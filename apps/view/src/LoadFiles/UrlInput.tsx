@@ -13,8 +13,10 @@ const BUTTON_STYLE = 'flex-none nr4 brand'
 
 const INPUT_ID = 'load-files_url-input'
 
-const defaultUrl = (loc: Location | null): string =>
-  loc ? `${loc.origin}/arduino-uno.zip` : ''
+const defaultUrl = (loc: Location | null): string => {
+  if (!loc) return ''
+  return `${loc.origin}${import.meta.env.BASE_URL}/arduino-uno.zip`
+}
 
 export type UrlInputProps = {
   children?: React.ReactNode
