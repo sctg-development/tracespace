@@ -1,15 +1,17 @@
 'use strict'
 
-const assert = require('assert')
-const fs = require('fs')
-const path = require('path')
-const runParallel = require('run-parallel')
-const runWaterfall = require('run-waterfall')
+import assert from 'assert'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
 
-const gerberToSvg = require('@sctg/gerber-to-svg')
-const pcbStackupCore = require('@sctg/pcb-stackup-core')
-const wtg = require('@sctg/whats-that-gerber')
+import gerberToSvg from '@sctg/gerber-to-svg'
+import pcbStackupCore from '@sctg/pcb-stackup-core'
+import wtg from '@sctg/whats-that-gerber'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const GERBERS_DIR = path.join(__dirname, '../../fixtures/boards/arduino-uno')
 
 const TOP_OUT = path.join(__dirname, 'arduino-uno-top.svg')

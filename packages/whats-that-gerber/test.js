@@ -1,9 +1,15 @@
 'use strict'
 
-var assert = require('assert')
+import assert from 'assert'
+import fs from 'fs'
 
-var cadFilenames = require('@sctg/tracespace-fixtures/gerber-filenames.json')
-var wtg = require('.')
+const cadFilenames = JSON.parse(
+  await fs.promises.readFile(
+    new URL('../fixtures/gerber-filenames.json', import.meta.url),
+    'utf8'
+  )
+)
+import wtg from './index.js'
 
 var EXPECTED_LAYERS = [
   {type: 'copper', side: 'top'},

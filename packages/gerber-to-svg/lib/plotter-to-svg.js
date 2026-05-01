@@ -1,15 +1,15 @@
 // transform stream to take plotter objects and convert them to an SVG string
 'use strict'
 
-var Transform = require('readable-stream').Transform
-var inherits = require('inherits')
-var isFinite = require('lodash.isfinite')
+import { Transform } from 'readable-stream'
+import inherits from 'inherits'
+import isFinite from 'lodash.isfinite'
 
-var reduceShapeArray = require('./_reduce-shape')
-var flashPad = require('./_flash-pad')
-var createPath = require('./_create-path')
-var util = require('./_util')
-var render = require('../render')
+import reduceShapeArray from './_reduce-shape.js'
+import flashPad from './_flash-pad.js'
+import createPath from './_create-path.js'
+import util from './_util.js'
+import render from '../render.js'
 
 var shift = util.shift
 var maskLayer = util.maskLayer
@@ -246,4 +246,4 @@ PlotterToSvg.prototype._draw = function (object) {
   }
 }
 
-module.exports = PlotterToSvg
+export default PlotterToSvg

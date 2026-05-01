@@ -58,4 +58,4 @@ var getNext = function (type, chunk, start) {
   return {lines: lines, read: read, block: block, rem: rem}
 }
 
-module.exports = getNext
+export default getNext

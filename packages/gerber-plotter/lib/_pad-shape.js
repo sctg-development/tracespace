@@ -1,10 +1,10 @@
 // returns a pad shape array given a tool definition
 'use strict'
 
-var isFunction = require('lodash.isfunction')
-var isFinite = require('lodash.isfinite')
+import isFunction from 'lodash.isfunction'
+import isFinite from 'lodash.isfinite'
 
-var boundingBox = require('./_box')
+import boundingBox from './_box.js'
 
 var roundToPrecision = function (number) {
   var rounded = Math.round(number * 100000000) / 100000000
@@ -356,7 +356,7 @@ var runMacro = function (mods, blocks) {
   }, emptyMacro)
 }
 
-module.exports = function padShape(tool, macros) {
+export default function padShape(tool, macros) {
   var shape = []
   var box = boundingBox.new()
   var toolShape = tool.shape

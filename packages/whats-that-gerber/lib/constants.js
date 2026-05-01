@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = {
+export default {
   // layer types
   TYPE_COPPER: 'copper',
   TYPE_SOLDERMASK: 'soldermask',

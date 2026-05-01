@@ -1,11 +1,13 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const pump = require('pump')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import pump from 'pump'
 
-const gerberToSvg = require('..')
+import gerberToSvg from '../index.js'
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const GERBERS_DIR = path.join(__dirname, '../../fixtures/boards/arduino-uno')
 const OUT_DIR = __dirname
 

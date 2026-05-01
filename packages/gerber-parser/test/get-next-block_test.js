@@ -1,9 +1,9 @@
 // tests for function that gets the next block from a chunk
 'use strict'
 
-var expect = require('chai').expect
-var partial = require('lodash/partial')
-var getNextBlock = require('../lib/get-next-block')
+import { expect } from 'chai'
+import partial from 'lodash/partial.js'
+import getNextBlock from '../lib/get-next-block.js'
 
 describe('get next block', function () {
   it('should throw with a bad filetype', function () {

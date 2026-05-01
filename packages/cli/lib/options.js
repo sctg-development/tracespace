@@ -1,10 +1,11 @@
 'use strict'
 
-const {normalize} = require('./resolve')
+import * as __req0 from './resolve.js'
+const { normalize } = __req0
 
 const STDOUT = '-'
 
-module.exports = {
+export default {
   out: {
     STDOUT,
     alias: 'o',

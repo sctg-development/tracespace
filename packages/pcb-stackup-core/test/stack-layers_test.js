@@ -1,12 +1,12 @@
 // test suite for stack layers function
 'use strict'
 
-var expect = require('chai').expect
-var sinon = require('sinon')
+import { expect } from 'chai'
+import sinon from 'sinon'
 
-var wtg = require('@sctg/whats-that-gerber')
-var expectXmlNodes = require('./expect-xml-nodes')
-var stack = require('../lib/stack-layers')
+import wtg from '@sctg/whats-that-gerber'
+import expectXmlNodes from './expect-xml-nodes.js'
+import stack from '../lib/stack-layers.js'
 
 var converter = function (defs, layer, viewBox, units) {
   return {

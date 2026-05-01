@@ -2,9 +2,9 @@
 // input: a coordinate string from a gerber file, output: a number
 'use strict'
 
-var expect = require('chai').expect
-var isNaN = require('lodash/isNaN')
-var normalize = require('../lib/normalize-coord')
+import { expect } from 'chai'
+import isNaN from 'lodash/isNaN.js'
+import normalize from '../lib/normalize-coord.js'
 
 describe('normalize coordinate', function () {
   it('should return NaN for bad input', function () {

@@ -1,8 +1,8 @@
 'use strict'
 
-const options = require('./options')
+import options from './options.js'
 
-module.exports = [
+export default [
   {
     cmd: '$0',
     desc: 'Render files in `cwd` and output to `cwd`',

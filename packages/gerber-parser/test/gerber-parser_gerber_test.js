@@ -2,10 +2,10 @@
 // test subset - parsing gerber files
 'use strict'
 
-var expect = require('chai').expect
-var partial = require('lodash/partial')
+import { expect } from 'chai'
+import partial from 'lodash/partial.js'
 
-var parser = require('..')
+import parser from '../index.js'
 
 describe('gerber parser with gerber files', function () {
   var p

@@ -1,7 +1,7 @@
 // reduce a shape array into a string to place is defs
 'use strict'
 
-var util = require('./_util')
+import util from './_util.js'
 var shift = util.shift
 var createMask = util.createMask
 var maskLayer = util.maskLayer
@@ -75,7 +75,7 @@ var clip = function (maskIdPrefix, index, shapes, ring, createElement) {
   return {mask: mask, layer: layer}
 }
 
-module.exports = function reduceShapeArray(
+export default function reduceShapeArray(
   prefix,
   code,
   shapeArray,

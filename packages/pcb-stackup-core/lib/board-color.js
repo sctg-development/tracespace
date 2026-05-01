@@ -1,9 +1,8 @@
 // board color defaults and css generation
 'use strict'
 
-var colorString = require('color-string')
-
-colorString = colorString.default || colorString
+import colorStringModule from 'color-string'
+const colorString = colorStringModule.default || colorStringModule
 
 var LAYER_IDS = ['fr4', 'cu', 'cf', 'sm', 'ss', 'sp', 'out']
 
@@ -60,4 +59,4 @@ function colorToCssString(color) {
   return css + ';'
 }
 
-module.exports = {getColor: getColor, getStyleElement: getStyleElement}
+export default {getColor: getColor, getStyleElement: getStyleElement}

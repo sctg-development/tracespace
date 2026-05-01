@@ -1,11 +1,11 @@
 // test suite for the layer mapping function
 'use strict'
 
-var expect = require('chai').expect
-var extend = require('xtend')
+import { expect } from 'chai'
+import extend from 'xtend'
 
-var wtg = require('@sctg/whats-that-gerber')
-var sortLayers = require('../lib/sort-layers')
+import wtg from '@sctg/whats-that-gerber'
+import sortLayers from '../lib/sort-layers.js'
 
 function mockLayer(side, type, converter) {
   return {

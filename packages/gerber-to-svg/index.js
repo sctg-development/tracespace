@@ -1,14 +1,15 @@
 // gerber to svg transform stream
 'use strict'
 
-var xid = require('@sctg/tracespace-xml-id')
-var gerberParser = require('@sctg/gerber-parser')
-var gerberPlotter = require('@sctg/gerber-plotter')
-var xmlElementString = require('xml-element-string')
+import xid from '@sctg/tracespace-xml-id'
+import gerberParserModule from '@sctg/gerber-parser'
+var gerberParser = gerberParserModule.default || gerberParserModule
+import gerberPlotter from '@sctg/gerber-plotter'
+import xmlElementString from 'xml-element-string'
 
-var PlotterToSvg = require('./lib/plotter-to-svg')
-var render = require('./render')
-var clone = require('./clone')
+import PlotterToSvg from './lib/plotter-to-svg.js'
+import render from './render.js'
+import clone from './clone.js'
 
 var parseOptions = function (options) {
   if (typeof options === 'string') {
@@ -40,7 +41,7 @@ var parseOptions = function (options) {
   return opts
 }
 
-module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
+export default function gerberConverterFactory(gerber, inputOpts, done) {
   if (typeof inputOpts === 'function') {
     done = inputOpts
     inputOpts = null
@@ -80,6 +81,8 @@ module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
     converter.filetype = parser.format.filetype
   })
 
+  parser.pipe(plotter).pipe(converter)
+
   if (gerber.pipe) {
     gerber.setEncoding('utf8')
     gerber.pipe(parser)
@@ -90,8 +93,6 @@ module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
       parser.end()
     })
   }
-
-  parser.pipe(plotter).pipe(converter)
 
   // collect result in callback mode
   if (callbackMode) {
@@ -122,5 +123,4 @@ module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
   return converter
 }
 
-module.exports.render = render
-module.exports.clone = clone
+export { render, clone }

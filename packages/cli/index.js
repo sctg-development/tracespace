@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 'use strict'
 
-const cosmiconfig = require('cosmiconfig')
-const yargs = require('yargs')
-const debug = require('debug')('@sctg/tracespace-cli')
-const cli = require('./lib/cli')
+import cosmiconfig from 'cosmiconfig'
+import yargs from 'yargs'
+import createDebug from 'debug'
+import cli from './lib/cli.js'
 
-debug('Searching for default config')
+const debug = createDebug('@sctg/tracespace-cli')
 
 cosmiconfig('tracespace')
   .search()

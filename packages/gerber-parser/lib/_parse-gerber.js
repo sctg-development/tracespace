@@ -2,10 +2,10 @@
 // takes a parser transform stream and a block string
 'use strict'
 
-var commands = require('./_commands')
-var normalize = require('./normalize-coord')
-var parseCoord = require('./parse-coord')
-var parseMacroBlock = require('./_parse-macro-block')
+import commands from './_commands.js'
+import normalize from './normalize-coord.js'
+import * as parseCoord from './parse-coord.js'
+import parseMacroBlock from './_parse-macro-block.js'
 
 // g-code set matchers
 var RE_MODE = /^G0*([123])/
@@ -274,4 +274,4 @@ var parse = function (parser, block) {
   )
 }
 
-module.exports = parse
+export default parse

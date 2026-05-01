@@ -12,7 +12,7 @@ var KEYS = [
   'units',
 ]
 
-module.exports = function cloneConverter(converter) {
+export default function cloneConverter(converter) {
   return KEYS.reduce(function (result, key) {
     var value = converter[key]
 

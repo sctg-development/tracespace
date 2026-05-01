@@ -2,14 +2,14 @@
 // TODO(mc, 2019-01-24): this is fundamentally broken / a bad idea
 'use strict'
 
-var util = require('util')
-var expect = require('chai').expect
-var isEqual = require('lodash/isEqual')
-var pull = require('lodash/pull')
+import util from 'util'
+import { expect } from 'chai'
+import isEqual from 'lodash/isEqual.js'
+import pull from 'lodash/pull.js'
 
 // element is a sinon spy, expectations is an array of expectations of {tag, attr, children}
 // children is an array of indices of return values from expectations
-module.exports = function expectXmlNodes(element, expectations) {
+export default function expectXmlNodes(element, expectations) {
   var returnValues = []
   var calls = element.getCalls()
 

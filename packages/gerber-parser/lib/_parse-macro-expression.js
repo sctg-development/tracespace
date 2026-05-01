@@ -5,7 +5,7 @@ var RE_OP = /[+\-/xX()]/
 var RE_NUMBER = /[$\d.]+/
 var RE_TOKEN = new RegExp([RE_OP.source, RE_NUMBER.source].join('|'), 'g')
 
-module.exports = function parseMacroExpression(parser, expr) {
+export default function parseMacroExpression(parser, expr) {
   // tokenize the expression
   var tokens = expr.match(RE_TOKEN)
 

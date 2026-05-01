@@ -1,14 +1,14 @@
 // gerber plotter
 'use strict'
 
-var Transform = require('readable-stream').Transform
-var inherits = require('inherits')
+import { Transform } from 'readable-stream'
+import inherits from 'inherits'
 
-var PathGraph = require('./path-graph')
-var warning = require('./_warning')
-var padShape = require('./_pad-shape')
-var operate = require('./_operate')
-var boundingBox = require('./_box')
+import PathGraph from './path-graph.js'
+import warning from './_warning.js'
+import padShape from './_pad-shape.js'
+import operate from './_operate.js'
+import boundingBox from './_box.js'
 
 var MAX_GAP = 0.00011
 
@@ -297,4 +297,4 @@ Plotter.prototype._flush = function (done) {
   done()
 }
 
-module.exports = Plotter
+export default Plotter

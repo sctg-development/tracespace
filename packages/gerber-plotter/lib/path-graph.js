@@ -1,7 +1,7 @@
 // utilities to create a graph of path segments and traverse that graph
 'use strict'
 
-var fill = require('lodash.fill')
+import fill from 'lodash.fill'
 
 var find = function (collection, condition) {
   var element
@@ -209,4 +209,4 @@ PathGraph.prototype.traverse = function () {
   return result
 }
 
-module.exports = PathGraph
+export default PathGraph

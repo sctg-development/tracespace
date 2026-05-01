@@ -1,8 +1,8 @@
 // test suite for coordinate parser function
 'use strict'
 
-var expect = require('chai').expect
-var parseCoord = require('../lib/parse-coord')
+import { expect } from 'chai'
+import * as parseCoord from '../lib/parse-coord.js'
 
 // svg coordinate FACTOR
 var FORMAT = {places: [2, 3], zeros: null}

@@ -1,11 +1,11 @@
 // parse options from input
 'use strict'
 
-var boardColor = require('./board-color')
-var xid = require('@sctg/tracespace-xml-id')
-var xmlElementString = require('xml-element-string')
+import boardColor from './board-color.js'
+import xid from '@sctg/tracespace-xml-id'
+import xmlElementString from 'xml-element-string'
 
-module.exports = function parseOptions(input) {
+export default function parseOptions(input) {
   if (typeof input === 'string') {
     input = {id: input}
   } else if (!input) {

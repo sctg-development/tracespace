@@ -1,7 +1,7 @@
 // function to parse a macro block into a primitive object
 'use strict'
 
-var parseMacroExpr = require('./_parse-macro-expression')
+import parseMacroExpr from './_parse-macro-expression.js'
 
 var RE_NUM = /^-?[\d.]+$/
 var RE_VAR_DEF = /^(\$[\d+])=(.+)/
@@ -153,4 +153,4 @@ var parseMacroBlock = function (parser, block) {
   }
 }
 
-module.exports = parseMacroBlock
+export default parseMacroBlock

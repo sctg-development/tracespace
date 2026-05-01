@@ -1,12 +1,15 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const {promisify} = require('util')
-const pcbStackup = require('@sctg/pcb-stackup')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import * as __req0 from 'util'
+const { promisify } = __req0
+import pcbStackup from '@sctg/pcb-stackup'
 
 const writeFile = promisify(fs.writeFile)
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const GERBERS_DIR = path.join(__dirname, '../../fixtures/boards/arduino-uno')
 const TOP_OUT = path.join(__dirname, 'arduino-uno-top.svg')
 const BOTTOM_OUT = path.join(__dirname, 'arduino-uno-bottom.svg')

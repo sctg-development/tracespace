@@ -1,11 +1,12 @@
 // pcb-stackup render snapshot tests
 'use strict'
 
-const prettier = require('prettier')
-const snapshot = require('snap-shot-it')
+import prettier from 'prettier'
+import snapshot from 'snap-shot-it'
 
-const {getBoards} = require('@sctg/tracespace-fixtures')
-const getBoardResults = require('./get-results')
+import * as __req0 from '@sctg/tracespace-fixtures'
+const { getBoards } = __req0
+import getBoardResults from './get-results.js'
 
 const SIDES = ['top', 'bottom']
 const BOARDS = getBoards.sync().filter((b) => !b.skipSnapshot)

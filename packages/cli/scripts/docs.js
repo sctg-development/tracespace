@@ -1,11 +1,12 @@
 'use strict'
 
-const assert = require('assert')
-const fs = require('fs')
-const path = require('path')
-const {promisify} = require('util')
+import assert from 'assert'
+import fs from 'fs'
+import path from 'path'
+import * as __req0 from 'util'
+const { promisify } = __req0
 
-const options = require('../lib/options')
+import options from '../lib/options.js'
 
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)

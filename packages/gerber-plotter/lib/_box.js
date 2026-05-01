@@ -50,7 +50,7 @@ var repeat = function (box, repeat) {
   return add(box, translate(box, repeat))
 }
 
-module.exports = {
+export default {
   new: newBox,
   add: add,
   addPoint: addPoint,

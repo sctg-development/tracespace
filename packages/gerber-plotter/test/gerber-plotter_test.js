@@ -1,10 +1,10 @@
 // test suite for plotter
 'use strict'
 
-var expect = require('chai').expect
+import { expect } from 'chai'
 
-var plotter = require('..')
-var boundingBox = require('../lib/_box')
+import plotter from '../index.js'
+import boundingBox from '../lib/_box.js'
 
 var EPSILON = 0.000001
 

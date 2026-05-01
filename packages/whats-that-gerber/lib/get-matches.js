@@ -1,10 +1,10 @@
 'use strict'
 
-var extend = require('xtend')
+import extend from 'xtend'
 
-var matchers = require('./matchers')
+import matchers from './matchers.js'
 
-module.exports = function getMatches(filename) {
+export default function getMatches(filename) {
   return matchers.map(matcherToFileMatches).filter(Boolean)
 
   function matcherToFileMatches(matcher) {

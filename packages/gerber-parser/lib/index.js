@@ -1,9 +1,8 @@
 // factory for @sctg/gerber-parser class
 'use strict'
 
-var isFinite = require('lodash.isfinite')
-
-var Parser = require('./parser')
+import isFinite from 'lodash.isfinite'
+import Parser from './parser.js'
 
 var verifyPlaces = function (p) {
   if (Array.isArray(p) && p.length === 2 && isFinite(p[0]) && isFinite(p[1])) {
@@ -29,7 +28,7 @@ var verifyFiletype = function (f) {
   throw new Error('filetype must be "drill" or "gerber"')
 }
 
-module.exports = function (options) {
+export default function (options) {
   options = options || {}
 
   var places = options.places ? verifyPlaces(options.places) : null

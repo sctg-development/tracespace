@@ -1,11 +1,13 @@
 'use strict'
 
-const path = require('path')
-const globby = require('globby')
-const isGlob = require('is-glob')
-const slash = require('slash')
-const untildify = require('untildify')
-const debug = require('debug')('@sctg/tracespace-cli')
+import path from 'path'
+import globby from 'globby'
+import isGlob from 'is-glob'
+import slash from 'slash'
+import untildify from 'untildify'
+import createDebug from 'debug'
+
+const debug = createDebug('@sctg/tracespace-cli')
 
 function normalize(filename) {
   return path.normalize(untildify(filename))
@@ -28,4 +30,4 @@ function resolvePatterns(patterns) {
   })
 }
 
-module.exports = {normalize, resolvePatterns}
+export default {normalize, resolvePatterns}

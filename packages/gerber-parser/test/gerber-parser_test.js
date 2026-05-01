@@ -1,11 +1,11 @@
 // test suite for the top level gerber parser class
 'use strict'
 
-var Transform = require('readable-stream').Transform
-var expect = require('chai').expect
-var repeat = require('lodash/repeat')
+import { Transform } from 'readable-stream'
+import { expect } from 'chai'
+import repeat from 'lodash/repeat.js'
 
-var parser = require('..')
+import parser from '../index.js'
 
 describe('gerber parser', function () {
   describe('factory and options', function () {

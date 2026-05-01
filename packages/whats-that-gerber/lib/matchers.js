@@ -1,9 +1,9 @@
 'use strict'
 
-var flatMap = require('./flat-map')
-var layerTypes = require('./layer-types')
+import flatMap from './flat-map.js'
+import layerTypes from './layer-types.js'
 
-module.exports = flatMap(layerTypes, layerTypeToMatchers)
+export default flatMap(layerTypes, layerTypeToMatchers)
 
 function layerTypeToMatchers(layer) {
   return flatMap(layer.matchers, matcherToCadMatchers)

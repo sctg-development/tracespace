@@ -1,8 +1,8 @@
 'use strict'
 
-var expect = require('chai').expect
+import { expect } from 'chai'
 
-var PathGraph = require('../lib/path-graph')
+import PathGraph from '../lib/path-graph.js'
 
 describe('path graphs', function () {
   var p

@@ -1,11 +1,12 @@
 // @sctg/gerber-to-svg render snapshot tests
 'use strict'
 
-const prettier = require('prettier')
-const snapshot = require('snap-shot-it')
+import prettier from 'prettier'
+import snapshot from 'snap-shot-it'
 
-const {getGerberSpecs, getBoards} = require('@sctg/tracespace-fixtures')
-const getResults = require('./get-results')
+import * as __req0 from '@sctg/tracespace-fixtures'
+const { getGerberSpecs, getBoards } = __req0
+import getResults from './get-results.js'
 
 const SUITES = [
   ...getGerberSpecs.sync(),

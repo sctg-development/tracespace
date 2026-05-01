@@ -8,7 +8,7 @@ var REPLACE_RE = new RegExp('^[^' + START_CHAR + ']|[^\\' + CHAR + ']', 'g')
 
 var DEFAULT_RANDOM_LENGTH = 12
 
-module.exports = {
+export default {
   random: random,
   sanitize: sanitize,
   ensure: ensure,

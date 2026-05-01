@@ -1,16 +1,20 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const express = require('express')
-const runParallel = require('run-parallel')
-const runWaterfall = require('run-waterfall')
-const template = require('lodash/template')
-const debug = require('debug')('tracespace/fixtures/server')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import express from 'express'
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
+import template from 'lodash/template.js'
+import createDebug from 'debug'
+
+const debug = createDebug('tracespace/fixtures/server')
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const TEMPLATE = path.join(__dirname, './template.html')
 
-module.exports = function makeServer(name, getSuites, getSuiteResult) {
+export default function makeServer(name, getSuites, getSuiteResult) {
   const app = express()
 
   app.get('/', (request, response) => {

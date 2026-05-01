@@ -1,12 +1,13 @@
 // runs pcb-stackup on the board fixtures
 'use strict'
 
-const runWaterfall = require('run-waterfall')
+import runWaterfall from 'run-waterfall'
+import createDebug from 'debug'
 
-const debug = require('debug')('tracespace/pcb-stackup/integration')
-const pcbStackup = require('..')
+const debug = createDebug('tracespace/pcb-stackup/integration')
+import pcbStackup from '../index.js'
 
-module.exports = function getBoardResults(board, done) {
+export default function getBoardResults(board, done) {
   debug(`Render started for ${board.name}`)
 
   const options = Object.assign({id: `__${board.name}`}, board.options)

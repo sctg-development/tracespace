@@ -1,16 +1,17 @@
 // runs pcb-stackup-core on the board fixtures
 'use strict'
 
-const runParallel = require('run-parallel')
-const runWaterfall = require('run-waterfall')
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
+import createDebug from 'debug'
 
-const gerberToSvg = require('@sctg/gerber-to-svg')
-const whatsThatGerber = require('@sctg/whats-that-gerber')
+import gerberToSvg from '@sctg/gerber-to-svg'
+import whatsThatGerber from '@sctg/whats-that-gerber'
 
-const debug = require('debug')('tracespace/pcb-stackup-core/integration')
-const pcbStackupCore = require('..')
+const debug = createDebug('tracespace/pcb-stackup-core/integration')
+import pcbStackupCore from '../index.js'
 
-module.exports = function getStackupResults(board, done) {
+export default function getStackupResults(board, done) {
   debug(`Render started for ${board.name}`)
 
   const {layers} = board

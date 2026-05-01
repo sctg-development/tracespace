@@ -33,4 +33,4 @@ var commandMap = {
   op: op,
   macro: macro,
 }
-module.exports = commandMap
+export default commandMap

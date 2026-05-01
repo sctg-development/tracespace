@@ -2,9 +2,9 @@
 // coordinate is 1000x the gerber unit
 'use strict'
 
-var numIsFinite = require('lodash.isfinite')
-var padLeft = require('lodash.padstart')
-var padRight = require('lodash.padend')
+import numIsFinite from 'lodash.isfinite'
+import padLeft from 'lodash.padstart'
+import padRight from 'lodash.padend'
 
 // function takes in the number string to be converted and the format object
 var normalizeCoord = function (number, format) {
@@ -56,4 +56,4 @@ var normalizeCoord = function (number, format) {
   return Number(sign + before + '.' + after)
 }
 
-module.exports = normalizeCoord
+export default normalizeCoord

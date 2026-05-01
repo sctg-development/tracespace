@@ -1,7 +1,7 @@
 // create a path from a fill or stroke object
 'use strict'
 
-var util = require('./_util')
+import util from './_util.js'
 var shift = util.shift
 
 var pointsEqual = function (point, target) {
@@ -77,7 +77,7 @@ var reduceSegments = function (result, segment) {
   return result
 }
 
-module.exports = function createPath(segments, width, element) {
+export default function createPath(segments, width, element) {
   var pathData = segments.reduce(reduceSegments, {last: [], data: ''}).data
   var attr = {d: pathData}
 

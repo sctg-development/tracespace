@@ -1,12 +1,12 @@
 // helper for stack layers that scales, wraps, gathers the defs of layers
 'use strict'
 
-var viewbox = require('viewbox')
-var wtg = require('@sctg/whats-that-gerber')
+import viewbox from 'viewbox'
+import wtg from '@sctg/whats-that-gerber'
 
-var wrapLayer = require('./wrap-layer')
+import wrapLayer from './wrap-layer.js'
 
-module.exports = function gatherLayers(
+export default function gatherLayers(
   element,
   idPrefix,
   layers,

@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function getCommonCad(matches) {
+export default function getCommonCad(matches) {
   var cadCount = matches.reduce(function (counts, match) {
     counts[match.cad] = counts[match.cad] + 1 || 1
     return counts

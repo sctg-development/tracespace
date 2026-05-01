@@ -1,7 +1,7 @@
 // @sctg/gerber-plotter factory
 'use strict'
 
-var Plotter = require('./plotter')
+import Plotter from './plotter.js'
 
 var verifyNota = function (nota) {
   if (nota === 'A' || nota === 'I') {
@@ -19,7 +19,7 @@ var verifyUnits = function (units) {
   throw new Error('units must be "in" or "mm"')
 }
 
-module.exports = function plotterFactory(options) {
+export default function plotterFactory(options) {
   options = options || {}
 
   var units = options.units ? verifyUnits(options.units) : null

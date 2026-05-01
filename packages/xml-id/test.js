@@ -1,7 +1,7 @@
 'use strict'
 
-var expect = require('chai').expect
-var xid = require('@sctg/tracespace-xml-id')
+import { expect } from 'chai'
+import xid from '@sctg/tracespace-xml-id'
 
 describe('xml-id', function () {
   describe('sanitize', function () {

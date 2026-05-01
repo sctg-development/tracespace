@@ -30,7 +30,7 @@ var createMask = function (maskId, box, children, element) {
   return element('mask', attributes, [element('g', {}, children)])
 }
 
-module.exports = {
+export default {
   shift: shift,
   maskLayer: maskLayer,
   createMask: createMask,

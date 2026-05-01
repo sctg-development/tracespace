@@ -1,17 +1,17 @@
 'use strict'
 
-var constants = require('./lib/constants')
-var flatMap = require('./lib/flat-map')
-var getCommonCad = require('./lib/get-common-cad')
-var getMatches = require('./lib/get-matches')
-var layerTypes = require('./lib/layer-types')
+import constants from './lib/constants.js'
+import flatMap from './lib/flat-map.js'
+import getCommonCad from './lib/get-common-cad.js'
+import getMatches from './lib/get-matches.js'
+import layerTypes from './lib/layer-types.js'
 
-module.exports = whatsThatGerber
-module.exports.validate = validate
-module.exports.getAllLayers = getAllLayers
+export default whatsThatGerber
+whatsThatGerber.validate = validate
+whatsThatGerber.getAllLayers = getAllLayers
 
 Object.keys(constants).forEach(function (constantName) {
-  module.exports[constantName] = constants[constantName]
+  whatsThatGerber[constantName] = constants[constantName]
 })
 
 function whatsThatGerber(filenames) {

@@ -1,23 +1,31 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const {glob, globSync} = require('glob')
-const runParallel = require('run-parallel')
-const runWaterfall = require('run-waterfall')
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import * as __req0 from 'glob'
+const { glob, globSync } = __req0
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
 
-const server = require('./server')
-const gerberFilenames = require('./gerber-filenames.json')
+import server from './server/index.js'
+
+const gerberFilenames = JSON.parse(
+  await fs.promises.readFile(new URL('./gerber-filenames.json', import.meta.url), 'utf8')
+)
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const GLOB_BOARD_MANIFEST = path.join(__dirname, 'boards/**/manifest.json')
 const GLOB_SPEC_GERBER = path.join(__dirname, 'gerbers/**/*.@(gbr|drl|svg)')
 
-module.exports = {
+export default {
   gerberFilenames,
   getBoards,
   getGerberSpecs,
   server,
 }
+
+export { gerberFilenames, getBoards, getGerberSpecs, server }
 
 function getBoards(done) {
   runWaterfall(

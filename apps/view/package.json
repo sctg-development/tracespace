@@ -1,7 +1,7 @@
 {
   "name": "@sctg/tracespace-view",
   "productName": "tracespace view",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "private": true,
   "description": "Probably the best Gerber viewer on the internet",
   "author": {

@@ -1,12 +1,12 @@
 // test suite for the plotter to svg transform stream
 'use strict'
 
-var assign = require('lodash/assign')
-var sinon = require('sinon')
-var expect = require('chai').expect
-var xmlElement = require('xml-element-string')
+import assign from 'lodash/assign.js'
+import sinon from 'sinon'
+import { expect } from 'chai'
+import xmlElement from 'xml-element-string'
 
-var PlotterToSvg = require('../lib/plotter-to-svg')
+import PlotterToSvg from '../lib/plotter-to-svg.js'
 
 var HALF_PI = Math.PI / 2
 

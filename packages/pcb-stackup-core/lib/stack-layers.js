@@ -1,12 +1,12 @@
 // stack layers function (where the magic happens)
 'use strict'
 
-var viewbox = require('viewbox')
-var wtg = require('@sctg/whats-that-gerber')
+import viewbox from 'viewbox'
+import wtg from '@sctg/whats-that-gerber'
 
-var gatherLayers = require('./_gather-layers')
+import gatherLayers from './_gather-layers.js'
 
-module.exports = function (
+export default function (
   element,
   id,
   side,

@@ -4,7 +4,7 @@
 'use strict'
 
 // convert to normalized number
-var normalize = require('./normalize-coord')
+import normalize from './normalize-coord.js'
 
 var RE_TRAILING = /[XY]0\d+/
 var RE_LEADING = /[XY]\d+0(?=\D|$)/
@@ -51,4 +51,4 @@ var detectZero = function (coord) {
   return null
 }
 
-module.exports = {parse: parse, detectZero: detectZero}
+export { parse, detectZero }

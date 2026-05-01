@@ -2,14 +2,14 @@
 // pcb-stackup main
 'use strict'
 
-var extend = require('xtend')
-var runParallel = require('run-parallel')
-var runWaterfall = require('run-waterfall')
-var gerberToSvg = require('@sctg/gerber-to-svg')
-var createStackup = require('@sctg/pcb-stackup-core')
-var wtg = require('@sctg/whats-that-gerber')
+import extend from 'xtend'
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
+import gerberToSvg from '@sctg/gerber-to-svg'
+import createStackup from '@sctg/pcb-stackup-core'
+import wtg from '@sctg/whats-that-gerber'
 
-module.exports = function pcbStackup(layers, options, done) {
+export default function pcbStackup(layers, options, done) {
   var result
 
   if (typeof options === 'function') {

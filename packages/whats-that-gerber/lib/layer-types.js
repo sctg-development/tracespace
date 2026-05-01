@@ -1,8 +1,8 @@
 'use strict'
 
-var c = require('./constants')
+import c from './constants.js'
 
-module.exports = [
+export default [
   // high-priority blacklist
   {
     type: null,

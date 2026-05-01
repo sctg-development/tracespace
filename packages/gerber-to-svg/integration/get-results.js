@@ -1,15 +1,16 @@
 // runs @sctg/gerber-to-svg on the gerber spec suite
 'use strict'
 
-const path = require('path')
-const runParallel = require('run-parallel')
-const runWaterfall = require('run-waterfall')
+import path from 'path'
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
+import createDebug from 'debug'
 
-const debug = require('debug')('tracespace/@sctg/gerber-to-svg/integration')
-const wtg = require('@sctg/whats-that-gerber')
-const gerberToSvg = require('..')
+const debug = createDebug('tracespace/@sctg/gerber-to-svg/integration')
+import wtg from '@sctg/whats-that-gerber'
+import gerberToSvg from '../index.js'
 
-module.exports = function getSuiteResults(suite, done) {
+export default function getSuiteResults(suite, done) {
   debug(`Rendering suite ${suite.name}`)
 
   const specs = suite.specs || suite.layers

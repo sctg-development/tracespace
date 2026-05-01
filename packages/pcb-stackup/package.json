@@ -1,6 +1,7 @@
 {
   "name": "@sctg/pcb-stackup",
-  "version": "5.0.0",
+  "version": "5.1.0",
+  "type": "module",
   "description": "Render PCBs as beautiful, precise SVGs from Gerber / NC drill files",
   "main": "index.js",
   "types": "index.d.ts",

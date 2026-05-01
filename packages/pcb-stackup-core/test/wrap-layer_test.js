@@ -1,11 +1,11 @@
 // test suite for the wrap layer function
 'use strict'
 
-var expect = require('chai').expect
-var sinon = require('sinon')
-var xmlElementString = require('xml-element-string')
+import { expect } from 'chai'
+import sinon from 'sinon'
+import xmlElementString from 'xml-element-string'
 
-var wrapLayer = require('../lib/wrap-layer')
+import wrapLayer from '../lib/wrap-layer.js'
 
 describe('wrap layer function', function () {
   it('should return the layer value wrapped in a group with an id', function () {

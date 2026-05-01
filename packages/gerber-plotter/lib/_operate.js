@@ -1,7 +1,7 @@
 // operate the plotter
 'use strict'
 
-var boundingBox = require('./_box')
+import boundingBox from './_box.js'
 
 var HALF_PI = Math.PI / 2
 var PI = Math.PI
@@ -467,4 +467,4 @@ var operate = function (
   }
 }
 
-module.exports = operate
+export default operate

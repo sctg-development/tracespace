@@ -1,6 +1,7 @@
 {
   "name": "@sctg/gerber-to-svg",
-  "version": "5.0.0",
+  "version": "5.1.0",
+  "type": "module",
   "description": "Render individual Gerber / NC drill files as SVGs",
   "main": "index.js",
   "types": "index.d.ts",

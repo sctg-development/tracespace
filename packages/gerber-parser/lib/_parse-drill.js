@@ -2,12 +2,12 @@
 // takes a parser transform stream and a block string
 'use strict'
 
-var numIsFinite = require('lodash.isfinite')
+import numIsFinite from 'lodash.isfinite'
 
-var commands = require('./_commands')
-var drillMode = require('./_drill-mode')
-var normalize = require('./normalize-coord')
-var parseCoord = require('./parse-coord')
+import commands from './_commands.js'
+import drillMode from './_drill-mode.js'
+import normalize from './normalize-coord.js'
+import * as parseCoord from './parse-coord.js'
 
 var RE_ALTIUM_HINT = /;FILE_FORMAT=(\d):(\d)/
 var RE_ALTIUM_PLATING_HINT = /;TYPE=(PLATED|NON_PLATED)/
@@ -235,4 +235,4 @@ var parse = function (parser, block) {
   }
 }
 
-module.exports = {parse: parse, flush: flush}
+export { parse, flush }

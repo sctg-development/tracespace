@@ -1,27 +1,34 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
-const common = require('common-prefix')
-const {get} = require('dot-prop')
-const makeDir = require('make-dir')
-const debug = require('debug')('@sctg/tracespace-cli')
+import fs from 'fs'
+import path from 'path'
+import util from 'util'
+import common from 'common-prefix'
+import * as __req0 from 'dot-prop'
+const { get } = __req0
+import makeDir from 'make-dir'
+import createDebug from 'debug'
 
-const gerberToSvg = require('@sctg/gerber-to-svg')
-const pcbStackup = require('@sctg/pcb-stackup')
-const whatsThatGerber = require('@sctg/whats-that-gerber')
-const yargs = require('yargs')
+const debug = createDebug('@sctg/tracespace-cli')
 
-const {description, version} = require('../package.json')
-const examples = require('./examples')
-const options = require('./options')
-const {resolvePatterns} = require('./resolve')
+import gerberToSvg from '@sctg/gerber-to-svg'
+import pcbStackup from '@sctg/pcb-stackup'
+import whatsThatGerber from '@sctg/whats-that-gerber'
+import yargs from 'yargs'
+
+const pkg = JSON.parse(
+  await fs.promises.readFile(new URL('../package.json', import.meta.url), 'utf8')
+)
+const { description, version } = pkg
+import examples from './examples.js'
+import options from './options.js'
+import * as __req2 from './resolve.js'
+const { resolvePatterns } = __req2
 
 const writeFile = util.promisify(fs.writeFile)
 const stackup = util.promisify(pcbStackup)
 
-module.exports = function cli(processArgv, config) {
+export default function cli(processArgv, config) {
   const argv = yargs
     .usage(
       '$0 [options] <files...>',

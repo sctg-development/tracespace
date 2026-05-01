@@ -1,9 +1,14 @@
 // simple visual test server for pcb-stackup-core
 'use strict'
 
-const {getBoards, server} = require('@sctg/tracespace-fixtures')
-const {name} = require('../package.json')
-const getBoardResults = require('./get-results')
+import fs from 'fs'
+import * as __req0 from '@sctg/tracespace-fixtures'
+const { getBoards, server } = __req0
+const pkg = JSON.parse(
+  await fs.promises.readFile(new URL('../package.json', import.meta.url), 'utf8')
+)
+const { name } = pkg
+import getBoardResults from './get-results.js'
 
 const PORT = 8001
 

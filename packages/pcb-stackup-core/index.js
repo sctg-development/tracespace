@@ -1,14 +1,14 @@
 // main pcb stackup function
 'use strict'
 
-var extend = require('xtend')
-var wtg = require('@sctg/whats-that-gerber')
-var vb = require('viewbox')
+import extend from 'xtend'
+import wtg from '@sctg/whats-that-gerber'
+import vb from 'viewbox'
 
-var boardColor = require('./lib/board-color')
-var parseOptions = require('./lib/parse-options')
-var sortLayers = require('./lib/sort-layers')
-var stackLayers = require('./lib/stack-layers')
+import boardColor from './lib/board-color.js'
+import parseOptions from './lib/parse-options.js'
+import sortLayers from './lib/sort-layers.js'
+import stackLayers from './lib/stack-layers.js'
 
 var SIDES = [wtg.SIDE_TOP, wtg.SIDE_BOTTOM]
 
@@ -23,7 +23,7 @@ var BASE_ATTRIBUTES = {
   'clip-rule': 'evenodd',
 }
 
-module.exports = function pcbStackupCore(layers, inputOpts) {
+export default function pcbStackupCore(layers, inputOpts) {
   var options = parseOptions(inputOpts)
   var sorted = sortLayers(layers)
 

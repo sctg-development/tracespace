@@ -1,16 +1,16 @@
 // generic file parser for gerber and drill files
 'use strict'
 
-var StringDecoder = require('string_decoder').StringDecoder
-var inherits = require('inherits')
-var Transform = require('readable-stream').Transform
+import { StringDecoder } from 'string_decoder'
+import inherits from 'inherits'
+import { Transform } from 'readable-stream'
 
-var determineFiletype = require('./_determine-filetype')
-var getNext = require('./get-next-block')
-var parseGerber = require('./_parse-gerber')
-var parseDrill = require('./_parse-drill')
-var warning = require('./_warning')
-var drillMode = require('./_drill-mode')
+import determineFiletype from './_determine-filetype.js'
+import getNext from './get-next-block.js'
+import parseGerber from './_parse-gerber.js'
+import * as parseDrill from './_parse-drill.js'
+import warning from './_warning.js'
+import drillMode from './_drill-mode.js'
 
 var LIMIT = 65535
 
@@ -110,4 +110,4 @@ Parser.prototype.parseSync = function (file) {
   return this._syncResult
 }
 
-module.exports = Parser
+export default Parser

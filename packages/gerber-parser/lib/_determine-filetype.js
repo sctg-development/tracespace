@@ -26,4 +26,4 @@ var determine = function (chunk, start, LIMIT) {
   return filetype
 }
 
-module.exports = determine
+export default determine

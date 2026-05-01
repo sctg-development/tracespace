@@ -1,18 +1,21 @@
 // runs @sctg/gerber-parser on the gerber spec and board suites
 'use strict'
 
-const concat = require('concat-stream')
-const pump = require('pump')
-const {Readable} = require('stream')
-const runParallel = require('run-parallel')
-const runWaterfall = require('run-waterfall')
+import concat from 'concat-stream'
+import pump from 'pump'
+import * as __req0 from 'stream'
+const { Readable } = __req0
+import runParallel from 'run-parallel'
+import runWaterfall from 'run-waterfall'
+import createDebug from 'debug'
 
-const debug = require('debug')('tracespace/@sctg/gerber-plotter/integration')
-const gerberParser = require('@sctg/gerber-parser')
-const gerberPlotter = require('@sctg/gerber-plotter')
-const wtg = require('@sctg/whats-that-gerber')
+const debug = createDebug('tracespace/@sctg/gerber-plotter/integration')
+import gerberParserModule from '@sctg/gerber-parser'
+const gerberParser = gerberParserModule.default || gerberParserModule
+import gerberPlotter from '@sctg/gerber-plotter'
+import wtg from '@sctg/whats-that-gerber'
 
-module.exports = function getSuiteResults(suite, done) {
+export default function getSuiteResults(suite, done) {
   debug(`Rendering suite ${suite.name}`)
 
   const specs = suite.specs || suite.layers
