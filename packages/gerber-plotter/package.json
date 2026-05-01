@@ -1,17 +1,17 @@
 {
-  "name": "gerber-plotter",
-  "version": "4.2.8",
+  "name": "@sctg/gerber-plotter",
+  "version": "5.0.0",
   "description": "Streaming Gerber / NC drill layer image plotter",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "serve": "node ../../scripts/serve"
+    "build": "vite build",
+    "serve": "vite preview --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git",
-    "directory": "packages/gerber-plotter"
+    "url": "git+https://github.com/sctg-development/tracespace.git",
+    "directory": "packages/@sctg/gerber-plotter"
   },
   "keywords": [
     "PCB",
@@ -25,20 +25,26 @@
     "electronics"
   ],
   "author": "Mike Cousins <mike@cousins.io> (https://mike.cousins.io/)",
+  "contributors": [
+    "Ronan Le Meillat"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tracespace/tracespace/issues"
+    "url": "https://github.com/sctg-development/tracespace/issues"
   },
-  "homepage": "https://github.com/tracespace/tracespace#readme",
+  "homepage": "https://github.com/sctg-development/tracespace#readme",
   "peerDependencies": {
-    "gerber-parser": "^4.0.0"
+    "@sctg/gerber-parser": "^5.0.0"
   },
   "dependencies": {
-    "@types/node": "^13.1.6",
+    "@types/node": "^25.6.0",
     "inherits": "^2.0.4",
     "lodash.fill": "^3.4.0",
     "lodash.isfinite": "^3.3.2",
     "lodash.isfunction": "^3.0.9",
-    "readable-stream": "^3.4.0"
+    "readable-stream": "^4.7.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

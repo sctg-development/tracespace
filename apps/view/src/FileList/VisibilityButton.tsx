@@ -1,8 +1,8 @@
 import React from 'react'
 import contrast from 'contrast'
-import {SIDE_TOP, SIDE_BOTTOM, SIDE_ALL, GerberSide} from 'whats-that-gerber'
+import {SIDE_TOP, SIDE_BOTTOM, SIDE_ALL} from '../layers'
 
-import {LayerRender} from '../types'
+import {LayerRender, GerberSide} from '../types'
 import {useAppState, toggleVisibility, State} from '../state'
 import {Button, Icon, IconProps} from '../ui'
 
@@ -62,7 +62,7 @@ export default function VisibilityButton(props: Props): JSX.Element {
       className={className}
       title={tooltip}
       disabled={disabled}
-      onClick={event => dispatch(toggleVisibility(id, event.shiftKey))}
+      onClick={(event) => dispatch(toggleVisibility(id, event.shiftKey))}
     >
       <Icon {...iconProps} />
     </Button>

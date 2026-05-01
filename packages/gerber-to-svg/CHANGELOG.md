@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.8](https://github.com/tracespace/tracespace/compare/v4.2.7...v4.2.8) (2022-03-28)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -13,7 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -21,7 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.6](https://github.com/tracespace/tracespace/compare/v4.2.5...v4.2.6) (2022-03-12)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -29,7 +29,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.5](https://github.com/tracespace/tracespace/compare/v4.2.4...v4.2.5) (2020-12-18)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -37,7 +37,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.4](https://github.com/tracespace/tracespace/compare/v4.2.3...v4.2.4) (2020-12-15)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -45,7 +45,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.2](https://github.com/tracespace/tracespace/compare/v4.2.1...v4.2.2) (2020-10-13)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -116,7 +116,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **deps:** update dependency @types/node to ^11.11.6 ([#184](https://github.com/tracespace/tracespace/issues/184)) ([c3bb301](https://github.com/tracespace/tracespace/commit/c3bb301))
-* **gerber-to-svg:** Allow options parameter to be skipped ([#181](https://github.com/tracespace/tracespace/issues/181)) ([bbe5c07](https://github.com/tracespace/tracespace/commit/bbe5c07))
+* **@sctg/gerber-to-svg:** Allow options parameter to be skipped ([#181](https://github.com/tracespace/tracespace/issues/181)) ([bbe5c07](https://github.com/tracespace/tracespace/commit/bbe5c07))
 
 
 
@@ -124,7 +124,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.0.1](https://github.com/tracespace/tracespace/compare/v4.0.0...v4.0.1) (2019-03-23)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -132,7 +132,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0](https://github.com/tracespace/tracespace/compare/v4.0.0-next.19...v4.0.0) (2019-03-09)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -155,7 +155,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 * Parameters, defaults, and return types have changed in pcb-stackup,
-pcb-stackup-core, and gerber-to-svg
+pcb-stackup-core, and @sctg/gerber-to-svg
 
 
 
@@ -166,7 +166,7 @@ pcb-stackup-core, and gerber-to-svg
 
 ### Bug Fixes
 
-* **gerber-to-svg:** Wrap children of <mask> nodes in a <g> ([#100](https://github.com/tracespace/tracespace/issues/100)) ([b984e32](https://github.com/tracespace/tracespace/commit/b984e32)), closes [#98](https://github.com/tracespace/tracespace/issues/98)
+* **@sctg/gerber-to-svg:** Wrap children of <mask> nodes in a <g> ([#100](https://github.com/tracespace/tracespace/issues/100)) ([b984e32](https://github.com/tracespace/tracespace/commit/b984e32)), closes [#98](https://github.com/tracespace/tracespace/issues/98)
 
 
 
@@ -174,7 +174,7 @@ pcb-stackup-core, and gerber-to-svg
 
 # [4.0.0-next.17](https://github.com/tracespace/tracespace/compare/v4.0.0-next.16...v4.0.0-next.17) (2018-12-20)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -200,7 +200,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.14"></a>
 # [4.0.0-next.14](https://github.com/tracespace/tracespace/compare/v4.0.0-next.13...v4.0.0-next.14) (2018-10-13)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -212,7 +212,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* Replace shortid with [@tracespace](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
+* Replace shortid with [@sctg/tracespace-](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
 
 
 
@@ -224,12 +224,12 @@ object keyed by the filenames passed in as an array
 
 ### Code Refactoring
 
-* **gerber-to-svg:** Remove CLI in favor of [@tracespace](https://github.com/tracespace)/cli ([50e255d](https://github.com/tracespace/tracespace/commit/50e255d))
+* **@sctg/gerber-to-svg:** Remove CLI in favor of [@sctg/tracespace-](https://github.com/tracespace)/cli ([50e255d](https://github.com/tracespace/tracespace/commit/50e255d))
 
 
 ### BREAKING CHANGES
 
-* **gerber-to-svg:** Removed gerber-to-svg (gerber2svg) CLI
+* **@sctg/gerber-to-svg:** Removed @sctg/gerber-to-svg (gerber2svg) CLI
 
 
 
@@ -238,7 +238,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.9"></a>
 # [4.0.0-next.9](https://github.com/tracespace/tracespace/compare/v4.0.0-next.8...v4.0.0-next.9) (2018-06-19)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -247,7 +247,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.8"></a>
 # [4.0.0-next.8](https://github.com/tracespace/tracespace/compare/v4.0.0-next.7...v4.0.0-next.8) (2018-06-16)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -256,7 +256,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.7"></a>
 # [4.0.0-next.7](https://github.com/tracespace/tracespace/compare/v4.0.0-next.6...v4.0.0-next.7) (2018-06-16)
 
-**Note:** Version bump only for package gerber-to-svg
+**Note:** Version bump only for package @sctg/gerber-to-svg
 
 
 
@@ -268,7 +268,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* **gerber-to-svg:** Fix append-ext check using old short-option ([cde8cda](https://github.com/tracespace/tracespace/commit/cde8cda))
+* **@sctg/gerber-to-svg:** Fix append-ext check using old short-option ([cde8cda](https://github.com/tracespace/tracespace/commit/cde8cda))
 
 
 
@@ -280,11 +280,11 @@ object keyed by the filenames passed in as an array
 
 ### Features
 
-* **gerber-to-svg:** Replace non-functional CLI options ([5633375](https://github.com/tracespace/tracespace/commit/5633375))
+* **@sctg/gerber-to-svg:** Replace non-functional CLI options ([5633375](https://github.com/tracespace/tracespace/commit/5633375))
 
 
 ### BREAKING CHANGES
 
-* **gerber-to-svg:** Short option for --append-ext was changed from -a to
+* **@sctg/gerber-to-svg:** Short option for --append-ext was changed from -a to
 -e, short option for --optimize-paths was changed to from -z to -t to
 match documentation and because -z was already used by --zero

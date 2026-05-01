@@ -4,11 +4,11 @@
 [![next][pcb-stackup-core-next-badge]][npm-next]
 [![david][pcb-stackup-core-david-badge]][david]
 
-> Stack gerber-to-svg layer renders to build PCB renders
+> Stack @sctg/gerber-to-svg layer renders to build PCB renders
 
 If you're looking for an easy way to generate beautiful SVG renders of printed circuit boards, check out the higher-level [pcb-stackup](../pcb-stackup) tool first.
 
-`pcb-stackup-core` is the low-level module that powers the rendering of `pcb-stackup`. It takes individual printed circuit board layer converters as output by [gerber-to-svg](../gerber-to-svg) and identified as PCB layer types by [whats-that-gerber](../whats-that-gerber) and uses them to build SVG renders of what the manufactured PCB will look like from the top and the bottom.
+`pcb-stackup-core` is the low-level module that powers the rendering of `pcb-stackup`. It takes individual printed circuit board layer converters as output by [@sctg/gerber-to-svg](../@sctg/gerber-to-svg) and identified as PCB layer types by [whats-that-gerber](../whats-that-gerber) and uses them to build SVG renders of what the manufactured PCB will look like from the top and the bottom.
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
@@ -28,12 +28,12 @@ npm install --save pcb-stackup-core
 yarn add pcb-stackup-core
 ```
 
-`gerber-to-svg` and `whats-that-gerber` are peer dependencies, so you'll want them, too:
+`@sctg/gerber-to-svg` and `whats-that-gerber` are peer dependencies, so you'll want them, too:
 
 ```shell
-npm install --save gerber-to-svg whats-that-gerber
+npm install --save @sctg/gerber-to-svg whats-that-gerber
 # or
-yarn add gerber-to-svg whats-that-gerber
+yarn add @sctg/gerber-to-svg whats-that-gerber
 ```
 
 Or, use a script tag:
@@ -65,7 +65,7 @@ This module is designed to work in Node or in the browser with Browserify or Web
 - Keys for all [options](#options), with values resolved to the actual values used
 
 ```js
-var pcbStackupCore = require('pcb-stackup-core')
+var pcbStackupCore = require('@sctg/pcb-stackup-core')
 var stackup = pcbStackupCore(layersArray)
 
 // stackup =>
@@ -90,15 +90,15 @@ var stackup = pcbStackupCore(layersArray)
 // }
 ```
 
-In `top.svg` and `bottom.svg` are the SVG elements (by default as XML strings). The rest of the properties all correspond to the [public properties of a gerber-to-svg converter](../gerber-to-svg/API.md#public-properties). `units` is a string value of 'in' or 'mm'. `viewBox` is the minimum x value, minimum y value, width, and height in thousandths of (1000x) `units`. `width` and `height` are the width and height in `units`. `defs` and `layer` are arrays of XML elements that are used as children of the `defs` node and the SVG's main `g` node.
+In `top.svg` and `bottom.svg` are the SVG elements (by default as XML strings). The rest of the properties all correspond to the [public properties of a @sctg/gerber-to-svg converter](../@sctg/gerber-to-svg/API.md#public-properties). `units` is a string value of 'in' or 'mm'. `viewBox` is the minimum x value, minimum y value, width, and height in thousandths of (1000x) `units`. `width` and `height` are the width and height in `units`. `defs` and `layer` are arrays of XML elements that are used as children of the `defs` node and the SVG's main `g` node.
 
-Astute readers will notice this is the same interface as gerber-to-svg converters, and this means the [render](../gerber-to-svg/API.md#render) and [clone](../gerber-to-svg/API.md#clone) static methods of gerber-to-svg will also work on the pcb-stackup-core renders.
+Astute readers will notice this is the same interface as @sctg/gerber-to-svg converters, and this means the [render](../@sctg/gerber-to-svg/API.md#render) and [clone](../@sctg/gerber-to-svg/API.md#clone) static methods of @sctg/gerber-to-svg will also work on the pcb-stackup-core renders.
 
 ### layers array
 
-The first parameter to the function is an array of layer objects. A layer object is an object with `side`, `type`, and `converter` keys, where `side` and `type` are the layer's properties as reported by [whats-that-gerber](../whats-that-gerber) and `converter` is the converter object returned by gerber-to-svg for that Gerber file (note: this is the actual return value of gerber-to-svg, not the value that is emitted by the stream or passed to the callback).
+The first parameter to the function is an array of layer objects. A layer object is an object with `side`, `type`, and `converter` keys, where `side` and `type` are the layer's properties as reported by [whats-that-gerber](../whats-that-gerber) and `converter` is the converter object returned by @sctg/gerber-to-svg for that Gerber file (note: this is the actual return value of @sctg/gerber-to-svg, not the value that is emitted by the stream or passed to the callback).
 
-It is expected that the converters will have already finished before being passed to pcb-stackup-core. This can be done by listening for the converter's `end` event or by using gerber-to-svg in callback mode, as shown in the example.
+It is expected that the converters will have already finished before being passed to pcb-stackup-core. This can be done by listening for the converter's `end` event or by using @sctg/gerber-to-svg in callback mode, as shown in the example.
 
 ```js
 var someLayer = {
@@ -139,7 +139,7 @@ var stackup2 = pcbStackupCore(layers, {id: 'my-unique-board-id'})
 
 | key           | default        | description                                                           |
 | ------------- | -------------- | --------------------------------------------------------------------- |
-| id            | `xid.random()` | Unique ID, generated by @tracespace/xml-id if omitted                 |
+| id            | `xid.random()` | Unique ID, generated by @sctg/tracespace-xml-id if omitted            |
 | color         | see below      | Colors to apply to the board render by layer type                     |
 | useOutline    | `true`         | Use the board outline layer as a mask for the board shape             |
 | createElement | see below      | Function used to create the XML element nodes                         |
@@ -200,13 +200,13 @@ When constructing the stackup, a `<mask>` of all the drill layers is built and a
 
 To work, the outline layer must be one or more fully-enclosed loops. If it isn't, setting `useOutline` to true will likely result in the final image being incorrect (or non-existent), because the `<path>`s won't clip the image properly. See the [MDN's documentation of `<clipPath>`][clip-path] for more details.
 
-To improve your chances of a board outline layer working for `useOutline`, make sure you set the `plotAsOutline` [option of gerber-to-svg](..gerber-to-svg/API.md#options) to `true` when converting the outline gerber. If the board outline still doesn't work, please open an issue to see if we can improve the masking process.
+To improve your chances of a board outline layer working for `useOutline`, make sure you set the `plotAsOutline` [option of @sctg/gerber-to-svg](..@sctg/gerber-to-svg/API.md#options) to `true` when converting the outline gerber. If the board outline still doesn't work, please open an issue to see if we can improve the masking process.
 
 [clip-path]: https://developer.mozilla.org/en-US/docs/Web/SVG/Element/clipPath
 
 #### create element
 
-Both gerber-to-svg and pcb-stackup-core take a `createElement` function as an option. It defaults to [xml-element-string][], which outputs a string. However, any function that takes a tag name, attributes object, and children array may be used. For example, if you wanted to create an object representation of the render and serialize it to JSON:
+Both @sctg/gerber-to-svg and pcb-stackup-core take a `createElement` function as an option. It defaults to [xml-element-string][], which outputs a string. However, any function that takes a tag name, attributes object, and children array may be used. For example, if you wanted to create an object representation of the render and serialize it to JSON:
 
 ```js
 var stackup = pcbStackupCore(layers, {createElement: createObjectElement})
@@ -218,7 +218,7 @@ function createObjectElement(tag, attributes, children) {
 }
 ```
 
-If you choose to use this option, the function you pass into pcb-stackup-core **must** be the same one you passed into gerber-to-svg. Also remember, if your `createElement` function returns something other than a string or Buffer, `options.objectMode` **must** be set to `true` in `gerberToSvg`. (See the [gerber-to-svg docs](../gerber-to-svg/API.md#element-options) for more details.)
+If you choose to use this option, the function you pass into pcb-stackup-core **must** be the same one you passed into @sctg/gerber-to-svg. Also remember, if your `createElement` function returns something other than a string or Buffer, `options.objectMode` **must** be set to `true` in `gerberToSvg`. (See the [@sctg/gerber-to-svg docs](../@sctg/gerber-to-svg/API.md#element-options) for more details.)
 
 [xml-element-string]: https://github.com/tracespace/xml-element-string
 

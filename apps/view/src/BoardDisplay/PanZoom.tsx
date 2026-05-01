@@ -4,7 +4,7 @@ import {useWindowListener} from '../hooks'
 import {DisplayControllerProps, Point} from './types'
 
 type Props = DisplayControllerProps & {
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement | null>
   children?: React.ReactNode
 }
 
@@ -45,9 +45,9 @@ export default function PanZoom(props: Props): JSX.Element {
     <div
       ref={containerRef}
       className="absolute absolute--fill"
-      onMouseDown={event => (panStart.current = getEventCenter(event))}
+      onMouseDown={(event) => (panStart.current = getEventCenter(event))}
       onMouseUp={() => (panStart.current = null)}
-      onMouseMove={event => {
+      onMouseMove={(event) => {
         if (panStart.current) {
           const {x: prevX, y: prevY} = panStart.current
           const {x, y} = getEventCenter(event)

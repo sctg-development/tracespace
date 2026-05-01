@@ -16,7 +16,7 @@ var MATCH = [
   {coord: 'a', test: /A([\d.]+)/},
 ]
 
-var parse = function(coord, format) {
+var parse = function (coord, format) {
   if (coord == null) {
     return {}
   }
@@ -26,7 +26,7 @@ var parse = function(coord, format) {
   }
 
   // pull out the x, y, i, and j
-  var parsed = MATCH.reduce(function(result, matcher) {
+  var parsed = MATCH.reduce(function (result, matcher) {
     var coordMatch = coord.match(matcher.test)
 
     if (coordMatch) {
@@ -39,7 +39,7 @@ var parse = function(coord, format) {
   return parsed
 }
 
-var detectZero = function(coord) {
+var detectZero = function (coord) {
   if (RE_LEADING.test(coord)) {
     return 'L'
   }

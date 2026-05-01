@@ -4,8 +4,8 @@
 
 /// <reference types="node" />
 
-import {Converter, ConverterResult, CreateElement} from 'gerber-to-svg'
-import {GerberSide, GerberType} from 'whats-that-gerber'
+import {Converter, ConverterResult, CreateElement} from '@sctg/gerber-to-svg'
+import {GerberSide, GerberType} from '@sctg/whats-that-gerber'
 
 declare function pcbStackupCore<NodeType = string>(
   layers: Array<pcbStackupCore.Layer>,

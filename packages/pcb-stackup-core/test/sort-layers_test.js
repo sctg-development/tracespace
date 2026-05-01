@@ -4,7 +4,7 @@
 var expect = require('chai').expect
 var extend = require('xtend')
 
-var wtg = require('whats-that-gerber')
+var wtg = require('@sctg/whats-that-gerber')
 var sortLayers = require('../lib/sort-layers')
 
 function mockLayer(side, type, converter) {
@@ -15,8 +15,8 @@ function mockLayer(side, type, converter) {
   }
 }
 
-describe('sort layers function', function() {
-  it('should reduce layers into object keyed by layer type', function() {
+describe('sort layers function', function () {
+  it('should reduce layers into object keyed by layer type', function () {
     var result = sortLayers([])
 
     expect(result.top).to.eql([])
@@ -25,7 +25,7 @@ describe('sort layers function', function() {
     expect(result.outline).to.equal(null)
   })
 
-  it('should add top layers to the top array', function() {
+  it('should add top layers to the top array', function () {
     var layers = [
       mockLayer(wtg.SIDE_TOP, wtg.TYPE_COPPER, {}),
       mockLayer(wtg.SIDE_TOP, wtg.TYPE_SOLDERMASK, {}),
@@ -41,7 +41,7 @@ describe('sort layers function', function() {
     expect(result.top).to.eql(layers)
   })
 
-  it('should add bottom layers to the bottom array', function() {
+  it('should add bottom layers to the bottom array', function () {
     var layers = [
       mockLayer(wtg.SIDE_BOTTOM, wtg.TYPE_COPPER, {}),
       mockLayer(wtg.SIDE_BOTTOM, wtg.TYPE_SOLDERMASK, {}),
@@ -57,7 +57,7 @@ describe('sort layers function', function() {
     expect(result.bottom).to.eql(layers)
   })
 
-  it('should add mechanical layers to the mech array', function() {
+  it('should add mechanical layers to the mech array', function () {
     var layers = [
       mockLayer(wtg.SIDE_ALL, wtg.TYPE_OUTLINE, {}),
       mockLayer(wtg.SIDE_ALL, wtg.TYPE_DRILL, {defs: 'drl1'}),
@@ -72,7 +72,7 @@ describe('sort layers function', function() {
     expect(result.drills).to.eql([layers[1], layers[2]])
   })
 
-  it('should ignore invalid or incomplete layers', function() {
+  it('should ignore invalid or incomplete layers', function () {
     var layers = [
       {type: wtg.TYPE_DRAWING, converter: {layer: ['foo']}},
       {side: wtg.SIDE_TOP, type: wtg.TYPE_COPPER},
@@ -90,7 +90,7 @@ describe('sort layers function', function() {
     expect(result.outline).to.equal(null)
   })
 
-  it('should include the externalId field of layers', function() {
+  it('should include the externalId field of layers', function () {
     var layers = [
       extend(mockLayer(wtg.SIDE_TOP, wtg.TYPE_COPPER, {}), {externalId: 'foo'}),
       extend(mockLayer(wtg.SIDE_BOTTOM, wtg.TYPE_SOLDERMASK, {}), {

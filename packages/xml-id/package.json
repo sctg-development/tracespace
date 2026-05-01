@@ -1,15 +1,15 @@
 {
-  "name": "@tracespace/xml-id",
+  "name": "@sctg/tracespace-xml-id",
   "publishConfig": {
     "access": "public"
   },
-  "version": "4.2.7",
+  "version": "5.0.0",
   "description": "XML ID utilities for tracespace projects",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git"
+    "url": "git+https://github.com/sctg-development/tracespace.git"
   },
   "keywords": [
     "xml",
@@ -19,7 +19,8 @@
     "random"
   ],
   "contributors": [
-    "Mike Cousins <mike@cousins.io> (https://mike.cousins.io)"
+    "Mike Cousins <mike@cousins.io> (https://mike.cousins.io)",
+    "Ronan Le Meillat"
   ],
   "license": "MIT"
 }

@@ -4,8 +4,8 @@
 const runParallel = require('run-parallel')
 const runWaterfall = require('run-waterfall')
 
-const gerberToSvg = require('gerber-to-svg')
-const whatsThatGerber = require('whats-that-gerber')
+const gerberToSvg = require('@sctg/gerber-to-svg')
+const whatsThatGerber = require('@sctg/whats-that-gerber')
 
 const debug = require('debug')('tracespace/pcb-stackup-core/integration')
 const pcbStackupCore = require('..')
@@ -22,13 +22,13 @@ module.exports = function getStackupResults(board, done) {
     board.options
   )
 
-  const layerTypes = whatsThatGerber(layers.map(l => l.name))
+  const layerTypes = whatsThatGerber(layers.map((l) => l.name))
 
   runWaterfall(
     [
-      next =>
+      (next) =>
         runParallel(
-          layers.map(layer => next => renderLayer(layer, layerTypes, next)),
+          layers.map((layer) => (next) => renderLayer(layer, layerTypes, next)),
           next
         ),
       (layers, next) => {
@@ -81,7 +81,7 @@ function renderLayer(layer, layerTypes, done) {
     )
   }
 
-  const converter = gerberToSvg(layer.source, options, error => {
+  const converter = gerberToSvg(layer.source, options, (error) => {
     if (error) return done(error)
 
     done(null, {converter, type, side})

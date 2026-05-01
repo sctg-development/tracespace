@@ -1,8 +1,8 @@
-// @tracespace/components tests
+// @sctg/tracespace-components tests
 
 import {expect} from 'chai'
 import React from 'react'
-import {shallow} from 'enzyme'
+import {renderToStaticMarkup} from 'react-dom/server'
 import snapshot from 'snap-shot-it'
 
 import * as components from '..'
@@ -11,30 +11,30 @@ describe('Logo', () => {
   const {Logo} = components
 
   it('should provide default width and height', () => {
-    const wrapper = shallow(<Logo />)
+    const logo = Logo({})
 
-    expect(wrapper.is('svg')).to.equal(true)
-    expect(wrapper.prop('width')).to.equal('32px')
-    expect(wrapper.prop('height')).to.equal('32px')
+    expect(logo.type).to.equal('svg')
+    expect(logo.props.width).to.equal('32px')
+    expect(logo.props.height).to.equal('32px')
   })
 
   it('should take specified width and height', () => {
-    const wrapper = shallow(<Logo width="32" height={64} />)
+    const logo = Logo({width: '32', height: 64})
 
-    expect(wrapper.is('svg')).to.equal(true)
-    expect(wrapper.prop('width')).to.equal('32')
-    expect(wrapper.prop('height')).to.equal('64')
+    expect(logo.type).to.equal('svg')
+    expect(logo.props.width).to.equal('32')
+    expect(logo.props.height).to.equal('64')
   })
 
   it('should preserve aspect ratio', () => {
-    expect(shallow(<Logo width="32" />).prop('height')).to.equal('32')
-    expect(shallow(<Logo height="32" />).prop('width')).to.equal('32')
+    expect(Logo({width: '32'}).props.height).to.equal('32')
+    expect(Logo({height: '32'}).props.width).to.equal('32')
   })
 
   it('should render', () => {
-    snapshot(shallow(<Logo />).html())
-    snapshot(shallow(<Logo width="32" />).html())
-    snapshot(shallow(<Logo height="32" />).html())
-    snapshot(shallow(<Logo width="100%" height="50%" />).html())
+    snapshot(renderToStaticMarkup(<Logo />))
+    snapshot(renderToStaticMarkup(<Logo width="32" />))
+    snapshot(renderToStaticMarkup(<Logo height="32" />))
+    snapshot(renderToStaticMarkup(<Logo width="100%" height="50%" />))
   })
 })

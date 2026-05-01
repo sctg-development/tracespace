@@ -30,7 +30,7 @@ Or, use a script tag:
 <script src="https://unpkg.com/pcb-stackup@^4.0.0/dist/pcb-stackup.min.js"></script>
 <script>
   // global variable pcbStackup now available
-  pcbStackup(layers).then(stackup => {
+  pcbStackup(layers).then((stackup) => {
     // ...
   })
 </script>
@@ -58,7 +58,7 @@ optional settings object and a callback function.
 
 ```javascript
 const fs = require('fs')
-const pcbStackup = require('pcb-stackup')
+const pcbStackup = require('@sctg/pcb-stackup')
 
 const fileNames = [
   '/path/to/board-F.Cu.gtl',
@@ -74,12 +74,12 @@ const fileNames = [
   '/path/to/board-NPTH.drl',
 ]
 
-const layers = fileNames.map(filename => ({
+const layers = fileNames.map((filename) => ({
   filename,
   gerber: fs.createReadStream(filename),
 }))
 
-pcbStackup(layers).then(stackup => {
+pcbStackup(layers).then((stackup) => {
   console.log(stackup.top.svg) // logs "<svg ... </svg>"
   console.log(stackup.bottom.svg) // logs "<svg ... </svg>"
 })

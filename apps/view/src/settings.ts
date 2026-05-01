@@ -9,21 +9,21 @@ import {
 export function createSettingsMiddleware(): State.Middleware {
   let database: AppDatabase | undefined
 
-  return store => {
+  return (store) => {
     const {dispatch} = store
 
-    createAppDatabase().then(db => {
+    createAppDatabase().then((db) => {
       database = db
       dispatch(State.fetchAppPreferences())
     })
 
-    return next => action => {
+    return (next) => (action) => {
       if (database) {
         const db: AppDatabase = database
 
         switch (action.type) {
           case State.FETCH_APP_PREFERENCES: {
-            ensureAppPreferences(db).then(prefs =>
+            ensureAppPreferences(db).then((prefs) =>
               dispatch(State.appPreferences(prefs))
             )
             break
@@ -32,7 +32,7 @@ export function createSettingsMiddleware(): State.Middleware {
           case State.UPDATE_APP_PREFERENCES: {
             updateAppPreferences(db, action.payload)
               .then(() => ensureAppPreferences(db))
-              .then(prefs => dispatch(State.appPreferences(prefs)))
+              .then((prefs) => dispatch(State.appPreferences(prefs)))
             break
           }
         }

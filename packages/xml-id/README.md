@@ -1,8 +1,8 @@
 # xml id
 
-[![latest][@tracespace/xml-id-latest-badge]][npm]
-[![next][@tracespace/xml-id-next-badge]][npm-next]
-[![david][@tracespace/xml-id-david-badge]][david]
+[![latest][@sctg/tracespace-xml-id-latest-badge]][npm]
+[![next][@sctg/tracespace-xml-id-next-badge]][npm-next]
+[![david][@sctg/tracespace-xml-id-david-badge]][david]
 
 > XML ID generation and sanitation utilities for tracespace projects
 
@@ -11,27 +11,27 @@ ID attributes in XML documents (e.g. SVG images) have certain requirements. This
 Part of the [tracespace][] collection of PCB visualization tools.
 
 [tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/@tracespace/xml-id
-[npm-next]: https://www.npmjs.com/package/@tracespace/xml-id/v/next
+[npm]: https://www.npmjs.com/package/@sctg/tracespace-xml-id
+[npm-next]: https://www.npmjs.com/package/@sctg/tracespace-xml-id/v/next
 [david]: https://david-dm.org/tracespace/tracespace?path=packages/xml-id
-[@tracespace/xml-id-latest-badge]: https://flat.badgen.net/npm/v/@tracespace/xml-id
-[@tracespace/xml-id-next-badge]: https://flat.badgen.net/npm/v/@tracespace/xml-id/next
-[@tracespace/xml-id-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/xml-id
+[@sctg/tracespace-xml-id-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-xml-id
+[@sctg/tracespace-xml-id-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-xml-id/next
+[@sctg/tracespace-xml-id-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/xml-id
 
 ## install
 
 Please note: because this package is an internal utility library, it may not follow semver and breaking changes could be introduced in _any_ version bump. **You should install an exact version.**
 
 ```shell
-npm install --save --save-exact @tracespace/xml-id
+npm install --save --save-exact @sctg/tracespace-xml-id
 # or
-yarn add --exact @tracespace/xml-id
+yarn add --exact @sctg/tracespace-xml-id
 ```
 
 ## usage
 
 ```js
-const {sanitize, random} = require('@tracespace/xml-id')
+const {sanitize, random} = require('@sctg/tracespace-xml-id')
 ```
 
 The alphabet used by this module is a subset of what is valid for XML which is also CSS identifier and URL friendly.

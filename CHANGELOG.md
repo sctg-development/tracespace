@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/sctg-development/tracespace) (2026-05-01)
+Update all dependencies to latest versions, including React 19 and TypeScript 6.0.3. This is a major version bump due to the breaking changes in these dependencies.
+Migrate to Vite 8
+rename package to @sctg/tracespace
+
 ## [4.2.8](https://github.com/tracespace/tracespace/compare/v4.2.7...v4.2.8) (2022-03-28)
 
 
@@ -27,7 +32,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **gerber-parser:** ignore object attribute %TO blocks ([#376](https://github.com/tracespace/tracespace/issues/376)) ([844d44b](https://github.com/tracespace/tracespace/commit/844d44b)), closes [#375](https://github.com/tracespace/tracespace/issues/375)
+* **@sctg/gerber-parser:** ignore object attribute %TO blocks ([#376](https://github.com/tracespace/tracespace/issues/376)) ([844d44b](https://github.com/tracespace/tracespace/commit/844d44b)), closes [#375](https://github.com/tracespace/tracespace/issues/375)
 
 
 
@@ -38,7 +43,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **gerber-plotter:** allow unset tool when drawing region arcs ([#356](https://github.com/tracespace/tracespace/issues/356)) ([f18d796](https://github.com/tracespace/tracespace/commit/f18d796)), closes [#355](https://github.com/tracespace/tracespace/issues/355)
+* **@sctg/gerber-plotter:** allow unset tool when drawing region arcs ([#356](https://github.com/tracespace/tracespace/issues/356)) ([f18d796](https://github.com/tracespace/tracespace/commit/f18d796)), closes [#355](https://github.com/tracespace/tracespace/issues/355)
 
 
 
@@ -50,7 +55,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **parser:** accept units on same line as format ([#350](https://github.com/tracespace/tracespace/issues/350)) ([eb2feae](https://github.com/tracespace/tracespace/commit/eb2feae))
-* **types:** define more types for gerber-plotter ([#349](https://github.com/tracespace/tracespace/issues/349)) ([d1a1417](https://github.com/tracespace/tracespace/commit/d1a1417))
+* **types:** define more types for @sctg/gerber-plotter ([#349](https://github.com/tracespace/tracespace/issues/349)) ([d1a1417](https://github.com/tracespace/tracespace/commit/d1a1417))
 
 
 
@@ -105,7 +110,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **gerber-parser:** Identify hole-plating in drill files ([#285](https://github.com/tracespace/tracespace/issues/285)) ([497f506](https://github.com/tracespace/tracespace/commit/497f506))
+* **@sctg/gerber-parser:** Identify hole-plating in drill files ([#285](https://github.com/tracespace/tracespace/issues/285)) ([497f506](https://github.com/tracespace/tracespace/commit/497f506))
 
 
 
@@ -185,8 +190,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency jszip to ^3.2.1 ([#163](https://github.com/tracespace/tracespace/issues/163)) ([ee2aeac](https://github.com/tracespace/tracespace/commit/ee2aeac))
 * **deps:** update font awesome ([#173](https://github.com/tracespace/tracespace/issues/173)) ([f9ba8e8](https://github.com/tracespace/tracespace/commit/f9ba8e8))
 * **deps:** update react monorepo and packages ([#155](https://github.com/tracespace/tracespace/issues/155)) ([cd445d8](https://github.com/tracespace/tracespace/commit/cd445d8))
-* **gerber-plotter:** Emit correct 'repeat' object on steprepeat disable ([#188](https://github.com/tracespace/tracespace/issues/188)) ([930d133](https://github.com/tracespace/tracespace/commit/930d133)), closes [#81](https://github.com/tracespace/tracespace/issues/81)
-* **gerber-to-svg:** Allow options parameter to be skipped ([#181](https://github.com/tracespace/tracespace/issues/181)) ([bbe5c07](https://github.com/tracespace/tracespace/commit/bbe5c07))
+* **@sctg/gerber-plotter:** Emit correct 'repeat' object on steprepeat disable ([#188](https://github.com/tracespace/tracespace/issues/188)) ([930d133](https://github.com/tracespace/tracespace/commit/930d133)), closes [#81](https://github.com/tracespace/tracespace/issues/81)
+* **@sctg/gerber-to-svg:** Allow options parameter to be skipped ([#181](https://github.com/tracespace/tracespace/issues/181)) ([bbe5c07](https://github.com/tracespace/tracespace/commit/bbe5c07))
 * **whats-that-gerber:** Add Orcad matchers for .drd and .npt ([#189](https://github.com/tracespace/tracespace/issues/189)) ([2894208](https://github.com/tracespace/tracespace/commit/2894208))
 
 
@@ -209,7 +214,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **deps:** update dependency run-parallel to ^1.1.9 ([#166](https://github.com/tracespace/tracespace/issues/166)) ([a175306](https://github.com/tracespace/tracespace/commit/a175306))
 * **deps:** update dependency run-series to ^1.1.8 ([#170](https://github.com/tracespace/tracespace/issues/170)) ([d5b0082](https://github.com/tracespace/tracespace/commit/d5b0082))
 * **deps:** update dependency run-waterfall to ^1.1.6 ([#172](https://github.com/tracespace/tracespace/issues/172)) ([9e72361](https://github.com/tracespace/tracespace/commit/9e72361))
-* **gerber-parser:** Parse DipTrace drill coordinate format command ([#168](https://github.com/tracespace/tracespace/issues/168)) ([b0de854](https://github.com/tracespace/tracespace/commit/b0de854)), closes [#137](https://github.com/tracespace/tracespace/issues/137)
+* **@sctg/gerber-parser:** Parse DipTrace drill coordinate format command ([#168](https://github.com/tracespace/tracespace/issues/168)) ([b0de854](https://github.com/tracespace/tracespace/commit/b0de854)), closes [#137](https://github.com/tracespace/tracespace/issues/137)
 * **whats-that-gerber:** Recognize DipTrace inner copper layers  ([#171](https://github.com/tracespace/tracespace/issues/171)) ([100a95b](https://github.com/tracespace/tracespace/commit/100a95b)), closes [#138](https://github.com/tracespace/tracespace/issues/138)
 
 
@@ -258,10 +263,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * **pcb-stackup:** pcb-stackup no longer tries to help if you use
 options.createElement. You can still use it, but you'll have to manually
-align your gerber-to-svg options with pcb-stackup's options
+align your @sctg/gerber-to-svg options with pcb-stackup's options
 * **travis:** Node v6 dropped from CI testing matrix
 * Parameters, defaults, and return types have changed in pcb-stackup,
-pcb-stackup-core, and gerber-to-svg
+pcb-stackup-core, and @sctg/gerber-to-svg
 
 
 
@@ -273,7 +278,7 @@ pcb-stackup-core, and gerber-to-svg
 ### Bug Fixes
 
 * **fixtures:** Replace macro multi-exposure expected render ([#101](https://github.com/tracespace/tracespace/issues/101)) ([a821588](https://github.com/tracespace/tracespace/commit/a821588))
-* **gerber-to-svg:** Wrap children of <mask> nodes in a <g> ([#100](https://github.com/tracespace/tracespace/issues/100)) ([b984e32](https://github.com/tracespace/tracespace/commit/b984e32)), closes [#98](https://github.com/tracespace/tracespace/issues/98)
+* **@sctg/gerber-to-svg:** Wrap children of <mask> nodes in a <g> ([#100](https://github.com/tracespace/tracespace/issues/100)) ([b984e32](https://github.com/tracespace/tracespace/commit/b984e32)), closes [#98](https://github.com/tracespace/tracespace/issues/98)
 
 
 
@@ -336,7 +341,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* Replace shortid with [@tracespace](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
+* Replace shortid with [@sctg/tracespace-](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
 
 
 ### Features
@@ -358,18 +363,18 @@ object keyed by the filenames passed in as an array
 
 ### Code Refactoring
 
-* **gerber-to-svg:** Remove CLI in favor of [@tracespace](https://github.com/tracespace)/cli ([50e255d](https://github.com/tracespace/tracespace/commit/50e255d))
+* **@sctg/gerber-to-svg:** Remove CLI in favor of [@sctg/tracespace-](https://github.com/tracespace)/cli ([50e255d](https://github.com/tracespace/tracespace/commit/50e255d))
 
 
 ### Features
 
-* **cli:** Add [@tracespace](https://github.com/tracespace)/cli package ([486d6fc](https://github.com/tracespace/tracespace/commit/486d6fc)), closes [#13](https://github.com/tracespace/tracespace/issues/13)
+* **cli:** Add [@sctg/tracespace-](https://github.com/tracespace)/cli package ([486d6fc](https://github.com/tracespace/tracespace/commit/486d6fc)), closes [#13](https://github.com/tracespace/tracespace/issues/13)
 * **whats-that-gerber:** Add support for eagle 9+ filenames ([#76](https://github.com/tracespace/tracespace/issues/76)) ([3b8f570](https://github.com/tracespace/tracespace/commit/3b8f570))
 
 
 ### BREAKING CHANGES
 
-* **gerber-to-svg:** Removed gerber-to-svg (gerber2svg) CLI
+* **@sctg/gerber-to-svg:** Removed @sctg/gerber-to-svg (gerber2svg) CLI
 
 
 
@@ -405,7 +410,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* **gerber-plotter:** Fix outline regression with duplicate paths([#64](https://github.com/tracespace/tracespace/issues/64)) ([23b4bcb](https://github.com/tracespace/tracespace/commit/23b4bcb))
+* **@sctg/gerber-plotter:** Fix outline regression with duplicate paths([#64](https://github.com/tracespace/tracespace/issues/64)) ([23b4bcb](https://github.com/tracespace/tracespace/commit/23b4bcb))
 
 
 ### Features
@@ -431,7 +436,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* **gerber-plotter:** Fix gap fill ruining arcs (mcous/gerber-plotter[#13](https://github.com/tracespace/tracespace/issues/13)) ([6cf04b7](https://github.com/tracespace/tracespace/commit/6cf04b7))
+* **@sctg/gerber-plotter:** Fix gap fill ruining arcs (mcous/@sctg/gerber-plotter[#13](https://github.com/tracespace/tracespace/issues/13)) ([6cf04b7](https://github.com/tracespace/tracespace/commit/6cf04b7))
 
 
 
@@ -443,7 +448,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* **gerber-to-svg:** Fix append-ext check using old short-option ([cde8cda](https://github.com/tracespace/tracespace/commit/cde8cda))
+* **@sctg/gerber-to-svg:** Fix append-ext check using old short-option ([cde8cda](https://github.com/tracespace/tracespace/commit/cde8cda))
 
 
 
@@ -455,12 +460,12 @@ object keyed by the filenames passed in as an array
 
 ### Features
 
-* **gerber-to-svg:** Replace non-functional CLI options ([5633375](https://github.com/tracespace/tracespace/commit/5633375))
+* **@sctg/gerber-to-svg:** Replace non-functional CLI options ([5633375](https://github.com/tracespace/tracespace/commit/5633375))
 
 
 ### BREAKING CHANGES
 
-* **gerber-to-svg:** Short option for --append-ext was changed from -a to
+* **@sctg/gerber-to-svg:** Short option for --append-ext was changed from -a to
 -e, short option for --optimize-paths was changed to from -z to -t to
 match documentation and because -z was already used by --zero
 
@@ -515,4 +520,4 @@ match documentation and because -z was already used by --zero
 
 ### Features
 
-* **fixtures:** Add [@tracespace](https://github.com/tracespace)/fixtures module ([526a330](https://github.com/tracespace/tracespace/commit/526a330))
+* **fixtures:** Add [@sctg/tracespace-](https://github.com/tracespace)/fixtures module ([526a330](https://github.com/tracespace/tracespace/commit/526a330))

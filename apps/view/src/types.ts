@@ -1,10 +1,13 @@
 import React from 'react'
-import {CoordinateFormat, ZeroSuppression} from 'gerber-parser'
-import {Units} from 'gerber-plotter'
-import {ConverterResult} from 'gerber-to-svg'
-import {Color} from 'pcb-stackup-core'
+import {CoordinateFormat, ZeroSuppression} from '@sctg/gerber-parser'
+import {Units} from '@sctg/gerber-plotter'
+import {ConverterResult} from '@sctg/gerber-to-svg'
+import {Color} from '@sctg/pcb-stackup-core'
 import {ViewBox} from 'viewbox'
-import {GerberSide, GerberType} from 'whats-that-gerber'
+import type whatsThatGerber from '@sctg/whats-that-gerber'
+
+type GerberSide = whatsThatGerber.GerberSide
+type GerberType = whatsThatGerber.GerberType
 
 export {CoordinateFormat, ZeroSuppression, Units, GerberType, GerberSide}
 

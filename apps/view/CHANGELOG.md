@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.8](https://github.com/tracespace/tracespace/compare/v4.2.7...v4.2.8) (2022-03-28)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 
@@ -13,7 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 
@@ -21,7 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.6](https://github.com/tracespace/tracespace/compare/v4.2.5...v4.2.6) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 
@@ -29,7 +29,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.5](https://github.com/tracespace/tracespace/compare/v4.2.4...v4.2.5) (2020-12-18)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 
@@ -37,7 +37,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.4](https://github.com/tracespace/tracespace/compare/v4.2.3...v4.2.4) (2020-12-15)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 
@@ -56,7 +56,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.2](https://github.com/tracespace/tracespace/compare/v4.2.1...v4.2.2) (2020-10-13)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 
@@ -169,7 +169,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0](https://github.com/tracespace/tracespace/compare/v4.0.0-next.19...v4.0.0) (2019-03-09)
 
-**Note:** Version bump only for package @tracespace/view
+**Note:** Version bump only for package @sctg/tracespace-view
 
 
 

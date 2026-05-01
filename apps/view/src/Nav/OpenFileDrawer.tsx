@@ -41,9 +41,9 @@ function OpenFileDrawer(props: OpenFileDrawerProps): JSX.Element {
       <p className={SEPARATOR_STYLE}>or</p>
       <Formik
         initialValues={{url: ''}}
-        onSubmit={values => handleUrl(values.url)}
+        onSubmit={(values) => handleUrl(values.url)}
       >
-        {formikProps => (
+        {(formikProps) => (
           <Form>
             <p className={ENTER_URL_LABEL_STYLE}>{ENTER_URL_LABEL}</p>
             <span className={URL_INPUT_WRAPPER_STYLE}>

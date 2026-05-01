@@ -1,4 +1,4 @@
-// test suite for gerber-to-svg
+// test suite for @sctg/gerber-to-svg
 'use strict'
 
 var events = require('events')
@@ -15,22 +15,22 @@ var xmlElementSpy = sinon.spy(xmlElementString)
 var xidEnsureStub = sinon.stub()
 
 var gerberToSvg = proxyquire('..', {
-  'gerber-parser': parserStub,
-  'gerber-plotter': plotterStub,
+  '@sctg/gerber-parser': parserStub,
+  '@sctg/gerber-plotter': plotterStub,
   'xml-element-string': xmlElementSpy,
-  '@tracespace/xml-id': {ensure: xidEnsureStub},
+  '@sctg/tracespace-xml-id': {ensure: xidEnsureStub},
   './lib/plotter-to-svg': converterStub,
 })
 
 var render = require('../render')
 var clone = require('../clone')
 
-describe('gerber to svg', function() {
+describe('gerber to svg', function () {
   var fakeParser
   var fakePlotter
   var fakeConverter
 
-  beforeEach(function() {
+  beforeEach(function () {
     parserStub.reset()
     plotterStub.reset()
     converterStub.reset()
@@ -60,15 +60,15 @@ describe('gerber to svg', function() {
     converterStub.returns(fakeConverter)
   })
 
-  afterEach(function() {
+  afterEach(function () {
     fakeParser.removeAllListeners()
     fakePlotter.removeAllListeners()
     fakeConverter.removeAllListeners()
   })
 
-  it('should return a the converter transform stream', function() {
+  it('should return a the converter transform stream', function () {
     var converter1 = gerberToSvg('', 'test-id')
-    var converter2 = gerberToSvg('', 'test-id', function() {})
+    var converter2 = gerberToSvg('', 'test-id', function () {})
 
     expect(converter1).to.equal(fakeConverter)
     expect(converter2).to.equal(fakeConverter)
@@ -77,8 +77,8 @@ describe('gerber to svg', function() {
     expect(converterStub).to.have.callCount(2)
   })
 
-  it('should gather readable data from the converter in callback mode', function(done) {
-    gerberToSvg('foobar*\n', 'quz', function(error, result) {
+  it('should gather readable data from the converter in callback mode', function (done) {
+    gerberToSvg('foobar*\n', 'quz', function (error, result) {
       expect(error == null).to.equal(true)
       expect(result).to.equal('<svg><foo/><bar/></svg>')
       done()
@@ -96,8 +96,8 @@ describe('gerber to svg', function() {
     fakeConverter.emit('end')
   })
 
-  it('should allow options param to be skipped', function(done) {
-    gerberToSvg('foobar*\n', function(error, result) {
+  it('should allow options param to be skipped', function (done) {
+    gerberToSvg('foobar*\n', function (error, result) {
       expect(error == null).to.equal(true)
       expect(result).to.equal('<svg />')
       done()
@@ -108,7 +108,7 @@ describe('gerber to svg', function() {
     fakeConverter.emit('end')
   })
 
-  it('should pipe a stream input into the parser and listen for errors', function() {
+  it('should pipe a stream input into the parser and listen for errors', function () {
     var input = {pipe: sinon.spy(), setEncoding: sinon.spy()}
 
     gerberToSvg(input, 'test-id')
@@ -118,29 +118,29 @@ describe('gerber to svg', function() {
     expect(input.setEncoding).to.be.calledWith('utf8')
   })
 
-  it('should write string input into the parser', function(done) {
+  it('should write string input into the parser', function (done) {
     var input = 'G04 empty gerber*\nM02*\n'
 
     gerberToSvg(input, 'test-id')
 
-    setTimeout(function() {
+    setTimeout(function () {
       expect(fakeParser.write).to.be.calledWith(input)
       expect(fakeParser.end).to.have.callCount(1)
       done()
     }, 10)
   })
 
-  it('should pass the id to plotter-to-svg when it is a string', function() {
+  it('should pass the id to plotter-to-svg when it is a string', function () {
     gerberToSvg('', 'foo')
     expect(converterStub).to.be.calledWith('foo')
   })
 
-  it('should pass the id in an object', function() {
+  it('should pass the id in an object', function () {
     gerberToSvg('', {id: 'bar'})
     expect(converterStub).to.be.calledWith('bar')
   })
 
-  it('should generate a random ID if id is missing', function() {
+  it('should generate a random ID if id is missing', function () {
     xidEnsureStub.reset()
     xidEnsureStub.returns('random-id')
 
@@ -148,13 +148,13 @@ describe('gerber to svg', function() {
     expect(converterStub).to.be.calledWith('random-id')
   })
 
-  it('should pass the attributes option', function() {
+  it('should pass the attributes option', function () {
     gerberToSvg('', {id: 'foo', attributes: {bar: 'baz'}})
     expect(converterStub).to.be.calledWith('foo', {bar: 'baz'})
   })
 
-  it('should pass createElement, which should default to xml-element-string', function() {
-    var element = function() {}
+  it('should pass createElement, which should default to xml-element-string', function () {
+    var element = function () {}
 
     gerberToSvg('', {id: 'foo'})
     expect(converterStub).to.be.calledWith('foo', {}, xmlElementSpy)
@@ -162,8 +162,8 @@ describe('gerber to svg', function() {
     expect(converterStub).to.be.calledWith('bar', {}, element)
   })
 
-  it('should pass objectMode, which should default to false', function() {
-    var element = function() {}
+  it('should pass objectMode, which should default to false', function () {
+    var element = function () {}
 
     gerberToSvg('', {id: 'foo', createElement: element})
     expect(converterStub).to.be.calledWith('foo', {}, element, false)
@@ -171,23 +171,23 @@ describe('gerber to svg', function() {
     expect(converterStub).to.be.calledWith('bar', {}, element, true)
   })
 
-  describe('passing along warnings', function() {
-    it('should emit warnings from the parser', function(done) {
+  describe('passing along warnings', function () {
+    it('should emit warnings from the parser', function (done) {
       var converter = gerberToSvg('foobar*\n', 'foobar')
       var warning = {}
 
-      converter.once('warning', function(w) {
+      converter.once('warning', function (w) {
         expect(w).to.equal(warning)
         done()
       })
       fakeParser.emit('warning', warning)
     })
 
-    it('should emit warnings from the plotter', function(done) {
+    it('should emit warnings from the plotter', function (done) {
       var converter = gerberToSvg('foobar*\n', 'foobar')
       var warning = {}
 
-      converter.once('warning', function(w) {
+      converter.once('warning', function (w) {
         expect(w).to.equal(warning)
         done()
       })
@@ -195,33 +195,33 @@ describe('gerber to svg', function() {
     })
   })
 
-  describe('passing along errors', function() {
-    it('should emit errors from the parser', function(done) {
+  describe('passing along errors', function () {
+    it('should emit errors from the parser', function (done) {
       var converter = gerberToSvg('foobar*\n', 'foobar')
       var error = {}
 
-      converter.once('error', function(e) {
+      converter.once('error', function (e) {
         expect(e).to.equal(error)
         done()
       })
       fakeParser.emit('error', error)
     })
 
-    it('should emit errors from the plotter', function(done) {
+    it('should emit errors from the plotter', function (done) {
       var converter = gerberToSvg('foobar*\n', 'foobar')
       var error = {}
 
-      converter.once('error', function(e) {
+      converter.once('error', function (e) {
         expect(e).to.equal(error)
         done()
       })
       fakePlotter.emit('error', error)
     })
 
-    it('should return errors from the parser in callback mode', function(done) {
+    it('should return errors from the parser in callback mode', function (done) {
       var expectedError = {}
 
-      gerberToSvg('foobar*\n', 'foobar', function(error) {
+      gerberToSvg('foobar*\n', 'foobar', function (error) {
         expect(error).to.equal(expectedError)
         done()
       })
@@ -229,10 +229,10 @@ describe('gerber to svg', function() {
       fakeParser.emit('error', expectedError)
     })
 
-    it('should return errors from the plotter in callback mode', function(done) {
+    it('should return errors from the plotter in callback mode', function (done) {
       var expectedError = {}
 
-      gerberToSvg('foobar*\n', 'foobar', function(error) {
+      gerberToSvg('foobar*\n', 'foobar', function (error) {
         expect(error).to.equal(expectedError)
         done()
       })
@@ -241,7 +241,7 @@ describe('gerber to svg', function() {
     })
   })
 
-  it('should take the filetype format from the parser', function() {
+  it('should take the filetype format from the parser', function () {
     var parser = new events.EventEmitter()
 
     assign(parser, fakeParser, {format: {filetype: 'foobar'}})
@@ -255,7 +255,7 @@ describe('gerber to svg', function() {
     expect(converter.filetype).to.equal('foobar')
   })
 
-  it('should expose the render function used by the converter', function() {
+  it('should expose the render function used by the converter', function () {
     var fakeConverter = {
       defs: ['the'],
       layer: ['other'],
@@ -270,7 +270,7 @@ describe('gerber to svg', function() {
     expect(gerberToSvg.render(fakeConverter)).to.equal(expected)
   })
 
-  it('shoud have a clone method that clones public properties of a converter', function() {
+  it('shoud have a clone method that clones public properties of a converter', function () {
     var converter = {
       parser: 'hello',
       plotter: 'from',
@@ -297,8 +297,8 @@ describe('gerber to svg', function() {
     })
   })
 
-  describe('parser and plotter options', function() {
-    it('should pass parser options to the parser', function() {
+  describe('parser and plotter options', function () {
+    it('should pass parser options to the parser', function () {
       var options = {
         id: 'bar',
         places: [2, 3],
@@ -314,7 +314,7 @@ describe('gerber to svg', function() {
       })
     })
 
-    it('should pass plotter options to the plotter', function() {
+    it('should pass plotter options to the plotter', function () {
       var options = {
         id: 'bar',
         units: 'in',
@@ -336,7 +336,7 @@ describe('gerber to svg', function() {
       })
     })
 
-    it('should include the parser and plotter as properties', function() {
+    it('should include the parser and plotter as properties', function () {
       var result = gerberToSvg('thing', 'id')
 
       expect(result.parser).to.equal(fakeParser)

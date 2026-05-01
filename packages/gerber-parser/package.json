@@ -1,17 +1,17 @@
 {
-  "name": "gerber-parser",
-  "version": "4.2.7",
+  "name": "@sctg/gerber-parser",
+  "version": "5.0.0",
   "description": "Streaming Gerber/drill file parser",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "serve": "node ../../scripts/serve"
+    "build": "vite build",
+    "serve": "vite preview --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git",
-    "directory": "packages/gerber-parser"
+    "url": "git+https://github.com/sctg-development/tracespace.git",
+    "directory": "packages/@sctg/gerber-parser"
   },
   "keywords": [
     "PCB",
@@ -27,15 +27,18 @@
   "author": "Mike Cousins <mike@cousins.io> (https://mike.cousins.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tracespace/tracespace/issues"
+    "url": "https://github.com/sctg-development/tracespace/issues"
   },
-  "homepage": "https://github.com/tracespace/tracespace#readme",
+  "homepage": "https://github.com/sctg-development/tracespace#readme",
   "dependencies": {
-    "@types/node": "^13.1.6",
+    "@types/node": "^25.6.0",
     "inherits": "^2.0.4",
     "lodash.isfinite": "^3.3.2",
     "lodash.padend": "^4.6.1",
     "lodash.padstart": "^4.6.1",
-    "readable-stream": "^3.4.0"
+    "readable-stream": "^4.7.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

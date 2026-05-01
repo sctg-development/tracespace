@@ -7,9 +7,10 @@ module.exports = {
     '@babel/preset-typescript',
   ],
   plugins: [
-    ['@babel/plugin-proposal-class-properties', {loose: true}],
-    ['@babel/proposal-object-rest-spread', {loose: true}],
+    ['@babel/plugin-transform-class-properties', {loose: true}],
+    ['@babel/plugin-transform-private-methods', {loose: true}],
+    ['@babel/plugin-transform-private-property-in-object', {loose: true}],
+    ['@babel/plugin-transform-object-rest-spread', {loose: true}],
     '@babel/plugin-syntax-dynamic-import',
-    'react-hot-loader/babel',
   ],
 }

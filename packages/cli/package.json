@@ -1,9 +1,9 @@
 {
-  "name": "@tracespace/cli",
+  "name": "@sctg/tracespace-cli",
   "publishConfig": {
     "access": "public"
   },
-  "version": "4.2.8",
+  "version": "5.0.0",
   "description": "Render a PCB as SVGs from the command line",
   "bin": {
     "tracespace": "index.js"
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git"
+    "url": "git+https://github.com/sctg-development/tracespace.git"
   },
   "keywords": [
     "pcb",
@@ -25,7 +25,8 @@
     "electronics"
   ],
   "contributors": [
-    "Mike Cousins <mike@cousins.io> (https://mike.cousins.io)"
+    "Mike Cousins <mike@cousins.io> (https://mike.cousins.io)",
+    "Ronan Le Meillat"
   ],
   "license": "MIT",
   "engines": {
@@ -33,17 +34,17 @@
   },
   "dependencies": {
     "common-prefix": "^1.1.0",
-    "cosmiconfig": "^5.2.1",
-    "debug": "^4.1.1",
-    "dot-prop": "^5.1.0",
-    "gerber-to-svg": "^4.2.8",
-    "globby": "^10.0.2",
-    "is-glob": "^4.0.1",
-    "make-dir": "^3.0.0",
-    "pcb-stackup": "^4.2.8",
-    "slash": "^3.0.0",
-    "untildify": "^4.0.0",
-    "whats-that-gerber": "^4.2.7",
-    "yargs": "^15.1.0"
+    "cosmiconfig": "^9.0.1",
+    "debug": "^4.4.3",
+    "dot-prop": "^10.1.0",
+    "@sctg/gerber-to-svg": "^5.0.0",
+    "globby": "^16.2.0",
+    "is-glob": "^4.0.3",
+    "make-dir": "^5.1.0",
+    "@sctg/pcb-stackup": "^5.0.0",
+    "slash": "^5.1.0",
+    "untildify": "^6.0.0",
+    "@sctg/whats-that-gerber": "^5.0.0",
+    "yargs": "^18.0.0"
   }
 }

@@ -1,24 +1,18 @@
 'use strict'
 
 const path = require('path')
-const Enzyme = require('enzyme')
-const EnzymeAdapter = require('enzyme-adapter-react-16')
-
 require('@babel/register')({
   configFile: path.join(__dirname, '../babel.config.js'),
-  plugins: [
-    '@babel/plugin-transform-modules-commonjs',
-    ['react-hot-loader/babel', false],
-  ],
+  plugins: ['@babel/plugin-transform-modules-commonjs'],
   extensions: ['.ts', '.d.ts', '.tsx'],
   sourceMaps: 'inline',
 })
 
-Enzyme.configure({adapter: new EnzymeAdapter()})
-
 const chai = require('chai')
-const sinonChai = require('sinon-chai')
-const chaiAsPromised = require('chai-as-promised')
+const sinonChaiModule = require('sinon-chai')
+const chaiAsPromisedModule = require('chai-as-promised')
+const sinonChai = sinonChaiModule.default || sinonChaiModule
+const chaiAsPromised = chaiAsPromisedModule.default || chaiAsPromisedModule
 
 chai.use(sinonChai)
 chai.use(chaiAsPromised)

@@ -19,7 +19,7 @@ const GERBER_PATHS = [
   path.join(GERBERS_DIR, 'arduino-uno.sts'),
 ]
 
-GERBER_PATHS.forEach(filename => {
+GERBER_PATHS.forEach((filename) => {
   const name = path.basename(filename)
   const out = path.join(OUT_DIR, `${name}.svg`)
 
@@ -27,7 +27,7 @@ GERBER_PATHS.forEach(filename => {
   const source = gerberToSvg(file)
   const destination = fs.createWriteStream(out)
 
-  pump(source, destination, error => {
+  pump(source, destination, (error) => {
     if (error) return console.error(`Error rendering ${name}`, error)
     console.log(`Wrote: ${out}`)
   })

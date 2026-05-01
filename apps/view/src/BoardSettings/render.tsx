@@ -95,7 +95,7 @@ function RadioGroup(props: RadioGroupProps): JSX.Element {
 
   return (
     <>
-      {options.map(opt => {
+      {options.map((opt) => {
         const value = field.value || defaultValue
         const checked = value === opt.value
 

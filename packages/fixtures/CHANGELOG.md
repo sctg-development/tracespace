@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/fixtures
+**Note:** Version bump only for package @sctg/tracespace-fixtures
 
 
 
@@ -62,7 +62,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0](https://github.com/tracespace/tracespace/compare/v4.0.0-next.19...v4.0.0) (2019-03-09)
 
-**Note:** Version bump only for package @tracespace/fixtures
+**Note:** Version bump only for package @sctg/tracespace-fixtures
 
 
 
@@ -79,7 +79,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 * Parameters, defaults, and return types have changed in pcb-stackup,
-pcb-stackup-core, and gerber-to-svg
+pcb-stackup-core, and @sctg/gerber-to-svg
 
 
 
@@ -119,7 +119,7 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* Replace shortid with [@tracespace](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
+* Replace shortid with [@sctg/tracespace-](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
 
 
 
@@ -176,7 +176,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.7"></a>
 # [4.0.0-next.7](https://github.com/tracespace/tracespace/compare/v4.0.0-next.6...v4.0.0-next.7) (2018-06-16)
 
-**Note:** Version bump only for package @tracespace/fixtures
+**Note:** Version bump only for package @sctg/tracespace-fixtures
 
 
 
@@ -185,7 +185,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.5"></a>
 # [4.0.0-next.5](https://github.com/tracespace/tracespace/compare/v4.0.0-next.4...v4.0.0-next.5) (2018-06-15)
 
-**Note:** Version bump only for package @tracespace/fixtures
+**Note:** Version bump only for package @sctg/tracespace-fixtures
 
 
 
@@ -206,7 +206,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.2"></a>
 # [4.0.0-next.2](https://github.com/tracespace/tracespace/compare/v4.0.0-next.1...v4.0.0-next.2) (2018-04-17)
 
-**Note:** Version bump only for package @tracespace/fixtures
+**Note:** Version bump only for package @sctg/tracespace-fixtures
 
 
 
@@ -218,4 +218,4 @@ object keyed by the filenames passed in as an array
 
 ### Features
 
-* **fixtures:** Add [@tracespace](https://github.com/tracespace)/fixtures module ([526a330](https://github.com/tracespace/tracespace/commit/526a330))
+* **fixtures:** Add [@sctg/tracespace-](https://github.com/tracespace)/fixtures module ([526a330](https://github.com/tracespace/tracespace/commit/526a330))

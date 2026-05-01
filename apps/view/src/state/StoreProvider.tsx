@@ -12,7 +12,7 @@ export type StoreProps = {
 export default function StoreProvider(props: StoreProps): JSX.Element {
   const [state, setState] = useState(INITIAL_STATE)
   const stateRef = useRef<State>(state)
-  const dispatchRef = useRef<Dispatch>(a => a)
+  const dispatchRef = useRef<Dispatch>((a) => a)
   const store = {
     getState: (): State => stateRef.current,
     dispatch: (action: Action) => dispatchRef.current(action),

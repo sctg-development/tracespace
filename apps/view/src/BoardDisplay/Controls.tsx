@@ -48,7 +48,7 @@ export default function Controls(props: DisplayControllerProps): JSX.Element {
       </Button>
       <span
         className={ZOOM_BAR_CONTAINER_STYLE}
-        onMouseDown={event => {
+        onMouseDown={(event) => {
           setGrabbing(true)
           handleGrabMove(event)
         }}

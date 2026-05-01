@@ -25,18 +25,18 @@ var SVG_ATTR = {
 
 var EMPTY_BOX = [Infinity, Infinity, -Infinity, -Infinity]
 
-describe('plotter to svg transform stream', function() {
+describe('plotter to svg transform stream', function () {
   var p
   var element
 
-  beforeEach(function() {
+  beforeEach(function () {
     element = sinon.spy(xmlElement)
     p = new PlotterToSvg('id', {}, element)
     p.setEncoding('utf8')
   })
 
-  it('should emit an empty svg if it gets a zero size plot', function(done) {
-    p.once('data', function() {
+  it('should emit an empty svg if it gets a zero size plot', function (done) {
+    p.once('data', function () {
       expect(element).to.be.calledWith('svg', SVG_ATTR, [])
       expect(p.viewBox).to.eql([0, 0, 0, 0])
       expect(p.width).to.equal(0)
@@ -49,11 +49,11 @@ describe('plotter to svg transform stream', function() {
     p.end()
   })
 
-  it('should be able to add attributes', function(done) {
+  it('should be able to add attributes', function (done) {
     var converter = new PlotterToSvg('foo', {id: 'foo', bar: 'baz'}, element)
     var expected = assign({}, SVG_ATTR, {id: 'foo', bar: 'baz'})
 
-    converter.once('data', function() {
+    converter.once('data', function () {
       expect(element).to.be.calledWith('svg', expected)
       done()
     })
@@ -62,8 +62,8 @@ describe('plotter to svg transform stream', function() {
     converter.end()
   })
 
-  describe('creating pad shapes', function() {
-    it('should handle circle primitives', function() {
+  describe('creating pad shapes', function () {
+    it('should handle circle primitives', function () {
       var toolShape = [{type: 'circle', cx: 0.001, cy: 0.002, r: 0.005}]
       var expected = {id: 'id_pad-10', cx: 1, cy: 2, r: 5}
 
@@ -72,7 +72,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[0]])
     })
 
-    it('should handle rect primitives', function() {
+    it('should handle rect primitives', function () {
       var toolShape = [
         {
           type: 'rect',
@@ -98,7 +98,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[0]])
     })
 
-    it('should handle polygon primitives', function() {
+    it('should handle polygon primitives', function () {
       var toolShape = [
         {
           type: 'poly',
@@ -116,7 +116,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[0]])
     })
 
-    it('should handle a ring primitives', function() {
+    it('should handle a ring primitives', function () {
       var toolShape = [
         {type: 'ring', r: 0.02, width: 0.005, cx: 0.05, cy: -0.03},
       ]
@@ -134,7 +134,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[0]])
     })
 
-    it('should handle a clipped primitive with rects', function() {
+    it('should handle a clipped primitive with rects', function () {
       var clippedShapes = [
         {type: 'rect', cx: 0.003, cy: 0.003, width: 0.004, height: 0.004, r: 0},
         {
@@ -192,7 +192,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[1], element.returnValues[6]])
     })
 
-    it('should handle a clipped primitive with polys', function() {
+    it('should handle a clipped primitive with polys', function () {
       var po = 0.001
       var ne = -0.005
       var mP = po + 0.004
@@ -265,7 +265,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[1], element.returnValues[6]])
     })
 
-    it('should handle multiple primitives', function() {
+    it('should handle multiple primitives', function () {
       var toolShape = [
         {type: 'rect', cx: 0.003, cy: 0.003, width: 0.004, height: 0.004, r: 0},
         {
@@ -315,7 +315,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([element.returnValues[4]])
     })
 
-    it('should handle multiple clipped primitives', function() {
+    it('should handle multiple clipped primitives', function () {
       var clippedShapes1 = [
         {type: 'rect', cx: 0.003, cy: 0.003, width: 0.004, height: 0.004, r: 0},
         {
@@ -421,7 +421,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.defs).to.eql([values[1], values[8], values[14]])
     })
 
-    it('should handle polarity changes', function() {
+    it('should handle polarity changes', function () {
       var toolShape = [
         {type: 'rect', cx: 0, cy: 0.005, width: 0.006, height: 0.008, r: 0},
         {type: 'layer', polarity: 'clear', box: [-0.003, 0.001, 0.003, 0.009]},
@@ -483,7 +483,7 @@ describe('plotter to svg transform stream', function() {
     })
   })
 
-  it('should be able to add a pad to the layer', function() {
+  it('should be able to add a pad to the layer', function () {
     var pad = {type: 'pad', tool: '24', x: 0.02, y: 0.05}
 
     p.write(pad)
@@ -495,8 +495,8 @@ describe('plotter to svg transform stream', function() {
     expect(p.layer).to.eql(element.returnValues)
   })
 
-  describe('fills and strokes', function() {
-    it('should add a path to the layer for a fill', function() {
+  describe('fills and strokes', function () {
+    it('should add a path to the layer for a fill', function () {
       var fill = {type: 'fill', path: []}
 
       p.write(fill)
@@ -504,7 +504,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should add a path with width and no fill for a stroke', function() {
+    it('should add a path with width and no fill for a stroke', function () {
       var stroke = {type: 'stroke', path: [], width: 0.006}
 
       p.write(stroke)
@@ -516,7 +516,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should know how to add line segments', function() {
+    it('should know how to add line segments', function () {
       var path = [
         {type: 'line', start: [0, 0], end: [0.1, 0]},
         {type: 'line', start: [0.1, 0], end: [0.1, 0.1]},
@@ -535,7 +535,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should know when to add movetos', function() {
+    it('should know when to add movetos', function () {
       var path = [
         {type: 'line', start: [0, 0], end: [0.1, 0.1]},
         {type: 'line', start: [0.2, 0.2], end: [0.3, 0.3]},
@@ -553,7 +553,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should know how to add arcs', function() {
+    it('should know how to add arcs', function () {
       var path = [
         {
           type: 'arc',
@@ -606,7 +606,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should add zero-length arcs as linetos', function() {
+    it('should add zero-length arcs as linetos', function () {
       var path = [
         {
           type: 'arc',
@@ -627,7 +627,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should add full circle arcs as two arcs', function() {
+    it('should add full circle arcs as two arcs', function () {
       var path = [
         {
           type: 'arc',
@@ -652,7 +652,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should only add explicit linetos as needed', function() {
+    it('should only add explicit linetos as needed', function () {
       var path = [
         {
           type: 'arc',
@@ -679,8 +679,8 @@ describe('plotter to svg transform stream', function() {
     })
   })
 
-  describe('polarity changes', function() {
-    it('should wrap the layer in a masked group when polarity becomes clear', function() {
+  describe('polarity changes', function () {
+    it('should wrap the layer in a masked group when polarity becomes clear', function () {
       var existing = ['<path d="M 0 0 1 0 1 1 0 1 0 0"/>']
       var polarity = {type: 'polarity', polarity: 'clear', box: [0, 0, 1, 1]}
 
@@ -694,7 +694,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues)
     })
 
-    it('should construct a mask and add to defs when polarity switches back', function() {
+    it('should construct a mask and add to defs when polarity switches back', function () {
       var clear = {type: 'polarity', polarity: 'clear', box: [0, 0, 0.5, 0.5]}
       var clearPad = {type: 'pad', tool: '10', x: 0.005, y: 0.005}
       var dark = {type: 'polarity', polarity: 'dark', box: [0, 0, 0.5, 0.5]}
@@ -726,7 +726,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql([values[0], values[5]])
     })
 
-    it('should not do anything with dark polarity if there is no mask', function() {
+    it('should not do anything with dark polarity if there is no mask', function () {
       var dark = {type: 'polarity', polarity: 'dark', box: [0, 0, 1, 1]}
 
       p.write(dark)
@@ -737,8 +737,8 @@ describe('plotter to svg transform stream', function() {
     })
   })
 
-  describe('block repeats', function() {
-    it('if only one layer, it should wrap the current layer and repeat it', function() {
+  describe('block repeats', function () {
+    it('if only one layer, it should wrap the current layer and repeat it', function () {
       var offsets = [
         [0, 0],
         [0, 1],
@@ -769,7 +769,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql(element.returnValues.slice(2, 6))
     })
 
-    it('should allow several layers in a block', function() {
+    it('should allow several layers in a block', function () {
       var offsets = [
         [0, 0],
         [0, 5],
@@ -974,7 +974,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql([values[22]])
     })
 
-    it('should handle step repeats that start with clear', function() {
+    it('should handle step repeats that start with clear', function () {
       var offsets = [
         [0, 0],
         [0, 0.5],
@@ -1080,7 +1080,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql([values[12]])
     })
 
-    it('should handle step repeats that start with dark then change to clear', function() {
+    it('should handle step repeats that start with dark then change to clear', function () {
       var offsets = [
         [0, 0],
         [0, 0.5],
@@ -1128,7 +1128,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.layer).to.eql([values[2]])
     })
 
-    it('should handle polarity switches with no objects gracefully', function() {
+    it('should handle polarity switches with no objects gracefully', function () {
       var offsets = [
         [0, 0],
         [0, 0.5],
@@ -1146,7 +1146,7 @@ describe('plotter to svg transform stream', function() {
       expect(element).to.have.callCount(0)
     })
 
-    it('should handle Infinities in the box', function() {
+    it('should handle Infinities in the box', function () {
       var offsets = [
         [0, 0],
         [0, 0.5],
@@ -1160,8 +1160,8 @@ describe('plotter to svg transform stream', function() {
     })
   })
 
-  describe('end of stream', function() {
-    it('should create a viewbox from a size object', function() {
+  describe('end of stream', function () {
+    it('should create a viewbox from a size object', function () {
       var size = {type: 'size', box: [-1, -1, 1, 2], units: 'mm'}
 
       p.write(size)
@@ -1171,7 +1171,7 @@ describe('plotter to svg transform stream', function() {
       expect(p.units).to.equal('mm')
     })
 
-    it('should contruct an svg from the layer and defs', function(done) {
+    it('should contruct an svg from the layer and defs', function (done) {
       var size = {type: 'size', box: [-1, -1, 1, 2], units: 'mm'}
       var viewBox = '-1000 -1000 2000 3000'
       var transform = 'translate(0,1000) scale(1,-1)'
@@ -1186,7 +1186,7 @@ describe('plotter to svg transform stream', function() {
         stroke: 'currentColor',
       }
 
-      p.on('data', function(result) {
+      p.on('data', function (result) {
         expect(element).to.be.calledWith('defs', {}, ['THESE_ARE_THE_DEFS'])
         expect(element).to.be.calledWith('g', layerAttr, ['THIS_IS_THE_LAYER'])
         expect(element).to.be.calledWith(
@@ -1204,10 +1204,10 @@ describe('plotter to svg transform stream', function() {
       p.end()
     })
 
-    it('should omit the defs mode if it is empty', function(done) {
+    it('should omit the defs mode if it is empty', function (done) {
       var size = {type: 'size', box: [-1, -1, 1, 2], units: 'mm'}
 
-      p.on('data', function() {
+      p.on('data', function () {
         expect(element).not.to.be.calledWith('defs')
         done()
       })
@@ -1218,7 +1218,7 @@ describe('plotter to svg transform stream', function() {
       p.end()
     })
 
-    it('should finish any in-progress mask', function() {
+    it('should finish any in-progress mask', function () {
       p._maskId = 'id_clear-1'
       p._maskBox = [1, 2, 3, 4]
       p._mask = ['SOME STUFF']
@@ -1231,7 +1231,7 @@ describe('plotter to svg transform stream', function() {
       })
     })
 
-    it('should finish any in-progress repeat', function() {
+    it('should finish any in-progress repeat', function () {
       var offsets = [
         [0, 0],
         [0, 1],

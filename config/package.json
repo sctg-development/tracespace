@@ -1,6 +1,6 @@
 {
-  "name": "@tracespace/config",
-  "version": "4.2.7",
+  "name": "@sctg/tracespace-config",
+  "version": "5.0.0",
   "private": true,
   "description": "Development config for tracespace/tracespace",
   "author": {
@@ -8,11 +8,14 @@
     "email": "mike@cousins.io",
     "url": "https://mike.cousins.io"
   },
-  "homepage": "https://github.com/tracespace/tracespace",
+  "homepage": "https://github.com/sctg-development/tracespace",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git",
+    "url": "git+https://github.com/sctg-development/tracespace.git",
     "directory": "config"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

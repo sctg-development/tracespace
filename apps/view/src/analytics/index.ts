@@ -25,7 +25,7 @@ export function createAnalyticsMiddleware(): State.Middleware {
     log.debug('no mixpanel token found; not initializing')
   }
 
-  return store => next => action => {
+  return (store) => (next) => (action) => {
     const prevState = store.getState()
     const result = next(action)
     const nextState = store.getState()

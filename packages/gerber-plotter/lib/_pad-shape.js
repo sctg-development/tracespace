@@ -6,7 +6,7 @@ var isFinite = require('lodash.isfinite')
 
 var boundingBox = require('./_box')
 
-var roundToPrecision = function(number) {
+var roundToPrecision = function (number) {
   var rounded = Math.round(number * 100000000) / 100000000
   // remove -0 for ease
   if (rounded === 0) {
@@ -15,11 +15,11 @@ var roundToPrecision = function(number) {
   return rounded
 }
 
-var degreesToRadians = function(degrees) {
+var degreesToRadians = function (degrees) {
   return (degrees * Math.PI) / 180
 }
 
-var rotatePointAboutOrigin = function(point, rot) {
+var rotatePointAboutOrigin = function (point, rot) {
   rot = degreesToRadians(rot)
   var sin = Math.sin(rot)
   var cos = Math.cos(rot)
@@ -32,7 +32,7 @@ var rotatePointAboutOrigin = function(point, rot) {
   ]
 }
 
-var circle = function(dia, cx, cy, rot) {
+var circle = function (dia, cx, cy, rot) {
   var r = dia / 2
   cx = cx || 0
   cy = cy || 0
@@ -50,7 +50,7 @@ var circle = function(dia, cx, cy, rot) {
   }
 }
 
-var vect = function(x1, y1, x2, y2, width, rot) {
+var vect = function (x1, y1, x2, y2, width, rot) {
   // rotate the endpoints if necessary
   if (rot) {
     var start = rotatePointAboutOrigin([x1, y1], rot)
@@ -79,7 +79,7 @@ var vect = function(x1, y1, x2, y2, width, rot) {
   points.push([roundToPrecision(x2 - sin), roundToPrecision(y2 + cos)])
   points.push([roundToPrecision(x1 - sin), roundToPrecision(y1 + cos)])
 
-  var box = points.reduce(function(result, p) {
+  var box = points.reduce(function (result, p) {
     return boundingBox.addPoint(result, p)
   }, boundingBox.new())
 
@@ -89,7 +89,7 @@ var vect = function(x1, y1, x2, y2, width, rot) {
   }
 }
 
-var rect = function(width, height, r, cx, cy, rot) {
+var rect = function (width, height, r, cx, cy, rot) {
   cx = cx || 0
   cy = cy || 0
   r = r || 0
@@ -113,7 +113,7 @@ var rect = function(width, height, r, cx, cy, rot) {
   }
 }
 
-var outlinePolygon = function(flatPoints, rot) {
+var outlinePolygon = function (flatPoints, rot) {
   var points = []
   var box = boundingBox.new()
   var point
@@ -133,7 +133,7 @@ var outlinePolygon = function(flatPoints, rot) {
   }
 }
 
-var regularPolygon = function(dia, nPoints, rot, cx, cy) {
+var regularPolygon = function (dia, nPoints, rot, cx, cy) {
   cx = cx || 0
   cy = cy || 0
 
@@ -162,11 +162,11 @@ var regularPolygon = function(dia, nPoints, rot, cx, cy) {
 }
 
 // just returns a ring object, does not return a box
-var ring = function(cx, cy, r, width) {
+var ring = function (cx, cy, r, width) {
   return {type: 'ring', cx: cx, cy: cy, r: r, width: width}
 }
 
-var moire = function(
+var moire = function (
   dia,
   ringThx,
   ringGap,
@@ -206,7 +206,7 @@ var moire = function(
   return {shape: shape, box: box}
 }
 
-var thermal = function(cx, cy, outerDia, innerDia, gap, rot) {
+var thermal = function (cx, cy, outerDia, innerDia, gap, rot) {
   var side = roundToPrecision((outerDia - gap) / 2)
   var offset = roundToPrecision((outerDia + gap) / 4)
   var width = roundToPrecision((outerDia - innerDia) / 2)
@@ -227,17 +227,17 @@ var thermal = function(cx, cy, outerDia, innerDia, gap, rot) {
   }
 }
 
-var runMacro = function(mods, blocks) {
+var runMacro = function (mods, blocks) {
   var emptyMacro = {shape: [], box: boundingBox.new()}
   var exposure = 1
 
   blocks = blocks || []
 
-  return blocks.reduce(function(result, block) {
+  return blocks.reduce(function (result, block) {
     var shapeAndBox
 
     if (block.type !== 'variable' && block.type !== 'comment') {
-      block = Object.keys(block).reduce(function(result, key) {
+      block = Object.keys(block).reduce(function (result, key) {
         var value = block[key]
         result[key] = resolveValue(value)
         return result
@@ -374,7 +374,7 @@ module.exports = function padShape(tool, macros) {
     shapeAndBox = regularPolygon(params[0], params[1], params[2])
   } else {
     // else we got a macro, so run the macro and return
-    var mods = params.reduce(function(result, val, index) {
+    var mods = params.reduce(function (result, val, index) {
       result['$' + (index + 1)] = val
 
       return result

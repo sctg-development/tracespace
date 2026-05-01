@@ -1,11 +1,11 @@
 # gerber plotter api
 
-API documentation for `gerber-plotter`. An understanding of the [Gerber file format specification](http://www.ucamco.com/en/guest/downloads), the [Excellon NC drill format](http://www.excellon.com/manuals/program.htm) (as poorly defined as it is), and the [`gerber-parser` module](../gerber-parser) will help with understanding the plotter API.
+API documentation for `@sctg/gerber-plotter`. An understanding of the [Gerber file format specification](http://www.ucamco.com/en/guest/downloads), the [Excellon NC drill format](http://www.excellon.com/manuals/program.htm) (as poorly defined as it is), and the [`@sctg/gerber-parser` module](../@sctg/gerber-parser) will help with understanding the plotter API.
 
 ## create a gerber plotter
 
 ```javascript
-var gerberPlotter = require('gerber-plotter')
+var gerberPlotter = require('@sctg/gerber-plotter')
 var plotter = gerberPlotter(OPTIONS)
 ```
 
@@ -71,7 +71,7 @@ A gerber plotter has certain public properties. Any properties not listed here a
 `plotter.format` is an object containing the units and coordinate notation the plotter used to build the image.
 
 ```javascript
-plotter.on('end', function() {
+plotter.on('end', function () {
   console.log(plotter.format)
 })
 // could print:
@@ -95,7 +95,7 @@ A `warning` event is emitted if the plotter encounters a recoverable problem whi
 // warning object
 var exampleWarning = {message: 'warning message', line: LINE_NO_IN_GERBER}
 
-plotter.on('warning', function(w) {
+plotter.on('warning', function (w) {
   console.warn(`plotter warning at line ${w.line}: ${w.message}`)
 })
 ```
@@ -130,7 +130,7 @@ A filed-in circle with radius `r` centered at (`cx`, `cy`):
 
 ```javascript
 {
-  type: 'circle', r, cx, cy
+  type: ('circle', r, cx, cy)
 }
 ```
 
@@ -140,7 +140,7 @@ A filled-in rectangle with width `width`, height `height`, and corner radius `r`
 
 ```javascript
 {
-  type: 'rect', width, height, r, cx, cy
+  type: ('rect', width, height, r, cx, cy)
 }
 ```
 
@@ -158,7 +158,7 @@ A ring of radius `r` and stroke width `width` centered at (`cx`, `cy`):
 
 ```javascript
 {
-  type: 'ring', r, width, cx, cy
+  type: ('ring', r, width, cx, cy)
 }
 ```
 

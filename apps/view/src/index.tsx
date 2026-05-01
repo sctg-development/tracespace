@@ -1,22 +1,20 @@
-// @tracespace/view entry point
+// @sctg/tracespace-view entry point
 import React from 'react'
-import './styles'
+import './styles/index.css'
 
 Promise.all([
-  import('react-dom'),
+  import('react-dom/client'),
   import('./App'),
   import('./state/StoreProvider'),
-]).then(imports => {
-  const [
-    {default: ReactDom},
-    {default: App},
-    {default: StoreProvider},
-  ] = imports
+]).then((imports) => {
+  const [{default: ReactDom}, {default: App}, {default: StoreProvider}] =
+    imports
 
-  ReactDom.hydrate(
+  ReactDom.createRoot(
+    document.querySelector('[data-hook=root]') as Element
+  ).render(
     <StoreProvider>
       <App />
-    </StoreProvider>,
-    document.querySelector('[data-hook=root]')
+    </StoreProvider>
   )
 })

@@ -1,11 +1,11 @@
-// Type definitions for gerber-to-svg 4.0
+// Type definitions for @sctg/gerber-to-svg 4.0
 // Project: https://github.com/tracespace/tracespace
 // Definitions by: Mike Cousins <https://mike.cousins.io>
 
 /// <reference types="node" />
 
-import {Parser, Options as ParserOptions} from 'gerber-parser'
-import {Plotter, Options as PlotterOptions} from 'gerber-plotter'
+import {Parser, Options as ParserOptions} from '@sctg/gerber-parser'
+import {Plotter, Options as PlotterOptions} from '@sctg/gerber-plotter'
 
 declare function gerberToSvg<NodeType = string>(
   gerber: gerberToSvg.GerberSource,
@@ -45,8 +45,7 @@ declare namespace gerberToSvg {
   }
 
   interface Converter<NodeType = string>
-    extends NodeJS.ReadableStream,
-      ConverterResult<NodeType> {
+    extends NodeJS.ReadableStream, ConverterResult<NodeType> {
     parser: Parser
     plotter: Plotter
   }

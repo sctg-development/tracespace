@@ -21,7 +21,7 @@ export default function SavedBoardList(props: Props): JSX.Element {
     <div className={STYLE}>
       <div onWheel={stopPropagation} className={WRAPPER_STYLE}>
         <ul className={LIST_STYLE}>
-          {boards.map(b => (
+          {boards.map((b) => (
             <BoardItem
               {...b}
               key={b.id}

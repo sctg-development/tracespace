@@ -30,7 +30,7 @@ assert(args.length > 0, USAGE)
 
 const s3 = new Aws.S3({apiVersion: '2006-03-01', region: AWS_S3_REGION})
 
-const publishTargets = args.map(s => {
+const publishTargets = args.map((s) => {
   const [localDir, publishPath] = s.split(':')
   assert(typeof localDir === 'string' && typeof publishPath === 'string', USAGE)
   return [path.join(process.cwd(), localDir), publishPath]
@@ -54,14 +54,14 @@ Promise.all([getObjectsToUpload(), getExistingObjects()])
     console.log('Removals successful; publish done')
     process.exit(0)
   })
-  .catch(error => {
+  .catch((error) => {
     console.error('Error during publish', error)
     process.exit(1)
   })
 
 function getObjectsToUpload() {
   const localDirs = publishTargets.map(([local]) => local)
-  return glob(localDirs, {absolute: true, dot: true}).then(files =>
+  return glob(localDirs, {absolute: true, dot: true}).then((files) =>
     files.map(buildUploadParams)
   )
 }
@@ -70,13 +70,13 @@ function getExistingObjects() {
   return s3
     .listObjectsV2({Bucket: AWS_S3_BUCKET})
     .promise()
-    .then(response =>
-      response.Contents.map(f => ({Bucket: AWS_S3_BUCKET, Key: f.Key}))
+    .then((response) =>
+      response.Contents.map((f) => ({Bucket: AWS_S3_BUCKET, Key: f.Key}))
     )
 }
 
 function getObjectsToRemove(uploads, existing) {
-  return existing.filter(e => !uploads.some(u => u.Key === e.Key))
+  return existing.filter((e) => !uploads.some((u) => u.Key === e.Key))
 }
 
 function makeUploadRequest(params) {

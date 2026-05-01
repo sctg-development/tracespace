@@ -61,7 +61,7 @@ function ColorInput(props: FieldProps & {colorId: ColorId}): JSX.Element {
         value={value}
         type="color"
         className="clip"
-        onChange={event => {
+        onChange={(event) => {
           let value = stripAlpha(event.target.value)
           if (colorId === 'sm') value += MASK_ALPHA
           form.setFieldValue(field.name, value)
@@ -79,7 +79,7 @@ export function ColorPresetsField(props: {fieldName: string}): JSX.Element {
 export function ColorFields(props: {fieldName: string}): JSX.Element {
   return (
     <>
-      {COLOR_IDS.map(id => (
+      {COLOR_IDS.map((id) => (
         <Field
           key={id}
           name={`${props.fieldName}.${id}`}
@@ -94,7 +94,7 @@ export function ColorFields(props: {fieldName: string}): JSX.Element {
 function ColorPresetInput(props: FieldProps): JSX.Element {
   return (
     <>
-      {COLOR_PRESETS.map(preset => (
+      {COLOR_PRESETS.map((preset) => (
         <ColorPresetOption key={preset.title} {...preset} {...props} />
       ))}
     </>
@@ -104,7 +104,7 @@ function ColorPresetInput(props: FieldProps): JSX.Element {
 function ColorPresetOption(props: FieldProps & ColorPreset): JSX.Element {
   const {title, color, field, form} = props
   const value = {...color, sm: `${stripAlpha(color.sm)}${MASK_ALPHA}`}
-  const checked = COLOR_IDS.every(i => colorsMatch(color[i], field.value[i]))
+  const checked = COLOR_IDS.every((i) => colorsMatch(color[i], field.value[i]))
   const iconName = checked ? 'dot-circle' : 'circle'
 
   return (

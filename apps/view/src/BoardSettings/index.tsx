@@ -14,7 +14,7 @@ export type BoardSettingsProps = {
 
 const OPEN_BUTTON_TOOLTIP = 'Board settings'
 
-const STYLE = 'dib ph3 tc v-top w-third'
+const STYLE = 'dib ph3 tc v-top'
 const NAME_STYLE = 'flex items-center justify-center'
 const OPEN_BUTTON_STYLE = 'nr4'
 const MODAL_STYLE = 'fixed top-1 left-0 right-0 bottom-1 z-1 nt2'

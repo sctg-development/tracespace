@@ -6,11 +6,11 @@ var shift = util.shift
 var createMask = util.createMask
 var maskLayer = util.maskLayer
 
-var element = function(tag, attr, children) {
+var element = function (tag, attr, children) {
   return {tag: tag, attr: attr, children: children || []}
 }
 
-var circle = function(cx, cy, r, width) {
+var circle = function (cx, cy, r, width) {
   var attr = {
     cx: shift(cx),
     cy: shift(cy),
@@ -25,7 +25,7 @@ var circle = function(cx, cy, r, width) {
   return element('circle', attr)
 }
 
-var rect = function(cx, cy, r, width, height) {
+var rect = function (cx, cy, r, width, height) {
   var attr = {
     x: shift(cx - width / 2),
     y: shift(cy - height / 2),
@@ -41,9 +41,9 @@ var rect = function(cx, cy, r, width, height) {
   return element('rect', attr)
 }
 
-var poly = function(points) {
+var poly = function (points) {
   var pointsAttr = points
-    .map(function(point) {
+    .map(function (point) {
       return point.map(shift).join(',')
     })
     .join(' ')
@@ -51,7 +51,7 @@ var poly = function(points) {
   return element('polygon', {points: pointsAttr})
 }
 
-var clip = function(maskIdPrefix, index, shapes, ring, createElement) {
+var clip = function (maskIdPrefix, index, shapes, ring, createElement) {
   var maskId = maskIdPrefix + 'mask-' + index
   var maskUrl = 'url(#' + maskId + ')'
 
@@ -61,7 +61,7 @@ var clip = function(maskIdPrefix, index, shapes, ring, createElement) {
     createElement(circleNode.tag, circleNode.attr),
   ])
 
-  var groupChildren = shapes.map(function(shape) {
+  var groupChildren = shapes.map(function (shape) {
     var node =
       shape.type === 'rect'
         ? rect(shape.cx, shape.cy, shape.r, shape.width, shape.height)
@@ -85,7 +85,7 @@ module.exports = function reduceShapeArray(
   var maskIdPrefix = id + '_'
 
   var image = shapeArray.reduce(
-    function(result, shape, index) {
+    function (result, shape, index) {
       var svg
 
       switch (shape.type) {

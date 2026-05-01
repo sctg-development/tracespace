@@ -1,22 +1,22 @@
-// gerber-plotter render snapshot tests
+// @sctg/gerber-plotter render snapshot tests
 'use strict'
 
 const snapshot = require('snap-shot-it')
 
-const {getBoards} = require('@tracespace/fixtures')
+const {getBoards} = require('@sctg/tracespace-fixtures')
 const getResults = require('./get-results')
 
-const SUITES = [...getBoards.sync().filter(b => !b.skipSnapshot)]
+const SUITES = [...getBoards.sync().filter((b) => !b.skipSnapshot)]
 
-describe(`gerber-plotter :: integration`, function() {
+describe(`@sctg/gerber-plotter :: integration`, function () {
   this.timeout(15000)
 
-  SUITES.forEach(suite =>
-    describe(suite.name, function() {
+  SUITES.forEach((suite) =>
+    describe(suite.name, function () {
       const specs = suite.specs || suite.layers
       let suiteResults
 
-      before(function(done) {
+      before(function (done) {
         if (process.env.INTEGRATION !== '1') return this.skip()
 
         getResults(suite, (error, results) => {
@@ -27,7 +27,7 @@ describe(`gerber-plotter :: integration`, function() {
       })
 
       specs.forEach((spec, i) =>
-        it(`renders ${spec.name}`, function() {
+        it(`renders ${spec.name}`, function () {
           snapshot(suiteResults.specs[i].render)
         })
       )

@@ -32,7 +32,7 @@ export async function ensureAppPreferences(
   db: AppDatabase
 ): Promise<DbAppPreferences> {
   return db.transaction('rw', db.preferences, async () => {
-    return db.preferences.toArray().then(results => {
+    return db.preferences.toArray().then((results) => {
       if (results.length === 0) {
         const prefs = {}
         return db.preferences.add(prefs).then(() => prefs)
@@ -57,12 +57,12 @@ export async function saveBoard(
   return db.transaction('rw', db.boards, db.layers, db.sources, async () => {
     const {layers, ...dbBoard} = board
 
-    const dbLayers = dbBoard.layerIds.map(lyId => {
+    const dbLayers = dbBoard.layerIds.map((lyId) => {
       const {source: _source, ...dbLayer} = layers[lyId]
       return dbLayer
     })
 
-    const dbSources = dbBoard.layerIds.map(lyId => {
+    const dbSources = dbBoard.layerIds.map((lyId) => {
       const {sourceId: id, source: contents} = layers[lyId]
       return {id, contents}
     })
@@ -75,7 +75,7 @@ export async function saveBoard(
 
 export async function getBoard(db: BoardDatabase, id: string): Promise<Board> {
   return db.transaction('r', db.boards, db.layers, db.sources, async () =>
-    db.boards.get(id).then(board => {
+    db.boards.get(id).then((board) => {
       if (!board) throw new NotFoundError(`board ${id} not found`)
       return getFullBoard(db, board)
     })
@@ -85,8 +85,8 @@ export async function getBoard(db: BoardDatabase, id: string): Promise<Board> {
 export async function getBoards(
   db: BoardDatabase
 ): Promise<Array<BoardSummary>> {
-  return db.boards.toArray().then(boards =>
-    boards.map(b => {
+  return db.boards.toArray().then((boards) =>
+    boards.map((b) => {
       const {id, name, options, thumbnail} = b
       return {id, name, options, thumbnail}
     })
@@ -100,7 +100,9 @@ export async function findBoardByUrl(
   return db.transaction('r', db.boards, db.layers, db.sources, async () =>
     db.boards
       .get({sourceUrl: url})
-      .then(board => (board ? getFullBoard(db, board) : Promise.resolve(null)))
+      .then((board) =>
+        board ? getFullBoard(db, board) : Promise.resolve(null)
+      )
   )
 }
 
@@ -109,16 +111,16 @@ export async function deleteBoard(
   id: string
 ): Promise<void> {
   return db.transaction('rw', db.boards, db.layers, db.sources, () =>
-    getBoard(db, id).then(board => {
-      const sourceIds = Object.values(board.layers).map(ly => ly.sourceId)
+    getBoard(db, id).then((board) => {
+      const sourceIds = Object.values(board.layers).map((ly) => ly.sourceId)
 
       db.boards.delete(id)
       db.layers
         .bulkDelete(board.layerIds)
         .then(() => db.layers.orderBy('sourceId').uniqueKeys())
-        .then(sourceIdsToKeep => {
+        .then((sourceIdsToKeep) => {
           const sourceIdsToDelete = sourceIds.filter(
-            id => !sourceIdsToKeep.includes(id)
+            (id) => !sourceIdsToKeep.includes(id)
           )
 
           db.sources.bulkDelete(sourceIdsToDelete)
@@ -136,21 +138,18 @@ export async function deleteAllBoards(db: BoardDatabase): Promise<void> {
 }
 
 async function getFullBoard(db: BoardDatabase, board: DbBoard): Promise<Board> {
-  const layersQuery = db.layers
-    .where('id')
-    .anyOf(board.layerIds)
-    .toArray()
+  const layersQuery = db.layers.where('id').anyOf(board.layerIds).toArray()
 
-  const sourcesQuery = layersQuery.then(layers =>
+  const sourcesQuery = layersQuery.then((layers) =>
     db.sources
       .where('id')
-      .anyOf(layers.map(ly => ly.sourceId))
+      .anyOf(layers.map((ly) => ly.sourceId))
       .toArray()
   )
 
   return Promise.all([layersQuery, sourcesQuery]).then(([layers, sources]) => {
     const layersMap = layers.reduce((result, layer) => {
-      const source = sources.find(s => s.id === layer.sourceId)
+      const source = sources.find((s) => s.id === layer.sourceId)
       return source
         ? {...result, [layer.id]: {...layer, source: source.contents}}
         : result

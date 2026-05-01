@@ -15,3 +15,5 @@ bundle.*
 # system and editor files
 .DS_Store
 .vscode
+lerna-debug.log
+__snapshots__/

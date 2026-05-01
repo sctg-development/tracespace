@@ -18,7 +18,7 @@ export type Values = {
 
 export type FormProps = FormikProps<Values>
 
-export type FieldProps = FormikFieldProps<Values>
+export type FieldProps = FormikFieldProps<any, Values>
 
 export type FormBoardOptions = {
   useOutline: BoardOptions['useOutline']

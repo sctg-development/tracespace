@@ -35,7 +35,7 @@ module.exports = function makeServer(name, getSuites, getSuiteResult) {
   function getResults(suites, done) {
     debug(`Rendering specs from ${suites.length} suites`)
 
-    const tasks = suites.map(suite => next => getSuiteResult(suite, next))
+    const tasks = suites.map((suite) => (next) => getSuiteResult(suite, next))
 
     runParallel(tasks, done)
   }
@@ -50,7 +50,7 @@ module.exports = function makeServer(name, getSuites, getSuiteResult) {
 function runTemplate(props, done) {
   runWaterfall(
     [
-      next => fs.readFile(TEMPLATE, 'utf8', next),
+      (next) => fs.readFile(TEMPLATE, 'utf8', next),
       (contents, next) => {
         try {
           next(null, template(contents)(props))

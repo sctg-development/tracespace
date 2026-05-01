@@ -1,8 +1,8 @@
 # tracespace fixtures
 
-[![latest][@tracespace/fixtures-latest-badge]][npm]
-[![next][@tracespace/fixtures-next-badge]][npm-next]
-[![david][@tracespace/fixtures-david-badge]][david]
+[![latest][@sctg/tracespace-fixtures-latest-badge]][npm]
+[![next][@sctg/tracespace-fixtures-next-badge]][npm-next]
+[![david][@sctg/tracespace-fixtures-david-badge]][david]
 
 > Test fixtures for tracespace projects
 
@@ -11,27 +11,27 @@ This module is a collection of data, including real-world open-source Gerber and
 Part of the [tracespace][] collection of PCB visualization tools.
 
 [tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/@tracespace/fixtures
-[npm-next]: https://www.npmjs.com/package/@tracespace/fixtures/v/next
+[npm]: https://www.npmjs.com/package/@sctg/tracespace-fixtures
+[npm-next]: https://www.npmjs.com/package/@sctg/tracespace-fixtures/v/next
 [david]: https://david-dm.org/tracespace/tracespace?path=packages/fixtures
-[@tracespace/fixtures-latest-badge]: https://flat.badgen.net/npm/v/@tracespace/fixtures
-[@tracespace/fixtures-next-badge]: https://flat.badgen.net/npm/v/@tracespace/fixtures/next
-[@tracespace/fixtures-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/fixtures
+[@sctg/tracespace-fixtures-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-fixtures
+[@sctg/tracespace-fixtures-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-fixtures/next
+[@sctg/tracespace-fixtures-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/fixtures
 
 ## install
 
 Please note: because this package is a collection of test fixtures, it may not follow semver and changes could be introduced in _any_ version bump that cause your tests to fail. **You should install an exact version.**
 
 ```shell
-npm install --save-dev --save-exact @tracespace/fixtures
+npm install --save-dev --save-exact @sctg/tracespace-fixtures
 # or
-yarn add --dev --exact @tracespace/fixtures
+yarn add --dev --exact @sctg/tracespace-fixtures
 ```
 
 ## usage
 
 ```js
-const fixtures = require('@tracespace/fixtures')
+const fixtures = require('@sctg/tracespace-fixtures')
 ```
 
 ### gerber filenames
@@ -39,9 +39,9 @@ const fixtures = require('@tracespace/fixtures')
 `gerber-filenames.json` is a JSON file with a collection of example Gerber / drill filenames along with what PCB layer type they represent organized by CAD package. This fixture is primarily used to test `whats-that-gerber`.
 
 ```js
-const {gerberFilenames} = require('@tracespace/fixtures')
+const {gerberFilenames} = require('@sctg/tracespace-fixtures')
 // or
-const gerberFilenames = require('@tracespace/fixtures/gerber-filenames.json')
+const gerberFilenames = require('@sctg/tracespace-fixtures/gerber-filenames.json')
 ```
 
 Where `gerberFilenames` looks like:
@@ -63,17 +63,17 @@ Array<{
 For non-npm projects, this file is also available via [the unpkg CDN][unpkg]:
 
 ```shell
-curl https://unpkg.com/@tracespace/fixtures@${version}/gerber-filenames.json
+curl https://unpkg.com/@sctg/tracespace-fixtures@${version}/gerber-filenames.json
 ```
 
 [unpkg]: https://unpkg.com
 
 ### example boards
 
-`@tracespace/fixtures` has a collection of sample open-source PCB files to test rendering full circuit boards. This fixture is primarily used to test `pcb-stackup` and `pcb-stackup-core`.
+`@sctg/tracespace-fixtures` has a collection of sample open-source PCB files to test rendering full circuit boards. This fixture is primarily used to test `pcb-stackup` and `pcb-stackup-core`.
 
 ```js
-const {getBoards} = require('@tracespace/fixtures')
+const {getBoards} = require('@sctg/tracespace-fixtures')
 
 // async
 getBoards((error, boards) => {
@@ -113,10 +113,10 @@ Array<{
 
 ### gerber specs
 
-`@tracespace/fixtures` has a collection of simple Gerber and NC drill files to ensure proper rendering of different image primitives and structures. This fixture is primarily used to test `gerber-to-svg`.
+`@sctg/tracespace-fixtures` has a collection of simple Gerber and NC drill files to ensure proper rendering of different image primitives and structures. This fixture is primarily used to test `@sctg/gerber-to-svg`.
 
 ```js
-const {getGerberSpecs} = require('@tracespace/fixtures')
+const {getGerberSpecs} = require('@sctg/tracespace-fixtures')
 
 // async
 getGerberSpecs((error, suites) => {
@@ -155,13 +155,13 @@ Array<{
 Simple server to display the results of a render test. Has a peer dependency on Express, which you must install yourself before usage:
 
 ```shell
-npm install --save-dev @tracespace/fixtures express
+npm install --save-dev @sctg/tracespace-fixtures express
 ```
 
 Usage:
 
 ```js
-const {server, getGerberSpecs} = require('@tracespace/fixtures')
+const {server, getGerberSpecs} = require('@sctg/tracespace-fixtures')
 
 const app = server('suite name', getGerberSpecs, getSuiteResults)
 

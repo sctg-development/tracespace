@@ -1,9 +1,9 @@
-// gerber-plotter factory
+// @sctg/gerber-plotter factory
 'use strict'
 
 var Plotter = require('./lib/plotter')
 
-var verifyNota = function(nota) {
+var verifyNota = function (nota) {
   if (nota === 'A' || nota === 'I') {
     return nota
   }
@@ -11,7 +11,7 @@ var verifyNota = function(nota) {
   throw new Error('notation must be "in" or "mm"')
 }
 
-var verifyUnits = function(units) {
+var verifyUnits = function (units) {
   if (units === 'in' || units === 'mm') {
     return units
   }

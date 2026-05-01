@@ -1,16 +1,16 @@
 {
-  "name": "whats-that-gerber",
-  "version": "4.2.7",
+  "name": "@sctg/whats-that-gerber",
+  "version": "5.0.0",
   "description": "Identify Gerber and drill files by filenamee",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "serve": "node ../../scripts/serve"
+    "build": "vite build",
+    "serve": "vite preview --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git",
+    "url": "git+https://github.com/sctg-development/tracespace.git",
     "directory": "packages/whats-that-gerber"
   },
   "keywords": [
@@ -24,14 +24,18 @@
   "contributors": [
     "Mike Cousins <mike@cousins.io> (http://cousins.io)",
     "Kaspar Emanuel <kaspar@monostable.co.uk> (http://monostable.co.uk)",
-    "David Freitag <dvdfreitag@gmail.com>"
+    "David Freitag <dvdfreitag@gmail.com>",
+    "Ronan Le Meillat"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tracespace/tracespace/issues"
+    "url": "https://github.com/sctg-development/tracespace/issues"
   },
-  "homepage": "https://github.com/tracespace/tracespace#readme",
+  "homepage": "https://github.com/sctg-development/tracespace#readme",
   "dependencies": {
     "xtend": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -23,7 +23,7 @@ export default function ModeSelect(): JSX.Element | null {
 
   return (
     <div className={STYLE}>
-      {buttons.map(b => (
+      {buttons.map((b) => (
         <Button key={b.mode} className={BUTTON_STYLE} onClick={b.onClick}>
           <span
             className={cx(

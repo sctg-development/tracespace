@@ -6,11 +6,11 @@ const util = require('util')
 const common = require('common-prefix')
 const {get} = require('dot-prop')
 const makeDir = require('make-dir')
-const debug = require('debug')('@tracespace/cli')
+const debug = require('debug')('@sctg/tracespace-cli')
 
-const gerberToSvg = require('gerber-to-svg')
-const pcbStackup = require('pcb-stackup')
-const whatsThatGerber = require('whats-that-gerber')
+const gerberToSvg = require('@sctg/gerber-to-svg')
+const pcbStackup = require('@sctg/pcb-stackup')
+const whatsThatGerber = require('@sctg/whats-that-gerber')
 const yargs = require('yargs')
 
 const {description, version} = require('../package.json')
@@ -23,19 +23,23 @@ const stackup = util.promisify(pcbStackup)
 
 module.exports = function cli(processArgv, config) {
   const argv = yargs
-    .usage('$0 [options] <files...>', `${description}\nv${version}`, yargs => {
-      yargs.positional('files', {
-        describe:
-          "Filenames, directories, or globs to a PCB's Gerber/drill files",
-        type: 'string',
-      })
+    .usage(
+      '$0 [options] <files...>',
+      `${description}\nv${version}`,
+      (yargs) => {
+        yargs.positional('files', {
+          describe:
+            "Filenames, directories, or globs to a PCB's Gerber/drill files",
+          type: 'string',
+        })
 
-      examples.forEach(e => yargs.example(e.cmd, e.desc))
+        examples.forEach((e) => yargs.example(e.cmd, e.desc))
 
-      yargs.epilog(
-        `You may also specify options in the current working directory using a config file in (.tracespacerc, .tracespacerc.json, tracespace.config.js, etc.) or a "tracespace" key in package.json`
-      )
-    })
+        yargs.epilog(
+          `You may also specify options in the current working directory using a config file in (.tracespacerc, .tracespacerc.json, tracespace.config.js, etc.) or a "tracespace" key in package.json`
+        )
+      }
+    )
     .config(config)
     .options(options)
     .version()
@@ -49,19 +53,17 @@ module.exports = function cli(processArgv, config) {
 
   debug('argv', argv)
 
-  const info = message => !argv.quiet && console.warn(message)
+  const info = (message) => !argv.quiet && console.warn(message)
 
   if (config._configFile) info(`Config loaded from ${config._configFile}`)
 
-  return resolvePatterns(argv.files)
-    .then(renderFiles)
-    .then(writeRenders)
+  return resolvePatterns(argv.files).then(renderFiles).then(writeRenders)
 
   function renderFiles(filenames) {
     const typesByName = whatsThatGerber(filenames)
     const layers = filenames
-      .map(filename => makeLayerFromFilename(filename, typesByName))
-      .filter(_ => _)
+      .map((filename) => makeLayerFromFilename(filename, typesByName))
+      .filter((_) => _)
 
     if (!layers.length) throw new Error(`No valid Gerber or drill files found`)
 
@@ -110,8 +112,8 @@ module.exports = function cli(processArgv, config) {
         !argv.noBoard && writeOutput(`${name}.top.svg`, stackup.top.svg),
         !argv.noBoard && writeOutput(`${name}.bottom.svg`, stackup.bottom.svg),
         ...stackup.layers
-          .filter(_ => !argv.noLayer)
-          .map(layer => {
+          .filter((_) => !argv.noLayer)
+          .map((layer) => {
             let filename = layer.filename
             if (layer.side) filename += `.${layer.side}`
             if (layer.type) filename += `.${layer.type}`
@@ -135,7 +137,7 @@ module.exports = function cli(processArgv, config) {
 }
 
 function inferBoardName(stackup) {
-  const names = stackup.layers.map(ly =>
+  const names = stackup.layers.map((ly) =>
     path.basename(ly.filename, path.extname(ly.filename))
   )
   return common(names) || 'board'

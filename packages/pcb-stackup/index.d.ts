@@ -9,13 +9,13 @@ import {
   ConverterResult,
   CreateElement,
   Options as GerberOptions,
-} from 'gerber-to-svg'
+} from '@sctg/gerber-to-svg'
 
 import {
   Stackup as CoreStackup,
   Layer as CoreLayer,
   Options as CoreOptions,
-} from 'pcb-stackup-core'
+} from '@sctg/pcb-stackup-core'
 
 import {GerberSide, GerberType} from 'whats-that-gerber'
 
@@ -55,8 +55,10 @@ declare namespace pcbStackup {
       }
     }
 
-  interface Stackup<NodeType = string, Layer = InputLayer>
-    extends CoreStackup<NodeType> {
+  interface Stackup<
+    NodeType = string,
+    Layer = InputLayer,
+  > extends CoreStackup<NodeType> {
     layers: Array<OutputLayer<Layer>>
     outlineGapFill: number | null
   }

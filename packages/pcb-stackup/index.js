@@ -5,9 +5,9 @@
 var extend = require('xtend')
 var runParallel = require('run-parallel')
 var runWaterfall = require('run-waterfall')
-var gerberToSvg = require('gerber-to-svg')
-var createStackup = require('pcb-stackup-core')
-var wtg = require('whats-that-gerber')
+var gerberToSvg = require('@sctg/gerber-to-svg')
+var createStackup = require('@sctg/pcb-stackup-core')
+var wtg = require('@sctg/whats-that-gerber')
 
 module.exports = function pcbStackup(layers, options, done) {
   var result
@@ -25,7 +25,7 @@ module.exports = function pcbStackup(layers, options, done) {
       throw new Error('No callback specified and global Promise not found')
     }
 
-    result = new Promise(function(resolve, reject) {
+    result = new Promise(function (resolve, reject) {
       done = function callbackToPromise(error, stackup) {
         if (error) return reject(error)
         resolve(stackup)
@@ -35,7 +35,7 @@ module.exports = function pcbStackup(layers, options, done) {
 
   var layerTypes = wtg(
     layers
-      .map(function(layer) {
+      .map(function (layer) {
         return layer.filename
       })
       .filter(Boolean)
@@ -43,7 +43,7 @@ module.exports = function pcbStackup(layers, options, done) {
 
   runWaterfall(
     [
-      // render all layers with gerber-to-svg in parallel
+      // render all layers with @sctg/gerber-to-svg in parallel
       function renderAllLayers(next) {
         var layerTasks = layers.map(makeRenderLayerTask)
         runParallel(layerTasks, next)

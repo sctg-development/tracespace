@@ -16,7 +16,7 @@ export const INITIAL_STATE: State = {
 
 export const StoreContext = React.createContext<Store>({
   getState: () => INITIAL_STATE,
-  dispatch: a => a,
+  dispatch: (a) => a,
 })
 
 export const useAppState = (): State & {dispatch: Dispatch} => {

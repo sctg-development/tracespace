@@ -1,6 +1,5 @@
 // root component
 import React from 'react'
-import {hot} from 'react-hot-loader/root'
 
 import {useAppState, createBoard, createBoardFromUrl} from './state'
 import BoardDisplay from './BoardDisplay'
@@ -43,4 +42,4 @@ function App(): JSX.Element {
   )
 }
 
-export default hot(App)
+export default App

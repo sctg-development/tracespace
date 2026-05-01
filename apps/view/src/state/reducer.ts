@@ -51,8 +51,8 @@ export default function reducer(state: State, action: Action): State {
 
       if (solo) {
         const layers = board ? board.layers : []
-        const otherIds = layers.map(ly => ly.id).filter(lyId => lyId !== id)
-        const nextVisibilty = otherIds.every(lyId => !layerVisibility[lyId])
+        const otherIds = layers.map((ly) => ly.id).filter((lyId) => lyId !== id)
+        const nextVisibilty = otherIds.every((lyId) => !layerVisibility[lyId])
 
         layerVisibility = otherIds.reduce(
           (result, id) => ({...result, [id]: nextVisibilty}),
@@ -90,7 +90,7 @@ export default function reducer(state: State, action: Action): State {
 
     case actionTypes.BOARD_UPDATED: {
       const updatedBoard = action.payload
-      const savedBoards = state.savedBoards.map(b =>
+      const savedBoards = state.savedBoards.map((b) =>
         b.id === updatedBoard.id ? updatedBoard : b
       )
 
@@ -101,7 +101,7 @@ export default function reducer(state: State, action: Action): State {
 
     case actionTypes.BOARD_DELETED: {
       const id = action.payload
-      const savedBoards = state.savedBoards.filter(b => b.id !== id)
+      const savedBoards = state.savedBoards.filter((b) => b.id !== id)
       let {board, mode} = state
 
       if (board && board.id === id) {

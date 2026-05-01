@@ -1,22 +1,22 @@
 # gerber to svg
 
-[![latest][gerber-to-svg-latest-badge]][npm]
-[![next][gerber-to-svg-next-badge]][npm-next]
-[![david][gerber-to-svg-david-badge]][david]
+[![latest][@sctg/gerber-to-svg-latest-badge]][npm]
+[![next][@sctg/gerber-to-svg-next-badge]][npm-next]
+[![david][@sctg/gerber-to-svg-david-badge]][david]
 
 > Render individual Gerber / NC drill files as SVGs
 
-`gerber-to-svg` is a library and CLI tool for converting [Gerber][gerber] and [NC drill][nc-drill] files (manufacturing files for printed circuit boards) into [SVG][svg] files for the web.
+`@sctg/gerber-to-svg` is a library and CLI tool for converting [Gerber][gerber] and [NC drill][nc-drill] files (manufacturing files for printed circuit boards) into [SVG][svg] files for the web.
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
 [tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/gerber-to-svg
-[npm-next]: https://www.npmjs.com/package/gerber-to-svg/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/gerber-to-svg
-[gerber-to-svg-latest-badge]: https://flat.badgen.net/npm/v/gerber-to-svg
-[gerber-to-svg-next-badge]: https://flat.badgen.net/npm/v/gerber-to-svg/next
-[gerber-to-svg-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/gerber-to-svg
+[npm]: https://www.npmjs.com/package/@sctg/gerber-to-svg
+[npm-next]: https://www.npmjs.com/package/@sctg/gerber-to-svg/v/next
+[david]: https://david-dm.org/tracespace/tracespace?path=packages/@sctg/gerber-to-svg
+[@sctg/gerber-to-svg-latest-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-to-svg
+[@sctg/gerber-to-svg-next-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-to-svg/next
+[@sctg/gerber-to-svg-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/@sctg/gerber-to-svg
 [gerber]: https://en.wikipedia.org/wiki/Gerber_format
 [nc-drill]: https://en.wikipedia.org/wiki/Excellon_format
 [svg]: https://en.wikipedia.org/wiki/Scalable_Vector_Graphics
@@ -24,15 +24,15 @@ Part of the [tracespace][] collection of PCB visualization tools.
 ## install
 
 ```shell
-npm install --save gerber-to-svg
+npm install --save @sctg/gerber-to-svg
 # or
-yarn add gerber-to-svg
+yarn add @sctg/gerber-to-svg
 ```
 
 Or, use a script tag:
 
 ```html
-<script src="https://unpkg.com/gerber-to-svg@^4.0.0/dist/gerber-to-svg.min.js"></script>
+<script src="https://unpkg.com/@sctg/gerber-to-svg@^4.0.0/dist/@sctg/gerber-to-svg.min.js"></script>
 <script>
   // global variable gerberToSvg now available
   var converter = gerberToSvg(input)
@@ -41,10 +41,10 @@ Or, use a script tag:
 
 ## example
 
-After you clone and set-up the repository as detailed in [development setup](../..#development-setup), you can run `gerber-to-svg`'s [example script](./example/index.js) to render all the layers of an Arduino Uno PCB.
+After you clone and set-up the repository as detailed in [development setup](../..#development-setup), you can run `@sctg/gerber-to-svg`'s [example script](./example/index.js) to render all the layers of an Arduino Uno PCB.
 
 ```shell
-cd tracespace/packages/gerber-to-svg
+cd tracespace/packages/@sctg/gerber-to-svg
 yarn example
 ```
 
@@ -52,12 +52,12 @@ yarn example
 
 Arduino Uno design files used here under the terms of the [Creative Commons Attribution Share-Alike license](https://www.arduino.cc/en/Main/FAQ).
 
-[sol]: https://unpkg.com/gerber-to-svg@next/example/arduino-uno.sol.svg
+[sol]: https://unpkg.com/@sctg/gerber-to-svg@next/example/arduino-uno.sol.svg
 
 ## usage
 
 ```js
-var gerberToSvg = require('gerber-to-svg')
+var gerberToSvg = require('@sctg/gerber-to-svg')
 var converter = gerberToSvg(input, options, [callback])
 ```
 
@@ -65,7 +65,7 @@ See [the API documentation](./API.md) for full details.
 
 ### command line
 
-If you would like to use `gerber-to-svg` from the command line, check out [`@tracespace/cli`][tracespace-cli]
+If you would like to use `@sctg/gerber-to-svg` from the command line, check out [`@sctg/tracespace-cli`][tracespace-cli]
 
 [tracespace-cli]: ../cli
 

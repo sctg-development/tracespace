@@ -10,19 +10,19 @@ var fakeStackup = {foo: 'bar'}
 var fakeConverter = {baz: 'quux'}
 var fakeGerber = 'gerber'
 
-describe('pcb stackup', function() {
+describe('pcb stackup', function () {
   var pcbStackup
   var stackupCore
   var gts
   var wtg
 
-  beforeEach(function() {
+  beforeEach(function () {
     stackupCore = sinon.stub()
     gts = sinon.stub()
     wtg = sinon.stub()
     pcbStackup = proxyquire('.', {
       'pcb-stackup-core': stackupCore,
-      'gerber-to-svg': gts,
+      '@sctg/gerber-to-svg': gts,
       'whats-that-gerber': wtg,
     })
 
@@ -30,14 +30,14 @@ describe('pcb stackup', function() {
     stackupCore.returns(fakeStackup)
   })
 
-  afterEach(function() {
+  afterEach(function () {
     sinon.restore()
   })
 
-  it('should accept and call node style callback', function(done) {
+  it('should accept and call node style callback', function (done) {
     var expectedStackup = extend(fakeStackup, {layers: []})
 
-    pcbStackup([], function(error, stackup) {
+    pcbStackup([], function (error, stackup) {
       try {
         expect(stackupCore).to.be.calledWithExactly([], null)
         expect(error).to.equal(null)
@@ -49,12 +49,12 @@ describe('pcb stackup', function() {
     })
   })
 
-  it('callback should error if gerber-to-svg errors', function(done) {
+  it('callback should error if @sctg/gerber-to-svg errors', function (done) {
     var layers = [{gerber: fakeGerber, side: 'top', type: 'copper'}]
 
     gts.yields(new Error('oh no'))
 
-    pcbStackup(layers, function(error, stackup) {
+    pcbStackup(layers, function (error, stackup) {
       try {
         expect(typeof stackup).to.equal('undefined')
         expect(error).to.match(/oh no/)
@@ -65,11 +65,11 @@ describe('pcb stackup', function() {
     })
   })
 
-  it('should accept options as the second argument', function(done) {
+  it('should accept options as the second argument', function (done) {
     var options = {useOutline: false}
     var expectedStackup = extend(fakeStackup, {layers: []})
 
-    pcbStackup([], options, function(error, stackup) {
+    pcbStackup([], options, function (error, stackup) {
       try {
         expect(stackupCore).to.be.calledWithExactly([], options)
         expect(error).to.equal(null)
@@ -81,17 +81,17 @@ describe('pcb stackup', function() {
     })
   })
 
-  it('return a promise if no callback passed', function() {
+  it('return a promise if no callback passed', function () {
     var options = {useOutline: false}
     var expectedStackup = extend(fakeStackup, {layers: []})
 
-    return pcbStackup([], options).then(function(stackup) {
+    return pcbStackup([], options).then(function (stackup) {
       expect(stackupCore).to.be.calledWithExactly([], options)
       expect(stackup).to.eql(expectedStackup)
     })
   })
 
-  it('promise should reject if gerber-to-svg errors', function() {
+  it('promise should reject if @sctg/gerber-to-svg errors', function () {
     var layers = [{gerber: fakeGerber, side: 'top', type: 'copper'}]
 
     gts.yields(new Error('oh no'))
@@ -99,7 +99,7 @@ describe('pcb stackup', function() {
     return expect(pcbStackup(layers)).to.be.rejectedWith(/oh no/)
   })
 
-  describe('valid layer inputs', function() {
+  describe('valid layer inputs', function () {
     var SPECS = [
       {
         name: 'should use a layer with type, side, and converter',
@@ -280,12 +280,12 @@ describe('pcb stackup', function() {
       },
     ]
 
-    SPECS.forEach(function(spec) {
-      it(spec.name, function() {
+    SPECS.forEach(function (spec) {
+      it(spec.name, function () {
         expect(spec.layers).to.have.lengthOf(spec.expectedLayerAdditions.length)
         expect(spec.layers).to.have.lengthOf(spec.expectedGtsGerbers.length)
 
-        var expectedLayers = spec.layers.map(function(layer, index) {
+        var expectedLayers = spec.layers.map(function (layer, index) {
           return extend(layer, spec.expectedLayerAdditions[index])
         })
         var expectedStackup = extend(fakeStackup, {layers: expectedLayers})
@@ -294,11 +294,11 @@ describe('pcb stackup', function() {
 
         var result = pcbStackup(spec.layers, spec.options)
 
-        gts.getCalls().forEach(function() {
+        gts.getCalls().forEach(function () {
           gts.yield(null, 'fake-svg')
         })
 
-        return result.then(function(stackup) {
+        return result.then(function (stackup) {
           expect(wtg).to.be.calledWithExactly(spec.expectedWtgLayers || [])
           expect(stackupCore).to.be.calledWithExactly(
             expectedLayers,
@@ -310,7 +310,7 @@ describe('pcb stackup', function() {
             spec.expectedGtsGerbers.filter(Boolean).length
           )
 
-          expectedLayers.forEach(function(layer, index) {
+          expectedLayers.forEach(function (layer, index) {
             var gerber = spec.expectedGtsGerbers[index]
             if (gerber !== null) {
               expect(gts).to.be.calledWithExactly(
@@ -325,7 +325,7 @@ describe('pcb stackup', function() {
     })
   })
 
-  describe('invalid layer input', function() {
+  describe('invalid layer input', function () {
     var SPECS = [
       {
         name: 'should throw if no layers given',
@@ -349,9 +349,9 @@ describe('pcb stackup', function() {
       },
     ]
 
-    SPECS.forEach(function(spec) {
-      it(spec.name, function() {
-        var task = function() {
+    SPECS.forEach(function (spec) {
+      it(spec.name, function () {
+        var task = function () {
           pcbStackup(spec.layers)
         }
 

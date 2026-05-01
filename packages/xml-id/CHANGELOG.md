@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/xml-id
+**Note:** Version bump only for package @sctg/tracespace-xml-id
 
 
 
@@ -13,7 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0](https://github.com/tracespace/tracespace/compare/v4.0.0-next.19...v4.0.0) (2019-03-09)
 
-**Note:** Version bump only for package @tracespace/xml-id
+**Note:** Version bump only for package @sctg/tracespace-xml-id
 
 
 
@@ -35,7 +35,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 * Parameters, defaults, and return types have changed in pcb-stackup,
-pcb-stackup-core, and gerber-to-svg
+pcb-stackup-core, and @sctg/gerber-to-svg
 
 
 
@@ -76,4 +76,4 @@ object keyed by the filenames passed in as an array
 
 ### Bug Fixes
 
-* Replace shortid with [@tracespace](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)
+* Replace shortid with [@sctg/tracespace-](https://github.com/tracespace)/xml-id and sanitize IDs ([#79](https://github.com/tracespace/tracespace/issues/79)) ([2cda760](https://github.com/tracespace/tracespace/commit/2cda760)), closes [#78](https://github.com/tracespace/tracespace/issues/78)

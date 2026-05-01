@@ -4,11 +4,11 @@
 var expect = require('chai').expect
 var sinon = require('sinon')
 
-var wtg = require('whats-that-gerber')
+var wtg = require('@sctg/whats-that-gerber')
 var expectXmlNodes = require('./expect-xml-nodes')
 var stack = require('../lib/stack-layers')
 
-var converter = function(defs, layer, viewBox, units) {
+var converter = function (defs, layer, viewBox, units) {
   return {
     defs: defs,
     layer: layer,
@@ -54,17 +54,17 @@ var outline = {
   converter: converter(['<out-d/>'], ['<out/>'], [-50, -50, 1100, 1100], 'in'),
 }
 
-describe('stack layers function', function() {
+describe('stack layers function', function () {
   var element
 
-  beforeEach(function() {
-    element = sinon.spy(function(tag, attributes, children) {
+  beforeEach(function () {
+    element = sinon.spy(function (tag, attributes, children) {
       return {tag: tag, attributes: attributes, children: children}
     })
   })
 
-  describe('building the defs and viewbox', function() {
-    it('should add all layer defs to defs', function() {
+  describe('building the defs and viewbox', function () {
+    it('should add all layer defs to defs', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline)
 
       expect(result.defs.slice(0, 7)).to.eql([
@@ -78,35 +78,35 @@ describe('stack layers function', function() {
       ])
     })
 
-    it('should add viewBoxes taking units into account', function() {
+    it('should add viewBoxes taking units into account', function () {
       var result = stack(element, 'id', 'top', layers, drills)
 
       expect(result.units).to.equal('in')
       expect(result.box).to.eql([-10, -10, 1020, 1210])
     })
 
-    it('should use outline viewBox if present and useOutline set', function() {
+    it('should use outline viewBox if present and useOutline set', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline, true)
 
       expect(result.units).to.equal('in')
       expect(result.box).to.eql([-50, -50, 1100, 1100])
     })
 
-    it('should add viewBoxes if useOutline set without outline', function() {
+    it('should add viewBoxes if useOutline set without outline', function () {
       var result = stack(element, 'id', 'top', layers, drills, null, true)
 
       expect(result.units).to.equal('in')
       expect(result.box).to.eql([-10, -10, 1020, 1210])
     })
 
-    it('should use outline viewBox if present and useOutline set', function() {
+    it('should use outline viewBox if present and useOutline set', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline, true)
 
       expect(result.units).to.equal('in')
       expect(result.box).to.eql([-50, -50, 1100, 1100])
     })
 
-    it('should have no units by default, but count units when present', function() {
+    it('should have no units by default, but count units when present', function () {
       var resultNoUnits = stack(element, 'id', 'top', [], [])
 
       var allIn = [
@@ -142,7 +142,7 @@ describe('stack layers function', function() {
       expect(resultMoreMm.units).to.equal('mm')
     })
 
-    it('should wrap the layers and add them to the defs', function() {
+    it('should wrap the layers and add them to the defs', function () {
       var result = stack(element, 'id', 'top', layers, drills)
       var values = element.returnValues
 
@@ -159,7 +159,7 @@ describe('stack layers function', function() {
       expect(result.defs).to.include.members(values.slice(0, 4))
     })
 
-    it('should wrap the mech layers and add them to the defs', function() {
+    it('should wrap the mech layers and add them to the defs', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline)
       var values = element.returnValues
       var transform = 'scale(0.03937007874015748,0.03937007874015748)'
@@ -175,7 +175,7 @@ describe('stack layers function', function() {
       expect(result.defs).to.include.members(values.slice(4, 7))
     })
 
-    it('should use a clip path instead of a group for the outline if masking', function() {
+    it('should use a clip path instead of a group for the outline if masking', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline, true)
       var values = expectXmlNodes(element, [
         {
@@ -191,7 +191,7 @@ describe('stack layers function', function() {
       ])
     })
 
-    it('should not add layers with externalId to defs', function() {
+    it('should not add layers with externalId to defs', function () {
       layers[0].externalId = 'foo'
       drills[0].externalId = 'bar'
       outline.externalId = 'baz'
@@ -224,7 +224,7 @@ describe('stack layers function', function() {
       expect(result.box).to.eql([-50, -50, 1100, 1250])
     })
 
-    it('should add outline to defs even if it has externalId if masking', function() {
+    it('should add outline to defs even if it has externalId if masking', function () {
       var out = {
         type: wtg.TYPE_OUTLINE,
         externalId: 'foo',
@@ -250,7 +250,7 @@ describe('stack layers function', function() {
       ])
     })
 
-    it('should add a mech mask to the defs', function() {
+    it('should add a mech mask to the defs', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline, true)
       var values = expectXmlNodes(element, [
         {
@@ -274,7 +274,7 @@ describe('stack layers function', function() {
       expect(result.defs).to.contain(values[4])
     })
 
-    it('should handle being told to use the outline when it is missing', function() {
+    it('should handle being told to use the outline when it is missing', function () {
       var result = stack(element, 'id', 'top', layers, drills, null, true)
       var values = expectXmlNodes(element, [
         {
@@ -299,8 +299,8 @@ describe('stack layers function', function() {
     })
   })
 
-  describe('building the main group', function() {
-    it('should start with a fr4 rectangle the size of the box', function() {
+  describe('building the main group', function () {
+    it('should start with a fr4 rectangle the size of the box', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline, true)
       var values = expectXmlNodes(element, [
         {
@@ -319,7 +319,7 @@ describe('stack layers function', function() {
       expect(result.layer[0]).to.equal(values[0])
     })
 
-    it('should add copper and copper finish if there is a copper layer', function() {
+    it('should add copper and copper finish if there is a copper layer', function () {
       var converters = [
         {
           type: wtg.TYPE_COPPER,
@@ -360,7 +360,7 @@ describe('stack layers function', function() {
       expect(result.layer.slice(-2)).to.eql([values[3], values[4]])
     })
 
-    it('should use the soldermask to mask the copper finish if it exists', function() {
+    it('should use the soldermask to mask the copper finish if it exists', function () {
       var converters = [
         {
           type: wtg.TYPE_COPPER,
@@ -385,7 +385,7 @@ describe('stack layers function', function() {
       expect(result.defs).to.contain(values[2])
     })
 
-    it('should add the soldermask', function() {
+    it('should add the soldermask', function () {
       var converters = [
         {
           type: wtg.TYPE_SOLDERMASK,
@@ -423,7 +423,7 @@ describe('stack layers function', function() {
       expect(result.layer.slice(-1)).to.eql([values[5]])
     })
 
-    it('should add silkscreen when there is a mask and a silk', function() {
+    it('should add silkscreen when there is a mask and a silk', function () {
       var converters = [
         {
           type: wtg.TYPE_SOLDERMASK,
@@ -462,7 +462,7 @@ describe('stack layers function', function() {
       expect(result.layer.slice(-1)).to.eql([values[2]])
     })
 
-    it('should add solderpaste', function() {
+    it('should add solderpaste', function () {
       var converters = [
         {
           type: wtg.TYPE_SOLDERPASTE,
@@ -485,19 +485,19 @@ describe('stack layers function', function() {
       expect(result.layer.slice(-1)).to.eql(values)
     })
 
-    it('should return the id of the mechanical mask', function() {
+    it('should return the id of the mechanical mask', function () {
       var result = stack(element, 'id', 'top', layers, drills)
 
       expect(result.mechMaskId).to.equal('id_top_mech-mask')
     })
 
-    it('should return the id of the outline clip path', function() {
+    it('should return the id of the outline clip path', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline, true)
 
       expect(result.outClipId).to.equal('id_top_outline')
     })
 
-    it('should add the outline to the normal layer if not used to clip', function() {
+    it('should add the outline to the normal layer if not used to clip', function () {
       var result = stack(element, 'id', 'top', layers, drills, outline)
       var values = expectXmlNodes(element, [
         {
@@ -514,7 +514,7 @@ describe('stack layers function', function() {
       expect(result.layer.slice(-1)).to.eql(values)
     })
 
-    it('should not add the outline if used in the mech mask', function() {
+    it('should not add the outline if used in the mech mask', function () {
       stack(element, 'id', 'top', layers, drills, outline, true)
 
       expect(element).to.not.be.calledWith('use', {
@@ -525,7 +525,7 @@ describe('stack layers function', function() {
       })
     })
 
-    it('should use external ids for uses if given', function() {
+    it('should use external ids for uses if given', function () {
       layers[0].externalId = 'foo'
       drills[0].externalId = 'bar'
 
@@ -554,7 +554,7 @@ describe('stack layers function', function() {
       )
     })
 
-    it('should use external drill id for use if not masking', function() {
+    it('should use external drill id for use if not masking', function () {
       outline.externalId = 'baz'
 
       var result = stack(element, 'id', 'top', layers, drills, outline)

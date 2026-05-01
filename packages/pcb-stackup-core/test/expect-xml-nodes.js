@@ -13,13 +13,13 @@ module.exports = function expectXmlNodes(element, expectations) {
   var returnValues = []
   var calls = element.getCalls()
 
-  expectations.forEach(function(expectation) {
+  expectations.forEach(function (expectation) {
     var tag = expectation.tag
     var attr = expectation.attr
     var children = expectation.children
 
     if (children) {
-      children = children.map(function(index) {
+      children = children.map(function (index) {
         if (typeof index === 'number') {
           return returnValues[index]
         }
@@ -49,7 +49,7 @@ module.exports = function expectXmlNodes(element, expectations) {
 
 // modifies calls argument
 function popCallByArgs(calls, tag, attr, children) {
-  var matchingCall = calls.find(function(call) {
+  var matchingCall = calls.find(function (call) {
     return (
       isEqualOrMatches(call.args[0], tag) &&
       isEqualOrMatches(call.args[1], attr) &&

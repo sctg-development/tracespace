@@ -37,7 +37,7 @@ export default function BoardUrl(props: BoardUrlProps): JSX.Element {
   return (
     <Label
       className={STYLE}
-      onCopy={event => {
+      onCopy={(event) => {
         setSuccess(true)
         event.currentTarget.focus()
         event.clipboardData.setData('text/plain', copyValue)
@@ -56,11 +56,11 @@ export default function BoardUrl(props: BoardUrlProps): JSX.Element {
         type="text"
         value={copyValue}
         className="clip"
-        onClick={event => {
+        onClick={(event) => {
           select(event)
           document.execCommand('copy')
         }}
-        onFocus={event => {
+        onFocus={(event) => {
           select(event)
           setSelected(true)
         }}

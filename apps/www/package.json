@@ -1,6 +1,6 @@
 {
-  "name": "@tracespace/www",
-  "version": "4.2.7",
+  "name": "@sctg/tracespace-www",
+  "version": "5.0.0",
   "private": true,
   "description": "tracespace website",
   "author": {
@@ -12,9 +12,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tracespace/tracespace.git"
+    "url": "git+https://github.com/sctg-development/tracespace.git"
   },
   "bugs": {
-    "url": "https://github.com/tracespace/tracespace/issues"
+    "url": "https://github.com/sctg-development/tracespace/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

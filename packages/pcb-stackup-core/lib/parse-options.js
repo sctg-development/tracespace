@@ -2,7 +2,7 @@
 'use strict'
 
 var boardColor = require('./board-color')
-var xid = require('@tracespace/xml-id')
+var xid = require('@sctg/tracespace-xml-id')
 var xmlElementString = require('xml-element-string')
 
 module.exports = function parseOptions(input) {

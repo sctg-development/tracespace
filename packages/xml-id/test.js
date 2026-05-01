@@ -1,10 +1,10 @@
 'use strict'
 
 var expect = require('chai').expect
-var xid = require('@tracespace/xml-id')
+var xid = require('@sctg/tracespace-xml-id')
 
-describe('xml-id', function() {
-  describe('sanitize', function() {
+describe('xml-id', function () {
+  describe('sanitize', function () {
     var SPECS = [
       // should leave these alone
       {given: '_123', expected: '_123'},
@@ -21,11 +21,11 @@ describe('xml-id', function() {
       {given: 'abc.def', expected: 'abc_def'},
     ]
 
-    SPECS.forEach(function(spec) {
+    SPECS.forEach(function (spec) {
       var given = spec.given
       var expected = spec.expected
 
-      it('given ' + given + ' expect ' + expected, function() {
+      it('given ' + given + ' expect ' + expected, function () {
         expect(xid.sanitize(given)).to.equal(expected)
       })
     })

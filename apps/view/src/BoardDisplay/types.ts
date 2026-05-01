@@ -10,7 +10,7 @@ export type Point = {
 }
 
 export type PartialDisplayState<
-  K extends keyof DisplayState = keyof DisplayState
+  K extends keyof DisplayState = keyof DisplayState,
 > = Pick<DisplayState, K>
 
 export type UpdateDisplayState = (partial: PartialDisplayState) => void

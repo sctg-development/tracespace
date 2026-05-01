@@ -1,7 +1,6 @@
 {
-  "version": "4.2.8",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "version": "5.0.0",
+  "npmClient": "npm",
   "command": {
     "version": {
       "conventionalCommits": true,

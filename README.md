@@ -1,4 +1,6 @@
-# tracespace
+# @sctg/tracespace
+
+This repository is un updated version of the original tracespace repository, which can be found at <https://github.com/tracespace/tracespace>.
 
 [![coverage][coverage-badge]][coverage]
 [![chat][chat-badge]][chat]
@@ -14,7 +16,7 @@ tracespace is an open-source collection of tools to make looking at circuit boar
 
 ## examples
 
-Renders of the [Arduino Uno][arduino] produced by [pcb-stackup][] and [gerber-to-svg][]:
+Renders of the [Arduino Uno][arduino] produced by [pcb-stackup][] and [@sctg/gerber-to-svg][]:
 
 ![arduino uno top][top]
 ![arduino uno bottom][bottom]
@@ -26,38 +28,38 @@ Arduino Uno design files used under the terms of the [Creative Commons Attributi
   <h4>top copper</h4>
   <img
     title='arduino uno cmp'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.cmp.svg'
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.cmp.svg'
   >
 
   <h4>drill hits</h4>
   <img
     title='arduino uno drd'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.drd.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.drd.svg'>
 
   <h4>outline</h4>
   <img
     title='arduino uno gko'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.gko.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.gko.svg'>
 
   <h4>top silkscreen</h4>
   <img
     title='arduino uno plc'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.plc.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.plc.svg'>
 
   <h4>bottom copper</h4>
   <img
     title='arduino uno sol'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.sol.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.sol.svg'>
 
   <h4>top soldermask</h4>
   <img
     title='arduino uno stc'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.stc.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.stc.svg'>
 
   <h4>bottom soldermask</h4>
   <img
     title='arduino uno sts'
-    src='https://unpkg.com/gerber-to-svg@latest/example/arduino-uno.sts.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@latest/example/arduino-uno.sts.svg'>
 </details>
 
 [arduino]: https://www.arduino.cc/
@@ -79,7 +81,7 @@ Arduino Uno design files used under the terms of the [Creative Commons Attributi
 
 This repository has one web-app that is published to <https://tracespace.io>
 
-### [@tracespace/view][view]
+### [@sctg/tracespace-view][view]
 
 > Probably the best printed circuit board viewer on the internet
 
@@ -102,16 +104,16 @@ This repository also contains several packages that are published to npm. See th
 [pcb-stackup-latest-badge]: https://flat.badgen.net/npm/v/pcb-stackup
 [pcb-stackup-next-badge]: https://flat.badgen.net/npm/v/pcb-stackup/next
 
-### [@tracespace/cli][]
+### [@sctg/tracespace-cli][]
 
-![latest][@tracespace/cli-latest-badge]
-![next][@tracespace/cli-next-badge]
+![latest][@sctg/tracespace-cli-latest-badge]
+![next][@sctg/tracespace-cli-next-badge]
 
 > Render PCBs as SVGs from the comfort of your own terminal
 
-[@tracespace/cli]: ./packages/cli
-[@tracespace/cli-latest-badge]: https://flat.badgen.net/npm/v/@tracespace/cli
-[@tracespace/cli-next-badge]: https://flat.badgen.net/npm/v/@tracespace/cli/next
+[@sctg/tracespace-cli]: ./packages/cli
+[@sctg/tracespace-cli-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-cli
+[@sctg/tracespace-cli-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-cli/next
 
 ### [pcb-stackup-core][]
 
@@ -124,38 +126,38 @@ This repository also contains several packages that are published to npm. See th
 [pcb-stackup-core-latest-badge]: https://flat.badgen.net/npm/v/pcb-stackup-core
 [pcb-stackup-core-next-badge]: https://flat.badgen.net/npm/v/pcb-stackup-core/next
 
-### [gerber-to-svg][]
+### [@sctg/gerber-to-svg][]
 
-![latest][gerber-to-svg-latest-badge]
-![next][gerber-to-svg-next-badge]
+![latest][@sctg/gerber-to-svg-latest-badge]
+![next][@sctg/gerber-to-svg-next-badge]
 
 > Render individual Gerber / NC drill files as SVGs
 
-[gerber-to-svg]: ./packages/gerber-to-svg
-[gerber-to-svg-latest-badge]: https://flat.badgen.net/npm/v/gerber-to-svg
-[gerber-to-svg-next-badge]: https://flat.badgen.net/npm/v/gerber-to-svg/next
+[@sctg/gerber-to-svg]: ./packages/@sctg/gerber-to-svg
+[@sctg/gerber-to-svg-latest-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-to-svg
+[@sctg/gerber-to-svg-next-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-to-svg/next
 
-### [gerber-plotter][]
+### [@sctg/gerber-plotter][]
 
-![latest][gerber-plotter-latest-badge]
-![next][gerber-plotter-next-badge]
+![latest][@sctg/gerber-plotter-latest-badge]
+![next][@sctg/gerber-plotter-next-badge]
 
-> Streaming layer image plotter (consumer of `gerber-parser`)
+> Streaming layer image plotter (consumer of `@sctg/gerber-parser`)
 
-[gerber-plotter]: ./packages/gerber-plotter
-[gerber-plotter-latest-badge]: https://flat.badgen.net/npm/v/gerber-plotter
-[gerber-plotter-next-badge]: https://flat.badgen.net/npm/v/gerber-plotter/next
+[@sctg/gerber-plotter]: ./packages/@sctg/gerber-plotter
+[@sctg/gerber-plotter-latest-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-plotter
+[@sctg/gerber-plotter-next-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-plotter/next
 
-### [gerber-parser][]
+### [@sctg/gerber-parser][]
 
-![latest][gerber-parser-latest-badge]
-![next][gerber-parser-next-badge]
+![latest][@sctg/gerber-parser-latest-badge]
+![next][@sctg/gerber-parser-next-badge]
 
 > Streaming Gerber/drill file parser
 
-[gerber-parser]: ./packages/gerber-parser
-[gerber-parser-latest-badge]: https://flat.badgen.net/npm/v/gerber-parser
-[gerber-parser-next-badge]: https://flat.badgen.net/npm/v/gerber-parser/next
+[@sctg/gerber-parser]: ./packages/@sctg/gerber-parser
+[@sctg/gerber-parser-latest-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-parser
+[@sctg/gerber-parser-next-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-parser/next
 
 ### [whats-that-gerber][]
 
@@ -168,27 +170,27 @@ This repository also contains several packages that are published to npm. See th
 [whats-that-gerber-latest-badge]: https://flat.badgen.net/npm/v/whats-that-gerber
 [whats-that-gerber-next-badge]: https://flat.badgen.net/npm/v/whats-that-gerber/next
 
-### [@tracespace/xml-id][]
+### [@sctg/tracespace-xml-id][]
 
-![latest][@tracespace/xml-id-latest-badge]
-![next][@tracespace/xml-id-next-badge]
+![latest][@sctg/tracespace-xml-id-latest-badge]
+![next][@sctg/tracespace-xml-id-next-badge]
 
 > XML ID generation and sanitation utilities for tracespace projects
 
-[@tracespace/xml-id]: ./packages/xml-id
-[@tracespace/xml-id-latest-badge]: https://flat.badgen.net/npm/v/@tracespace/xml-id
-[@tracespace/xml-id-next-badge]: https://flat.badgen.net/npm/v/@tracespace/xml-id/next
+[@sctg/tracespace-xml-id]: ./packages/xml-id
+[@sctg/tracespace-xml-id-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-xml-id
+[@sctg/tracespace-xml-id-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-xml-id/next
 
-### [@tracespace/fixtures][]
+### [@sctg/tracespace-fixtures][]
 
-![latest][@tracespace/fixtures-latest-badge]
-![next][@tracespace/fixtures-next-badge]
+![latest][@sctg/tracespace-fixtures-latest-badge]
+![next][@sctg/tracespace-fixtures-next-badge]
 
 > Test fixtures for tracespace projects
 
-[@tracespace/fixtures]: ./packages/fixtures
-[@tracespace/fixtures-latest-badge]: https://flat.badgen.net/npm/v/@tracespace/fixtures
-[@tracespace/fixtures-next-badge]: https://flat.badgen.net/npm/v/@tracespace/fixtures/next
+[@sctg/tracespace-fixtures]: ./packages/fixtures
+[@sctg/tracespace-fixtures-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-fixtures
+[@sctg/tracespace-fixtures-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-fixtures/next
 
 ## contributing
 
@@ -247,14 +249,14 @@ INTEGRATION=1 yarn test:watch
 
 ### development servers
 
-`pcb-stackup`, `pcb-stackup-core`, `gerber-to-svg`, and `@tracespace/view` have development servers. The first three serve a set of reference renders for manual visual inspection, and the `@tracespace/view` development server builds and serves the web-app locally.
+`pcb-stackup`, `pcb-stackup-core`, `@sctg/gerber-to-svg`, and `@sctg/tracespace-view` have development servers. The first three serve a set of reference renders for manual visual inspection, and the `@sctg/tracespace-view` development server builds and serves the web-app locally.
 
 ```shell
 # run all dev servers
 yarn start
 
 # run server for a specific project
-yarn start --scope @tracespace/view
+yarn start --scope @sctg/tracespace-view
 ```
 
 ### production assets
@@ -262,11 +264,11 @@ yarn start --scope @tracespace/view
 There are two production asset types that you can build:
 
 - Full web-app bundles
-  - `@tracespace/view`
+  - `@sctg/tracespace-view`
 - Standalone library bundles
-  - `gerber-parser`
-  - `gerber-plotter`
-  - `gerber-to-svg`
+  - `@sctg/gerber-parser`
+  - `@sctg/gerber-plotter`
+  - `@sctg/gerber-to-svg`
   - `pcb-stackup-core`
   - `pcb-stackup`
   - `whats-that-gerber`
@@ -285,8 +287,8 @@ yarn build:all
 yarn serve
 
 # as with the dev server, these commands may be scoped by name
-yarn build --scope gerber-parser
-yarn serve --scope @tracespace/view
+yarn build --scope @sctg/gerber-parser
+yarn serve --scope @sctg/tracespace-view
 ```
 
 ### linting and formatting

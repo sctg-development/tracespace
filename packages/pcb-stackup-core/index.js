@@ -2,7 +2,7 @@
 'use strict'
 
 var extend = require('xtend')
-var wtg = require('whats-that-gerber')
+var wtg = require('@sctg/whats-that-gerber')
 var vb = require('viewbox')
 
 var boardColor = require('./lib/board-color')
@@ -33,7 +33,7 @@ module.exports = function pcbStackupCore(layers, inputOpts) {
   var useOutline = options.useOutline
   var element = options.createElement
 
-  var stacks = SIDES.map(function(side) {
+  var stacks = SIDES.map(function (side) {
     return stackLayers(
       element,
       id,
@@ -45,13 +45,13 @@ module.exports = function pcbStackupCore(layers, inputOpts) {
     )
   })
 
-  var box = stacks.reduce(function(result, stack) {
+  var box = stacks.reduce(function (result, stack) {
     return vb.add(result, stack.box)
   }, vb.create())
 
   if (box.length !== 4) box = [0, 0, 0, 0]
 
-  return stacks.reduce(function(result, stack, index) {
+  return stacks.reduce(function (result, stack, index) {
     var side = SIDES[index]
     var style = boardColor.getStyleElement(element, id + '_', side, color)
     var units = stack.units

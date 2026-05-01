@@ -32,14 +32,14 @@ If you opt in to usage tracking, the following data is collected and stored by [
     - This helps decide default values for any settings that cannot be inferred
 - Any render/storage errors that occur
 
-For more information, see the [analytics module][view-analytics] in the @tracespace/view source code.
+For more information, see the [analytics module][view-analytics] in the @sctg/tracespace-view source code.
 
 [mixpanel-js]: https://help.mixpanel.com/hc/en-us/articles/115004613766-Default-Properties-Collected-by-Mixpanel
 [view-analytics]: ./apps/view/src/analytics
 
 ## requesting your data
 
-If you would like a copy of the usage data we've collected from you, please email <privacy@tracespace.io> with your request. You will need to include your analytics user ID, which you can find by following the instructions below.
+If you would like a copy of the usage data we've collected from you, please email <privacy@sctg/tracespace-.io> with your request. You will need to include your analytics user ID, which you can find by following the instructions below.
 
 ### tracespace view
 
@@ -57,4 +57,4 @@ Any updates to this policy and/or data collected will be reflected below. If we 
 
 ## contact
 
-Please contact <privacy@tracespace.io> with any questions or concerns.
+Please contact <privacy@sctg/tracespace-.io> with any questions or concerns.

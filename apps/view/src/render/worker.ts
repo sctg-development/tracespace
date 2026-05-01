@@ -12,17 +12,6 @@ import {
 import {RenderWorkerContext, WorkerMessageEvent} from './types'
 
 import {
-  filesToStackups,
-  urlToStackups,
-  stackupToBoard,
-  stackupToBoardRender,
-  boardToStackups,
-  stackupToZipBlob,
-  updateBoard,
-  updateBoardThumbnail,
-} from './models'
-
-import {
   Action,
   CREATE_BOARD,
   CREATE_BOARD_FROM_URL,
@@ -44,12 +33,46 @@ import {
 const ctx: RenderWorkerContext = self as any
 let db: BoardDatabase
 
-createBoardDatabase()
-  .then(database => {
+// Polyfill process.nextTick for dependencies that use it in Web Workers
+if (typeof (globalThis as any).process === 'undefined') {
+  ;(globalThis as any).process = {}
+}
+if (typeof (globalThis as any).process.nextTick !== 'function') {
+  ;(globalThis as any).process.nextTick = (fn: () => void) =>
+    Promise.resolve().then(fn)
+}
+
+// Models will be loaded dynamically to avoid CommonJS interop issues with Web Workers
+let models: any
+
+// Send diagnostic message to confirm worker script is executing
+ctx.postMessage({type: 'WORKER_DEBUG', payload: 'Worker script started'} as any)
+
+// Initialize worker: load models and database
+Promise.all([
+  import('./models').then((m) => {
+    models = m
+    console.log('[Worker] Models loaded')
+  }),
+  createBoardDatabase().then((database) => {
     db = database
-    return getBoards(db)
+    console.log('[Worker] Database created')
+  }),
+])
+  .then(() => getBoards(db))
+  .then((boards) => {
+    console.log('[Worker] Initialized with boards:', boards.length)
+    ctx.postMessage(workerInitialized(boards))
   })
-  .then(boards => ctx.postMessage(workerInitialized(boards)))
+  .catch((error) => {
+    console.error('[Worker] Initialization error:', error)
+    ctx.postMessage(
+      workerErrored(
+        {type: 'FETCH_APP_PREFERENCES'} as unknown as Action,
+        error as Error
+      )
+    )
+  })
 
 const duration = (start: number): number => Date.now() - start
 
@@ -58,32 +81,44 @@ ctx.onmessage = function receive(event) {
   const startTime = Date.now()
   let response
 
+  console.log('[Worker] Received message:', request.type, 'payload' in request ? request.payload : undefined)
+
   switch (request.type) {
     case CREATE_BOARD_FROM_URL: {
-      const url = request.payload
+      const url = (request as any).payload
+      console.log('[Worker] Processing CREATE_BOARD_FROM_URL with URL:', url)
 
       response = Promise.all([
         findBoardByUrl(db, url),
-        urlToStackups(url),
-      ]).then(async result => {
+        models.urlToStackups(url),
+      ]).then(async (result) => {
+        console.log('[Worker] urlToStackups completed, processing results')
         const [existingBoard, [selfContained, shared]] = result
-        let board = stackupToBoard(selfContained)
+        console.log(
+          '[Worker] Stackup layers:',
+          Object.keys(selfContained.layers).length
+        )
+        let board = models.stackupToBoard(selfContained)
+        console.log(
+          '[Worker] Board created with layers:',
+          Object.keys(board.layers).length
+        )
         let saveQuery
 
         board.sourceUrl = url
 
         if (!existingBoard) {
-          const render = stackupToBoardRender(shared, board)
+          const render = models.stackupToBoardRender(shared, board)
 
           ctx.postMessage(boardRendered(render, duration(startTime)))
           saveQuery = saveBoard(db, board)
         } else {
-          board = updateBoard(board, existingBoard)
-          saveQuery = boardToStackups(board).then(stackups => {
+          board = models.updateBoard(board, existingBoard)
+          saveQuery = models.boardToStackups(board).then((stackups: any) => {
             const [selfContained, shared] = stackups
-            const render = stackupToBoardRender(shared, board)
+            const render = models.stackupToBoardRender(shared, board)
 
-            board = updateBoardThumbnail(board, selfContained)
+            board = models.updateBoardThumbnail(board, selfContained)
             ctx.postMessage(boardRendered(render, duration(startTime)))
 
             return saveBoard(db, board)
@@ -99,10 +134,10 @@ ctx.onmessage = function receive(event) {
     case CREATE_BOARD: {
       const files = request.payload
 
-      response = filesToStackups(files).then(async stackups => {
+      response = models.filesToStackups(files).then(async (stackups: any) => {
         const [selfContained, shared] = stackups
-        const board = stackupToBoard(selfContained)
-        const render = stackupToBoardRender(shared, board)
+        const board = models.stackupToBoard(selfContained)
+        const render = models.stackupToBoardRender(shared, board)
 
         ctx.postMessage(boardRendered(render, duration(startTime)))
 
@@ -117,10 +152,10 @@ ctx.onmessage = function receive(event) {
     case GET_BOARD: {
       const id = request.payload
 
-      response = getBoard(db, id).then(async board =>
-        boardToStackups(board).then(stackups => {
+      response = getBoard(db, id).then(async (board) =>
+        models.boardToStackups(board).then((stackups: any) => {
           const [, shared] = stackups
-          const render = stackupToBoardRender(shared, board)
+          const render = models.stackupToBoardRender(shared, board)
           ctx.postMessage(boardRendered(render, duration(startTime)))
         })
       )
@@ -131,13 +166,14 @@ ctx.onmessage = function receive(event) {
     case GET_BOARD_PACKAGE: {
       const id = request.payload
 
-      response = getBoard(db, id).then(async board =>
-        boardToStackups(board)
-          .then(stackups => {
+      response = getBoard(db, id).then(async (board) =>
+        models
+          .boardToStackups(board)
+          .then((stackups: any) => {
             const [selfContained] = stackups
-            return stackupToZipBlob(selfContained)
+            return models.stackupToZipBlob(selfContained)
           })
-          .then(blob => ctx.postMessage(boardPackaged(id, board.name, blob)))
+          .then((blob: any) => ctx.postMessage(boardPackaged(id, board.name, blob)))
       )
 
       break
@@ -146,13 +182,13 @@ ctx.onmessage = function receive(event) {
     case UPDATE_BOARD: {
       const {id, update} = request.payload
 
-      response = getBoard(db, id).then(async prevBoard => {
-        const board = updateBoard(prevBoard, update)
+      response = getBoard(db, id).then(async (prevBoard) => {
+        const board = models.updateBoard(prevBoard, update)
 
-        return boardToStackups(board).then(async stackups => {
+        return models.boardToStackups(board).then(async (stackups: any) => {
           const [selfContained, shared] = stackups
-          const render = stackupToBoardRender(shared, board)
-          const nextBoard = updateBoardThumbnail(board, selfContained)
+          const render = models.stackupToBoardRender(shared, board)
+          const nextBoard = models.updateBoardThumbnail(board, selfContained)
 
           ctx.postMessage(boardRendered(render, duration(startTime)))
 

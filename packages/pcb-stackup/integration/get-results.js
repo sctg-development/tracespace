@@ -10,7 +10,7 @@ module.exports = function getBoardResults(board, done) {
   debug(`Render started for ${board.name}`)
 
   const options = Object.assign({id: `__${board.name}`}, board.options)
-  const layers = board.layers.map(layer => {
+  const layers = board.layers.map((layer) => {
     const {filename} = layer
 
     return {
@@ -22,7 +22,7 @@ module.exports = function getBoardResults(board, done) {
 
   runWaterfall(
     [
-      next => pcbStackup(layers, options, next),
+      (next) => pcbStackup(layers, options, next),
       (stackup, next) => next(null, makeBoardResult(board, stackup)),
     ],
     done

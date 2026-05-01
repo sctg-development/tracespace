@@ -1,18 +1,3 @@
-// TODO(mc, 2019-03-01): tree-shake this import somehow or bundle reduction
-import {
-  TYPE_COPPER,
-  TYPE_SOLDERMASK,
-  TYPE_SILKSCREEN,
-  TYPE_SOLDERPASTE,
-  TYPE_DRILL,
-  TYPE_OUTLINE,
-  TYPE_DRAWING,
-  SIDE_TOP,
-  SIDE_BOTTOM,
-  SIDE_INNER,
-  SIDE_ALL,
-} from 'whats-that-gerber'
-
 import {
   Optional,
   GerberType,
@@ -20,6 +5,19 @@ import {
   LayerRender,
   LayerOptions,
 } from './types'
+
+const TYPE_COPPER: NonNullable<GerberType> = 'copper'
+const TYPE_SOLDERMASK: NonNullable<GerberType> = 'soldermask'
+const TYPE_SILKSCREEN: NonNullable<GerberType> = 'silkscreen'
+const TYPE_SOLDERPASTE: NonNullable<GerberType> = 'solderpaste'
+const TYPE_DRILL: NonNullable<GerberType> = 'drill'
+const TYPE_OUTLINE: NonNullable<GerberType> = 'outline'
+const TYPE_DRAWING: NonNullable<GerberType> = 'drawing'
+
+const SIDE_TOP: NonNullable<GerberSide> = 'top'
+const SIDE_BOTTOM: NonNullable<GerberSide> = 'bottom'
+const SIDE_INNER: NonNullable<GerberSide> = 'inner'
+const SIDE_ALL: NonNullable<GerberSide> = 'all'
 
 export {
   TYPE_COPPER,
@@ -111,14 +109,14 @@ export function getDefaultLayerOptions(
   type: 'gerber' | 'drill'
 ): Optional<LayerOptions> {
   const layers = allLayers.filter(
-    ly =>
+    (ly) =>
       ly.converter.layer.length !== 0 &&
       ((type === 'gerber' && ly.type && ly.type !== TYPE_DRILL) ||
         (type === 'drill' && ly.type === TYPE_DRILL))
   )
 
   return layers.reduce<Optional<LayerOptions>>((options, ly) => {
-    OPTIONS.forEach(name => {
+    OPTIONS.forEach((name) => {
       const layerValue = ly.initialOptions[name]
       let value = options[name]
 

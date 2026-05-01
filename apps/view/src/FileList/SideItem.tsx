@@ -20,7 +20,7 @@ export default function SideList(props: Props): JSX.Element | null {
     <li>
       <h3 className={HEADING_STYLE}>{label}</h3>
       <ul className={SUBLIST_STYLE}>
-        {layers.map(layer => (
+        {layers.map((layer) => (
           <FileItem key={layer.id} {...layer} showFilenames={showFilenames} />
         ))}
       </ul>

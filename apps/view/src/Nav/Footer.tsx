@@ -16,7 +16,7 @@ export default function Footer(): JSX.Element {
   return (
     <footer className={STYLE}>
       <p className={COPY_STYLE}>
-        {'© 2015 - 2019 by '}
+        {'© 2015 - 2026 by '}
         <a href={AUTHOR_URL} className={LINK_STYLE}>
           {AUTHOR_NAME.toLowerCase()}
         </a>{' '}

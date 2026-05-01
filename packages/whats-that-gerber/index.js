@@ -10,7 +10,7 @@ module.exports = whatsThatGerber
 module.exports.validate = validate
 module.exports.getAllLayers = getAllLayers
 
-Object.keys(constants).forEach(function(constantName) {
+Object.keys(constants).forEach(function (constantName) {
   module.exports[constantName] = constants[constantName]
 })
 
@@ -20,7 +20,7 @@ function whatsThatGerber(filenames) {
   var matches = flatMap(filenames, getMatches)
   var commonCad = getCommonCad(matches)
 
-  return filenames.reduce(function(result, filename) {
+  return filenames.reduce(function (result, filename) {
     var match = _selectMatch(matches, filename, commonCad)
 
     result[filename] = match
@@ -33,10 +33,10 @@ function whatsThatGerber(filenames) {
 
 function getAllLayers() {
   return layerTypes
-    .map(function(layer) {
+    .map(function (layer) {
       return {type: layer.type, side: layer.side}
     })
-    .filter(function(layer) {
+    .filter(function (layer) {
       return layer.type !== null
     })
 }
@@ -62,11 +62,11 @@ function validate(target) {
 }
 
 function _selectMatch(matches, filename, cad) {
-  var filenameMatches = matches.filter(function(match) {
+  var filenameMatches = matches.filter(function (match) {
     return match.filename === filename
   })
 
-  var result = filenameMatches.find(function(match) {
+  var result = filenameMatches.find(function (match) {
     return match.cad === cad
   })
 

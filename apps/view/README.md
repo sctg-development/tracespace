@@ -2,7 +2,7 @@
 
 > https://tracespace.io/view
 
-Probably the best Gerber viewer on the internet. @tracespace/view uses the [pcb-stackup][] library to render Gerber and NC drill files as SVGs in your browser, without ever sending your files to a server.
+Probably the best Gerber viewer on the internet. @sctg/tracespace-view uses the [pcb-stackup][] library to render Gerber and NC drill files as SVGs in your browser, without ever sending your files to a server.
 
 Your renders are saved locally, so you can check out your boards without constantly having to re-upload your Gerber files.
 

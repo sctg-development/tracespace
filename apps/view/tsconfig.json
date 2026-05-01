@@ -1,11 +1,12 @@
 {
-  "extends": "@tracespace/config/tsconfig-base.json",
+  "extends": "@sctg/tracespace-config/tsconfig-base.json",
   "references": [],
   "compilerOptions": {
     "composite": true,
     "emitDeclarationOnly": true,
     "rootDir": "src",
-    "outDir": "lib"
+    "outDir": "lib",
+    "types": ["node", "mocha", "react", "vite/client"]
   },
   "include": ["typings", "src"]
 }

@@ -1,8 +1,8 @@
 # gerber parser api
 
-API documentation for gerber-parser. An understanding of the [Gerber file format specification](http://www.ucamco.com/en/guest/downloads) and the [Excellon NC drill format](http://www.excellon.com/manuals/program.htm) (as poorly defined as it is) will help with understanding the parser API.
+API documentation for @sctg/gerber-parser. An understanding of the [Gerber file format specification](http://www.ucamco.com/en/guest/downloads) and the [Excellon NC drill format](http://www.excellon.com/manuals/program.htm) (as poorly defined as it is) will help with understanding the parser API.
 
-- [create a gerber parser](#create-a-gerber-parser)
+- [create a gerber parser](#create-a-@sctg/gerber-parser)
   - [usage](#usage)
     - [streaming](#streaming)
     - [synchronous](#synchronous)
@@ -30,17 +30,17 @@ API documentation for gerber-parser. An understanding of the [Gerber file format
 ## create a gerber parser
 
 ```javascript
-var gerberParser = require('gerber-parser')
+var gerberParser = require('@sctg/gerber-parser')
 
 var parser = gerberParser(OPTIONS)
 var gerberStream = getReadableStreamSomehow()
 
 gerberStream
   .pipe(parser)
-  .on('warning', function(warning) {
+  .on('warning', function (warning) {
     // handle warning
   })
-  .once('error', function(error) {
+  .once('error', function (error) {
     // handle error
   })
 ```
@@ -48,7 +48,7 @@ gerberStream
 ### usage
 
 ```javascript
-var gerberParser = require('gerber-parser')
+var gerberParser = require('@sctg/gerber-parser')
 var parser = gerberParser(OPTIONS)
 ```
 
@@ -106,7 +106,7 @@ A gerber parser has certain public properties. Any properties not listed here as
 The format object `parser.format` can be used once parsing has finished to determine any formatting decisions the parser made. Specifically, coordinate places format, zero suppression format, and filetype.
 
 ```javascript
-parser.on('end', function() {
+parser.on('end', function () {
   console.log(parser.format)
 })
 // could print:
@@ -340,7 +340,7 @@ A **circle primitive** adds a circle to the macro image:
 
 ```javascript
 {
-  type: 'circle', exp, dia, cx, cy, rot
+  type: ('circle', exp, dia, cx, cy, rot)
 }
 ```
 
@@ -348,7 +348,7 @@ A **vector primitive** adds a stroke with `width` and endpoints (`x1`, `y1`) and
 
 ```javascript
 {
-  type: 'vect', exp, width, x1, y1, x2, y2, rot
+  type: ('vect', exp, width, x1, y1, x2, y2, rot)
 }
 ```
 
@@ -356,7 +356,7 @@ A **rectangle primitive** adds a rectangle with `width` and `height` centered at
 
 ```javascript
 {
-  type: 'rect', exp, width, height, cx, cy, rot
+  type: ('rect', exp, width, height, cx, cy, rot)
 }
 ```
 
@@ -364,7 +364,7 @@ A **lower-left rectangle primitive** adds a rectangle with `width` and `height` 
 
 ```javascript
 {
-  type: 'rectLL', exp, width, height, x, y, rot
+  type: ('rectLL', exp, width, height, x, y, rot)
 }
 ```
 
@@ -372,7 +372,7 @@ An **outline primitive** adds an outline polygon described by a `points` array o
 
 ```javascript
 {
-  type: 'outline', exp, points, rot
+  type: ('outline', exp, points, rot)
 }
 ```
 
@@ -380,7 +380,7 @@ An **polygon primitive** adds a regular polygon with circumcircle diameter `dia`
 
 ```javascript
 {
-  type: 'poly', exp, vertices, cx, cy, dia, rot
+  type: ('poly', exp, vertices, cx, cy, dia, rot)
 }
 ```
 
@@ -388,7 +388,7 @@ A **moiré primitive** adds a moiré (target) with center at (`cx`, `cy`), outer
 
 ```javascript
 {
-  type: 'moire',
+  type: ('moire',
     exp,
     cx,
     cy,
@@ -398,7 +398,7 @@ A **moiré primitive** adds a moiré (target) with center at (`cx`, `cy`), outer
     maxRings,
     crossThx,
     crossLen,
-    rot
+    rot)
 }
 ```
 
@@ -406,6 +406,6 @@ A **thermal primitive** adds a thermal with center at (`cx`, `cy`), outer diamet
 
 ```javascript
 {
-  type: 'thermal', exp, cx, cy, outerDia, innerDia, gap, rot
+  type: ('thermal', exp, cx, cy, outerDia, innerDia, gap, rot)
 }
 ```

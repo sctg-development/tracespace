@@ -1,31 +1,31 @@
 # tracespace cli
 
-[![latest][@tracespace/cli-latest-badge]][npm]
-[![next][@tracespace/cli-next-badge]][npm-next]
-[![david][@tracespace/cli-david-badge]][david]
+[![latest][@sctg/tracespace-cli-latest-badge]][npm]
+[![next][@sctg/tracespace-cli-next-badge]][npm-next]
+[![david][@sctg/tracespace-cli-david-badge]][david]
 
 > Render PCBs as SVGs from the comfort of your own terminal
 
-The tracespace CLI provides a wrapper for [gerber-to-svg][] and [pcb-stackup][] so you can generate beautiful, precise SVG renders of printed circuit boards quickly and easily.
+The tracespace CLI provides a wrapper for [@sctg/gerber-to-svg][] and [pcb-stackup][] so you can generate beautiful, precise SVG renders of printed circuit boards quickly and easily.
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[gerber-to-svg]: ../gerber-to-svg
+[@sctg/gerber-to-svg]: ../@sctg/gerber-to-svg
 [pcb-stackup]: ../pcb-stackup
 [tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/@tracespace/cli
-[npm-next]: https://www.npmjs.com/package/@tracespace/cli/v/next
+[npm]: https://www.npmjs.com/package/@sctg/tracespace-cli
+[npm-next]: https://www.npmjs.com/package/@sctg/tracespace-cli/v/next
 [david]: https://david-dm.org/tracespace/tracespace?path=packages/cli
-[@tracespace/cli-latest-badge]: https://flat.badgen.net/npm/v/@tracespace/cli
-[@tracespace/cli-next-badge]: https://flat.badgen.net/npm/v/@tracespace/cli/next
-[@tracespace/cli-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/cli
+[@sctg/tracespace-cli-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-cli
+[@sctg/tracespace-cli-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-cli/next
+[@sctg/tracespace-cli-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/cli
 
 ## install
 
 ```shell
-npm install -g @tracespace/cli
+npm install -g @sctg/tracespace-cli
 # or
-yarn global add @tracespace/cli
+yarn global add @sctg/tracespace-cli
 ```
 
 ## usage
@@ -37,7 +37,7 @@ tracespace [options] <files...>
 You can also use [`npx`][npx] to run without installing globally
 
 ```shell
-npx @tracespace/cli [options] <files...>
+npx @sctg/tracespace-cli [options] <files...>
 ```
 
 [npx]: https://github.com/zkat/npx
@@ -118,7 +118,7 @@ tracespace -B --force some-file.xyz
 
 - Type: `object`
 - Default: `{}`
-- Description: Options for all gerber files (passed to gerber-to-svg)
+- Description: Options for all gerber files (passed to @sctg/gerber-to-svg)
 
 ```shell
 # Set the color attribute of all Gerber SVGs
@@ -129,7 +129,7 @@ tracespace -B -g.attributes.color=blue
 
 - Type: `object`
 - Default: `{}`
-- Description: Options for all drill files (passed to gerber-to-svg)
+- Description: Options for all drill files (passed to @sctg/gerber-to-svg)
 
 ```shell
 # Set the color attribute of all drill SVGs

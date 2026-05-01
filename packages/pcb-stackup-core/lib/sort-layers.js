@@ -1,7 +1,7 @@
 // sort layers array into top and bottom
 'use strict'
 
-var wtg = require('whats-that-gerber')
+var wtg = require('@sctg/whats-that-gerber')
 
 module.exports = function sortLayers(layers) {
   return layers.filter(acceptLayer).reduce(assignLayer, {

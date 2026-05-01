@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const glob = require('glob')
+const {glob, globSync} = require('glob')
 const runParallel = require('run-parallel')
 const runWaterfall = require('run-waterfall')
 
@@ -22,10 +22,15 @@ module.exports = {
 function getBoards(done) {
   runWaterfall(
     [
-      next => glob(GLOB_BOARD_MANIFEST, next),
+      (next) =>
+        glob(GLOB_BOARD_MANIFEST)
+          .then((paths) => next(null, paths))
+          .catch(next),
       (manifestPaths, next) =>
         runParallel(
-          manifestPaths.map(manifest => next => readManifest(manifest, next)),
+          manifestPaths.map(
+            (manifest) => (next) => readManifest(manifest, next)
+          ),
           next
         ),
     ],
@@ -34,18 +39,21 @@ function getBoards(done) {
 }
 
 getBoards.sync = function getBoardsSync() {
-  const manifests = glob.sync(GLOB_BOARD_MANIFEST)
+  const manifests = globSync(GLOB_BOARD_MANIFEST)
 
-  return manifests.map(manifest => readManifest.sync(manifest))
+  return manifests.map((manifest) => readManifest.sync(manifest))
 }
 
 function getGerberSpecs(done) {
   runWaterfall(
     [
-      next => glob(GLOB_SPEC_GERBER, next),
+      (next) =>
+        glob(GLOB_SPEC_GERBER)
+          .then((paths) => next(null, paths))
+          .catch(next),
       (gerberPaths, next) =>
         runParallel(
-          gerberPaths.map(gerber => next => readFile(gerber, {}, next)),
+          gerberPaths.map((gerber) => (next) => readFile(gerber, {}, next)),
           next
         ),
       (gerberSpecs, next) => next(null, collectSpecs(gerberSpecs)),
@@ -54,9 +62,9 @@ function getGerberSpecs(done) {
   )
 }
 
-getGerberSpecs.sync = function() {
-  const paths = glob.sync(GLOB_SPEC_GERBER)
-  const specs = paths.map(filepath => readFile.sync(filepath, {}))
+getGerberSpecs.sync = function () {
+  const paths = globSync(GLOB_SPEC_GERBER)
+  const specs = paths.map((filepath) => readFile.sync(filepath, {}))
 
   return collectSpecs(specs)
 }
@@ -65,7 +73,7 @@ function readManifest(manifestPath, done) {
   const name = path.basename(path.dirname(manifestPath))
 
   runWaterfall(
-    [next => readFile(manifestPath, {name}, next), addLayersToManifest],
+    [(next) => readFile(manifestPath, {name}, next), addLayersToManifest],
     done
   )
 }
@@ -84,10 +92,11 @@ function getLayerFilepath(manifest, layer) {
 function addLayersToManifest(manifest, done) {
   runWaterfall(
     [
-      next =>
+      (next) =>
         runParallel(
-          manifest.layers.map(layer => next =>
-            readFile(getLayerFilepath(manifest, layer), layer, next)
+          manifest.layers.map(
+            (layer) => (next) =>
+              readFile(getLayerFilepath(manifest, layer), layer, next)
           ),
           next
         ),
@@ -98,7 +107,7 @@ function addLayersToManifest(manifest, done) {
 }
 
 addLayersToManifest.sync = function addLayersToManifestSync(manifest) {
-  const layers = manifest.layers.map(layer =>
+  const layers = manifest.layers.map((layer) =>
     readFile.sync(getLayerFilepath(manifest, layer), layer)
   )
 
@@ -108,7 +117,7 @@ addLayersToManifest.sync = function addLayersToManifestSync(manifest) {
 function readFile(filepath, props, done) {
   runWaterfall(
     [
-      next => fs.readFile(filepath, 'utf8', next),
+      (next) => fs.readFile(filepath, 'utf8', next),
       (source, next) => next(null, makeFileResult(filepath, props, source)),
     ],
     done
@@ -165,10 +174,10 @@ function collectSpecs(gerberSpecs) {
     {suites: [], suitesByName: {}}
   )
 
-  return suites.map(name => ({
+  return suites.map((name) => ({
     name,
     specs: suitesByName[name].specs.map(
-      specName => suitesByName[name].specsByName[specName]
+      (specName) => suitesByName[name].specsByName[specName]
     ),
   }))
 }

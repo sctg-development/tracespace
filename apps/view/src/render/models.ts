@@ -2,15 +2,18 @@ import commonPrefix from 'common-prefix'
 import randomColor from 'randomcolor'
 
 import vb from 'viewbox'
-import xid from '@tracespace/xml-id'
-import {Options as GerberToSvgOptions} from 'gerber-to-svg'
+import * as xidModule from '@sctg/tracespace-xml-id'
+import {Options as GerberToSvgOptions} from '@sctg/gerber-to-svg'
+import * as gerberToSvgFull from '@sctg/gerber-to-svg'
 
-// @ts-expect-error: cannot figure out how to type this without breaking the import
-import clone from 'gerber-to-svg/clone'
-// @ts-expect-error: cannot figure out how to type this without breaking the import
-import render from 'gerber-to-svg/render'
+// Extract functions from CommonJS modules
+const xid = (xidModule as any).default || xidModule
+const render =
+  (gerberToSvgFull as any).render || (gerberToSvgFull as any).default?.render
+const clone =
+  (gerberToSvgFull as any).clone || (gerberToSvgFull as any).default?.clone
 
-import {Stackup, InputLayer, Options as StackupOptions} from 'pcb-stackup'
+import {Stackup, InputLayer, Options as StackupOptions} from '@sctg/pcb-stackup'
 
 import {
   Optional,
@@ -39,7 +42,7 @@ const SCALE_MM_TO_IN = 1 / 25.4
 const SCALE_IN_TO_MM = 25.4
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const getPcbStackup = () => import('pcb-stackup').then(m => m.default)
+const getPcbStackup = () => import('@sctg/pcb-stackup').then((m) => m.default)
 
 export async function filesToStackups(
   files: Array<File>
@@ -56,7 +59,7 @@ export async function urlToStackups(
 export async function boardToStackups(
   board: Board
 ): Promise<[Stackup, Stackup]> {
-  const stackupLayers = Object.values(board.layers).map(ly => ({
+  const stackupLayers = Object.values(board.layers).map((ly) => ({
     filename: ly.filename,
     gerber: ly.source,
     side: ly.side,
@@ -64,12 +67,12 @@ export async function boardToStackups(
     options: layerToGerberToSvgOptions(ly, board),
   }))
 
-  return getPcbStackup().then(pcbStackup => {
+  return getPcbStackup().then((pcbStackup) => {
     const options = boardToPcbStackupOptions(board)
     const selfContainedStackup = pcbStackup(stackupLayers, options)
-    const sharedStackup = selfContainedStackup.then(stackup =>
+    const sharedStackup = selfContainedStackup.then((stackup) =>
       pcbStackup(
-        stackup.layers.map(ly => ({...ly, externalId: ly.options.id})),
+        stackup.layers.map((ly) => ({...ly, externalId: ly.options.id})),
         options
       )
     )
@@ -80,7 +83,7 @@ export async function boardToStackups(
 
 export async function stackupToZipBlob(stackup: Stackup): Promise<Blob> {
   const files = stackup.layers
-    .filter(layer => layer.converter.layer.length > 0)
+    .filter((layer) => layer.converter.layer.length > 0)
     .reduce(
       (result, layer) =>
         result.concat({
@@ -176,7 +179,7 @@ export function stackupToBoardRender(
     top: stackup.top.svg,
     bottom: stackup.bottom.svg,
     layers: stackupToLayerRenders(stackup, board),
-    sourceIds: board.layerIds.map(id => board.layers[id].sourceId),
+    sourceIds: board.layerIds.map((id) => board.layers[id].sourceId),
     sourceUrl: board.sourceUrl || null,
   }
 }
@@ -188,11 +191,11 @@ async function fileStreamsToStackups(
   const layers = fileStreams.map(fileStreamToInputLayer)
   const options = {id, attributes: {class: 'w-100 h-100'}}
 
-  return getPcbStackup().then(pcbStackup => {
+  return getPcbStackup().then((pcbStackup) => {
     const selfContainedStackup = pcbStackup(layers, options)
-    const sharedStackup = selfContainedStackup.then(stackup =>
+    const sharedStackup = selfContainedStackup.then((stackup) =>
       pcbStackup(
-        stackup.layers.map(ly => ({...ly, externalId: ly.options.id})),
+        stackup.layers.map((ly) => ({...ly, externalId: ly.options.id})),
         options
       )
     )
@@ -201,18 +204,26 @@ async function fileStreamsToStackups(
   })
 }
 
-function fileStreamToInputLayer(gerber: FileStream): InputLayerFromFile {
+function fileStreamToInputLayer(fileStream: FileStream): InputLayerFromFile {
   const id = xid.random(RANDOM_ID_LENGTH)
 
-  return {gerber, filename: gerber.name, options: {id}}
+  // Create an object that is a Buffer but also has FileStream properties
+  // This allows both pcb-stackup (expects Buffer) and stackupToBoard (expects FileStream properties) to work
+  const gerber = Object.assign(fileStream.contents, {
+    name: fileStream.name,
+    digest: fileStream.digest,
+    contents: fileStream.contents,
+  }) as any
+
+  return {gerber, filename: fileStream.name, options: {id}}
 }
 
 function stackupToBoardName(stackup: Stackup): string {
   const boardName =
     commonPrefix(
       stackup.layers
-        .filter(ly => ly.converter.layer.length > 0)
-        .map(ly => baseName(ly.filename || '', true))
+        .filter((ly) => ly.converter.layer.length > 0)
+        .map((ly) => baseName(ly.filename || '', true))
     ) || DEFAULT_BOARD_NAME
 
   // strip trailing dot if present

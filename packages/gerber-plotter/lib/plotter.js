@@ -12,7 +12,7 @@ var boundingBox = require('./_box')
 
 var MAX_GAP = 0.00011
 
-var isFormatKey = function(key) {
+var isFormatKey = function (key) {
   return (
     key === 'units' ||
     key === 'backupUnits' ||
@@ -21,7 +21,7 @@ var isFormatKey = function(key) {
   )
 }
 
-var Plotter = function(
+var Plotter = function (
   units,
   backupUnits,
   nota,
@@ -76,7 +76,7 @@ var Plotter = function(
 
 inherits(Plotter, Transform)
 
-Plotter.prototype._finishPath = function(doNotOptimize) {
+Plotter.prototype._finishPath = function (doNotOptimize) {
   var path = this._path.traverse()
   this._path = new PathGraph(
     !doNotOptimize && this._optimizePaths,
@@ -95,11 +95,11 @@ Plotter.prototype._finishPath = function(doNotOptimize) {
   }
 }
 
-Plotter.prototype._warn = function(message) {
+Plotter.prototype._warn = function (message) {
   this.emit('warning', warning(message, this._line))
 }
 
-Plotter.prototype._checkFormat = function() {
+Plotter.prototype._checkFormat = function () {
   if (!this.format.units) {
     this.format.units = this.format.backupUnits
     this._warn('units not set; using backup units: ' + this.format.units)
@@ -111,7 +111,7 @@ Plotter.prototype._checkFormat = function() {
   }
 }
 
-Plotter.prototype._updateBox = function(box) {
+Plotter.prototype._updateBox = function (box) {
   var stepRepLen = this._stepRep.length
   if (!stepRepLen) {
     this._box = boundingBox.add(this._box, box)
@@ -121,7 +121,7 @@ Plotter.prototype._updateBox = function(box) {
   }
 }
 
-Plotter.prototype._transform = function(chunk, encoding, done) {
+Plotter.prototype._transform = function (chunk, encoding, done) {
   var type = chunk.type
   this._line = chunk.line
 
@@ -141,7 +141,7 @@ Plotter.prototype._transform = function(chunk, encoding, done) {
     if (this.nota === 'I') {
       var _this = this
 
-      coord = Object.keys(coord).reduce(function(result, key) {
+      coord = Object.keys(coord).reduce(function (result, key) {
         var value = coord[key]
 
         if (key === 'x') {
@@ -290,7 +290,7 @@ Plotter.prototype._transform = function(chunk, encoding, done) {
   return done()
 }
 
-Plotter.prototype._flush = function(done) {
+Plotter.prototype._flush = function (done) {
   this._finishPath()
 
   this.push({type: 'size', box: this._box, units: this.format.units})

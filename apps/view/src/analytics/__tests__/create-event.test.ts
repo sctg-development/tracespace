@@ -13,7 +13,7 @@ type Spec = {
 
 const MockFile = (name: string, type: string = ''): File => {
   const file = {name, type, size: 0, lastModified: 0, slice: () => file}
-  return (file as unknown) as File
+  return file as unknown as File
 }
 
 describe('create analytics event', () => {
@@ -78,7 +78,7 @@ describe('create analytics event', () => {
     },
   ]
 
-  SPECS.forEach(spec =>
+  SPECS.forEach((spec) =>
     it(spec.name, () => {
       const nextState = spec.nextState || INITIAL_STATE
       const prevState = spec.prevState || INITIAL_STATE

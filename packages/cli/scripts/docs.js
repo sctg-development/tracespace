@@ -12,9 +12,9 @@ const writeFile = promisify(fs.writeFile)
 
 const argv = process.argv.slice(2)
 
-const startMatch = sec => `<!-- insert:${argv[1]}:${sec} -->`
-const endMatch = sec => `<!-- endinsert:${argv[1]}:${sec} -->`
-const matcher = sec =>
+const startMatch = (sec) => `<!-- insert:${argv[1]}:${sec} -->`
+const endMatch = (sec) => `<!-- endinsert:${argv[1]}:${sec} -->`
+const matcher = (sec) =>
   new RegExp(`(${startMatch(sec)}\n)[\\s\\S]*(\n${endMatch(sec)})`, 'm')
 
 assert(argv[0], `expected first argument to be the path to a markdown file`)
@@ -30,7 +30,7 @@ readFile(doc, 'utf8')
       console.log(`Wrote ${doc}`)
       process.exit(0)
     },
-    error => {
+    (error) => {
       console.error(error)
       process.exit(1)
     }
@@ -49,7 +49,7 @@ function writeDocs(contents) {
 
 function generateOptions() {
   return Object.keys(options)
-    .map(long => {
+    .map((long) => {
       const {
         describe,
         type,

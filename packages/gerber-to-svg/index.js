@@ -1,16 +1,16 @@
 // gerber to svg transform stream
 'use strict'
 
-var xid = require('@tracespace/xml-id')
-var gerberParser = require('gerber-parser')
-var gerberPlotter = require('gerber-plotter')
+var xid = require('@sctg/tracespace-xml-id')
+var gerberParser = require('@sctg/gerber-parser')
+var gerberPlotter = require('@sctg/gerber-plotter')
 var xmlElementString = require('xml-element-string')
 
 var PlotterToSvg = require('./lib/plotter-to-svg')
 var render = require('./render')
 var clone = require('./clone')
 
-var parseOptions = function(options) {
+var parseOptions = function (options) {
   if (typeof options === 'string') {
     options = {id: options}
   } else if (!options) {
@@ -76,7 +76,7 @@ module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
   })
 
   // expose the filetype property of the parser for convenience
-  parser.once('end', function() {
+  parser.once('end', function () {
     converter.filetype = parser.format.filetype
   })
 
@@ -97,7 +97,7 @@ module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
   if (callbackMode) {
     var result = ''
 
-    var finishConversion = function() {
+    var finishConversion = function () {
       return done(null, result)
     }
 
@@ -112,7 +112,7 @@ module.exports = function gerberConverterFactory(gerber, inputOpts, done) {
 
     converter.once('end', finishConversion)
 
-    converter.once('error', function(error) {
+    converter.once('error', function (error) {
       converter.removeListener('end', finishConversion)
 
       return done(error)

@@ -3,6 +3,8 @@
 
 var colorString = require('color-string')
 
+colorString = colorString.default || colorString
+
 var LAYER_IDS = ['fr4', 'cu', 'cf', 'sm', 'ss', 'sp', 'out']
 
 var DEFAULTS = {
@@ -18,7 +20,7 @@ var DEFAULTS = {
 function getColor(overrides) {
   overrides = overrides || {}
 
-  return LAYER_IDS.reduce(function(color, id) {
+  return LAYER_IDS.reduce(function (color, id) {
     color[id] = overrides[id] || DEFAULTS[id]
     return color
   }, {})
@@ -26,7 +28,7 @@ function getColor(overrides) {
 
 function getStyleElement(element, prefix, side, color) {
   return element('style', {}, [
-    LAYER_IDS.map(function(id) {
+    LAYER_IDS.map(function (id) {
       var selector = '.' + prefix + id
       var style = colorToCssString(color[id])
       return selector + ' {' + style + '}'
@@ -44,13 +46,15 @@ function colorToCssString(color) {
   var alpha = parsedColor.value[3] != null ? parsedColor.value[3] : 1
 
   if (parsedColor.model === 'rgb') {
-    css += colorString.to.hex(components).toLowerCase()
+    css += colorString.to.hex.apply(colorString.to, components).toLowerCase()
   } else {
-    css += colorString.to[parsedColor.model](components).toLowerCase()
+    css += colorString.to[parsedColor.model]
+      .apply(colorString.to, components)
+      .toLowerCase()
   }
 
   if (alpha !== 1) {
-    css += '; opacity: ' + alpha
+    css += '; opacity: ' + Math.round(alpha * 100) / 100
   }
 
   return css + ';'

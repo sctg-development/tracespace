@@ -2,7 +2,7 @@
 
 var assert = require('assert')
 
-var cadFilenames = require('@tracespace/fixtures/gerber-filenames.json')
+var cadFilenames = require('@sctg/tracespace-fixtures/gerber-filenames.json')
 var wtg = require('.')
 
 var EXPECTED_LAYERS = [
@@ -20,21 +20,21 @@ var EXPECTED_LAYERS = [
   {type: 'drawing', side: null},
 ]
 
-describe('whats-that-gerber', function() {
-  it('should default to null', function() {
+describe('whats-that-gerber', function () {
+  it('should default to null', function () {
     var result = wtg('foobar')
 
     assert.deepStrictEqual(result, {foobar: {side: null, type: null}})
   })
 
-  it('should have a list of all layer types', function() {
+  it('should have a list of all layer types', function () {
     assert.deepStrictEqual(wtg.getAllLayers(), EXPECTED_LAYERS)
   })
 
-  it('should know which types are valid', function() {
+  it('should know which types are valid', function () {
     var allLayers = wtg.getAllLayers()
 
-    allLayers.forEach(function(layer) {
+    allLayers.forEach(function (layer) {
       var result = wtg.validate(layer)
       assert.deepStrictEqual(result, {
         valid: true,
@@ -44,7 +44,7 @@ describe('whats-that-gerber', function() {
     })
   })
 
-  it('should know which types are invalid', function() {
+  it('should know which types are invalid', function () {
     var invalidSide = wtg.validate({side: 'bop', type: 'copper'})
     var invalidType = wtg.validate({side: 'top', type: 'topper'})
     var invalidAll = wtg.validate({side: 'fizz', type: 'buzz'})
@@ -58,18 +58,18 @@ describe('whats-that-gerber', function() {
     assert.deepStrictEqual(invalidAll, {valid: false, side: null, type: null})
   })
 
-  cadFilenames.forEach(function(cadSet) {
+  cadFilenames.forEach(function (cadSet) {
     var cad = cadSet.cad
     var files = cadSet.files
 
-    it('should identify ' + cad + ' files', function() {
+    it('should identify ' + cad + ' files', function () {
       var result = wtg(
-        files.map(function(file) {
+        files.map(function (file) {
           return file.name
         })
       )
 
-      files.forEach(function(file) {
+      files.forEach(function (file) {
         var name = file.name
         var fileResult = result[name]
         var sideResult = fileResult.side

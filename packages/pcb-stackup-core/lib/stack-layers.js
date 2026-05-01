@@ -2,11 +2,11 @@
 'use strict'
 
 var viewbox = require('viewbox')
-var wtg = require('whats-that-gerber')
+var wtg = require('@sctg/whats-that-gerber')
 
 var gatherLayers = require('./_gather-layers')
 
-module.exports = function(
+module.exports = function (
   element,
   id,
   side,
@@ -148,7 +148,7 @@ function createRect(element, box, fill, className) {
 }
 
 function mechMask(element, id, box, drills) {
-  var children = drills.map(function(layer) {
+  var children = drills.map(function (layer) {
     return useLayer(element, layer.id)
   })
 

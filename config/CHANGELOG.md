@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/config
+**Note:** Version bump only for package @sctg/tracespace-config
 
 
 
@@ -13,7 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.1](https://github.com/tracespace/tracespace/compare/v4.2.0...v4.2.1) (2020-04-30)
 
-**Note:** Version bump only for package @tracespace/config
+**Note:** Version bump only for package @sctg/tracespace-config
 
 
 
@@ -43,4 +43,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.0.2](https://github.com/tracespace/tracespace/compare/v4.0.1...v4.0.2) (2019-03-24)
 
-**Note:** Version bump only for package @tracespace/config
+**Note:** Version bump only for package @sctg/tracespace-config

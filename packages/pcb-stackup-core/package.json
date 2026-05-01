@@ -1,18 +1,18 @@
 {
-  "name": "pcb-stackup-core",
-  "version": "4.2.8",
+  "name": "@sctg/pcb-stackup-core",
+  "version": "5.0.0",
   "description": "Layer stacking core logic for pcb-stackup",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "example": "node example",
     "start": "node integration/server",
-    "build": "cross-env NODE_ENV=production webpack",
-    "serve": "node ../../scripts/serve"
+    "build": "vite build",
+    "serve": "vite preview --host 0.0.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tracespace/tracespace.git",
+    "url": "git://github.com/sctg-development/tracespace.git",
     "directory": "packages/pcb-stackup-core"
   },
   "keywords": [
@@ -26,21 +26,25 @@
   ],
   "contributors": [
     "Mike Cousins <mike@cousins.io> (https://mike.cousins.io/)",
-    "Kaspar Emanuel <kaspar@monostable.co.uk> (http://monostable.co.uk)"
+    "Kaspar Emanuel <kaspar@monostable.co.uk> (http://monostable.co.uk)",
+    "Ronan Le Meillat"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tracespace/tracespace/issues"
+    "url": "https://github.com/sctg-development/tracespace/issues"
   },
-  "homepage": "https://github.com/tracespace/tracespace",
+  "homepage": "https://github.com/sctg-development/tracespace",
   "dependencies": {
-    "@tracespace/xml-id": "^4.2.7",
-    "@types/node": "^13.1.6",
-    "color-string": "^1.5.3",
-    "gerber-to-svg": "^4.2.8",
+    "@sctg/gerber-to-svg": "^5.0.0",
+    "@sctg/tracespace-xml-id": "^5.0.0",
+    "@sctg/whats-that-gerber": "^5.0.0",
+    "@types/node": "^25.6.0",
+    "color-string": "^2.1.4",
     "viewbox": "^1.0.0",
-    "whats-that-gerber": "^4.2.7",
     "xml-element-string": "^1.0.0",
     "xtend": "^4.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

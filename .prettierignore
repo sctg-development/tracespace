@@ -1,0 +1,13 @@
+node_modules
+__snapshots__
+coverage
+.nyc_output
+
+# compiled files
+dist
+**/lib/**/*.d.ts
+
+# generated and local editor state
+CHANGELOG.md
+package.json
+.vscode

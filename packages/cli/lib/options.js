@@ -8,7 +8,7 @@ module.exports = {
   out: {
     STDOUT,
     alias: 'o',
-    coerce: path => (path === STDOUT ? path : normalize(path)),
+    coerce: (path) => (path === STDOUT ? path : normalize(path)),
     default: '.',
     describe: `Output directory (or \`${STDOUT}\` for stdout)`,
     type: 'string',
@@ -46,7 +46,7 @@ module.exports = {
   },
   gerber: {
     alias: 'g',
-    describe: 'Options for all gerber files (passed to gerber-to-svg)',
+    describe: 'Options for all gerber files (passed to @sctg/gerber-to-svg)',
     type: 'object',
     example: {
       cmd: '$0 -B -g.attributes.color=blue',
@@ -55,7 +55,7 @@ module.exports = {
   },
   drill: {
     alias: 'd',
-    describe: 'Options for all drill files (passed to gerber-to-svg)',
+    describe: 'Options for all drill files (passed to @sctg/gerber-to-svg)',
     type: 'object',
     example: {
       cmd: '$0 -B -d.attributes.color=red',
@@ -76,10 +76,8 @@ module.exports = {
     describe: 'Override the layers options of a given file',
     type: 'object',
     example: {
-      cmd:
-        '$0 -l.arduino-uno.drd.type=drill -l.arduino-uno.drd.options.filetype=drill',
-      desc:
-        'Set layer type of `arduino-uno.drd` to `drill` and parse as a drill file',
+      cmd: '$0 -l.arduino-uno.drd.type=drill -l.arduino-uno.drd.options.filetype=drill',
+      desc: 'Set layer type of `arduino-uno.drd` to `drill` and parse as a drill file',
       aside:
         "If you're using this option a lot, you may want to consider using a config file",
     },

@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package gerber-parser
+**Note:** Version bump only for package @sctg/gerber-parser
 
 
 
@@ -16,7 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **gerber-parser:** ignore object attribute %TO blocks ([#376](https://github.com/tracespace/tracespace/issues/376)) ([844d44b](https://github.com/tracespace/tracespace/commit/844d44b)), closes [#375](https://github.com/tracespace/tracespace/issues/375)
+* **@sctg/gerber-parser:** ignore object attribute %TO blocks ([#376](https://github.com/tracespace/tracespace/issues/376)) ([844d44b](https://github.com/tracespace/tracespace/commit/844d44b)), closes [#375](https://github.com/tracespace/tracespace/issues/375)
 
 
 
@@ -66,7 +66,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **gerber-parser:** Identify hole-plating in drill files ([#285](https://github.com/tracespace/tracespace/issues/285)) ([497f506](https://github.com/tracespace/tracespace/commit/497f506))
+* **@sctg/gerber-parser:** Identify hole-plating in drill files ([#285](https://github.com/tracespace/tracespace/issues/285)) ([497f506](https://github.com/tracespace/tracespace/commit/497f506))
 
 
 
@@ -124,7 +124,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **gerber-parser:** Parse DipTrace drill coordinate format command ([#168](https://github.com/tracespace/tracespace/issues/168)) ([b0de854](https://github.com/tracespace/tracespace/commit/b0de854)), closes [#137](https://github.com/tracespace/tracespace/issues/137)
+* **@sctg/gerber-parser:** Parse DipTrace drill coordinate format command ([#168](https://github.com/tracespace/tracespace/issues/168)) ([b0de854](https://github.com/tracespace/tracespace/commit/b0de854)), closes [#137](https://github.com/tracespace/tracespace/issues/137)
 
 
 
@@ -132,7 +132,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0](https://github.com/tracespace/tracespace/compare/v4.0.0-next.19...v4.0.0) (2019-03-09)
 
-**Note:** Version bump only for package gerber-parser
+**Note:** Version bump only for package @sctg/gerber-parser
 
 
 
@@ -155,7 +155,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### BREAKING CHANGES
 
 * Parameters, defaults, and return types have changed in pcb-stackup,
-pcb-stackup-core, and gerber-to-svg
+pcb-stackup-core, and @sctg/gerber-to-svg
 
 
 
@@ -192,7 +192,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.9"></a>
 # [4.0.0-next.9](https://github.com/tracespace/tracespace/compare/v4.0.0-next.8...v4.0.0-next.9) (2018-06-19)
 
-**Note:** Version bump only for package gerber-parser
+**Note:** Version bump only for package @sctg/gerber-parser
 
 
 
@@ -201,4 +201,4 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.8"></a>
 # [4.0.0-next.8](https://github.com/tracespace/tracespace/compare/v4.0.0-next.7...v4.0.0-next.8) (2018-06-16)
 
-**Note:** Version bump only for package gerber-parser
+**Note:** Version bump only for package @sctg/gerber-parser

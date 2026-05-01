@@ -6,7 +6,7 @@ var parseMacroExpr = require('./_parse-macro-expression')
 var RE_NUM = /^-?[\d.]+$/
 var RE_VAR_DEF = /^(\$[\d+])=(.+)/
 
-var parseMacroBlock = function(parser, block) {
+var parseMacroBlock = function (parser, block) {
   // check first for a comment
   if (block[0] === '0') {
     return {type: 'comment'}
@@ -19,7 +19,7 @@ var parseMacroBlock = function(parser, block) {
     var varExpr = varDefMatch[2]
     var evaluate = parseMacroExpr(parser, varExpr)
 
-    var setMods = function(mods) {
+    var setMods = function (mods) {
       mods[varName] = evaluate(mods)
 
       return mods
@@ -28,7 +28,7 @@ var parseMacroBlock = function(parser, block) {
   }
 
   // map a primitive param to a number or, if an expression, a function
-  var modVal = function(m) {
+  var modVal = function (m) {
     if (RE_NUM.test(m)) {
       return Number(m)
     }

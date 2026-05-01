@@ -47,12 +47,12 @@ var RE_MACRO = /^%AM([A-Za-z_$][\w\-.]*)\*?(.*)/
 //
 var RE_CADENCE_ALLEGRO_UNITS_IN_FORMAT = /\*MO(IN|MM)$/
 
-var parseUnits = function(parser, unitsMatch) {
+var parseUnits = function (parser, unitsMatch) {
   var units = unitsMatch === 'IN' ? 'in' : 'mm'
   return parser._push(commands.set('units', units))
 }
 
-var parseToolDef = function(parser, block) {
+var parseToolDef = function (parser, block) {
   var format = {places: parser.format.places}
   var toolMatch = block.match(RE_TOOL_DEF)
   var tool = toolMatch[1]
@@ -106,21 +106,21 @@ var parseToolDef = function(parser, block) {
   return parser._push(commands.tool(tool, toolDef))
 }
 
-var parseMacroDef = function(parser, block) {
+var parseMacroDef = function (parser, block) {
   var macroMatch = block.match(RE_MACRO)
   var name = macroMatch[1]
   if (name.match(/-/)) {
     parser._warn('hyphens in macro name are illegal: ' + name)
   }
   var blockMatch = macroMatch[2].length ? macroMatch[2].split('*') : []
-  var blocks = blockMatch.filter(Boolean).map(function(block) {
+  var blocks = blockMatch.filter(Boolean).map(function (block) {
     return parseMacroBlock(parser, block)
   })
 
   return parser._push(commands.macro(name, blocks))
 }
 
-var parse = function(parser, block) {
+var parse = function (parser, block) {
   // if comment or object attribute return
   if (RE_COMMENT.test(block) || RE_TO.test(block)) {
     return

@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.8](https://github.com/tracespace/tracespace/compare/v4.2.7...v4.2.8) (2022-03-28)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -13,7 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.7](https://github.com/tracespace/tracespace/compare/v4.2.6...v4.2.7) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -21,7 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.6](https://github.com/tracespace/tracespace/compare/v4.2.5...v4.2.6) (2022-03-12)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -29,7 +29,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.5](https://github.com/tracespace/tracespace/compare/v4.2.4...v4.2.5) (2020-12-18)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -37,7 +37,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.4](https://github.com/tracespace/tracespace/compare/v4.2.3...v4.2.4) (2020-12-15)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -45,7 +45,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.2.2](https://github.com/tracespace/tracespace/compare/v4.2.1...v4.2.2) (2020-10-13)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -115,7 +115,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [4.0.2](https://github.com/tracespace/tracespace/compare/v4.0.1...v4.0.2) (2019-03-24)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -135,7 +135,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0](https://github.com/tracespace/tracespace/compare/v4.0.0-next.19...v4.0.0) (2019-03-09)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -155,7 +155,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0-next.18](https://github.com/tracespace/tracespace/compare/v4.0.0-next.17...v4.0.0-next.18) (2019-01-26)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -163,7 +163,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [4.0.0-next.17](https://github.com/tracespace/tracespace/compare/v4.0.0-next.16...v4.0.0-next.17) (2018-12-20)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -200,7 +200,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.14"></a>
 # [4.0.0-next.14](https://github.com/tracespace/tracespace/compare/v4.0.0-next.13...v4.0.0-next.14) (2018-10-13)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -209,7 +209,7 @@ object keyed by the filenames passed in as an array
 <a name="4.0.0-next.13"></a>
 # [4.0.0-next.13](https://github.com/tracespace/tracespace/compare/v4.0.0-next.12...v4.0.0-next.13) (2018-09-12)
 
-**Note:** Version bump only for package @tracespace/cli
+**Note:** Version bump only for package @sctg/tracespace-cli
 
 
 
@@ -221,4 +221,4 @@ object keyed by the filenames passed in as an array
 
 ### Features
 
-* **cli:** Add [@tracespace](https://github.com/tracespace)/cli package ([486d6fc](https://github.com/tracespace/tracespace/commit/486d6fc)), closes [#13](https://github.com/tracespace/tracespace/issues/13)
+* **cli:** Add [@sctg/tracespace-](https://github.com/tracespace)/cli package ([486d6fc](https://github.com/tracespace/tracespace/commit/486d6fc)), closes [#13](https://github.com/tracespace/tracespace/issues/13)

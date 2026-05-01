@@ -9,8 +9,8 @@ export function promiseFlatMap<In, Out>(
 ): PromiseArray<Out> {
   return collection.reduce(
     (result: PromiseArray<Out>, element: In): PromiseArray<Out> =>
-      result.then(resolvedResult =>
-        Promise.resolve(iterator(element)).then(newItems =>
+      result.then((resolvedResult) =>
+        Promise.resolve(iterator(element)).then((newItems) =>
           resolvedResult.concat(newItems)
         )
       ),

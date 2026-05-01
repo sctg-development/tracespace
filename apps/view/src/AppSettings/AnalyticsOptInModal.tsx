@@ -40,7 +40,9 @@ export default function AnalyticsOptInToast(): JSX.Element {
     <Fade in={show && appPreferences.analyticsOptIn == null}>
       <Formik
         initialValues={{analyticsOptIn: true}}
-        onSubmit={values => dispatch(updateAppPreferences(values))}
+        onSubmit={(values) => {
+          dispatch(updateAppPreferences(values))
+        }}
       >
         {() => (
           <Form className={TOAST_STYLE}>
@@ -48,11 +50,19 @@ export default function AnalyticsOptInToast(): JSX.Element {
               <h3 className={TITLE_STYLE}>{TITLE_COPY}</h3>
               <p className={COPY_STYLE}>{USAGE_TRACKING_COPY_1}</p>
               <Field name="analyticsOptIn">
-                {(fieldProps: FieldProps<AppPreferences>) => (
-                  <Checkbox className={OPT_IN_STYLE} {...fieldProps.field}>
-                    {USAGE_TRACKING_LABEL_COPY}
-                  </Checkbox>
-                )}
+                {(fieldProps: FieldProps<boolean, AppPreferences>) => {
+                  const {value: checked, ...field} = fieldProps.field
+
+                  return (
+                    <Checkbox
+                      className={OPT_IN_STYLE}
+                      checked={checked}
+                      {...field}
+                    >
+                      {USAGE_TRACKING_LABEL_COPY}
+                    </Checkbox>
+                  )
+                }}
               </Field>
               <p className={COPY_STYLE}>{USAGE_TRACKING_COPY_2}</p>
               <p className={COPY_STYLE}>

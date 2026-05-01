@@ -4,7 +4,7 @@ import {Omit} from '../types'
 
 import {
   FontAwesomeIcon as FaIcon,
-  Props as FaIconProps,
+  FontAwesomeIconProps as FaIconProps,
 } from '@fortawesome/react-fontawesome'
 
 import {

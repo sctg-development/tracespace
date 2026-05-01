@@ -1,7 +1,7 @@
-// simple visual test server for gerber-to-svg
+// simple visual test server for @sctg/gerber-to-svg
 'use strict'
 
-const {getGerberSpecs, server} = require('@tracespace/fixtures')
+const {getGerberSpecs, server} = require('@sctg/tracespace-fixtures')
 const {name} = require('../package.json')
 const getSuiteResults = require('./get-results')
 

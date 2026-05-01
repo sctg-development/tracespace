@@ -7,8 +7,8 @@ var xmlElementString = require('xml-element-string')
 
 var wrapLayer = require('../lib/wrap-layer')
 
-describe('wrap layer function', function() {
-  it('should return the layer value wrapped in a group with an id', function() {
+describe('wrap layer function', function () {
+  it('should return the layer value wrapped in a group with an id', function () {
     var layer = {layer: ['SOME_STUFF']}
     var element = sinon.spy(xmlElementString)
     var result = wrapLayer(element, 'id', layer)
@@ -18,7 +18,7 @@ describe('wrap layer function', function() {
     expect(result).to.equal(element.returnValues[0])
   })
 
-  it('should be able to scale the layer', function() {
+  it('should be able to scale the layer', function () {
     var layer = {layer: ['SOME_STUFF']}
     var element = sinon.spy(xmlElementString)
     var result = wrapLayer(element, 'foobar', layer, 25.4)
@@ -28,7 +28,7 @@ describe('wrap layer function', function() {
     expect(result).to.equal(element.returnValues[0])
   })
 
-  it('should not add a transformation if the scale is 1', function() {
+  it('should not add a transformation if the scale is 1', function () {
     var layer = {layer: ['SOME_STUFF']}
     var element = sinon.spy(xmlElementString)
     var result = wrapLayer(element, 'id', layer, 1)
@@ -38,7 +38,7 @@ describe('wrap layer function', function() {
     expect(result).to.equal(element.returnValues[0])
   })
 
-  it('should be able to use a tag other than <g>', function() {
+  it('should be able to use a tag other than <g>', function () {
     var layer = {layer: ['SOME_STUFF']}
     var element = sinon.spy(xmlElementString)
     var result = wrapLayer(element, 'id', layer, 1, 'clipPath')

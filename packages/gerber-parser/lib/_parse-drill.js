@@ -11,7 +11,8 @@ var parseCoord = require('./parse-coord')
 
 var RE_ALTIUM_HINT = /;FILE_FORMAT=(\d):(\d)/
 var RE_ALTIUM_PLATING_HINT = /;TYPE=(PLATED|NON_PLATED)/
-var RE_KI_HINT = /;FORMAT={(.):(.)\/ (absolute|.+)? \/ (metric|inch) \/.+(trailing|leading|decimal|keep)/
+var RE_KI_HINT =
+  /;FORMAT={(.):(.)\/ (absolute|.+)? \/ (metric|inch) \/.+(trailing|leading|decimal|keep)/
 
 var RE_UNITS = /^(INCH|METRIC|M71|M72)/
 var RE_ZERO = /,([TL])Z/
@@ -21,7 +22,7 @@ var RE_TOOL_SET = /T0*(\d+)(?![\S]*C)/
 var RE_COORD = /((?:[XYIJA][+-]?[\d.]+){1,4})(?:G85((?:[XY][+-]?[\d.]+){1,2}))?/
 var RE_ROUTE = /^G0([01235])/
 
-var parseCommentForFormatHints = function(parser, block, line) {
+var parseCommentForFormatHints = function (parser, block, line) {
   var result = {}
 
   if (RE_KI_HINT.test(block)) {
@@ -73,7 +74,7 @@ var parseCommentForFormatHints = function(parser, block, line) {
   return result
 }
 
-var parseUnits = function(parser, block, line) {
+var parseUnits = function (parser, block, line) {
   var unitsMatch = block.match(RE_UNITS)
   var zeroMatch = block.match(RE_ZERO)
   var formatMatch = block.match(RE_FORMAT)
@@ -99,7 +100,7 @@ var parseUnits = function(parser, block, line) {
   parser._push(commands.set('units', units, line))
 }
 
-var coordToCommand = function(parser, block, line) {
+var coordToCommand = function (parser, block, line) {
   var coordMatch = block.match(RE_COORD)
   var coord = parseCoord.parse(coordMatch[1], parser.format)
 
@@ -138,7 +139,7 @@ var coordToCommand = function(parser, block, line) {
   }
 }
 
-var parseBlock = function(parser, block, line) {
+var parseBlock = function (parser, block, line) {
   if (RE_TOOL_DEF.test(block)) {
     var toolMatch = block.match(RE_TOOL_DEF)
     var toolCode = toolMatch[1]
@@ -188,19 +189,19 @@ var parseBlock = function(parser, block, line) {
   }
 }
 
-var flush = function(parser) {
-  parser._drillStash.forEach(function(data) {
+var flush = function (parser) {
+  parser._drillStash.forEach(function (data) {
     parseBlock(parser, data.block, data.line)
   })
   parser._drillStash = []
 }
 
-var parse = function(parser, block) {
+var parse = function (parser, block) {
   if (block[0] === ';') {
     // if comment, parse it for formatting hints
     var formatHints = parseCommentForFormatHints(parser, block, parser.line)
 
-    Object.keys(formatHints).forEach(function(key) {
+    Object.keys(formatHints).forEach(function (key) {
       if (!parser.format[key]) {
         parser.format[key] = formatHints[key]
       }

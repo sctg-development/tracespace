@@ -39,7 +39,7 @@ export function LayerTypeSelect(props: LayerFieldProps): JSX.Element {
     <select
       {...field}
       className="dib flex-none f5 w4 mr2"
-      onChange={event => {
+      onChange={(event) => {
         const type = (event.target.value as GerberType) || ''
         const layer = form.values.layers[layerId]
         const validSides = typeToValidSides(type)
@@ -53,7 +53,7 @@ export function LayerTypeSelect(props: LayerFieldProps): JSX.Element {
         })
       }}
     >
-      {ALL_TYPES.map(t => (
+      {ALL_TYPES.map((t) => (
         <option key={t} value={t}>
           {t}
         </option>
@@ -73,7 +73,7 @@ export function LayerSideSelect(props: LayerFieldProps): JSX.Element {
 
   return (
     <select className="dib flex-none f5 w4 mr2" disabled={disabled} {...field}>
-      {options.map(opt => (
+      {options.map((opt) => (
         <option key={opt} value={opt}>
           {opt === SIDE_ALL || opt === '' ? 'n/a' : opt}
         </option>

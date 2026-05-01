@@ -14,7 +14,7 @@ const BUTTON_STYLE = 'flex-none nr4 brand'
 const INPUT_ID = 'load-files_url-input'
 
 const defaultUrl = (loc: Location | null): string =>
-  loc ? `${loc.origin}${loc.pathname}arduino-uno.zip` : ''
+  loc ? `${loc.origin}/arduino-uno.zip` : ''
 
 export type UrlInputProps = {
   children?: React.ReactNode
@@ -28,10 +28,13 @@ export default function UrlInput(props: UrlInputProps): JSX.Element {
   return (
     <Formik
       initialValues={{url: defaultUrl(location)}}
-      onSubmit={values => handleUrl(values.url)}
+      onSubmit={(values) => {
+        console.log('[UrlInput] Form submitted with URL:', values.url)
+        handleUrl(values.url)
+      }}
       enableReinitialize
     >
-      {formProps => (
+      {(formProps) => (
         <Form>
           <label htmlFor={INPUT_ID} className={LABEL_STYLE}>
             {children}

@@ -8,7 +8,7 @@ var proxyquire = require('proxyquire')
 var sinon = require('sinon')
 var xmlElementString = require('xml-element-string')
 
-var wtg = require('whats-that-gerber')
+var wtg = require('@sctg/whats-that-gerber')
 var expectXmlNodes = require('./expect-xml-nodes')
 var sortLayersSpy = sinon.spy(require('../lib/sort-layers'))
 var stackLayersStub = sinon.stub()
@@ -20,7 +20,7 @@ var pcbStackupCore = proxyquire('..', {
   './lib/stack-layers': stackLayersStub,
 })
 
-var converter = function() {
+var converter = function () {
   return {
     defs: '',
     layer: '',
@@ -52,8 +52,8 @@ var EXPECTED_BASE_ATTRIBUTES = {
   'clip-rule': 'evenodd',
 }
 
-describe('pcb stackup function', function() {
-  beforeEach(function() {
+describe('pcb stackup function', function () {
+  beforeEach(function () {
     element.resetHistory()
     sortLayersSpy.resetHistory()
     stackLayersStub.reset()
@@ -66,12 +66,12 @@ describe('pcb stackup function', function() {
     })
   })
 
-  afterEach(function() {
+  afterEach(function () {
     sinon.restore()
   })
 
-  it('should have a createElement option that defaults to xml-element-string', function() {
-    var customElement = function() {
+  it('should have a createElement option that defaults to xml-element-string', function () {
+    var customElement = function () {
       return 'foo'
     }
 
@@ -82,9 +82,9 @@ describe('pcb stackup function', function() {
     expect(stackLayersStub).to.be.calledWith(customElement)
   })
 
-  it('should return an SVG element with the propper attributes', function() {
+  it('should return an SVG element with the propper attributes', function () {
     var result = pcbStackupCore([], 'foobar')
-    var svgAttr = function(side) {
+    var svgAttr = function (side) {
       return assign(
         {
           id: 'foobar_' + side,
@@ -105,7 +105,7 @@ describe('pcb stackup function', function() {
     expect(result.bottom.svg).to.equal(bottomElement.returnValues[0])
   })
 
-  it('should have a default color style', function() {
+  it('should have a default color style', function () {
     var result = pcbStackupCore([], 'foobar')
     var styleSpy = element.withArgs('style', {}, [EXPECTED_DEFAULT_STYLE])
 
@@ -114,7 +114,7 @@ describe('pcb stackup function', function() {
     expect(result.bottom.svg).to.contain(styleSpy.returnValues[1])
   })
 
-  it('should handle user input colors', function() {
+  it('should handle user input colors', function () {
     var options = {
       id: 'foobar',
       color: {cu: '#123', cf: '#456', sp: '#789'},
@@ -137,7 +137,7 @@ describe('pcb stackup function', function() {
     expect(result.bottom.svg).to.contain(styleSpy.returnValues[0])
   })
 
-  it('should pass the layers to sort layers', function() {
+  it('should pass the layers to sort layers', function () {
     var files = [
       {side: wtg.SIDE_TOP, type: wtg.TYPE_COPPER, converter: converter()},
       {side: wtg.SIDE_TOP, type: wtg.TYPE_SOLDERMASK, converter: converter()},
@@ -187,7 +187,7 @@ describe('pcb stackup function', function() {
     )
   })
 
-  it('should use stack to build result, add mech mask, flip as needed', function() {
+  it('should use stack to build result, add mech mask, flip as needed', function () {
     stackLayersStub.withArgs(element, 'foobar', 'top').returns({
       box: [0, 0, 1000, 1000],
       units: 'in',
@@ -292,7 +292,7 @@ describe('pcb stackup function', function() {
     })
   })
 
-  it('should add a clip path if stackLayers returns a outline clip id', function() {
+  it('should add a clip path if stackLayers returns a outline clip id', function () {
     stackLayersStub.withArgs(element, 'foobar', 'top').returns({
       box: [0, 0, 1000, 1000],
       units: 'mm',
@@ -331,7 +331,7 @@ describe('pcb stackup function', function() {
     )
   })
 
-  it('should allow arbitrary stuff in the attributes', function() {
+  it('should allow arbitrary stuff in the attributes', function () {
     pcbStackupCore([], {id: 'foo', attributes: {bar: 'baz'}})
 
     expect(element).to.be.calledWith('svg', sinon.match.has('bar', 'baz'))

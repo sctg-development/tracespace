@@ -1,88 +1,112 @@
-import {Transform, TransformCallback} from 'readable-stream'
-import fileReaderStream from 'filereader-stream'
+import {Buffer} from 'buffer'
 import MD5 from 'md5.js'
-import pump from 'pump'
 import {isZip} from '../util'
 import {baseName, promiseFlatMap, PromiseArray} from './util'
-
-const READER_OPTIONS = {chunkSize: 2048}
 
 export type FileToWrite = {name: string; contents: string}
 
 export async function readFiles(files: Array<File>): PromiseArray<FileStream> {
-  return promiseFlatMap(files, (file: File) =>
-    isZip(file) ? zipReader(file) : [fileReader(file)]
+  return promiseFlatMap(files, async (file: File) =>
+    isZip(file) ? zipReader(file) : [await fileReader(file)]
   )
 }
 
 export async function fetchZipFile(url: string): PromiseArray<FileStream> {
+  console.log('[fetchZipFile] Starting fetch from:', url)
   return fetch(url)
-    .then(response => {
+    .then((response) => {
+      console.log(
+        '[fetchZipFile] Response status:',
+        response.status,
+        response.ok
+      )
       if (response.ok) return response.blob()
       throw new Error(`Could not fetch ${url}: ${response.status}`)
     })
-    .then(blob => {
-      if (isZip(blob)) return zipReader(blob)
+    .then((blob) => {
+      console.log(
+        '[fetchZipFile] Blob received, size:',
+        blob.size,
+        'type:',
+        blob.type
+      )
+      if (isZip(blob)) {
+        console.log('[fetchZipFile] ZIP detected, reading entries')
+        return zipReader(blob)
+      }
       throw new Error(`${url} is not a zip file`)
+    })
+    .catch((error) => {
+      console.error('[fetchZipFile] Error:', error)
+      throw error
     })
 }
 
 export async function writeFiles(files: Array<FileToWrite>): Promise<Blob> {
-  return import('jszip').then(ZipModule => {
+  return import('jszip').then((ZipModule) => {
     const zip = ZipModule.default()
-    files.forEach(f => zip.file(f.name, f.contents))
+    files.forEach((f) => zip.file(f.name, f.contents))
     return zip.generateAsync({type: 'blob'})
   })
 }
 
-export class FileStream extends Transform {
-  _hasher: MD5
-
-  _chunks: Array<Buffer>
-
+export class FileStream {
   name: string
 
-  digest: string | null
+  digest: string
 
-  contents: Buffer | null
+  contents: Buffer
 
-  constructor(filename: string) {
-    super()
-    this._hasher = new MD5()
-    this._chunks = []
+  constructor(filename: string, digest: string, contents: Buffer) {
     this.name = baseName(filename)
-    this.digest = null
-    this.contents = null
-  }
-
-  _transform(chunk: Buffer, _: string, next: TransformCallback): void {
-    this._hasher.update(chunk)
-    this._chunks.push(chunk)
-    next(undefined, chunk)
-  }
-
-  _flush(next: TransformCallback): void {
-    this.digest = this._hasher.digest('hex')
-    this.contents = Buffer.concat(this._chunks)
-    next()
+    this.digest = digest
+    this.contents = contents
   }
 }
 
-function fileReader(file: File): FileStream {
-  const reader = fileReaderStream(file, READER_OPTIONS)
-  const collector = new FileStream(file.name)
+async function fileReader(file: File): Promise<FileStream> {
+  const contents = await file.arrayBuffer()
+  return fileStreamFromContents(file.name, contents)
+}
 
-  return pump<FileStream>(reader, collector)
+function fileStreamFromContents(
+  filename: string,
+  contents: ArrayBuffer | Uint8Array
+): FileStream {
+  const bytes =
+    contents instanceof Uint8Array ? contents : new Uint8Array(contents)
+  const buffer = Buffer.from(bytes)
+  const hasher = new MD5()
+
+  hasher.update(buffer)
+
+  return new FileStream(filename, hasher.digest('hex'), buffer)
 }
 
 async function zipReader(file: Blob): PromiseArray<FileStream> {
+  console.log('[zipReader] Loading jszip...')
   return import('jszip')
-    .then(ZipModule => ZipModule.loadAsync(file))
-    .then(zip =>
-      Object.keys(zip.files)
-        .filter(name => !zip.files[name].dir)
-        .map(name =>
-          pump<FileStream>(zip.files[name].nodeStream(), new FileStream(name))
-        )
-    )
+    .then((ZipModule) => {
+      console.log('[zipReader] jszip loaded, loading async...')
+      return ZipModule.loadAsync(file)
+    })
+    .then((zip) => {
+      console.log(
+        '[zipReader] ZIP loaded, files count:',
+        Object.keys(zip.files).length
+      )
+      return Promise.all(
+        Object.keys(zip.files)
+          .filter((name) => !zip.files[name].dir)
+          .map(async (name) => {
+            console.log('[zipReader] Processing file:', name)
+            const bytes = await zip.files[name].async('uint8array')
+            return fileStreamFromContents(name, bytes)
+          })
+      )
+    })
+    .catch((error) => {
+      console.error('[zipReader] Error:', error)
+      throw error
+    })
 }

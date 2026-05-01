@@ -3,15 +3,14 @@
 const path = require('path')
 const express = require('express')
 const {getPortPromise: getPort} = require('portfinder')
-const {OUT_DIRNAME} = require('@tracespace/config/webpack')
 
-const directory = path.resolve(process.cwd(), OUT_DIRNAME)
+const directory = path.resolve(process.cwd(), 'dist')
 const app = express()
 
 app.use(express.static(directory))
 
 getPort({port: 9090})
-  .then(port => {
+  .then((port) => {
     app
       .listen(port)
       .once('listening', () => handleUp(port))

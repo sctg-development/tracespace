@@ -57,7 +57,7 @@ export default function SettingsForm(props: SettingsFormProps): JSX.Element {
       onSubmit={handleSubmit}
       onReset={close}
     >
-      {formProps => (
+      {(formProps) => (
         <Form className={className}>
           <SettingsButtons delete={handleDelete} />
           <Field name="name" component={BoardNameInput} />
@@ -117,7 +117,7 @@ export default function SettingsForm(props: SettingsFormProps): JSX.Element {
               {layers
                 .slice(0)
                 .sort(orderLayers)
-                .map(ly => (
+                .map((ly) => (
                   <LayerItem key={ly.id} filename={ly.filename}>
                     <Field
                       name={`layers.${ly.id}.type`}

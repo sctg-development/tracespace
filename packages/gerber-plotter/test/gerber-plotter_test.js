@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 // test suite for plotter
 'use strict'
 
@@ -9,131 +8,131 @@ var boundingBox = require('../lib/_box')
 
 var EPSILON = 0.000001
 
-describe('gerber plotter', function() {
+describe('gerber plotter', function () {
   var p
-  beforeEach(function() {
+  beforeEach(function () {
     p = plotter()
   })
 
-  it('should be an object stream', function() {
-    expect(function() {
+  it('should be an object stream', function () {
+    expect(function () {
       p.write({})
     }).to.not.throw()
   })
 
-  describe('format options', function() {
-    it('should allow user to set units', function() {
+  describe('format options', function () {
+    it('should allow user to set units', function () {
       p = plotter({units: 'mm'})
       expect(p.format.units).to.equal('mm')
       p = plotter({units: 'in'})
       expect(p.format.units).to.equal('in')
 
-      expect(function() {
+      expect(function () {
         p = plotter({units: 'foo'})
       }).to.throw(/units/)
     })
 
-    it('should allow user to set backupUnits', function() {
+    it('should allow user to set backupUnits', function () {
       p = plotter({backupUnits: 'mm'})
       expect(p.format.backupUnits).to.equal('mm')
       p = plotter({units: 'in'})
       expect(p.format.units).to.equal('in')
 
-      expect(function() {
+      expect(function () {
         p = plotter({backupUnits: 'foo'})
       }).to.throw(/units must be/)
     })
 
-    it('should allow user to set notation', function() {
+    it('should allow user to set notation', function () {
       p = plotter({nota: 'A'})
       expect(p.format.nota).to.equal('A')
       p = plotter({nota: 'I'})
       expect(p.format.nota).to.equal('I')
 
-      expect(function() {
+      expect(function () {
         p = plotter({nota: 'foo'})
       }).to.throw(/notation/)
     })
 
-    it('should allow user to set backup notation', function() {
+    it('should allow user to set backup notation', function () {
       p = plotter({backupNota: 'A'})
       expect(p.format.backupNota).to.equal('A')
       p = plotter({backupNota: 'I'})
       expect(p.format.backupNota).to.equal('I')
 
-      expect(function() {
+      expect(function () {
         p = plotter({backupNota: 'foo'})
       }).to.throw(/notation must be/)
     })
 
-    it('should default backup units and notation to inches and abs', function() {
+    it('should default backup units and notation to inches and abs', function () {
       expect(p.format.backupUnits).to.equal('in')
       expect(p.format.backupNota).to.equal('A')
     })
 
-    it('should not throw with null/undefined options', function() {
+    it('should not throw with null/undefined options', function () {
       var p
-      expect(function() {
+      expect(function () {
         p = plotter({units: null})
       }).to.not.throw()
       expect(p.format.units === null).to.equal(true)
 
-      expect(function() {
+      expect(function () {
         p = plotter({backupUnits: undefined})
       }).to.not.throw()
       expect(p.format.backupUnits).to.equal('in')
 
-      expect(function() {
+      expect(function () {
         p = plotter({nota: undefined})
       }).to.not.throw()
       expect(p.format.nota === null).to.equal(true)
 
-      expect(function() {
+      expect(function () {
         p = plotter({backupNota: null})
       }).to.not.throw()
       expect(p.format.backupNota).to.equal('A')
     })
   })
 
-  describe('plotting options', function() {
-    it('should have an optimize paths option that defaults to falsey', function() {
+  describe('plotting options', function () {
+    it('should have an optimize paths option that defaults to falsey', function () {
       expect(!p._optimizePaths).to.equal(true)
 
       p = plotter({optimizePaths: true})
       expect(p._optimizePaths).to.equal(true)
     })
 
-    it('should have an outline mode option that defaults to falsey', function() {
+    it('should have an outline mode option that defaults to falsey', function () {
       expect(!p._plotAsOutline).to.equal(true)
 
       p = plotter({plotAsOutline: true, units: 'mm'})
       expect(p._plotAsOutline).to.equal(0.00011)
     })
 
-    it('should convert default outline gap fill to inches', function() {
+    it('should convert default outline gap fill to inches', function () {
       expect(!p._plotAsOutline).to.equal(true)
 
       p = plotter({plotAsOutline: true, units: 'in'})
       expect(p._plotAsOutline).to.be.closeTo(0.00011 / 25.4, EPSILON)
     })
 
-    it('should convert given outline gap fill to inches', function() {
+    it('should convert given outline gap fill to inches', function () {
       expect(!p._plotAsOutline).to.equal(true)
 
       p = plotter({plotAsOutline: 0.1, units: 'in'})
       expect(p._plotAsOutline).to.be.closeTo(0.1 / 25.4, EPSILON)
     })
 
-    it('should force optimize paths to true if plot as outline is true', function() {
+    it('should force optimize paths to true if plot as outline is true', function () {
       p = plotter({plotAsOutline: true, optimizePaths: false, units: 'mm'})
       expect(p._plotAsOutline).to.equal(0.00011)
       expect(p._optimizePaths).to.equal(true)
     })
   })
 
-  describe('handling set commands', function() {
-    describe('format', function() {
-      it('should set units', function() {
+  describe('handling set commands', function () {
+    describe('format', function () {
+      it('should set units', function () {
         p.write({type: 'set', prop: 'units', value: 'mm'})
         expect(p.format.units).to.equal('mm')
 
@@ -142,13 +141,13 @@ describe('gerber plotter', function() {
         expect(p.format.units).to.equal('in')
       })
 
-      it('should not redefine units', function() {
+      it('should not redefine units', function () {
         p = plotter({units: 'in'})
         p.write({type: 'set', prop: 'units', value: 'mm'})
         expect(p.format.units).to.equal('in')
       })
 
-      it('should set the notation', function() {
+      it('should set the notation', function () {
         p.write({type: 'set', prop: 'nota', value: 'A'})
         expect(p.format.nota).to.equal('A')
 
@@ -157,34 +156,34 @@ describe('gerber plotter', function() {
         expect(p.format.nota).to.equal('I')
       })
 
-      it('should not redefine notation', function() {
+      it('should not redefine notation', function () {
         p = plotter({nota: 'A'})
         p.write({type: 'set', prop: 'nota', value: 'I'})
         expect(p.format.nota).to.equal('A')
       })
 
-      it('should set the backup units', function() {
+      it('should set the backup units', function () {
         p.write({type: 'set', prop: 'backupUnits', value: 'mm'})
         expect(p.format.backupUnits).to.equal('mm')
         p.write({type: 'set', prop: 'backupUnits', value: 'in'})
         expect(p.format.backupUnits).to.equal('in')
       })
 
-      it('should not redefine the backupUnits set by user', function() {
+      it('should not redefine the backupUnits set by user', function () {
         p = plotter({backupUnits: 'in'})
         p.write({type: 'set', prop: 'backupUnits', value: 'mm'})
         expect(p.format.backupUnits).to.equal('in')
       })
 
-      it('should not redefine the backupNotation set by user', function() {
+      it('should not redefine the backupNotation set by user', function () {
         p = plotter({backupNota: 'A'})
         p.write({type: 'set', prop: 'backupNota', value: 'I'})
         expect(p.format.backupNota).to.equal('A')
       })
     })
 
-    describe('plotter state', function() {
-      it('should change the tool', function() {
+    describe('plotter state', function () {
+      it('should change the tool', function () {
         var tool = {}
         p._tools['10'] = tool
 
@@ -192,8 +191,8 @@ describe('gerber plotter', function() {
         expect(p._tool).to.equal(tool)
       })
 
-      it('should warn if the tool does not exist', function(done) {
-        p.once('warning', function(w) {
+      it('should warn if the tool does not exist', function (done) {
+        p.once('warning', function (w) {
           expect(w.line).to.equal(10)
           expect(w.message).to.match(/tool 10/)
           expect(p._tool === null).to.equal(true)
@@ -203,15 +202,15 @@ describe('gerber plotter', function() {
         p.write({type: 'set', line: 10, prop: 'tool', value: '10'})
       })
 
-      it('should set the region mode', function() {
+      it('should set the region mode', function () {
         p.write({type: 'set', line: 10, prop: 'region', value: true})
         expect(p._region).to.equal(true)
         p.write({type: 'set', line: 10, prop: 'region', value: false})
         expect(p._region).to.equal(false)
       })
 
-      it('should warn and ignore tool changes if region mode is on', function(done) {
-        p.once('warning', function(w) {
+      it('should warn and ignore tool changes if region mode is on', function (done) {
+        p.once('warning', function (w) {
           expect(w.line).to.equal(11)
           expect(w.message).to.match(/region/)
           expect(p._tool === null).to.equal(true)
@@ -223,7 +222,7 @@ describe('gerber plotter', function() {
         p.write({type: 'set', line: 11, prop: 'tool', value: '10'})
       })
 
-      it('should set the interpolation mode', function() {
+      it('should set the interpolation mode', function () {
         p.write({type: 'set', prop: 'mode', value: 'i'})
         expect(p._mode).to.equal('i')
         p.write({type: 'set', prop: 'mode', value: 'cw'})
@@ -232,7 +231,7 @@ describe('gerber plotter', function() {
         expect(p._mode).to.equal('ccw')
       })
 
-      it('should set the arc quadrant mode', function() {
+      it('should set the arc quadrant mode', function () {
         p.write({type: 'set', prop: 'quad', value: 's'})
         expect(p._quad).to.equal('s')
         p.write({type: 'set', prop: 'quad', value: 'm'})
@@ -241,14 +240,14 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('handling done command', function() {
-    it('should set the done flag', function() {
+  describe('handling done command', function () {
+    it('should set the done flag', function () {
       p.write({type: 'done'})
       expect(p._done).to.equal(true)
     })
 
-    it('should warn if other commands come in after a done', function(done) {
-      p.once('warning', function(w) {
+    it('should warn if other commands come in after a done', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/done/)
         done()
       })
@@ -258,8 +257,8 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('handling new tool commands', function() {
-    it('should set current tool to newly defined tool', function() {
+  describe('handling new tool commands', function () {
+    it('should set current tool to newly defined tool', function () {
       var circle = {shape: 'circle', params: [4], hole: []}
       p.write({type: 'tool', code: '10', tool: circle})
       expect(p._tools['10']).to.equal(p._tool)
@@ -267,7 +266,7 @@ describe('gerber plotter', function() {
       expect(p._tools['15']).to.equal(p._tool)
     })
 
-    it('should set trace width for circle and rectangle tools', function() {
+    it('should set trace width for circle and rectangle tools', function () {
       var circle = {shape: 'circle', params: [4], hole: []}
       var rect = {shape: 'rect', params: [2, 3], hole: []}
 
@@ -278,13 +277,13 @@ describe('gerber plotter', function() {
       expect(p._tool.trace).to.eql([2, 3])
     })
 
-    it('should warn if the tool has already been set', function() {
+    it('should warn if the tool has already been set', function () {
       var circle1 = {shape: 'circle', params: [1], hole: []}
       var circle2 = {shape: 'circle', params: [2], hole: []}
       var circle3 = {shape: 'circle', params: [3], hole: []}
       var capturedWarning = null
 
-      p.once('warning', function(w) {
+      p.once('warning', function (w) {
         capturedWarning = w
       })
 
@@ -297,7 +296,7 @@ describe('gerber plotter', function() {
       expect(p._tool).to.eql(p._tools['11'])
     })
 
-    it('should not set trace for untraceable tools', function() {
+    it('should not set trace for untraceable tools', function () {
       var circle = {shape: 'circle', params: [4], hole: [1, 1]}
       var rect = {shape: 'rect', params: [2, 3], hole: [1]}
       var obround = {shape: 'obround', params: [2, 3], hole: []}
@@ -315,8 +314,8 @@ describe('gerber plotter', function() {
       expect(p._tool.trace).to.eql([])
     })
 
-    describe('standard tool pad shapes', function() {
-      it('should create pad shapes for standard circles', function() {
+    describe('standard tool pad shapes', function () {
+      it('should create pad shapes for standard circles', function () {
         var circle0 = {shape: 'circle', params: [1], hole: []}
         var circle1 = {shape: 'circle', params: [2], hole: [1]}
         var circle2 = {shape: 'circle', params: [3], hole: [1, 1]}
@@ -339,7 +338,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should create pad shapes for standard rectangles', function() {
+      it('should create pad shapes for standard rectangles', function () {
         var rect0 = {shape: 'rect', params: [1, 2], hole: []}
         var rect1 = {shape: 'rect', params: [3, 4], hole: [1]}
         var rect2 = {shape: 'rect', params: [5, 6], hole: [1, 1]}
@@ -364,7 +363,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should create pad shapes for standard obrounds', function() {
+      it('should create pad shapes for standard obrounds', function () {
         var obround0 = {shape: 'obround', params: [1, 2], hole: []}
         var obround1 = {shape: 'obround', params: [4, 3], hole: [1]}
         var obround2 = {shape: 'obround', params: [5, 6], hole: [1, 1]}
@@ -389,7 +388,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should create pad shapes for standard polygons', function() {
+      it('should create pad shapes for standard polygons', function () {
         var poly0 = {shape: 'poly', params: [2, 3, 0], hole: []}
         var poly1 = {shape: 'poly', params: [2, 6, 45], hole: [1]}
         var poly2 = {shape: 'poly', params: [2, 12, 140], hole: [1, 1]}
@@ -454,8 +453,8 @@ describe('gerber plotter', function() {
       })
     })
 
-    describe('standard tool bounding boxes', function() {
-      it('should calculate a bounding box for a circle', function() {
+    describe('standard tool bounding boxes', function () {
+      it('should calculate a bounding box for a circle', function () {
         var circle0 = {shape: 'circle', params: [1], hole: []}
         var circle1 = {shape: 'circle', params: [7], hole: [1]}
         var circle2 = {shape: 'circle', params: [4], hole: [1, 1]}
@@ -468,7 +467,7 @@ describe('gerber plotter', function() {
         expect(p._tool.box).to.eql([-2, -2, 2, 2])
       })
 
-      it('should calculate a bounding box for a rects and obrounds', function() {
+      it('should calculate a bounding box for a rects and obrounds', function () {
         var rect0 = {shape: 'rect', params: [1, 2], hole: []}
         var rect1 = {shape: 'rect', params: [7, 4], hole: [1]}
         var obround0 = {shape: 'obround', params: [9, 8], hole: [1, 1]}
@@ -484,7 +483,7 @@ describe('gerber plotter', function() {
         expect(p._tool.box).to.eql([-2, -0.5, 2, 0.5])
       })
 
-      it('should calculate a bounding box for a standard polygon', function() {
+      it('should calculate a bounding box for a standard polygon', function () {
         var poly0 = {shape: 'poly', params: [5, 4, 0], hole: []}
         var poly1 = {shape: 'poly', params: [6, 8, 0], hole: [1]}
         var poly2 = {
@@ -502,9 +501,9 @@ describe('gerber plotter', function() {
       })
     })
 
-    describe('macro tool pads', function() {
-      describe('primitives without rotation', function() {
-        it('should ignore comment primitives', function() {
+    describe('macro tool pads', function () {
+      describe('primitives without rotation', function () {
+        it('should ignore comment primitives', function () {
           var macro = {
             type: 'macro',
             name: 'EMPTY',
@@ -522,7 +521,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([Infinity, Infinity, -Infinity, -Infinity])
         })
 
-        it('should be able to handle shape and box for circle primitives', function() {
+        it('should be able to handle shape and box for circle primitives', function () {
           var blocks = [{type: 'circle', exp: 1, dia: 4, cx: 3, cy: 4, rot: 0}]
           var macro = {type: 'macro', name: 'CIRC', blocks: blocks}
           var tool = {
@@ -537,7 +536,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([1, 2, 5, 6])
         })
 
-        it('should be able to handle shape and box for vect primitives', function() {
+        it('should be able to handle shape and box for vect primitives', function () {
           var blocks = [
             {
               type: 'vect',
@@ -594,7 +593,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([-0.5, -1, 5, 5])
         })
 
-        it('should be able to handle rectangle primitives', function() {
+        it('should be able to handle rectangle primitives', function () {
           var blocks = [
             {type: 'rect', exp: 1, width: 4, height: 2, cx: 3, cy: 4, rot: 0},
           ]
@@ -613,7 +612,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([1, 3, 5, 5])
         })
 
-        it('should be able to handle lower-left rects', function() {
+        it('should be able to handle lower-left rects', function () {
           var blocks = [
             {type: 'rectLL', exp: 1, width: 4, height: 2, x: 1, y: 3, rot: 0},
           ]
@@ -632,7 +631,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([1, 3, 5, 5])
         })
 
-        it('should be able to handle an outline primitive', function() {
+        it('should be able to handle an outline primitive', function () {
           var blocks = [
             {type: 'outline', exp: 1, points: [0, 0, 1, 0, 1, 1, 0, 0], rot: 0},
           ]
@@ -658,7 +657,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([0, 0, 1, 1])
         })
 
-        it('should handle a regular polygon primitive', function() {
+        it('should handle a regular polygon primitive', function () {
           var blocks = [
             {type: 'poly', exp: 1, vertices: 4, cx: 3, cy: 2, dia: 2, rot: 0},
           ]
@@ -685,7 +684,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([2, 1, 4, 3])
         })
 
-        it('should handle moiré primitives with only rings', function() {
+        it('should handle moiré primitives with only rings', function () {
           var blocks = [
             {
               type: 'moire',
@@ -719,7 +718,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([-0.5, 0.5, 4.5, 5.5])
         })
 
-        it('should handle moirés with circle centers', function() {
+        it('should handle moirés with circle centers', function () {
           var blocks = [
             {
               type: 'moire',
@@ -753,7 +752,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([3.6, 3.6, 6.4, 6.4])
         })
 
-        it('should handle thermals', function() {
+        it('should handle thermals', function () {
           var blocks = [
             {
               type: 'thermal',
@@ -791,8 +790,8 @@ describe('gerber plotter', function() {
         })
       })
 
-      describe('rotated primitives', function() {
-        it('should handle rotated circles', function() {
+      describe('rotated primitives', function () {
+        it('should handle rotated circles', function () {
           var blocks = [{type: 'circle', exp: 1, dia: 4, cx: 0, cy: 4, rot: 90}]
           var macro = {type: 'macro', name: 'RCIRC', blocks: blocks}
           var tool = {
@@ -807,7 +806,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([-6, -2, -2, 2])
         })
 
-        it('should handle rotated vects', function() {
+        it('should handle rotated vects', function () {
           var blocks = [
             {
               type: 'vect',
@@ -844,7 +843,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([-0.5, 1.41421356, 0.5, 7.07106781])
         })
 
-        it('should handle rotated rects', function() {
+        it('should handle rotated rects', function () {
           var blocks = [
             {type: 'rect', exp: 1, width: 4, height: 2, cx: 3, cy: 4, rot: -30},
           ]
@@ -870,14 +869,11 @@ describe('gerber plotter', function() {
             },
           ])
           expect(p._tool.box).to.eql([
-            2.3660254,
-            0.09807622,
-            6.83012702,
-            3.83012702,
+            2.3660254, 0.09807622, 6.83012702, 3.83012702,
           ])
         })
 
-        it('should handle rotated lower-left rects', function() {
+        it('should handle rotated lower-left rects', function () {
           var blocks = [
             {type: 'rectLL', exp: 1, width: 4, height: 2, x: 1, y: 3, rot: -30},
           ]
@@ -903,14 +899,11 @@ describe('gerber plotter', function() {
             },
           ])
           expect(p._tool.box).to.eql([
-            2.3660254,
-            0.09807622,
-            6.83012702,
-            3.83012702,
+            2.3660254, 0.09807622, 6.83012702, 3.83012702,
           ])
         })
 
-        it('should handle rotated outline polygons', function() {
+        it('should handle rotated outline polygons', function () {
           var blocks = [
             {
               type: 'outline',
@@ -941,7 +934,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([-1.3660254, -0.3660254, 0, 0.5])
         })
 
-        it('should handle rotated regular polygons', function() {
+        it('should handle rotated regular polygons', function () {
           var dia = 2 * Math.sqrt(2)
           var blocks = [
             {
@@ -977,7 +970,7 @@ describe('gerber plotter', function() {
           expect(p._tool.box).to.eql([-1, -1, 1, 1])
         })
 
-        it('should handle rotated moires', function() {
+        it('should handle rotated moires', function () {
           var blocks = [
             {
               type: 'moire',
@@ -1025,14 +1018,11 @@ describe('gerber plotter', function() {
             },
           ])
           expect(p._tool.box).to.eql([
-            -2.19006351,
-            -2.19006351,
-            2.19006351,
-            2.19006351,
+            -2.19006351, -2.19006351, 2.19006351, 2.19006351,
           ])
         })
 
-        it('should handle rotated thermals', function() {
+        it('should handle rotated thermals', function () {
           var blocks = [
             {
               type: 'thermal',
@@ -1102,21 +1092,21 @@ describe('gerber plotter', function() {
         })
       })
 
-      it('should handle modifiers and functional args', function() {
+      it('should handle modifiers and functional args', function () {
         var blocks = [
           {
             type: 'circle',
             exp: 1,
-            dia: function(mods) {
+            dia: function (mods) {
               return mods.$1
             },
-            cx: function(mods) {
+            cx: function (mods) {
               return mods.$2
             },
-            cy: function(mods) {
+            cy: function (mods) {
               return mods.$3
             },
-            rot: function(mods) {
+            rot: function (mods) {
               return mods.$4
             },
           },
@@ -1134,24 +1124,24 @@ describe('gerber plotter', function() {
         expect(p._tool.pad).to.eql([{type: 'circle', cx: 3, cy: 2, r: 2}])
       })
 
-      it('should handle variable sets', function() {
+      it('should handle variable sets', function () {
         var blocks = [
           {
             type: 'variable',
-            set: function(mods) {
+            set: function (mods) {
               return {$1: 4, $2: 3, $3: mods.$2 - 1}
             },
           },
           {
             type: 'circle',
             exp: 1,
-            dia: function(mods) {
+            dia: function (mods) {
               return mods.$1
             },
-            cx: function(mods) {
+            cx: function (mods) {
               return mods.$2
             },
-            cy: function(mods) {
+            cy: function (mods) {
               return mods.$3
             },
             rot: 0,
@@ -1170,38 +1160,38 @@ describe('gerber plotter', function() {
         expect(p._tool.pad).to.eql([{type: 'circle', cx: 3, cy: 2, r: 2}])
       })
 
-      it('should handle modifiers and functional array args', function() {
+      it('should handle modifiers and functional array args', function () {
         var blocks = [
           {
             type: 'outline',
             exp: 1,
             points: [
-              function(mods) {
+              function (mods) {
                 return mods.$1
               },
-              function(mods) {
+              function (mods) {
                 return mods.$2
               },
-              function(mods) {
+              function (mods) {
                 return mods.$3
               },
-              function(mods) {
+              function (mods) {
                 return mods.$4
               },
-              function(mods) {
+              function (mods) {
                 return mods.$5
               },
-              function(mods) {
+              function (mods) {
                 return mods.$6
               },
-              function(mods) {
+              function (mods) {
                 return mods.$7
               },
-              function(mods) {
+              function (mods) {
                 return mods.$8
               },
             ],
-            rot: function(mods) {
+            rot: function (mods) {
               return mods.$9
             },
           },
@@ -1228,7 +1218,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should handle multiple primitives and exposure', function() {
+      it('should handle multiple primitives and exposure', function () {
         var blocks = [
           {type: 'circle', exp: 1, dia: 4, cx: -2, cy: 0, rot: 0},
           {type: 'rect', exp: 0, width: 1, height: 1, cx: -1, cy: 0, rot: 0},
@@ -1257,8 +1247,8 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('handling operation commands', function() {
-    beforeEach(function() {
+  describe('handling operation commands', function () {
+    beforeEach(function () {
       var tool = {shape: 'circle', params: [2], hole: []}
       p.write({type: 'set', prop: 'epsilon', value: 0.00000001})
       p.write({type: 'set', prop: 'units', value: 'in'})
@@ -1267,7 +1257,7 @@ describe('gerber plotter', function() {
       p.write({type: 'tool', code: '10', tool: tool})
     })
 
-    it('should move the plotter', function() {
+    it('should move the plotter', function () {
       p.write({type: 'op', op: 'int', coord: {x: 4, y: -3}})
       expect(p._pos).to.eql([4, -3])
       p.write({type: 'op', op: 'move', coord: {y: 0}})
@@ -1276,7 +1266,7 @@ describe('gerber plotter', function() {
       expect(p._pos).to.eql([-7, 0])
     })
 
-    it('should move the plotter with incremental notation', function() {
+    it('should move the plotter with incremental notation', function () {
       p.nota = 'I'
       p.write({type: 'op', op: 'int', coord: {x: 4, y: -3, i: 1, j: 4}})
       expect(p._pos).to.eql([4, -3])
@@ -1286,9 +1276,9 @@ describe('gerber plotter', function() {
       expect(p._pos).to.eql([-3, -2])
     })
 
-    describe('flashing pads', function() {
-      it('should emit a shape if first flash for tool', function(done) {
-        p.once('readable', function() {
+    describe('flashing pads', function () {
+      it('should emit a shape if first flash for tool', function (done) {
+        p.once('readable', function () {
           var result = p.read()
           expect(result).to.eql({
             type: 'shape',
@@ -1300,10 +1290,10 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'flash', coord: {x: 1, y: 1}})
       })
 
-      it('should emit pad objects after the shape object', function(done) {
-        p.once('data', function(result) {
+      it('should emit pad objects after the shape object', function (done) {
+        p.once('data', function (result) {
           expect(result.type).to.equal('shape')
-          p.once('data', function(result) {
+          p.once('data', function (result) {
             expect(result).to.eql({type: 'pad', tool: '10', x: 1, y: 1})
             done()
           })
@@ -1311,10 +1301,10 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'flash', coord: {x: 1, y: 1}})
       })
 
-      it('should not emit the pad shape more than once', function(done) {
+      it('should not emit the pad shape more than once', function (done) {
         var results = 0
         var expected = ['shape', 'pad', 'pad']
-        var handleData = function(data) {
+        var handleData = function (data) {
           expect(data.type).to.eql(expected[results])
           if (++results >= expected.length) {
             p.removeListener('data', handleData)
@@ -1327,14 +1317,14 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'flash', coord: {x: 5, y: 5}})
       })
 
-      it('should update the bounding box', function() {
+      it('should update the bounding box', function () {
         p.write({type: 'op', op: 'flash', coord: {x: 1, y: 1}})
         expect(p._box).to.eql([0, 0, 2, 2])
       })
     })
 
-    describe('interpolating to create strokes', function() {
-      it('should create a path graph with linear strokes', function() {
+    describe('interpolating to create strokes', function () {
+      it('should create a path graph with linear strokes', function () {
         p.write({type: 'op', op: 'int', coord: {x: 1, y: 1}})
         p.write({type: 'op', op: 'int', coord: {x: 1, y: 3}})
         p.write({type: 'op', op: 'int', coord: {x: 3, y: 3}})
@@ -1346,7 +1336,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should handle moves in between strokes when optimizing paths', function() {
+      it('should handle moves in between strokes when optimizing paths', function () {
         var tool = {shape: 'circle', params: [2], hole: []}
         p = plotter({optimizePaths: true})
 
@@ -1369,7 +1359,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should handle moves in between strokes when not optimizing paths', function() {
+      it('should handle moves in between strokes when not optimizing paths', function () {
         var tool = {shape: 'circle', params: [2], hole: []}
         p = plotter({optimizePaths: false})
 
@@ -1392,7 +1382,7 @@ describe('gerber plotter', function() {
         ])
       })
 
-      it('should update the box in non-region mode', function() {
+      it('should update the box in non-region mode', function () {
         p.write({type: 'op', op: 'int', coord: {x: 1, y: 3}})
         p.write({type: 'op', op: 'int', coord: {x: 3, y: 3}})
         p.write({type: 'op', op: 'int', coord: {x: 0, y: 0}})
@@ -1400,7 +1390,7 @@ describe('gerber plotter', function() {
         expect(p._box).to.eql([-1, -1, 4, 4])
       })
 
-      it('should update the bounding box in region mode', function() {
+      it('should update the bounding box in region mode', function () {
         p.write({type: 'set', prop: 'region', value: true})
         p.write({type: 'op', op: 'int', coord: {x: 1, y: 3}})
         p.write({type: 'op', op: 'int', coord: {x: 3, y: 3}})
@@ -1409,8 +1399,8 @@ describe('gerber plotter', function() {
         expect(p._box).to.eql([0, 0, 3, 3])
       })
 
-      describe('arc strokes', function() {
-        it('should determine the center and radius in single quadrant mode', function() {
+      describe('arc strokes', function () {
+        it('should determine the center and radius in single quadrant mode', function () {
           p.write({type: 'set', prop: 'arc', value: 's'})
           p.write({type: 'set', prop: 'mode', value: 'cw'})
           p.write({type: 'op', op: 'int', coord: {x: 2, y: 0, i: 1, j: 1.5}})
@@ -1477,7 +1467,7 @@ describe('gerber plotter', function() {
           expect(arcs[3].radius).to.be.closeTo(R, EPSILON)
         })
 
-        it('should use the actual offsets to get the center in multi-quadrant mode', function() {
+        it('should use the actual offsets to get the center in multi-quadrant mode', function () {
           p.write({type: 'set', prop: 'arc', value: 'm'})
           p.write({type: 'set', prop: 'mode', value: 'cw'})
           p.write({type: 'op', op: 'int', coord: {x: 2, y: 0, i: 1, j: -1.5}})
@@ -1514,7 +1504,7 @@ describe('gerber plotter', function() {
           expect(arcs[1].radius).to.be.closeTo(R, EPSILON)
         })
 
-        it('should select the correct arc with an "a" coordinate', function() {
+        it('should select the correct arc with an "a" coordinate', function () {
           p.write({type: 'set', prop: 'mode', value: 'cw'})
           p.write({type: 'op', op: 'int', coord: {x: 2, y: 2, a: 2}})
           p.write({type: 'set', prop: 'mode', value: 'ccw'})
@@ -1549,7 +1539,7 @@ describe('gerber plotter', function() {
           expect(arcs[1].sweep).to.be.closeTo(3.141593, EPSILON)
         })
 
-        it('should set the sweep to zero for matching start and end in single mode', function() {
+        it('should set the sweep to zero for matching start and end in single mode', function () {
           p.write({type: 'set', prop: 'arc', value: 's'})
           p.write({type: 'set', prop: 'mode', value: 'cw'})
           p.write({type: 'op', op: 'int', coord: {x: 0, y: 0, i: 1}})
@@ -1567,7 +1557,7 @@ describe('gerber plotter', function() {
           ])
         })
 
-        it('should set the sweep to a full circle in multi mode', function() {
+        it('should set the sweep to a full circle in multi mode', function () {
           p.write({type: 'set', prop: 'arc', value: 'm'})
           p.write({type: 'set', prop: 'mode', value: 'cw'})
           p.write({type: 'op', op: 'int', coord: {x: 0, y: 0, i: -1}})
@@ -1585,12 +1575,12 @@ describe('gerber plotter', function() {
           ])
         })
 
-        it('should warn and not add to path if arc is impossible', function(done) {
-          p.once('warning', function(w) {
+        it('should warn and not add to path if arc is impossible', function (done) {
+          p.once('warning', function (w) {
             expect(w.message).to.match(/impossible arc/)
             expect(w.line).to.equal(12)
 
-            setTimeout(function() {
+            setTimeout(function () {
               expect(p._path.length).to.equal(0)
               done()
             }, 5)
@@ -1601,10 +1591,10 @@ describe('gerber plotter', function() {
           p.write({type: 'op', op: 'int', coord: {x: 1, y: 1, i: 1}, line: 12})
         })
 
-        it('should warn and not add to path if tool is not circular', function(done) {
-          p.once('warning', function(w) {
+        it('should warn and not add to path if tool is not circular', function (done) {
+          p.once('warning', function (w) {
             expect(w.message).to.match(/arc.*circular/)
-            setTimeout(function() {
+            setTimeout(function () {
               expect(p._path.length).to.equal(0)
               done()
             }, 5)
@@ -1617,7 +1607,7 @@ describe('gerber plotter', function() {
           p.write({type: 'op', op: 'int', coord: {x: 2, y: 0, i: 1, j: 1.5}})
         })
 
-        it('should allow non-circular tools if in region mode', function() {
+        it('should allow non-circular tools if in region mode', function () {
           var rectTool = {shape: 'rect', params: [2, 1], hole: []}
           p.write({type: 'tool', code: '11', tool: rectTool})
           p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1627,7 +1617,7 @@ describe('gerber plotter', function() {
           expect(p._path.length).to.equal(1)
         })
 
-        it('should allow missing tools if in region mode', function() {
+        it('should allow missing tools if in region mode', function () {
           p = plotter()
 
           p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1637,8 +1627,8 @@ describe('gerber plotter', function() {
           expect(p._path.length).to.equal(1)
         })
 
-        describe('bounding box', function() {
-          it('should usually use the arc end points', function() {
+        describe('bounding box', function () {
+          it('should usually use the arc end points', function () {
             p.write({type: 'op', op: 'move', coord: {x: 0.5, y: 0.866}})
             p.write({type: 'set', prop: 'mode', value: 'cw'})
             p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1660,7 +1650,7 @@ describe('gerber plotter', function() {
             expect(p._box).to.eql([0.5, 0.5, 0.866, 0.866])
           })
 
-          it('should should set the min x when arc sweeps past 180 deg', function() {
+          it('should should set the min x when arc sweeps past 180 deg', function () {
             p.write({type: 'op', op: 'move', coord: {x: -0.7071, y: -0.7071}})
             p.write({type: 'set', prop: 'mode', value: 'cw'})
             p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1682,7 +1672,7 @@ describe('gerber plotter', function() {
             expect(p._box[0]).to.be.closeTo(-1, 0.00001)
           })
 
-          it('should should set the min y when arc sweeps past 270 deg', function() {
+          it('should should set the min y when arc sweeps past 270 deg', function () {
             p.write({type: 'op', op: 'move', coord: {x: -0.7071, y: -0.7071}})
             p.write({type: 'set', prop: 'mode', value: 'ccw'})
             p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1704,7 +1694,7 @@ describe('gerber plotter', function() {
             expect(p._box[1]).to.be.closeTo(-1, 0.00001)
           })
 
-          it('should should set the max x when arc sweeps past 0 deg', function() {
+          it('should should set the max x when arc sweeps past 0 deg', function () {
             p.write({type: 'op', op: 'move', coord: {x: 0.7071, y: -0.7071}})
             p.write({type: 'set', prop: 'mode', value: 'ccw'})
             p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1726,7 +1716,7 @@ describe('gerber plotter', function() {
             expect(p._box[2]).to.be.closeTo(1, 0.00001)
           })
 
-          it('should should set the max y when arc sweeps past 90 deg', function() {
+          it('should should set the max y when arc sweeps past 90 deg', function () {
             p.write({type: 'op', op: 'move', coord: {x: -0.7071, y: 0.7071}})
             p.write({type: 'set', prop: 'mode', value: 'cw'})
             p.write({type: 'set', prop: 'arc', value: 's'})
@@ -1748,7 +1738,7 @@ describe('gerber plotter', function() {
             expect(p._box[3]).to.be.closeTo(1, 0.00001)
           })
 
-          it('should set the box properly for a full circle', function() {
+          it('should set the box properly for a full circle', function () {
             p.write({type: 'set', prop: 'mode', value: 'cw'})
             p.write({type: 'set', prop: 'arc', value: 'm'})
             p.write({type: 'op', op: 'int', coord: {x: 0, y: 0, i: -1, j: 0}})
@@ -1763,13 +1753,13 @@ describe('gerber plotter', function() {
       })
     })
 
-    describe('interpolating with rectangular tools', function() {
-      beforeEach(function() {
+    describe('interpolating with rectangular tools', function () {
+      beforeEach(function () {
         var rectTool = {shape: 'rect', params: [2, 1], hole: []}
         p.write({type: 'tool', code: '11', tool: rectTool})
       })
 
-      it('should directly emit fills without adding to the path for rect tools', function(done) {
+      it('should directly emit fills without adding to the path for rect tools', function (done) {
         var path = [
           {type: 'line', start: [-1, -0.5], end: [1, -0.5]},
           {type: 'line', start: [1, -0.5], end: [1, 0.5]},
@@ -1777,12 +1767,12 @@ describe('gerber plotter', function() {
           {type: 'line', start: [-1, 0.5], end: [-1, -0.5]},
         ]
 
-        p.once('readable', function() {
+        p.once('readable', function () {
           var result = p.read()
           expect(p._path.length).to.equal(0)
           expect(result).to.eql({type: 'fill', path: path})
 
-          setTimeout(function() {
+          setTimeout(function () {
             expect(p._box).to.eql([-1, -0.5, 1, 0.5])
             done()
           }, 1)
@@ -1791,7 +1781,7 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'int', coord: {x: 0, y: 0}})
       })
 
-      it('should handle a first quadrant move', function(done) {
+      it('should handle a first quadrant move', function (done) {
         var path = [
           {type: 'line', start: [-1, -0.5], end: [1, -0.5]},
           {type: 'line', start: [1, -0.5], end: [6, 4.5]},
@@ -1801,12 +1791,12 @@ describe('gerber plotter', function() {
           {type: 'line', start: [-1, 0.5], end: [-1, -0.5]},
         ]
 
-        p.once('readable', function() {
+        p.once('readable', function () {
           var result = p.read()
           expect(p._path.length).to.equal(0)
           expect(result).to.eql({type: 'fill', path: path})
 
-          setTimeout(function() {
+          setTimeout(function () {
             expect(p._box).to.eql([-1, -0.5, 6, 5.5])
             done()
           }, 1)
@@ -1815,7 +1805,7 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'int', coord: {x: 5, y: 5}})
       })
 
-      it('should handle a second quadrant move', function(done) {
+      it('should handle a second quadrant move', function (done) {
         var path = [
           {type: 'line', start: [1, -0.5], end: [1, 0.5]},
           {type: 'line', start: [1, 0.5], end: [-4, 5.5]},
@@ -1825,12 +1815,12 @@ describe('gerber plotter', function() {
           {type: 'line', start: [-1, -0.5], end: [1, -0.5]},
         ]
 
-        p.once('readable', function() {
+        p.once('readable', function () {
           var result = p.read()
           expect(p._path.length).to.equal(0)
           expect(result).to.eql({type: 'fill', path: path})
 
-          setTimeout(function() {
+          setTimeout(function () {
             expect(p._box).to.eql([-6, -0.5, 1, 5.5])
             done()
           }, 1)
@@ -1839,7 +1829,7 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'int', coord: {x: -5, y: 5}})
       })
 
-      it('should handle a third quadrant move', function(done) {
+      it('should handle a third quadrant move', function (done) {
         var path = [
           {type: 'line', start: [1, 0.5], end: [-1, 0.5]},
           {type: 'line', start: [-1, 0.5], end: [-6, -4.5]},
@@ -1849,12 +1839,12 @@ describe('gerber plotter', function() {
           {type: 'line', start: [1, -0.5], end: [1, 0.5]},
         ]
 
-        p.once('readable', function() {
+        p.once('readable', function () {
           var result = p.read()
           expect(p._path.length).to.equal(0)
           expect(result).to.eql({type: 'fill', path: path})
 
-          setTimeout(function() {
+          setTimeout(function () {
             expect(p._box).to.eql([-6, -5.5, 1, 0.5])
             done()
           }, 1)
@@ -1863,7 +1853,7 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'int', coord: {x: -5, y: -5}})
       })
 
-      it('should handle a fourth quadrant move', function(done) {
+      it('should handle a fourth quadrant move', function (done) {
         var path = [
           {type: 'line', start: [-1, 0.5], end: [-1, -0.5]},
           {type: 'line', start: [-1, -0.5], end: [4, -5.5]},
@@ -1873,12 +1863,12 @@ describe('gerber plotter', function() {
           {type: 'line', start: [1, 0.5], end: [-1, 0.5]},
         ]
 
-        p.once('readable', function() {
+        p.once('readable', function () {
           var result = p.read()
           expect(p._path.length).to.equal(0)
           expect(result).to.eql({type: 'fill', path: path})
 
-          setTimeout(function() {
+          setTimeout(function () {
             expect(p._box).to.eql([-1, -5.5, 6, 0.5])
             done()
           }, 1)
@@ -1887,11 +1877,11 @@ describe('gerber plotter', function() {
         p.write({type: 'op', op: 'int', coord: {x: 5, y: -5}})
       })
 
-      it('should do a normal stroke if region mode is on', function(done) {
+      it('should do a normal stroke if region mode is on', function (done) {
         p._region = true
         p.write({type: 'op', op: 'int', coord: {x: 5, y: 5}})
 
-        setTimeout(function() {
+        setTimeout(function () {
           expect(p._path.traverse()).to.eql([
             {type: 'line', start: [0, 0], end: [5, 5]},
           ])
@@ -1900,10 +1890,10 @@ describe('gerber plotter', function() {
       })
     })
 
-    it('should allow but warn about modal operation codes', function(done) {
-      p.once('warning', function(w) {
+    it('should allow but warn about modal operation codes', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/modal operation/)
-        setTimeout(function() {
+        setTimeout(function () {
           expect(p._path.length).to.equal(2)
           done()
         }, 5)
@@ -1914,15 +1904,15 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('operation warnings', function() {
-    beforeEach(function() {
+  describe('operation warnings', function () {
+    beforeEach(function () {
       var tool = {shape: 'circle', params: [2], hole: []}
       p.write({type: 'set', prop: 'epsilon', value: 0.00000001})
       p.write({type: 'tool', code: '10', tool: tool})
     })
 
-    it('should warn and use backup units if the units are not set', function(done) {
-      p.once('warning', function(w) {
+    it('should warn and use backup units if the units are not set', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/backup units/)
         done()
       })
@@ -1932,8 +1922,8 @@ describe('gerber plotter', function() {
       p.write({type: 'op', op: 'int', coord: {x: 1, y: 1}})
     })
 
-    it('should warn and use backup notation if the notation is not set', function(done) {
-      p.once('warning', function(w) {
+    it('should warn and use backup notation if the notation is not set', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/backup notation/)
         done()
       })
@@ -1943,8 +1933,8 @@ describe('gerber plotter', function() {
       p.write({type: 'op', op: 'int', coord: {x: 1, y: 1}})
     })
 
-    it('should warn if a tool is flashed in region mode', function(done) {
-      p.once('warning', function(w) {
+    it('should warn if a tool is flashed in region mode', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/flash in region/)
         done()
       })
@@ -1955,8 +1945,8 @@ describe('gerber plotter', function() {
       p.write({type: 'op', op: 'flash', coord: {x: 1, y: 1}})
     })
 
-    it('should warn if a non-existent tool is flashed', function(done) {
-      p.once('warning', function(w) {
+    it('should warn if a non-existent tool is flashed', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/unknown tool/)
         done()
       })
@@ -1967,13 +1957,13 @@ describe('gerber plotter', function() {
       p.write({type: 'op', op: 'flash', coord: {x: 1, y: 1}})
     })
 
-    it('should warn and ignore interpolates with unstrokable tools', function(done) {
+    it('should warn and ignore interpolates with unstrokable tools', function (done) {
       var tool = {shape: 'circle', params: [2], hole: [1]}
 
-      p.once('warning', function(w) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/not strokable/)
 
-        setTimeout(function() {
+        setTimeout(function () {
           expect(p._path.length).to.equal(0)
           done()
         }, 5)
@@ -1986,10 +1976,10 @@ describe('gerber plotter', function() {
       p.write({type: 'op', op: 'int', coord: {x: 1, y: 1}})
     })
 
-    it('should warn and assume linear interpolation mode if unspecified', function(done) {
-      p.once('warning', function(w) {
+    it('should warn and assume linear interpolation mode if unspecified', function (done) {
+      p.once('warning', function (w) {
         expect(w.message).to.match(/no interpolation.*linear/)
-        setTimeout(function() {
+        setTimeout(function () {
           expect(p._path.length).to.equal(1)
           done()
         }, 5)
@@ -2000,10 +1990,10 @@ describe('gerber plotter', function() {
       p.write({type: 'op', op: 'int', coord: {x: 1, y: 1}})
     })
 
-    it('should warn and assume single-quadrant mode if unspecified', function(done) {
-      p.on('warning', function(w) {
+    it('should warn and assume single-quadrant mode if unspecified', function (done) {
+      p.on('warning', function (w) {
         expect(w.message).to.match(/assuming single quadrant/)
-        setTimeout(function() {
+        setTimeout(function () {
           expect(p._arc).to.equal('s')
           expect(p._path.length).to.equal(1)
           done()
@@ -2017,7 +2007,7 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('emitting strokes and regions', function() {
+  describe('emitting strokes and regions', function () {
     var path = [
       {type: 'line', start: [0, 0], end: [1, 0]},
       {type: 'line', start: [1, 0], end: [1, 1]},
@@ -2025,19 +2015,19 @@ describe('gerber plotter', function() {
       {type: 'line', start: [0, 1], end: [0, 0]},
     ]
 
-    beforeEach(function() {
+    beforeEach(function () {
       var tool0 = {shape: 'circle', params: [0.2], hole: []}
       var tool1 = {shape: 'circle', params: [0.4], hole: []}
       p.write({type: 'tool', code: '11', tool: tool1})
       p.write({type: 'tool', code: '10', tool: tool0})
 
-      path.forEach(function(path) {
+      path.forEach(function (path) {
         p._path.add(path)
       })
     })
 
-    it('should end the path on a tool change', function(done) {
-      p.once('data', function() {
+    it('should end the path on a tool change', function (done) {
+      p.once('data', function () {
         expect(p._path.length).to.equal(0)
         done()
       })
@@ -2045,10 +2035,10 @@ describe('gerber plotter', function() {
       p.write({type: 'set', prop: 'tool', value: '10'})
     })
 
-    it('should end the path on a tool definition', function(done) {
+    it('should end the path on a tool definition', function (done) {
       var tool = {shape: 'circle', params: [0.1], hole: []}
 
-      p.once('data', function() {
+      p.once('data', function () {
         expect(p._path.length).to.equal(0)
         done()
       })
@@ -2056,8 +2046,8 @@ describe('gerber plotter', function() {
       p.write({type: 'tool', code: '12', tool: tool})
     })
 
-    it('should end the path on a region change', function(done) {
-      p.once('data', function() {
+    it('should end the path on a region change', function (done) {
+      p.once('data', function () {
         expect(p._path.length).to.equal(0)
         done()
       })
@@ -2065,8 +2055,8 @@ describe('gerber plotter', function() {
       p.write({type: 'set', prop: 'region', value: true})
     })
 
-    it('should end the path on a polarity change', function(done) {
-      p.once('data', function() {
+    it('should end the path on a polarity change', function (done) {
+      p.once('data', function () {
         expect(p._path.length).to.equal(0)
         done()
       })
@@ -2074,8 +2064,8 @@ describe('gerber plotter', function() {
       p.write({type: 'level', level: 'polarity', value: 'C'})
     })
 
-    it('should end the path on a step repeat', function(done) {
-      p.once('data', function() {
+    it('should end the path on a step repeat', function (done) {
+      p.once('data', function () {
         expect(p._path.length).to.equal(0)
         done()
       })
@@ -2087,8 +2077,8 @@ describe('gerber plotter', function() {
       })
     })
 
-    it('should end the path on stream end', function(done) {
-      p.once('data', function() {
+    it('should end the path on stream end', function (done) {
+      p.once('data', function () {
         expect(p._path.length).to.equal(0)
         done()
       })
@@ -2096,14 +2086,14 @@ describe('gerber plotter', function() {
       p.end()
     })
 
-    it('should emit a stroke if region mode it off', function(done) {
+    it('should emit a stroke if region mode it off', function (done) {
       var expected = {
         type: 'stroke',
         width: 0.2,
         path: path,
       }
 
-      p.once('readable', function() {
+      p.once('readable', function () {
         var data = p.read()
         expect(data).to.eql(expected)
         done()
@@ -2112,10 +2102,10 @@ describe('gerber plotter', function() {
       p._finishPath()
     })
 
-    it('should emit a fill if region mode is on', function(done) {
+    it('should emit a fill if region mode is on', function (done) {
       var expected = {type: 'fill', path: path}
 
-      p.once('readable', function() {
+      p.once('readable', function () {
         var data = p.read()
         expect(data).to.eql(expected)
         done()
@@ -2126,15 +2116,15 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('emitting new layers', function() {
-    it('should push a polarity change with the current bounding box', function(done) {
+  describe('emitting new layers', function () {
+    it('should push a polarity change with the current bounding box', function (done) {
       var results = 0
       var expected = [
         {type: 'polarity', polarity: 'clear', box: [0, 0, 10, 10]},
         {type: 'polarity', polarity: 'dark', box: [0, 0, 10, 10]},
       ]
 
-      var handleData = function(data) {
+      var handleData = function (data) {
         expect(data).to.eql(expected[results])
         if (++results >= expected.length) {
           p.removeListener('data', handleData)
@@ -2148,8 +2138,8 @@ describe('gerber plotter', function() {
       p.write({type: 'level', level: 'polarity', value: 'D'})
     })
 
-    it('should push a step repeat with the current bounding box', function(done) {
-      p.once('readable', function() {
+    it('should push a step repeat with the current bounding box', function (done) {
+      p.once('readable', function () {
         var result = p.read()
         expect(result).to.eql({
           type: 'repeat',
@@ -2174,7 +2164,7 @@ describe('gerber plotter', function() {
       })
     })
 
-    it('should update the box during a step repeat', function() {
+    it('should update the box during a step repeat', function () {
       var tool = {shape: 'circle', params: [2], hole: []}
       p.write({type: 'tool', code: '10', tool: tool})
       p.write({
@@ -2186,8 +2176,8 @@ describe('gerber plotter', function() {
       expect(p._box).to.eql([-4, 0, 1.5, 5])
     })
 
-    it('should emit an empty step repeat if SR is disabled', function(done) {
-      p.once('readable', function() {
+    it('should emit an empty step repeat if SR is disabled', function (done) {
+      p.once('readable', function () {
         var result = p.read()
         expect(result.offsets).to.eql([])
         done()
@@ -2201,9 +2191,9 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('ending the stream', function() {
-    it('should push a size object after the stream ends', function(done) {
-      p.once('readable', function() {
+  describe('ending the stream', function () {
+    it('should push a size object after the stream ends', function (done) {
+      p.once('readable', function () {
         var result = p.read()
         expect(result).to.eql({type: 'size', box: [1, 2, 3, 4], units: 'in'})
         done()
@@ -2215,10 +2205,10 @@ describe('gerber plotter', function() {
     })
   })
 
-  describe('outline mode', function() {
+  describe('outline mode', function () {
     var outPlotter
     var tool
-    beforeEach(function() {
+    beforeEach(function () {
       tool = {shape: 'circle', params: [2], hole: []}
 
       outPlotter = plotter({plotAsOutline: true})
@@ -2229,7 +2219,7 @@ describe('gerber plotter', function() {
       outPlotter.write({type: 'tool', code: '10', tool: tool})
     })
 
-    it('should update the bounding box in as if it was region mode', function() {
+    it('should update the bounding box in as if it was region mode', function () {
       outPlotter.write({type: 'op', op: 'int', coord: {x: 1, y: 3}})
       outPlotter.write({type: 'op', op: 'int', coord: {x: 3, y: 3}})
       outPlotter.write({type: 'op', op: 'int', coord: {x: 0, y: 0}})
@@ -2237,7 +2227,7 @@ describe('gerber plotter', function() {
       expect(outPlotter._box).to.eql([0, 0, 3, 3])
     })
 
-    it('should set the tool to the first used tool and never change it', function() {
+    it('should set the tool to the first used tool and never change it', function () {
       var newTool = {shape: 'circle', params: [4], hole: []}
       var newerTool = {shape: 'circle', params: [6], hole: []}
 
@@ -2252,23 +2242,23 @@ describe('gerber plotter', function() {
       expect(outPlotter._tool.code).to.equal('10')
     })
 
-    it('should fill gaps in paths if in outline mode', function() {
+    it('should fill gaps in paths if in outline mode', function () {
       expect(!outPlotter._path._fillGaps).to.equal(false)
       outPlotter.write({type: 'op', op: 'int', coord: {x: 1, y: 3}})
       outPlotter._finishPath()
       expect(!outPlotter._path._fillGaps).to.equal(false)
     })
 
-    it('should be able to set a custom max gap size', function() {
+    it('should be able to set a custom max gap size', function () {
       outPlotter = plotter({plotAsOutline: 0.0011, units: 'mm'})
       expect(outPlotter._path._fillGaps).to.equal(0.0011)
     })
   })
 
-  describe('path optimization', function() {
+  describe('path optimization', function () {
     var optimizedPlotter
     var tool
-    beforeEach(function() {
+    beforeEach(function () {
       tool = {shape: 'circle', params: [2], hole: []}
 
       optimizedPlotter = plotter({optimizePaths: true})
@@ -2279,14 +2269,14 @@ describe('gerber plotter', function() {
       optimizedPlotter.write({type: 'tool', code: '10', tool: tool})
     })
 
-    it('should set the path to optimize', function() {
+    it('should set the path to optimize', function () {
       expect(optimizedPlotter._path._optimize).to.equal(true)
       optimizedPlotter.write({type: 'op', op: 'int', coord: {x: 1, y: 3}})
       optimizedPlotter._finishPath()
       expect(optimizedPlotter._path._optimize).to.equal(true)
     })
 
-    it('should not optimize in region mode', function() {
+    it('should not optimize in region mode', function () {
       optimizedPlotter.write({type: 'set', prop: 'region', value: true})
       expect(optimizedPlotter._path._optimize).to.equal(false)
       optimizedPlotter.write({type: 'set', prop: 'region', value: false})

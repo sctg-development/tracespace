@@ -41,7 +41,7 @@ Or, use a script tag:
 Pass `whatsThatGerber` an array of filenames from a PCB, and it will give you back an object keyed by filename with the best guess it can make for the type and side of each file. If both `side` and `type` are `null`, the filename cannot be identified as a Gerber / drill file.
 
 ```js
-const whatsThatGerber = require('whats-that-gerber')
+const whatsThatGerber = require('@sctg/whats-that-gerber')
 
 const filenames = ['my-board-F_Cu.gbr', 'my-board-B_Cu.gbr', 'foo.bar']
 const typeByFilename = whatsThatGerber(filenames)
@@ -67,7 +67,7 @@ There are 12 available layer types, were a type is an object of the format:
 You can get an array of all types with:
 
 ```js
-const {getAllLayers} = require('whats-that-gerber')
+const {getAllLayers} = require('@sctg/whats-that-gerber')
 const allLayers = getAllLayers()
 ```
 
@@ -106,7 +106,7 @@ const {
   SIDE_BOTTOM, // 'bottom'
   SIDE_INNER, // 'inner'
   SIDE_ALL, // 'all'
-} = require('whats-that-gerber')
+} = require('@sctg/whats-that-gerber')
 ```
 
 #### checking if a layer type is valid
@@ -114,7 +114,7 @@ const {
 You can check if any given string is a valid layer type with:
 
 ```js
-const {validate} = require('whats-that-gerber')
+const {validate} = require('@sctg/whats-that-gerber')
 
 const type1 = {side: 'top', type: 'copper'}
 const type2 = {side: 'foo', type: 'silkscreen'}
@@ -140,4 +140,4 @@ We should be able to identify files output by the following programs:
 
 Please read the [Contributing Section](../README.md#contributing) of the main README for development setup instructions.
 
-If you're adding or modifying a filetype matcher, please remember to add or modify an example filename in [`@tracespace/fixtures/gerber-filenames.json`](../fixtures/gerber-filenames.json) to ensure your change is tested.
+If you're adding or modifying a filetype matcher, please remember to add or modify an example filename in [`@sctg/tracespace-fixtures/gerber-filenames.json`](../fixtures/gerber-filenames.json) to ensure your change is tested.

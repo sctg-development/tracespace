@@ -3,7 +3,7 @@
 
 var xmlElementString = require('xml-element-string')
 
-module.exports = function(converter, attr, createElement) {
+module.exports = function (converter, attr, createElement) {
   var element = createElement || xmlElementString
 
   var attributes = {
@@ -21,7 +21,7 @@ module.exports = function(converter, attr, createElement) {
 
   if (typeof attr === 'string') attr = {id: attr}
 
-  Object.keys(attr || {}).forEach(function(key) {
+  Object.keys(attr || {}).forEach(function (key) {
     var value = attr[key]
 
     if (value != null) {

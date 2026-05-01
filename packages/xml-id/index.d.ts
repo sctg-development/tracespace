@@ -1,4 +1,4 @@
-// Type definitions for @tracespace/xml-id 4.0
+// Type definitions for @sctg/tracespace-xml-id 4.0
 // Project: https://github.com/tracespace/tracespace
 // Definitions by: Mike Cousins <https://mike.cousins.io>
 

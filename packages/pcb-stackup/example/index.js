@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const {promisify} = require('util')
-const pcbStackup = require('pcb-stackup')
+const pcbStackup = require('@sctg/pcb-stackup')
 
 const writeFile = promisify(fs.writeFile)
 
@@ -24,10 +24,10 @@ const GERBER_FILENAMES = [
 renderStackup()
   .then(writeStackup)
   .then(() => console.log(`Wrote:\n  ${TOP_OUT}\n  ${BOTTOM_OUT}`))
-  .catch(error => console.error('Error rendering stackup', error))
+  .catch((error) => console.error('Error rendering stackup', error))
 
 function renderStackup() {
-  const layers = GERBER_FILENAMES.map(filename => ({
+  const layers = GERBER_FILENAMES.map((filename) => ({
     filename,
     gerber: fs.createReadStream(path.join(GERBERS_DIR, filename)),
   }))
