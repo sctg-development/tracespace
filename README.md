@@ -85,7 +85,7 @@ This repository has one web-app that is published to <https://tracespace.io>
 
 > Probably the best printed circuit board viewer on the internet
 
-A Gerber viewer powered by the tracespace libraries. Available at <https://tracespace.io/view>.
+A Gerber viewer powered by the tracespace libraries. Available at <https://sctg-development.github.io/tracespace/>.
 
 [view]: ./apps/view
 
