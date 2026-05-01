@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Build all apps
-        run: npm run build:all
+        run: npm run build
 
       - name: Build Vite app for apps/view
         run: npx vite build --base=/tracespace
