@@ -1,9 +1,9 @@
 import React from 'react'
-import {Formik, Form, Field} from 'formik'
+import { Formik, Form, Field } from 'formik'
 
-import {useLocation} from '../hooks'
-import {Button, Icon} from '../ui'
-import {select} from '../events'
+import { useLocation } from '../hooks'
+import { Button, Icon } from '../ui'
+import { select } from '../events'
 
 const LABEL_STYLE = 'db pointer mb2'
 const WRAPPER_STYLE = 'flex items-bottom h2'
@@ -15,7 +15,8 @@ const INPUT_ID = 'load-files_url-input'
 
 const defaultUrl = (loc: Location | null): string => {
   if (!loc) return ''
-  return `${loc.origin}${import.meta.env.BASE_URL}/arduino-uno.zip`
+  const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? `${loc.origin}${import.meta.env.BASE_URL.slice(0, -1)}` : `${loc.origin}${import.meta.env.BASE_URL}`
+  return `${baseUrl}/arduino-uno.zip`
 }
 
 export type UrlInputProps = {
@@ -24,12 +25,12 @@ export type UrlInputProps = {
 }
 
 export default function UrlInput(props: UrlInputProps): JSX.Element {
-  const {children, handleUrl} = props
+  const { children, handleUrl } = props
   const location = useLocation()
 
   return (
     <Formik
-      initialValues={{url: defaultUrl(location)}}
+      initialValues={{ url: defaultUrl(location) }}
       onSubmit={(values) => {
         console.log('[UrlInput] Form submitted with URL:', values.url)
         handleUrl(values.url)
