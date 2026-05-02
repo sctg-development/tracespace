@@ -1,7 +1,6 @@
 # what's that gerber?
 
 [![latest][whats-that-gerber-latest-badge]][npm]
-[![next][whats-that-gerber-next-badge]][npm-next]
 [![david][whats-that-gerber-david-badge]][david]
 
 > Identify Gerber and drill files by filename
@@ -10,26 +9,22 @@ Have you got a bunch of Gerber files lying around without any idea what they're 
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/whats-that-gerber
-[npm-next]: https://www.npmjs.com/package/whats-that-gerber/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/whats-that-gerber
-[whats-that-gerber-latest-badge]: https://flat.badgen.net/npm/v/whats-that-gerber
-[whats-that-gerber-next-badge]: https://flat.badgen.net/npm/v/whats-that-gerber/next
-[whats-that-gerber-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/whats-that-gerber
+[tracespace]: https://github.com/sctg-development/tracespace
+[npm]: https://www.npmjs.com/package/@sctg/whats-that-gerber
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/whats-that-gerber
+[whats-that-gerber-latest-badge]: https://flat.badgen.net/npm/v/@sctg/whats-that-gerber
+[whats-that-gerber-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/whats-that-gerber
 
 ## install
 
 ```shell
-npm install --save whats-that-gerber
-# or
-yarn add whats-that-gerber
+npm install --save @sctg/whats-that-gerber
 ```
 
 Or, use a script tag:
 
 ```html
-<script src="https://unpkg.com/whats-that-gerber@^4.0.0/dist/whats-that-gerber.min.js"></script>
+<script src="https://unpkg.com/@sctg/whats-that-gerber@^5.1.0/dist/@sctg/whats-that-gerber.min.js"></script>
 <script>
   // global variable whatsThatGerber now available
   var parser = whatsThatGerber()

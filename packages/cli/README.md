@@ -1,31 +1,26 @@
 # tracespace cli
 
 [![latest][@sctg/tracespace-cli-latest-badge]][npm]
-[![next][@sctg/tracespace-cli-next-badge]][npm-next]
 [![david][@sctg/tracespace-cli-david-badge]][david]
 
 > Render PCBs as SVGs from the comfort of your own terminal
 
-The tracespace CLI provides a wrapper for [@sctg/gerber-to-svg][] and [pcb-stackup][] so you can generate beautiful, precise SVG renders of printed circuit boards quickly and easily.
+The tracespace CLI provides a wrapper for [@sctg/gerber-to-svg][] and [@sctg/pcb-stackup][] so you can generate beautiful, precise SVG renders of printed circuit boards quickly and easily.
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[@sctg/gerber-to-svg]: ../@sctg/gerber-to-svg
-[pcb-stackup]: ../pcb-stackup
-[tracespace]: https://github.com/tracespace/tracespace
+[@sctg/gerber-to-svg]: ../gerber-to-svg
+[@sctg/pcb-stackup]: ../pcb-stackup
+[tracespace]: https://github.com/sctg-development/tracespace
 [npm]: https://www.npmjs.com/package/@sctg/tracespace-cli
-[npm-next]: https://www.npmjs.com/package/@sctg/tracespace-cli/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/cli
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/cli
 [@sctg/tracespace-cli-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-cli
-[@sctg/tracespace-cli-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-cli/next
-[@sctg/tracespace-cli-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/cli
+[@sctg/tracespace-cli-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/cli
 
 ## install
 
 ```shell
 npm install -g @sctg/tracespace-cli
-# or
-yarn global add @sctg/tracespace-cli
 ```
 
 ## usage

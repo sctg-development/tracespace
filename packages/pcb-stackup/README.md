@@ -1,33 +1,28 @@
 # pcb stackup
 
-[![latest][pcb-stackup-latest-badge]][npm]
-[![next][pcb-stackup-next-badge]][npm-next]
+[![latest][@sctg/pcb-stackup-latest-badge]][npm]
 [![david][pcb-stackup-david-badge]][david]
 
 > Render PCBs as beautiful, precise SVGs from Gerber / NC drill files
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/pcb-stackup
-[npm-next]: https://www.npmjs.com/package/pcb-stackup/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/pcb-stackup
-[pcb-stackup-latest-badge]: https://flat.badgen.net/npm/v/pcb-stackup
-[pcb-stackup-next-badge]: https://flat.badgen.net/npm/v/pcb-stackup/next
-[pcb-stackup-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/pcb-stackup
+[tracespace]: https://github.com/sctg-development/tracespace
+[npm]: https://www.npmjs.com/package/@sctg/pcb-stackup
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/pcb-stackup
+[@sctg/pcb-stackup-latest-badge]: https://flat.badgen.net/npm/v/@sctg/pcb-stackup
+[pcb-stackup-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/pcb-stackup
 
 ## install
 
 ```shell
-npm install --save pcb-stackup
-# or
-yarn add pcb-stackup
+npm install --save @sctg/pcb-stackup
 ```
 
 Or, use a script tag:
 
 ```html
-<script src="https://unpkg.com/pcb-stackup@^4.0.0/dist/pcb-stackup.min.js"></script>
+<script src="https://unpkg.com/@sctg/pcb-stackup@^5.1.0/dist/@sctg/pcb-stackup.min.js"></script>
 <script>
   // global variable pcbStackup now available
   pcbStackup(layers).then((stackup) => {
@@ -38,14 +33,14 @@ Or, use a script tag:
 
 ## example
 
-![arduino-uno-top](https://unpkg.com/pcb-stackup@next/example/arduino-uno-top.svg)
-![arduino-uno-bottom](https://unpkg.com/pcb-stackup@next/example/arduino-uno-bottom.svg)
+![arduino-uno-top](https://unpkg.com/@sctg/pcb-stackup@^5.1.0/example/arduino-uno-top.svg)
+![arduino-uno-bottom](https://unpkg.com/@sctg/pcb-stackup@^5.1.0/example/arduino-uno-bottom.svg)
 
 After you clone and set-up the repository as detailed in [development setup](../..#development-setup), you can run `pcb-stackup`'s [example script](./example/index.js) to render the top and bottom of an Arduino Uno PCB.
 
 ```shell
 cd tracespace/packages/pcb-stackup
-yarn example
+npm run example
 ```
 
 Arduino Uno design files used here under the terms of the [Creative Commons Attribution Share-Alike license](https://www.arduino.cc/en/Main/FAQ).

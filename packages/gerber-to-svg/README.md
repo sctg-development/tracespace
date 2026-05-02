@@ -1,7 +1,6 @@
 # gerber to svg
 
 [![latest][@sctg/gerber-to-svg-latest-badge]][npm]
-[![next][@sctg/gerber-to-svg-next-badge]][npm-next]
 [![david][@sctg/gerber-to-svg-david-badge]][david]
 
 > Render individual Gerber / NC drill files as SVGs
@@ -10,13 +9,11 @@
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
+[tracespace]: https://github.com/sctg-development/tracespace
 [npm]: https://www.npmjs.com/package/@sctg/gerber-to-svg
-[npm-next]: https://www.npmjs.com/package/@sctg/gerber-to-svg/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/@sctg/gerber-to-svg
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/gerber-to-svg
 [@sctg/gerber-to-svg-latest-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-to-svg
-[@sctg/gerber-to-svg-next-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-to-svg/next
-[@sctg/gerber-to-svg-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/@sctg/gerber-to-svg
+[@sctg/gerber-to-svg-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/gerber-to-svg
 [gerber]: https://en.wikipedia.org/wiki/Gerber_format
 [nc-drill]: https://en.wikipedia.org/wiki/Excellon_format
 [svg]: https://en.wikipedia.org/wiki/Scalable_Vector_Graphics
@@ -25,14 +22,12 @@ Part of the [tracespace][] collection of PCB visualization tools.
 
 ```shell
 npm install --save @sctg/gerber-to-svg
-# or
-yarn add @sctg/gerber-to-svg
 ```
 
 Or, use a script tag:
 
 ```html
-<script src="https://unpkg.com/@sctg/gerber-to-svg@^4.0.0/dist/@sctg/gerber-to-svg.min.js"></script>
+<script src="https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/dist/@sctg/gerber-to-svg.min.js"></script>
 <script>
   // global variable gerberToSvg now available
   var converter = gerberToSvg(input)
@@ -44,15 +39,15 @@ Or, use a script tag:
 After you clone and set-up the repository as detailed in [development setup](../..#development-setup), you can run `@sctg/gerber-to-svg`'s [example script](./example/index.js) to render all the layers of an Arduino Uno PCB.
 
 ```shell
-cd tracespace/packages/@sctg/gerber-to-svg
-yarn example
+cd tracespace/packages/gerber-to-svg
+npm run example
 ```
 
 ![arduino uno sol][sol]
 
 Arduino Uno design files used here under the terms of the [Creative Commons Attribution Share-Alike license](https://www.arduino.cc/en/Main/FAQ).
 
-[sol]: https://unpkg.com/@sctg/gerber-to-svg@next/example/arduino-uno.sol.svg
+[sol]: https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.sol.svg
 
 ## usage
 

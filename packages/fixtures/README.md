@@ -1,7 +1,6 @@
 # tracespace fixtures
 
 [![latest][@sctg/tracespace-fixtures-latest-badge]][npm]
-[![next][@sctg/tracespace-fixtures-next-badge]][npm-next]
 [![david][@sctg/tracespace-fixtures-david-badge]][david]
 
 > Test fixtures for tracespace projects
@@ -10,13 +9,11 @@ This module is a collection of data, including real-world open-source Gerber and
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
+[tracespace]: https://github.com/sctg-development/tracespace
 [npm]: https://www.npmjs.com/package/@sctg/tracespace-fixtures
-[npm-next]: https://www.npmjs.com/package/@sctg/tracespace-fixtures/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/fixtures
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/fixtures
 [@sctg/tracespace-fixtures-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-fixtures
-[@sctg/tracespace-fixtures-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-fixtures/next
-[@sctg/tracespace-fixtures-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/fixtures
+[@sctg/tracespace-fixtures-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/fixtures
 
 ## install
 
@@ -24,8 +21,6 @@ Please note: because this package is a collection of test fixtures, it may not f
 
 ```shell
 npm install --save-dev --save-exact @sctg/tracespace-fixtures
-# or
-yarn add --dev --exact @sctg/tracespace-fixtures
 ```
 
 ## usage

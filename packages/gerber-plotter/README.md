@@ -3,41 +3,34 @@
 > Streaming Gerber / NC drill layer image plotter
 
 [![latest][@sctg/gerber-plotter-latest-badge]][npm]
-[![next][@sctg/gerber-plotter-next-badge]][npm-next]
 [![david][@sctg/gerber-plotter-david-badge]][david]
 
-A printed circuit board Gerber and drill file plotter. Implemented as a Node transform stream that consumes objects output by [@sctg/gerber-parser](../@sctg/gerber-parser) and outputs PCB image objects.
+A printed circuit board Gerber and drill file plotter. Implemented as a Node transform stream that consumes objects output by [@sctg/gerber-parser](../gerber-parser) and outputs PCB image objects.
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
+[tracespace]: https://github.com/sctg-development/tracespace
 [npm]: https://www.npmjs.com/package/@sctg/gerber-plotter
-[npm-next]: https://www.npmjs.com/package/@sctg/gerber-plotter/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/@sctg/gerber-plotter
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/gerber-plotter
 [@sctg/gerber-plotter-latest-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-plotter
-[@sctg/gerber-plotter-next-badge]: https://flat.badgen.net/npm/v/@sctg/gerber-plotter/next
-[@sctg/gerber-plotter-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/@sctg/gerber-plotter
+[@sctg/gerber-plotter-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/gerber-plotter
 
 ## install
 
 ```shell
 npm install --save @sctg/gerber-plotter
-# or
-yarn add @sctg/gerber-plotter
 ```
 
 `@sctg/gerber-parser` is a peer dependency, so you probably want to install it too:
 
 ```shell
 npm install --save @sctg/gerber-parser
-# or
-yarn add @sctg/gerber-parser
 ```
 
 Or, use a script tag:
 
 ```html
-<script src="https://unpkg.com/@sctg/gerber-plotter@^4.0.0/dist/@sctg/gerber-plotter.min.js"></script>
+<script src="https://unpkg.com/@sctg/gerber-plotter@^5.1.0/dist/@sctg/gerber-plotter.min.js"></script>
 <script>
   // global variable gerberPlotter now available
   var plotter = gerberPlotter()

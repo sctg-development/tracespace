@@ -1,45 +1,38 @@
 # pcb stackup core
 
-[![latest][pcb-stackup-core-latest-badge]][npm]
-[![next][pcb-stackup-core-next-badge]][npm-next]
+[![latest][@sctg/pcb-stackup-core-latest-badge]][npm]
 [![david][pcb-stackup-core-david-badge]][david]
 
 > Stack @sctg/gerber-to-svg layer renders to build PCB renders
 
 If you're looking for an easy way to generate beautiful SVG renders of printed circuit boards, check out the higher-level [pcb-stackup](../pcb-stackup) tool first.
 
-`pcb-stackup-core` is the low-level module that powers the rendering of `pcb-stackup`. It takes individual printed circuit board layer converters as output by [@sctg/gerber-to-svg](../@sctg/gerber-to-svg) and identified as PCB layer types by [whats-that-gerber](../whats-that-gerber) and uses them to build SVG renders of what the manufactured PCB will look like from the top and the bottom.
+`@sctg/pcb-stackup-core` is the low-level module that powers the rendering of `@sctg/pcb-stackup`. It takes individual printed circuit board layer converters as output by [@sctg/gerber-to-svg](../gerber-to-svg) and identified as PCB layer types by [@sctg/whats-that-gerber](../whats-that-gerber) and uses them to build SVG renders of what the manufactured PCB will look like from the top and the bottom.
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
-[npm]: https://www.npmjs.com/package/pcb-stackup-core
-[npm-next]: https://www.npmjs.com/package/pcb-stackup-core/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/pcb-stackup-core
-[pcb-stackup-core-latest-badge]: https://flat.badgen.net/npm/v/pcb-stackup-core
-[pcb-stackup-core-next-badge]: https://flat.badgen.net/npm/v/pcb-stackup-core/next
-[pcb-stackup-core-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/pcb-stackup-core
+[tracespace]: https://github.com/sctg-development/tracespace
+[npm]: https://www.npmjs.com/package/@sctg/pcb-stackup-core
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/pcb-stackup-core
+[@sctg/pcb-stackup-core-latest-badge]: https://flat.badgen.net/npm/v/@sctg/pcb-stackup-core
+[pcb-stackup-core-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/pcb-stackup-core
 
 ## install
 
 ```shell
-npm install --save pcb-stackup-core
-# or
-yarn add pcb-stackup-core
+npm install --save @sctg/pcb-stackup-core
 ```
 
 `@sctg/gerber-to-svg` and `whats-that-gerber` are peer dependencies, so you'll want them, too:
 
 ```shell
-npm install --save @sctg/gerber-to-svg whats-that-gerber
-# or
-yarn add @sctg/gerber-to-svg whats-that-gerber
+npm install --save @sctg/gerber-to-svg @sctg/whats-that-gerber
 ```
 
 Or, use a script tag:
 
 ```html
-<script src="https://unpkg.com/pcb-stackup-core@^4.0.0/dist/pcb-stackup-core.min.js"></script>
+<script src="https://unpkg.com/@sctg/pcb-stackup-core@^5.1.0/dist/@sctg/pcb-stackup-core.min.js"></script>
 <script>
   // global variable pcbStackupCore now available
   var stackup = pcbStackupCore(layers)
@@ -52,7 +45,7 @@ After you clone and set-up the repository as detailed in [development setup](../
 
 ```shell
 cd tracespace/packages/pcb-stackup-core
-yarn example
+npm run example
 ```
 
 Arduino Uno design files used here under the terms of the [Creative Commons Attribution Share-Alike license](https://www.arduino.cc/en/Main/FAQ).
@@ -90,9 +83,9 @@ var stackup = pcbStackupCore(layersArray)
 // }
 ```
 
-In `top.svg` and `bottom.svg` are the SVG elements (by default as XML strings). The rest of the properties all correspond to the [public properties of a @sctg/gerber-to-svg converter](../@sctg/gerber-to-svg/API.md#public-properties). `units` is a string value of 'in' or 'mm'. `viewBox` is the minimum x value, minimum y value, width, and height in thousandths of (1000x) `units`. `width` and `height` are the width and height in `units`. `defs` and `layer` are arrays of XML elements that are used as children of the `defs` node and the SVG's main `g` node.
+In `top.svg` and `bottom.svg` are the SVG elements (by default as XML strings). The rest of the properties all correspond to the [public properties of a @sctg/gerber-to-svg converter](../gerber-to-svg/API.md#public-properties). `units` is a string value of 'in' or 'mm'. `viewBox` is the minimum x value, minimum y value, width, and height in thousandths of (1000x) `units`. `width` and `height` are the width and height in `units`. `defs` and `layer` are arrays of XML elements that are used as children of the `defs` node and the SVG's main `g` node.
 
-Astute readers will notice this is the same interface as @sctg/gerber-to-svg converters, and this means the [render](../@sctg/gerber-to-svg/API.md#render) and [clone](../@sctg/gerber-to-svg/API.md#clone) static methods of @sctg/gerber-to-svg will also work on the pcb-stackup-core renders.
+Astute readers will notice this is the same interface as @sctg/gerber-to-svg converters, and this means the [render](../gerber-to-svg/API.md#render) and [clone](../gerber-to-svg/API.md#clone) static methods of @sctg/gerber-to-svg will also work on the pcb-stackup-core renders.
 
 ### layers array
 
@@ -218,7 +211,7 @@ function createObjectElement(tag, attributes, children) {
 }
 ```
 
-If you choose to use this option, the function you pass into pcb-stackup-core **must** be the same one you passed into @sctg/gerber-to-svg. Also remember, if your `createElement` function returns something other than a string or Buffer, `options.objectMode` **must** be set to `true` in `gerberToSvg`. (See the [@sctg/gerber-to-svg docs](../@sctg/gerber-to-svg/API.md#element-options) for more details.)
+If you choose to use this option, the function you pass into pcb-stackup-core **must** be the same one you passed into @sctg/gerber-to-svg. Also remember, if your `createElement` function returns something other than a string or Buffer, `options.objectMode` **must** be set to `true` in `gerberToSvg`. (See the [@sctg/gerber-to-svg docs](../gerber-to-svg/API.md#element-options) for more details.)
 
 [xml-element-string]: https://github.com/tracespace/xml-element-string
 

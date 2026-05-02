@@ -1,7 +1,6 @@
 # xml id
 
 [![latest][@sctg/tracespace-xml-id-latest-badge]][npm]
-[![next][@sctg/tracespace-xml-id-next-badge]][npm-next]
 [![david][@sctg/tracespace-xml-id-david-badge]][david]
 
 > XML ID generation and sanitation utilities for tracespace projects
@@ -10,13 +9,11 @@ ID attributes in XML documents (e.g. SVG images) have certain requirements. This
 
 Part of the [tracespace][] collection of PCB visualization tools.
 
-[tracespace]: https://github.com/tracespace/tracespace
+[tracespace]: https://github.com/sctg-development/tracespace
 [npm]: https://www.npmjs.com/package/@sctg/tracespace-xml-id
-[npm-next]: https://www.npmjs.com/package/@sctg/tracespace-xml-id/v/next
-[david]: https://david-dm.org/tracespace/tracespace?path=packages/xml-id
+[david]: https://david-dm.org/sctg-development/tracespace?path=packages/xml-id
 [@sctg/tracespace-xml-id-latest-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-xml-id
-[@sctg/tracespace-xml-id-next-badge]: https://flat.badgen.net/npm/v/@sctg/tracespace-xml-id/next
-[@sctg/tracespace-xml-id-david-badge]: https://flat.badgen.net/david/dep/tracespace/tracespace/packages/xml-id
+[@sctg/tracespace-xml-id-david-badge]: https://flat.badgen.net/david/dep/sctg-development/tracespace/packages/xml-id
 
 ## install
 
@@ -24,8 +21,6 @@ Please note: because this package is an internal utility library, it may not fol
 
 ```shell
 npm install --save --save-exact @sctg/tracespace-xml-id
-# or
-yarn add --exact @sctg/tracespace-xml-id
 ```
 
 ## usage
