@@ -16,4 +16,3 @@ bundle.*
 .DS_Store
 .vscode
 lerna-debug.log
-__snapshots__/
