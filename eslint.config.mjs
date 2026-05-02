@@ -35,21 +35,7 @@ export default tseslint.config(
       'no-useless-assignment': 'off',
     },
   },
-  {
-    files: [
-      'packages/@sctg/gerber-parser/**/*.js',
-      'packages/@sctg/gerber-plotter/**/*.js',
-      'packages/@sctg/gerber-to-svg/**/*.js',
-      'packages/pcb-stackup/**/*.js',
-      'packages/pcb-stackup-core/**/*.js',
-      'packages/whats-that-gerber/**/*.js',
-      'packages/xml-id/**/*.js',
-    ],
-    languageOptions: {
-      ecmaVersion: 5,
-      sourceType: 'script',
-    },
-  },
+
   {
     files: ['**/*.config.js', '**/*.config.mjs', '**/integration/**/*.js', '**/example/**/*.js'],
     languageOptions: {
