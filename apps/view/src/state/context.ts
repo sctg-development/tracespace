@@ -12,6 +12,7 @@ export const INITIAL_STATE: State = {
   downloading: false,
   layerVisibility: {},
   error: null,
+  workerInitialized: false,
 }
 
 export const StoreContext = React.createContext<Store>({

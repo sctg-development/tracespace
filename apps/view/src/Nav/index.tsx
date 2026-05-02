@@ -12,6 +12,10 @@ import Footer from './Footer'
 type Props = {
   handleFiles: (event: FileEvent) => void
   handleUrl: (url: string) => void
+  showPageTitle?: boolean
+  showPageTitleLogo?: boolean
+  pageTitle?: string
+  pageSubtitle?: string
 }
 
 const STYLE = 'flex items-start justify-between relative w-100 h3'
@@ -21,12 +25,28 @@ const BUTTON_STYLE = 'ml1 pa1 f3'
 
 export default function Nav(props: Props): JSX.Element {
   const {board, loading, updating} = useAppState()
-  const {handleFiles, handleUrl} = props
+  const {
+    handleFiles,
+    handleUrl,
+    showPageTitle = true,
+    showPageTitleLogo = true,
+    pageTitle = 'tracespace',
+    pageSubtitle = 'view',
+  } = props
   const show = !loading && board !== null
 
   return (
     <nav className={STYLE}>
-      <PageTitle subtitle="view" className={TITLE_STYLE} />
+      {showPageTitle ? (
+        <PageTitle
+          title={pageTitle}
+          subtitle={pageSubtitle}
+          showLogo={showPageTitleLogo}
+          className={TITLE_STYLE}
+        />
+      ) : (
+        <div className={TITLE_STYLE} />
+      )}
       {board && (
         <Slide in={show} from="top">
           <BoardSettings board={board} updating={updating} />

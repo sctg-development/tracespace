@@ -1,5 +1,5 @@
 // root component
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 
 import {useAppState, createBoard, createBoardFromUrl} from './state'
 import BoardDisplay from './BoardDisplay'
@@ -12,8 +12,50 @@ import {preventDefault} from './events'
 import {Main} from './ui'
 import {FileEvent} from './types'
 
-function App(): JSX.Element {
-  const {dispatch} = useAppState()
+export type FileProp =
+  | string
+  | File
+  | Blob
+  | Array<File | Blob>
+
+export type AppProps = {
+  showNav?: boolean
+  showPageTitle?: boolean
+  showPageTitleLogo?: boolean
+  pageTitle?: string
+  pageSubtitle?: string
+  showLoadFiles?: boolean
+  file?: FileProp
+}
+
+function App(props: AppProps): JSX.Element {
+  const {
+    showNav = true,
+    showPageTitle = true,
+    showPageTitleLogo = true,
+    pageTitle = 'tracespace',
+    pageSubtitle = 'view',
+    showLoadFiles = true,
+    file,
+  } = props
+  const {dispatch, workerInitialized} = useAppState()
+  const loadedFileRef = useRef<FileProp | undefined>(undefined)
+
+  useEffect((): void => {
+    if (!workerInitialized) return
+    if (file === undefined || file === loadedFileRef.current) return
+    loadedFileRef.current = file
+
+    if (typeof file === 'string') {
+      dispatch(createBoardFromUrl(file))
+    } else {
+      const files = Array.isArray(file) ? file : [file]
+      const asFiles = files.map((f, i) =>
+        f instanceof File ? f : new File([f], `board-${i}.zip`)
+      )
+      dispatch(createBoard(asFiles, false))
+    }
+  }, [file, workerInitialized, dispatch])
 
   const handleFiles = (event: FileEvent): void => {
     const files =
@@ -35,8 +77,19 @@ function App(): JSX.Element {
       <BoardDisplay />
       <FileList />
       <BoardList />
-      <Nav handleFiles={handleFiles} handleUrl={handleUrl} />
-      <LoadFiles handleFiles={handleFiles} handleUrl={handleUrl} />
+      {showNav && (
+        <Nav
+          handleFiles={handleFiles}
+          handleUrl={handleUrl}
+          showPageTitle={showPageTitle}
+          showPageTitleLogo={showPageTitleLogo}
+          pageTitle={pageTitle}
+          pageSubtitle={pageSubtitle}
+        />
+      )}
+      {showLoadFiles && (
+        <LoadFiles handleFiles={handleFiles} handleUrl={handleUrl} />
+      )}
       <ErrorToast />
     </Main>
   )

@@ -64,7 +64,7 @@ export default function reducer(state: State, action: Action): State {
     }
 
     case actionTypes.WORKER_INITIALIZED: {
-      return {...state, savedBoards: action.payload}
+      return {...state, savedBoards: action.payload, workerInitialized: true}
     }
 
     case actionTypes.BOARD_RENDERED: {

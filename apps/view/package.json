@@ -2,7 +2,7 @@
   "name": "@sctg/tracespace-view",
   "productName": "tracespace view",
   "version": "5.1.0",
-  "private": true,
+  "private": false,
   "description": "Probably the best Gerber viewer on the internet",
   "author": {
     "name": "Mike Cousins",

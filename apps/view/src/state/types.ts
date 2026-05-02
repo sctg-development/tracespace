@@ -18,6 +18,7 @@ export type State = {
   downloading: boolean
   layerVisibility: LayerVisibilityMap
   error: null | ErrorObject
+  workerInitialized: boolean
 }
 
 export type Reducer = (state: State, action: Action) => State

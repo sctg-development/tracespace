@@ -1,0 +1,35 @@
+{
+  "name": "@sctg/tracespace-react-standalone",
+  "version": "5.1.0",
+  "private": true,
+  "description": "tracespace react standalone example",
+  "author": {
+    "name": "ronan le meillat"
+  },
+  "homepage": "https://github.com/sctg-development/tracespace",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sctg-development/tracespace.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sctg-development/tracespace/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "serve": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "@sctg/tracespace-view": "^5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10"
+  }
+}
