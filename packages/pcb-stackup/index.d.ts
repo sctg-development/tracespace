@@ -17,7 +17,7 @@ import {
   Options as CoreOptions,
 } from '@sctg/pcb-stackup-core'
 
-import {GerberSide, GerberType} from 'whats-that-gerber'
+import {GerberSide, GerberType} from '@sctg/whats-that-gerber'
 
 declare function pcbStackup<NodeType = string, Layer = pcbStackup.InputLayer>(
   layers: Array<Layer>,

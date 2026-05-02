@@ -38,14 +38,14 @@
     "cosmiconfig": "^9.0.1",
     "debug": "^4.4.3",
     "dot-prop": "^10.1.0",
-    "@sctg/gerber-to-svg": "^5.0.0",
+    "@sctg/gerber-to-svg": "^5.1.0",
     "globby": "^16.2.0",
     "is-glob": "^4.0.3",
     "make-dir": "^5.1.0",
-    "@sctg/pcb-stackup": "^5.0.0",
+    "@sctg/pcb-stackup": "^5.1.0",
     "slash": "^5.1.0",
     "untildify": "^6.0.0",
-    "@sctg/whats-that-gerber": "^5.0.0",
+    "@sctg/whats-that-gerber": "^5.1.0",
     "yargs": "^18.0.0"
   }
 }

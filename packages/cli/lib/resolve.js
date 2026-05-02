@@ -1,7 +1,7 @@
 'use strict'
 
 import path from 'path'
-import globby from 'globby'
+import {globby} from 'globby'
 import isGlob from 'is-glob'
 import slash from 'slash'
 import untildify from 'untildify'
