@@ -26,44 +26,44 @@ Arduino Uno design files used under the terms of the [Creative Commons Attributi
   <h4>top copper</h4>
   <img
     title='arduino uno cmp'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.cmp.svg'
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.cmp.svg'
   >
 
   <h4>drill hits</h4>
   <img
     title='arduino uno drd'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.drd.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.drd.svg'>
 
   <h4>outline</h4>
   <img
     title='arduino uno gko'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.gko.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.gko.svg'>
 
   <h4>top silkscreen</h4>
   <img
     title='arduino uno plc'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.plc.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.plc.svg'>
 
   <h4>bottom copper</h4>
   <img
     title='arduino uno sol'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.sol.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.sol.svg'>
 
   <h4>top soldermask</h4>
   <img
     title='arduino uno stc'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.stc.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.stc.svg'>
 
   <h4>bottom soldermask</h4>
   <img
     title='arduino uno sts'
-    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.0/example/arduino-uno.sts.svg'>
+    src='https://unpkg.com/@sctg/gerber-to-svg@^5.1.1/example/arduino-uno.sts.svg'>
 </details>
 
 [arduino]: https://www.arduino.cc/
 [arduino-osh]: https://www.arduino.cc/en/Main/FAQ
-[top]: https://unpkg.com/@sctg/pcb-stackup@^5.1.0/example/arduino-uno-top.svg
-[bottom]: https://unpkg.com/@sctg/pcb-stackup@^5.1.0/example/arduino-uno-bottom.svg
+[top]: https://unpkg.com/@sctg/pcb-stackup@^5.1.1/example/arduino-uno-top.svg
+[bottom]: https://unpkg.com/@sctg/pcb-stackup@^5.1.1/example/arduino-uno-bottom.svg
 
 ### tracespace in the wild
 
@@ -137,14 +137,14 @@ This repository contains multiple packages published on npm.
 
 ### core packages (published)
 
-- [@sctg/gerber-parser][] - `^5.1.0` - Streaming Gerber/drill file parser
-- [@sctg/gerber-plotter][] - `^5.1.0` - Streaming layer image plotter
-- [@sctg/gerber-to-svg][] - `^5.1.0` - Render individual Gerber / NC drill files as SVGs
-- [@sctg/pcb-stackup-core][] - `^5.1.0` - Layer stacking core logic
-- [@sctg/pcb-stackup][] - `^5.1.0` - Render PCB stackups as SVGs
-- [@sctg/tracespace-xml-id][] - `^5.1.0` - XML ID generation and sanitation utilities
-- [@sctg/tracespace-cli][] - `^5.1.0` - Command-line renderer
-- [@sctg/tracespace-fixtures][] - `^5.1.0` - Test fixtures
+- [@sctg/gerber-parser][] - `^5.1.1` - Streaming Gerber/drill file parser
+- [@sctg/gerber-plotter][] - `^5.1.1` - Streaming layer image plotter
+- [@sctg/gerber-to-svg][] - `^5.1.1` - Render individual Gerber / NC drill files as SVGs
+- [@sctg/pcb-stackup-core][] - `^5.1.1` - Layer stacking core logic
+- [@sctg/pcb-stackup][] - `^5.1.1` - Render PCB stackups as SVGs
+- [@sctg/tracespace-xml-id][] - `^5.1.1` - XML ID generation and sanitation utilities
+- [@sctg/tracespace-cli][] - `^5.1.1` - Command-line renderer
+- [@sctg/tracespace-fixtures][] - `^5.1.1` - Test fixtures
 
 ### other package
 
