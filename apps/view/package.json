@@ -1,7 +1,7 @@
 {
   "name": "@sctg/tracespace-view",
   "productName": "tracespace view",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "private": false,
   "description": "Probably the best Gerber viewer on the internet",
   "author": {
@@ -33,8 +33,8 @@
     "@sctg/gerber-parser": "^5.1.1",
     "@sctg/gerber-plotter": "^5.1.1",
     "@sctg/gerber-to-svg": "^5.1.1",
-    "@sctg/pcb-stackup-core": "^5.1.1",
     "@sctg/pcb-stackup": "^5.1.1",
+    "@sctg/pcb-stackup-core": "^5.1.1",
     "@sctg/tracespace-xml-id": "^5.1.1",
     "@sctg/whats-that-gerber": "^5.1.1",
     "@types/common-prefix": "^1.1.3",
@@ -43,9 +43,9 @@
     "@types/lodash": "^4.17.24",
     "@types/pump": "^1.1.3",
     "@types/randomcolor": "^0.5.9",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/react-transition-group": "^4.4.12",
-    "@types/react": "^19.2.14",
     "classnames": "^2.5.1",
     "common-prefix": "^1.1.0",
     "contrast": "^1.0.1",
@@ -60,13 +60,14 @@
     "mixpanel-browser": "^2.78.0",
     "pump": "^3.0.4",
     "randomcolor": "^0.6.2",
+    "react": "19.2.5",
     "react-dom": "19.2.5",
     "react-transition-group": "^4.4.5",
-    "react": "19.2.5",
     "tachyons": "^4.12.0",
     "viewbox": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "gitHead": "9eb7ab3ad1a3e369ffe01ad927247ec1f1831c4c"
 }
