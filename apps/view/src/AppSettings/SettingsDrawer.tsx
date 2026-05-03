@@ -4,6 +4,7 @@ import {VERSION} from '../pkg'
 import {getAnalyticsUserId} from '../analytics'
 import {select} from '../events'
 import {useAppState, deleteAllBoards, updateAppPreferences} from '../state'
+import {useStorageEnabled} from '../StorageContext'
 import {DeleteButton, Drawer, Checkbox, Label} from '../ui'
 
 const TITLE = 'app settings'
@@ -27,6 +28,7 @@ type Props = {
 
 export default function SettingsDrawer(props: Props): JSX.Element {
   const {appPreferences, dispatch} = useAppState()
+  const useStorage = useStorageEnabled()
   const {open, close} = props
 
   const handleTrackingChange = (
@@ -50,13 +52,15 @@ export default function SettingsDrawer(props: Props): JSX.Element {
         {USAGE_TRACKING_COPY}
       </Checkbox>
 
-      <Label className={SETTINGS_ITEM_STYLE}>
-        <span className={LABEL_COPY_STYLE}>{DELETE_SAVED_COPY}</span>
-        <DeleteButton
-          className={DELETE_BUTTON_STYLE}
-          onClick={handleDeleteAllClick}
-        />
-      </Label>
+      {useStorage && (
+        <Label className={SETTINGS_ITEM_STYLE}>
+          <span className={LABEL_COPY_STYLE}>{DELETE_SAVED_COPY}</span>
+          <DeleteButton
+            className={DELETE_BUTTON_STYLE}
+            onClick={handleDeleteAllClick}
+          />
+        </Label>
+      )}
       <footer className={FOOTER_STYLE}>
         <Label>
           <span className={USER_ID_LABEL_STYLE}>{USER_ID_COPY}:</span>

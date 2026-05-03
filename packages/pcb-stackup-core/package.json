@@ -36,9 +36,9 @@
   },
   "homepage": "https://github.com/sctg-development/tracespace",
   "dependencies": {
-    "@sctg/gerber-to-svg": "^5.1.0",
-    "@sctg/tracespace-xml-id": "^5.1.0",
-    "@sctg/whats-that-gerber": "^5.1.0",
+    "@sctg/gerber-to-svg": "^5.1.1",
+    "@sctg/tracespace-xml-id": "^5.1.1",
+    "@sctg/whats-that-gerber": "^5.1.1",
     "@types/node": "^25.6.0",
     "color-string": "^2.1.4",
     "viewbox": "^1.0.0",

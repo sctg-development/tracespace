@@ -7,9 +7,11 @@ import {State, Dispatch, Action} from './types'
 
 export type StoreProps = {
   children: React.ReactNode
+  useStorage?: boolean
 }
 
 export default function StoreProvider(props: StoreProps): JSX.Element {
+  const {useStorage = false} = props
   const [state, setState] = useState(INITIAL_STATE)
   const stateRef = useRef<State>(state)
   const dispatchRef = useRef<Dispatch>((a) => a)
@@ -19,7 +21,7 @@ export default function StoreProvider(props: StoreProps): JSX.Element {
   }
 
   useEffect((): void => {
-    dispatchRef.current = createMiddleware().reduceRight<Dispatch>(
+    dispatchRef.current = createMiddleware(useStorage).reduceRight<Dispatch>(
       (next, handler) => handler(store)(next),
       function baseDispatch(action) {
         stateRef.current = reducer(stateRef.current, action)
@@ -27,7 +29,7 @@ export default function StoreProvider(props: StoreProps): JSX.Element {
         return action
       }
     )
-  }, [])
+  }, [useStorage])
 
   return (
     <StoreContext.Provider value={store}>

@@ -85,6 +85,50 @@ This repository has one web-app published at <https://sctg-development.github.io
 
 A Gerber viewer powered by the tracespace libraries.
 
+#### React 19 Component
+
+The `@sctg/tracespace-view` package exports a production-ready React 19 component that can be easily embedded into any React application:
+
+```typescript
+import {TracespaceViewer} from '@sctg/tracespace-view'
+
+// Minimal usage
+export default function MyApp() {
+  return <TracespaceViewer />
+}
+
+// Embedded with custom branding and file loading
+export default function MyApp() {
+  return (
+    <TracespaceViewer
+      showNav={false}
+      showLoadFiles={false}
+      pageTitle="My PCB Viewer"
+      file="/boards/arduino-uno.zip"
+      useStorage={true}
+    />
+  )
+}
+```
+
+**Key Features:**
+
+- **Self-contained:** Includes the full render pipeline, Web Worker, and Redux-like state management
+- **Embeddable:** All props are optional; works with zero configuration or full customization
+- **Configurable:** Control UI visibility, branding, file loading, and state persistence
+- **React 19 ready:** Modern React patterns with hooks and concurrent rendering
+
+**Props:**
+
+- `showNav` — Show/hide the top navigation bar (default: `true`)
+- `showPageTitle` — Show/hide the page title (default: `true`)
+- `showPageTitleLogo` — Show/hide the tracespace logo (default: `true`)
+- `pageTitle` — Main title text (default: `"tracespace"`)
+- `pageSubtitle` — Subtitle text (default: `"view"`)
+- `showLoadFiles` — Show/hide the file upload interface (default: `true`)
+- `file` — Programmatically load a file (URL, File, Blob, or array of files)
+- `useStorage` — Enable persistent state storage via IndexedDB (default: `false`)
+
 [view]: ./apps/view
 
 ## packages

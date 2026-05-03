@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/sctg-development/tracespace#readme",
   "peerDependencies": {
-    "@sctg/gerber-parser": "^5.1.0"
+    "@sctg/gerber-parser": "^5.1.1"
   },
   "dependencies": {
     "@types/node": "^25.6.0",

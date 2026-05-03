@@ -3,6 +3,7 @@ import React from 'react'
 import App from './App'
 import type {FileProp} from './App'
 import StoreProvider from './state/StoreProvider'
+import {StorageProvider} from './StorageContext'
 import './styles/index.css'
 
 export type {FileProp}
@@ -70,6 +71,13 @@ export type TracespaceViewerProps = {
    * <TracespaceViewer showLoadFiles={false} file={pickedFile} />
    */
   file?: FileProp
+
+  /**
+   * Enable persistent storage of application preferences and state using IndexedDB.
+   * When `true`, user preferences (display settings, board filters, etc.) are
+   * preserved across page reloads. Defaults to `false`.
+   */
+  useStorage?: boolean
 }
 
 /**
@@ -103,9 +111,12 @@ export type TracespaceViewerProps = {
 export default function TracespaceViewer(
   props: TracespaceViewerProps
 ): JSX.Element {
+  const {useStorage, ...appProps} = props
   return (
-    <StoreProvider>
-      <App {...props} />
-    </StoreProvider>
+    <StorageProvider useStorage={useStorage ?? false}>
+      <StoreProvider useStorage={useStorage}>
+        <App {...appProps} />
+      </StoreProvider>
+    </StorageProvider>
   )
 }
