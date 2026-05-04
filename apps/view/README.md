@@ -21,6 +21,12 @@ For more information, see the [state module][state]
 [actions]: ./src/state/actions.ts
 [reducer]: './src/state/reducer.ts'
 
+### styling
+
+The app uses Tailwind CSS 4.2.4 through the official `@tailwindcss/vite` 4.2.4 plugin. Global styling is defined in [`src/styles/index.css`](./src/styles/index.css), including the app theme via Tailwind's `@theme` directive.
+
+Component styling lives directly in TSX as Tailwind utility classes. The old Tachyons stylesheets and local `reset.css`, `skins.css`, and `animation.css` files have been removed.
+
 ### rendering
 
 The app runs pcb-stackup and various file reading libraries in a separate thread from the main UI via a [Web Worker][web-worker]. The render worker responds to and emits application store actions via the [render middleware][render-middleware]/
@@ -55,7 +61,7 @@ The tracespace view application collects anonymous usage data if you opt-in to t
 To debug the application state, you can change the app's log level using your browser's JavaScript console:
 
 ```js
-localStorage.setItem('logLevel', 'debug')
+localStorage.setItem("logLevel", "debug");
 ```
 
 Available log levels are:

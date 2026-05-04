@@ -1,0 +1,10 @@
+{
+  "extends": "@sctg/tracespace-config/tsconfig-base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "types": ["node", "react", "vite/client"]
+  },
+  "include": ["src"]
+}

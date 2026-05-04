@@ -1,17 +1,17 @@
-import React from 'react'
-import cx from 'classnames'
-import {Omit} from '../types'
+import React from "react";
+import cx from "classnames";
+import { Omit } from "../types";
 
 import {
   FontAwesomeIcon as FaIcon,
   FontAwesomeIconProps as FaIconProps,
-} from '@fortawesome/react-fontawesome'
+} from "@fortawesome/react-fontawesome";
 
 import {
   library,
   IconPrefix as FaIconPrefix,
   IconProp as FaIconProp,
-} from '@fortawesome/fontawesome-svg-core'
+} from "@fortawesome/fontawesome-svg-core";
 
 import {
   faCheckSquare,
@@ -22,7 +22,7 @@ import {
   faEyeSlash,
   faSquare,
   faTrashAlt,
-} from '@fortawesome/free-regular-svg-icons'
+} from "@fortawesome/free-regular-svg-icons";
 
 import {
   faCheck,
@@ -39,41 +39,41 @@ import {
   faSlidersH,
   faSpinner,
   faTimes,
-} from '@fortawesome/free-solid-svg-icons'
+} from "@fortawesome/free-solid-svg-icons";
 
 const PREFIX_BY_ICON = {
-  check: 'fas',
-  'check-square': 'far',
-  'chevron-left': 'fas',
-  'chevron-right': 'fas',
-  circle: 'far',
-  cog: 'fas',
-  copy: 'far',
-  'dot-circle': 'far',
-  expand: 'fas',
-  eye: 'far',
-  'eye-slash': 'far',
-  'file-download': 'fas',
-  'file-upload': 'fas',
-  plus: 'fas',
-  'question-circle': 'fas',
-  'search-plus': 'fas',
-  'search-minus': 'fas',
-  'sliders-h': 'fas',
-  spinner: 'fas',
-  square: 'far',
-  times: 'fas',
-  'trash-alt': 'far',
-}
+  check: "fas",
+  "check-square": "far",
+  "chevron-left": "fas",
+  "chevron-right": "fas",
+  circle: "far",
+  cog: "fas",
+  copy: "far",
+  "dot-circle": "far",
+  expand: "fas",
+  eye: "far",
+  "eye-slash": "far",
+  "file-download": "fas",
+  "file-upload": "fas",
+  plus: "fas",
+  "question-circle": "fas",
+  "search-plus": "fas",
+  "search-minus": "fas",
+  "sliders-h": "fas",
+  spinner: "fas",
+  square: "far",
+  times: "fas",
+  "trash-alt": "far",
+};
 
-export type IconName = keyof typeof PREFIX_BY_ICON
+export type IconName = keyof typeof PREFIX_BY_ICON;
 
 export type IconProps = {
-  name: IconName
-  className?: string
-  style?: React.CSSProperties
-  faProps?: Omit<FaIconProps, 'icon' | 'className'>
-}
+  name: IconName;
+  className?: string;
+  style?: React.CSSProperties;
+  faProps?: Omit<FaIconProps, "icon" | "className">;
+};
 
 library.add(
   faCheck,
@@ -97,19 +97,19 @@ library.add(
   faSquare,
   faTimes,
   faTrashAlt,
-  faQuestionCircle
-)
+  faQuestionCircle,
+);
 
 export function Icon(props: IconProps): JSX.Element {
-  const {name, style, faProps} = props
-  const icon: FaIconProp = [PREFIX_BY_ICON[name] as FaIconPrefix, name]
-  const className = cx(props.className, 'relative w2 h2 pa2')
+  const { name, style, faProps } = props;
+  const icon: FaIconProp = [PREFIX_BY_ICON[name] as FaIconPrefix, name];
+  const className = cx(props.className, "relative w-8 h-8 p-2");
 
   return (
     <div className={className} style={style}>
-      <span className="db absolute absolute--center">
+      <span className="block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <FaIcon icon={icon} {...faProps} />
       </span>
     </div>
-  )
+  );
 }

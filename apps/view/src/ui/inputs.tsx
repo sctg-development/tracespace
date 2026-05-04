@@ -1,43 +1,43 @@
-import React from 'react'
-import cx from 'classnames'
+import React from "react";
+import cx from "classnames";
 
-import {Icon} from './Icon'
+import { Icon } from "./Icon";
 
 export type LabelProps = {
-  className?: string
-  disabled?: boolean
-  children: React.ReactNode
-} & React.LabelHTMLAttributes<HTMLLabelElement>
-
-export const LABEL_CLASSNAME = 'flex items-center'
+  className?: string;
+  disabled?: boolean;
+  children: React.ReactNode;
+} & React.LabelHTMLAttributes<HTMLLabelElement>;
 
 export function Label(props: LabelProps): JSX.Element {
-  const {className, disabled, children, ...rest} = props
-  const style = cx(LABEL_CLASSNAME, className, {pointer: !disabled})
+  const { className, disabled, children, ...rest } = props;
+  const style = cx("flex items-center", className, {
+    "cursor-pointer": !disabled,
+  });
 
   return (
     <label className={style} {...rest}>
       {children}
     </label>
-  )
+  );
 }
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export function HiddenInput(props: InputProps): JSX.Element {
-  return <input className="clip" {...props} />
+  return <input className="sr-only" {...props} />;
 }
 
 export function Checkbox(props: InputProps): JSX.Element {
-  const {className, children, ...inputProps} = props
+  const { className, children, ...inputProps } = props;
   const iconName =
-    props.value || props.checked === true ? 'check-square' : 'square'
+    props.value || props.checked === true ? "check-square" : "square";
 
   return (
     <Label className={className}>
       <HiddenInput type="checkbox" {...inputProps} />
-      <Icon className="nl2" name={iconName} />
+      <Icon className="-ml-2" name={iconName} />
       {children}
     </Label>
-  )
+  );
 }

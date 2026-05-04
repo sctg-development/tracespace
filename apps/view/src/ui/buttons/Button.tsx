@@ -1,33 +1,28 @@
-import React from 'react'
-import cx from 'classnames'
+import React from "react";
+import cx from "classnames";
 
 export type ButtonProps = {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-  disabled?: boolean
-  className?: string
-  children?: React.ReactNode
-  title?: string
-  type?: 'button' | 'submit' | 'reset'
-}
-
-export const BUTTON_CLASSNAME = 'br2'
-
-export function getButtonStyle(props: ButtonProps): string {
-  return cx(
-    {
-      'o-40': props.disabled,
-      'pointer bg-animate hover-bg-black-20': !props.disabled,
-    },
-    BUTTON_CLASSNAME,
-    props.className
-  )
-}
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+  title?: string;
+  type?: "button" | "submit" | "reset";
+};
 
 export function Button(props: ButtonProps): JSX.Element {
-  const {onClick, title, children} = props
-  const type = props.type || 'button'
-  const disabled = Boolean(props.disabled)
-  const className = getButtonStyle(props)
+  const { onClick, title, children } = props;
+  const type = props.type || "button";
+  const disabled = Boolean(props.disabled);
+  const className = cx(
+    {
+      "opacity-40": disabled,
+      "cursor-pointer transition-colors hover:bg-black/20 focus-within:bg-black/20":
+        !disabled,
+    },
+    "rounded",
+    props.className,
+  );
 
   return (
     <button
@@ -40,5 +35,5 @@ export function Button(props: ButtonProps): JSX.Element {
     >
       {children}
     </button>
-  )
+  );
 }

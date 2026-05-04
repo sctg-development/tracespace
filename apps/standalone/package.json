@@ -24,11 +24,13 @@
     "serve": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
+    "@sctg/tracespace-view": "^5.1.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "@sctg/tracespace-view": "^5.1.1"
+    "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.4",
     "typescript": "^6.0.3",
     "vite": "^8.0.10"
   }

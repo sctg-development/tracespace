@@ -1,3 +1,3 @@
 // button components
-export * from './Button'
-export * from './DeleteButton'
+export * from "./Button";
+export * from "./DeleteButton";

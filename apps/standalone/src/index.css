@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "@sctg/tracespace-view/src/styles/index.css";
+@import "@sctg/tracespace-view/src/styles/theme.css";
+@source "@sctg/tracespace-view/src"

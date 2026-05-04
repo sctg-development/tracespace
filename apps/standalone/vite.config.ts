@@ -1,15 +1,19 @@
 import path from 'node:path'
-import {createRequire} from 'node:module'
-import {fileURLToPath} from 'node:url'
-import {defineConfig} from 'vite'
+import { createRequire } from 'node:module'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const require = createRequire(import.meta.url)
 const pkg = require('./package.json')
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    tailwindcss()
+  ],
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
     'process.env.MIXPANEL_ID': JSON.stringify(process.env.MIXPANEL_ID || ''),

@@ -1,58 +1,54 @@
-import React from 'react'
-import { Formik, Form, Field } from 'formik'
+import React from "react";
+import { Formik, Form, Field } from "formik";
 
-import { useLocation } from '../hooks'
-import { Button, Icon } from '../ui'
-import { select } from '../events'
+import { useLocation } from "../hooks";
+import { Button, Icon } from "../ui";
+import { select } from "../events";
 
-const LABEL_STYLE = 'db pointer mb2'
-const WRAPPER_STYLE = 'flex items-bottom h2'
-const INPUT_STYLE =
-  'w-100 mh2 bb bt-0 br-0 bl-0 b--near-black code f6 tc bg-transparent'
-const BUTTON_STYLE = 'flex-none nr4 brand'
-
-const INPUT_ID = 'load-files_url-input'
+const INPUT_ID = "load-files_url-input";
 
 const defaultUrl = (loc: Location | null): string => {
-  if (!loc) return ''
-  const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? `${loc.origin}${import.meta.env.BASE_URL.slice(0, -1)}` : `${loc.origin}${import.meta.env.BASE_URL}`
-  return `${baseUrl}/arduino-uno.zip`
-}
+  if (!loc) return "";
+  const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? `${loc.origin}${import.meta.env.BASE_URL.slice(0, -1)}`
+    : `${loc.origin}${import.meta.env.BASE_URL}`;
+  return `${baseUrl}/arduino-uno.zip`;
+};
 
 export type UrlInputProps = {
-  children?: React.ReactNode
-  handleUrl: (url: string) => unknown
-}
+  children?: React.ReactNode;
+  handleUrl: (url: string) => unknown;
+};
 
 export default function UrlInput(props: UrlInputProps): JSX.Element {
-  const { children, handleUrl } = props
-  const location = useLocation()
+  const { children, handleUrl } = props;
+  const location = useLocation();
 
   return (
     <Formik
       initialValues={{ url: defaultUrl(location) }}
       onSubmit={(values) => {
-        console.log('[UrlInput] Form submitted with URL:', values.url)
-        handleUrl(values.url)
+        console.log("[UrlInput] Form submitted with URL:", values.url);
+        handleUrl(values.url);
       }}
       enableReinitialize
     >
       {(formProps) => (
         <Form>
-          <label htmlFor={INPUT_ID} className={LABEL_STYLE}>
+          <label htmlFor={INPUT_ID} className="block cursor-pointer mb-2">
             {children}
           </label>
-          <div className={WRAPPER_STYLE}>
+          <div className="flex items-end h-8">
             <Field
               id={INPUT_ID}
               name="url"
               type="text"
-              className={INPUT_STYLE}
+              className="w-full mx-2 border-b border-t-0 border-r-0 border-l-0 border-neutral-950 font-mono text-sm text-center bg-transparent"
               onClick={select}
             />
             <Button
               type="submit"
-              className={BUTTON_STYLE}
+              className="shrink-0 -mr-8 text-brand"
               disabled={!formProps.values.url}
             >
               <Icon name="check" />
@@ -61,5 +57,5 @@ export default function UrlInput(props: UrlInputProps): JSX.Element {
         </Form>
       )}
     </Formik>
-  )
+  );
 }

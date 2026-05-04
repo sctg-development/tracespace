@@ -1,70 +1,67 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from "react";
 
-import {stopPropagation} from '../events'
-import {BoardRender} from '../types'
-import {Button, Icon, Fade} from '../ui'
-import {BoardName} from './name'
-import ModeSelect from './ModeSelect'
-import SettingsForm from './SettingsForm'
+import { stopPropagation } from "../events";
+import { BoardRender } from "../types";
+import { Button, Icon, Fade } from "../ui";
+import { BoardName } from "./name";
+import ModeSelect from "./ModeSelect";
+import SettingsForm from "./SettingsForm";
 
 export type BoardSettingsProps = {
-  board: BoardRender
-  updating: boolean
-}
+  board: BoardRender;
+  updating: boolean;
+};
 
-const OPEN_BUTTON_TOOLTIP = 'Board settings'
-
-const STYLE = 'dib ph3 tc v-top'
-const NAME_STYLE = 'flex items-center justify-center'
-const OPEN_BUTTON_STYLE = 'nr4'
-const MODAL_STYLE = 'fixed top-1 left-0 right-0 bottom-1 z-1 nt2'
-const MODAL_CONTENTS_STYLE =
-  'relative w-50 mxh-100 center pt2 ph4 br3 near-black bg-white shadow overflow-y-auto scrollbar-near-black'
-
-const FORM_STYLE = 'dib w-100'
+const OPEN_BUTTON_TOOLTIP = "Board settings";
 
 export default function BoardSettings(props: BoardSettingsProps): JSX.Element {
-  const [open, setOpen] = useState(false)
-  const modalContentsRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false);
+  const modalContentsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const $modalContents = modalContentsRef.current
+    const $modalContents = modalContentsRef.current;
 
     if ($modalContents) {
-      const {width} = $modalContents.getBoundingClientRect()
-      const clientWidth = $modalContents.clientWidth
-      const shift = (width - clientWidth) / 2
+      const { width } = $modalContents.getBoundingClientRect();
+      const clientWidth = $modalContents.clientWidth;
+      const shift = (width - clientWidth) / 2;
 
       // shift modal contents by scrollbar width if present
-      $modalContents.style.transform = `translateX(${shift}px)`
+      $modalContents.style.transform = `translateX(${shift}px)`;
     }
-  })
+  });
 
-  const {board, updating} = props
-  const toggleOpen = (): void => setOpen(!open)
+  const { board, updating } = props;
+  const toggleOpen = (): void => setOpen(!open);
 
   return (
-    <div className={STYLE}>
-      <div className={NAME_STYLE}>
+    <div className="inline-block px-4 text-center align-top">
+      <div className="flex items-center justify-center">
         <BoardName>{board.name}</BoardName>
         <Button
           onClick={toggleOpen}
           disabled={updating}
-          className={OPEN_BUTTON_STYLE}
+          className="-mr-8"
           title={OPEN_BUTTON_TOOLTIP}
         >
           <Icon
-            name={updating ? 'spinner' : 'cog'}
-            faProps={{pulse: updating}}
+            name={updating ? "spinner" : "cog"}
+            faProps={{ pulse: updating }}
           />
         </Button>
       </div>
       <ModeSelect />
       <Fade in={open}>
-        <div className={MODAL_STYLE} onWheel={stopPropagation}>
-          <div className={MODAL_CONTENTS_STYLE} ref={modalContentsRef}>
+        <div
+          className="fixed top-4 left-0 right-0 bottom-4 z-10 -mt-2"
+          onWheel={stopPropagation}
+        >
+          <div
+            className="relative w-1/2 max-h-full mx-auto pt-2 px-8 rounded-lg text-neutral-950 bg-white shadow-view overflow-y-auto [scrollbar-width:thin] [scrollbar-color:#111_transparent]"
+            ref={modalContentsRef}
+          >
             <SettingsForm
-              className={FORM_STYLE}
+              className="inline-block w-full"
               board={board}
               close={toggleOpen}
             />
@@ -72,5 +69,5 @@ export default function BoardSettings(props: BoardSettingsProps): JSX.Element {
         </div>
       </Fade>
     </div>
-  )
+  );
 }

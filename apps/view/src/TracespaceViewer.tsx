@@ -1,54 +1,54 @@
-import React from 'react'
+import React from "react";
 
-import App from './App'
-import type {FileProp} from './App'
-import StoreProvider from './state/StoreProvider'
-import {StorageProvider} from './StorageContext'
-import './styles/index.css'
+import App from "./App";
+import type { FileProp } from "./App";
+import StoreProvider from "./state/StoreProvider";
+import { StorageProvider } from "./StorageContext";
+import "./styles/index.css";
 
-export type {FileProp}
+export type { FileProp };
 
 /**
- * Props for the {@link TracespaceViewer} component.
+ * Props for the {@text-inherit no-underline TracespaceViewer} component.
  */
 export type TracespaceViewerProps = {
   /**
    * Show or hide the top navigation bar (file controls, board settings,
    * app settings). Defaults to `true`.
    */
-  showNav?: boolean
+  showNav?: boolean;
 
   /**
    * Show or hide the page title (logo + text) inside the navigation bar.
    * Has no effect when `showNav` is `false`. Defaults to `true`.
    */
-  showPageTitle?: boolean
+  showPageTitle?: boolean;
 
   /**
    * Show or hide the tracespace logo inside the page title.
    * Has no effect when `showNav` or `showPageTitle` is `false`.
    * Defaults to `true`.
    */
-  showPageTitleLogo?: boolean
+  showPageTitleLogo?: boolean;
 
   /**
    * Main title text displayed in the page title.
    * Defaults to `"tracespace"`.
    */
-  pageTitle?: string
+  pageTitle?: string;
 
   /**
    * Subtitle text displayed in bold after the main title.
    * Defaults to `"view"`.
    */
-  pageSubtitle?: string
+  pageSubtitle?: string;
 
   /**
    * Show or hide the full-screen upload prompt (file input, URL input,
    * loading spinner). Set to `false` when supplying files programmatically
    * via the `file` prop. Defaults to `true`.
    */
-  showLoadFiles?: boolean
+  showLoadFiles?: boolean;
 
   /**
    * File(s) to load programmatically, without user interaction.
@@ -70,15 +70,15 @@ export type TracespaceViewerProps = {
    * // Load from a File picked by the user elsewhere in the app
    * <TracespaceViewer showLoadFiles={false} file={pickedFile} />
    */
-  file?: FileProp
+  file?: FileProp;
 
   /**
    * Enable persistent storage of application preferences and state using IndexedDB.
    * When `true`, user preferences (display settings, board filters, etc.) are
    * preserved across page reloads. Defaults to `false`.
    */
-  useStorage?: boolean
-}
+  useStorage?: boolean;
+};
 
 /**
  * Self-contained Gerber/PCB viewer component for React 19 applications.
@@ -109,14 +109,14 @@ export type TracespaceViewerProps = {
  * />
  */
 export default function TracespaceViewer(
-  props: TracespaceViewerProps
+  props: TracespaceViewerProps,
 ): JSX.Element {
-  const {useStorage, ...appProps} = props
+  const { useStorage, ...appProps } = props;
   return (
     <StorageProvider useStorage={useStorage ?? false}>
       <StoreProvider useStorage={useStorage}>
         <App {...appProps} />
       </StoreProvider>
     </StorageProvider>
-  )
+  );
 }

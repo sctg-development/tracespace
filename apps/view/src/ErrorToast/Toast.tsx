@@ -1,30 +1,25 @@
-import React from 'react'
+import React from "react";
 
-import {useTimeout} from '../hooks'
-import {Button, Icon} from '../ui'
+import { useTimeout } from "../hooks";
+import { Button, Icon } from "../ui";
 
-const STYLE = 'dib center fixed top-1 left-0 right-0 tc'
-const WRAPPER_STYLE =
-  'inline-flex items-center justify-center pl3 pv1 pr1 br2 bg-red white shadow'
-const MESSAGE_STYLE = 'mv0 mr2'
-
-const DISMISS_TIMEOUT = 4000
+const DISMISS_TIMEOUT = 4000;
 
 export type ToastProps = {
-  dismiss: () => unknown
-  children: React.ReactNode
-}
+  dismiss: () => unknown;
+  children: React.ReactNode;
+};
 
 export default function Toast(props: ToastProps): JSX.Element {
-  const {dismiss, children} = props
+  const { dismiss, children } = props;
 
-  useTimeout(dismiss, DISMISS_TIMEOUT)
+  useTimeout(dismiss, DISMISS_TIMEOUT);
 
   return (
-    <div className={STYLE}>
-      <div className={WRAPPER_STYLE}>
-        <p className={MESSAGE_STYLE}>
-          {'Error: '}
+    <div className="inline-block mx-auto fixed top-4 left-0 right-0 text-center">
+      <div className="inline-flex items-center justify-center py-1 pl-4 pr-1 rounded bg-red-600 text-white shadow-view">
+        <p className="my-0 mr-2">
+          {"Error: "}
           {children}
         </p>
         <Button onClick={dismiss}>
@@ -32,5 +27,5 @@ export default function Toast(props: ToastProps): JSX.Element {
         </Button>
       </div>
     </div>
-  )
+  );
 }

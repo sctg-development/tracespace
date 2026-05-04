@@ -1,23 +1,24 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
+import cx from "classnames";
 
-import {VERSION} from '../pkg'
-import {Button, Icon, getButtonStyle} from '../ui'
-import SettingsDrawer from './SettingsDrawer'
-import AnalyticsOptInModal from './AnalyticsOptInModal'
+import { VERSION } from "../pkg";
+import { Button, Icon } from "../ui";
+import SettingsDrawer from "./SettingsDrawer";
+import AnalyticsOptInModal from "./AnalyticsOptInModal";
 
-const HELP_TOOLTIP = 'Troubleshooting'
-const HELP_HREF = `https://github.com/tracespace/tracespace/blob/v${VERSION}/apps/view/HELP.md`
+const HELP_TOOLTIP = "Troubleshooting";
+const HELP_HREF = `https://github.com/tracespace/tracespace/blob/v${VERSION}/apps/view/HELP.md`;
 
-const SETTINGS_TOOLTIP = 'App settings'
+const SETTINGS_TOOLTIP = "App settings";
 
 export type AppSettingsProps = {
-  buttonClassName: string
-}
+  buttonClassName: string;
+};
 
 export default function AppSettings(props: AppSettingsProps): JSX.Element {
-  const [open, setOpen] = useState(false)
-  const {buttonClassName} = props
-  const toggleOpen = (): void => setOpen(!open)
+  const [open, setOpen] = useState(false);
+  const { buttonClassName } = props;
+  const toggleOpen = (): void => setOpen(!open);
 
   return (
     <>
@@ -26,7 +27,10 @@ export default function AppSettings(props: AppSettingsProps): JSX.Element {
         title={HELP_TOOLTIP}
         target="_blank"
         rel="noreferrer noopener"
-        className={getButtonStyle({className: buttonClassName})}
+        className={cx(
+          "rounded cursor-pointer transition-colors hover:bg-black/20 focus-within:bg-black/20",
+          buttonClassName,
+        )}
       >
         <Icon name="question-circle" />
       </a>
@@ -40,5 +44,5 @@ export default function AppSettings(props: AppSettingsProps): JSX.Element {
       <SettingsDrawer open={open} close={toggleOpen} />
       <AnalyticsOptInModal />
     </>
-  )
+  );
 }

@@ -1,66 +1,61 @@
-import React from 'react'
+import React from "react";
 
-import {useAppState} from '../state'
-import {PageTitle, Slide} from '../ui'
-import {FileEvent} from '../types'
-import AppSettings from '../AppSettings'
-import BoardSettings from '../BoardSettings'
-import FileControls from './FileControls'
+import { useAppState } from "../state";
+import { PageTitle, Slide } from "../ui";
+import { FileEvent } from "../types";
+import AppSettings from "../AppSettings";
+import BoardSettings from "../BoardSettings";
+import FileControls from "./FileControls";
 
-import Footer from './Footer'
+import Footer from "./Footer";
 
 type Props = {
-  handleFiles: (event: FileEvent) => void
-  handleUrl: (url: string) => void
-  showPageTitle?: boolean
-  showPageTitleLogo?: boolean
-  pageTitle?: string
-  pageSubtitle?: string
-}
-
-const STYLE = 'flex items-start justify-between relative w-100 h3'
-const TITLE_STYLE = 'w-third flex-none'
-const BUTTON_WRAPPER_STYLE = 'flex-none flex items-start justify-end w-third'
-const BUTTON_STYLE = 'ml1 pa1 f3'
+  handleFiles: (event: FileEvent) => void;
+  handleUrl: (url: string) => void;
+  showPageTitle?: boolean;
+  showPageTitleLogo?: boolean;
+  pageTitle?: string;
+  pageSubtitle?: string;
+};
 
 export default function Nav(props: Props): JSX.Element {
-  const {board, loading, updating} = useAppState()
+  const { board, loading, updating } = useAppState();
   const {
     handleFiles,
     handleUrl,
     showPageTitle = true,
     showPageTitleLogo = true,
-    pageTitle = 'tracespace',
-    pageSubtitle = 'view',
-  } = props
-  const show = !loading && board !== null
+    pageTitle = "tracespace",
+    pageSubtitle = "view",
+  } = props;
+  const show = !loading && board !== null;
 
   return (
-    <nav className={STYLE}>
+    <nav className="flex items-start justify-between relative w-full h-16">
       {showPageTitle ? (
         <PageTitle
           title={pageTitle}
           subtitle={pageSubtitle}
           showLogo={showPageTitleLogo}
-          className={TITLE_STYLE}
+          className="w-1/3 shrink-0"
         />
       ) : (
-        <div className={TITLE_STYLE} />
+        <div className="w-1/3 shrink-0" />
       )}
       {board && (
         <Slide in={show} from="top">
           <BoardSettings board={board} updating={updating} />
         </Slide>
       )}
-      <div className={BUTTON_WRAPPER_STYLE}>
+      <div className="shrink-0 flex items-start justify-end w-1/3">
         <FileControls
-          buttonClassName={BUTTON_STYLE}
+          buttonClassName={"ml-1 p-1 text-2xl"}
           handleFiles={handleFiles}
           handleUrl={handleUrl}
         />
-        <AppSettings buttonClassName={BUTTON_STYLE} />
+        <AppSettings buttonClassName={"ml-1 p-1 text-2xl"} />
       </div>
       <Footer />
     </nav>
-  )
+  );
 }

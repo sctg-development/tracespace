@@ -25,6 +25,11 @@
   },
   "main": "./src/index.tsx",
   "types": "./lib/index.d.ts",
+  "files": [
+    "src",
+    "lib",
+    "typings"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-regular-svg-icons": "^7.2.0",
@@ -63,8 +68,11 @@
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "react-transition-group": "^4.4.5",
-    "tachyons": "^4.12.0",
     "viewbox": "^1.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.4",
+    "tailwindcss": "^4.2.4"
   },
   "publishConfig": {
     "access": "public"

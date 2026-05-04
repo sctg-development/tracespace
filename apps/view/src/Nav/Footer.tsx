@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 import {
   REPO_URL,
@@ -6,34 +6,42 @@ import {
   AUTHOR_URL,
   CONTRIBUTORS_URL,
   PRIVACY_URL,
-} from '../pkg'
-
-const STYLE = 'fixed right-1 bottom-1 w-third tr'
-const COPY_STYLE = 'mv0 lh-copy f7 white'
-const LINK_STYLE = 'link dim fw3 lightest-blue'
+} from "../pkg";
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className={STYLE}>
-      <p className={COPY_STYLE}>
-        {'© 2015 - 2026 by '}
-        <a href={AUTHOR_URL} className={LINK_STYLE}>
+    <footer className="fixed right-4 bottom-4 w-1/3 text-right">
+      <p className="my-0 leading-relaxed text-xs text-white">
+        {"© 2015 - 2026 by "}
+        <a
+          href={AUTHOR_URL}
+          className="text-inherit no-underline transition-opacity hover:opacity-50 font-light text-blue-100"
+        >
           {AUTHOR_NAME.toLowerCase()}
-        </a>{' '}
-        {'and '}
-        <a href={CONTRIBUTORS_URL} className={LINK_STYLE}>
+        </a>{" "}
+        {"and "}
+        <a
+          href={CONTRIBUTORS_URL}
+          className="text-inherit no-underline transition-opacity hover:opacity-50 font-light text-blue-100"
+        >
           contributors
         </a>
       </p>
-      <p className={COPY_STYLE}>
-        <a href={PRIVACY_URL} className={LINK_STYLE}>
+      <p className="my-0 leading-relaxed text-xs text-white">
+        <a
+          href={PRIVACY_URL}
+          className="text-inherit no-underline transition-opacity hover:opacity-50 font-light text-blue-100"
+        >
           privacy policy
         </a>
-        {' | '}
-        <a href={REPO_URL} className={LINK_STYLE}>
+        {" | "}
+        <a
+          href={REPO_URL}
+          className="text-inherit no-underline transition-opacity hover:opacity-50 font-light text-blue-100"
+        >
           view source
         </a>
       </p>
     </footer>
-  )
+  );
 }

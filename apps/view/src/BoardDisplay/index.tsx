@@ -1,24 +1,25 @@
-import React, {useState, useRef, useEffect, useLayoutEffect} from 'react'
-import cx from 'classnames'
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import cx from "classnames";
 
-import {useAppState} from '../state'
-import {usePrevious} from '../hooks'
-import {Fade, Slide, SvgRender} from '../ui'
-import {INITIAL_STATE, pan, zoom, getScale} from './display'
-import PanZoom from './PanZoom'
-import Controls from './Controls'
-import LayersRender from './LayersRender'
-import {DisplayControllerProps} from './types'
+import { useAppState } from "../state";
+import { usePrevious } from "../hooks";
+import { Fade, Slide, SvgRender } from "../ui";
+import { INITIAL_STATE, pan, zoom, getScale } from "./display";
+import PanZoom from "./PanZoom";
+import Controls from "./Controls";
+import LayersRender from "./LayersRender";
+import { DisplayControllerProps } from "./types";
 
-const percent = (n: number): string => `${n * 100}%`
-const getId = (b: {id: string} | null): string | null => (b ? b.id : null)
+const percent = (n: number): string => `${n * 100}%`;
+const getId = (board: { id: string } | null): string | null =>
+  board ? board.id : null;
 
 export default function BoardDisplay(): JSX.Element {
-  const {mode, board, loading, layerVisibility} = useAppState()
-  const [displayState, setDisplayState] = useState(INITIAL_STATE)
-  const prevBoard = usePrevious(board)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const show = !loading && board !== null
+  const { mode, board, loading, layerVisibility } = useAppState();
+  const [displayState, setDisplayState] = useState(INITIAL_STATE);
+  const prevBoard = usePrevious(board);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const show = !loading && board !== null;
 
   const controllerProps: DisplayControllerProps = {
     step: displayState.step,
@@ -27,21 +28,21 @@ export default function BoardDisplay(): JSX.Element {
     zoom: (...args) => setDisplayState(zoom(displayState, ...args)),
     zoomIn: () => setDisplayState(zoom(displayState, 1)),
     zoomOut: () => setDisplayState(zoom(displayState, -1)),
-  }
+  };
 
   useLayoutEffect(() => {
     if (containerRef.current) {
-      const {x, y, step} = displayState
-      const {scale} = getScale(step)
-      const transform = `translate(${percent(x)},${percent(y)}) scale(${scale})`
+      const { x, y, step } = displayState;
+      const { scale } = getScale(step);
+      const transform = `translate(${percent(x)},${percent(y)}) scale(${scale})`;
 
-      containerRef.current.style.transform = transform
+      containerRef.current.style.transform = transform;
     }
-  })
+  });
 
   useEffect(() => {
-    if (getId(board) !== getId(prevBoard)) controllerProps.reset()
-  }, [board, prevBoard])
+    if (getId(board) !== getId(prevBoard)) controllerProps.reset();
+  }, [board, prevBoard]);
 
   return (
     <>
@@ -50,15 +51,15 @@ export default function BoardDisplay(): JSX.Element {
           {board && (
             <>
               <SvgRender
-                className={cx('w-100', {dn: mode !== 'top'})}
+                className={cx("w-full", { hidden: mode !== "top" })}
                 source={board.top}
               />
               <SvgRender
-                className={cx('w-100', {dn: mode !== 'bottom'})}
+                className={cx("w-full", { hidden: mode !== "bottom" })}
                 source={board.bottom}
               />
               <LayersRender
-                className={cx('w-100', {clip: mode !== 'layers'})}
+                className={cx("w-full", { "sr-only": mode !== "layers" })}
                 viewBox={board.viewBox}
                 layers={board.layers}
                 layerVisibility={layerVisibility}
@@ -71,5 +72,5 @@ export default function BoardDisplay(): JSX.Element {
         <Controls {...controllerProps} />
       </Slide>
     </>
-  )
+  );
 }

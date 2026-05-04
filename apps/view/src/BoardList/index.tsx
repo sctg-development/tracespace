@@ -1,28 +1,28 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 
-import {useAppState, getBoard} from '../state'
-import {usePrevious} from '../hooks'
-import {useStorageEnabled} from '../StorageContext'
-import {Fade, Slide} from '../ui'
-import ShowButton from './ShowButton'
-import SavedBoardList from './SavedBoardList'
+import { useAppState, getBoard } from "../state";
+import { usePrevious } from "../hooks";
+import { useStorageEnabled } from "../StorageContext";
+import { Fade, Slide } from "../ui";
+import ShowButton from "./ShowButton";
+import SavedBoardList from "./SavedBoardList";
 
 export default function BoardList(): JSX.Element {
-  const {mode, loading, board, savedBoards, dispatch} = useAppState()
-  const useStorage = useStorageEnabled()
-  const [show, setShow] = useState(mode === null)
-  const [selected, setSelected] = useState(board ? board.id : null)
-  const prevLoading = usePrevious(loading)
+  const { mode, loading, board, savedBoards, dispatch } = useAppState();
+  const useStorage = useStorageEnabled();
+  const [show, setShow] = useState(mode === null);
+  const [selected, setSelected] = useState(board ? board.id : null);
+  const prevLoading = usePrevious(loading);
 
   useEffect(() => {
     if (prevLoading && !loading && board) {
-      setShow(false)
-      setSelected(board.id)
+      setShow(false);
+      setSelected(board.id);
     }
-  }, [prevLoading, loading, board])
+  }, [prevLoading, loading, board]);
 
-  const haveBoards = useStorage && savedBoards.length > 0
-  const showList = haveBoards && show
+  const haveBoards = useStorage && savedBoards.length > 0;
+  const showList = haveBoards && show;
 
   return (
     <>
@@ -34,11 +34,11 @@ export default function BoardList(): JSX.Element {
           selectedId={selected}
           boards={savedBoards}
           onItemClick={(id: string) => {
-            dispatch(getBoard(id))
-            setSelected(id)
+            dispatch(getBoard(id));
+            setSelected(id);
           }}
         />
       </Slide>
     </>
-  )
+  );
 }

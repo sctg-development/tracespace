@@ -85,6 +85,8 @@ This repository has one web-app published at <https://sctg-development.github.io
 
 A Gerber viewer powered by the tracespace libraries.
 
+The view app is built with Vite 8 and Tailwind CSS 4.2.4 via `@tailwindcss/vite` 4.2.4. Its Tailwind theme is defined in `apps/view/src/styles/index.css` with `@theme`, and component styles are applied directly as Tailwind classes in the React TSX files.
+
 #### React 19 Component
 
 The `@sctg/tracespace-view` package exports a production-ready React 19 component that can be easily embedded into any React application:
@@ -129,6 +131,45 @@ export default function MyApp() {
 - `file` — Programmatically load a file (URL, File, Blob, or array of files)
 - `useStorage` — Enable persistent state storage via IndexedDB (default: `false`)
 
+#### Tailwind CSS setup for consumer apps
+
+`<TracespaceViewer>` is styled exclusively with Tailwind CSS v4 utility classes. Because Tailwind v4 generates CSS at build time by scanning source files, a consumer app must perform the scanning itself — it cannot be delegated to the library.
+
+**Requirements:** `@tailwindcss/vite` ≥ 4.2.4 installed and registered as a Vite plugin.
+
+**1. Register the plugin** in your `vite.config.ts`:
+
+```typescript
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+})
+```
+
+**2. Create a CSS entry point** in your app (e.g. `src/index.css`):
+
+```css
+@import "tailwindcss";
+
+/* Import the tracespace-view theme (brand colors, fonts, shadows) */
+@import "@sctg/tracespace-view/src/styles/theme.css";
+
+/* Tell Tailwind to scan tracespace-view source files for class names */
+@source "@sctg/tracespace-view/src";
+```
+
+**3. Import the CSS** in your app entry point:
+
+```typescript
+import './index.css'
+import {TracespaceViewer} from '@sctg/tracespace-view'
+```
+
+The `@source` directive is a Tailwind v4 mechanism that explicitly includes an external package's source files in the class-name scan. Without it, Tailwind skips `node_modules` by default and no utility classes are generated for the component.
+
+See [`apps/standalone`](./apps/standalone) for a working reference implementation.
+
 [view]: ./apps/view
 
 ## packages
@@ -137,18 +178,16 @@ This repository contains multiple packages published on npm.
 
 ### core packages (published)
 
-- [@sctg/gerber-parser][] - `^5.1.1` - Streaming Gerber/drill file parser
-- [@sctg/gerber-plotter][] - `^5.1.1` - Streaming layer image plotter
-- [@sctg/gerber-to-svg][] - `^5.1.1` - Render individual Gerber / NC drill files as SVGs
-- [@sctg/pcb-stackup-core][] - `^5.1.1` - Layer stacking core logic
-- [@sctg/pcb-stackup][] - `^5.1.1` - Render PCB stackups as SVGs
-- [@sctg/tracespace-xml-id][] - `^5.1.1` - XML ID generation and sanitation utilities
-- [@sctg/tracespace-cli][] - `^5.1.1` - Command-line renderer
-- [@sctg/tracespace-fixtures][] - `^5.1.1` - Test fixtures
+- [@sctg/gerber-parser][] - Streaming Gerber/drill file parser
+- [@sctg/gerber-plotter][] - Streaming layer image plotter
+- [@sctg/gerber-to-svg][] - Render individual Gerber / NC drill files as SVGs
+- [@sctg/pcb-stackup-core][] - Layer stacking core logic
+- [@sctg/pcb-stackup][] - Render PCB stackups as SVGs
+- [@sctg/tracespace-xml-id][] - XML ID generation and sanitation utilities
+- [@sctg/tracespace-cli][] - Command-line renderer
+- [@sctg/tracespace-fixtures][] - Test fixtures
 
 ### other package
-
-- [@sctg/whats-that-gerber][] - Identify Gerber and drill files by filename
 
 [@sctg/pcb-stackup]: ./packages/pcb-stackup
 [@sctg/tracespace-cli]: ./packages/cli

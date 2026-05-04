@@ -1,70 +1,55 @@
 // board display controls for zoom bar and board vs layer render
-import React, {useState} from 'react'
+import React, { useState } from "react";
 
-import {Button, Icon} from '../ui'
-import {stepToScale, scaleToStep} from './display'
-import {DisplayControllerProps} from './types'
+import { Button, Icon } from "../ui";
+import { stepToScale, scaleToStep } from "./display";
+import { DisplayControllerProps } from "./types";
 
-const ZOOM_RESET_TOOLTIP = 'Reset pan and zoom'
-const ZOOM_OUT_TOOLTIP = 'Zoom out'
-const ZOOM_IN_TOOTIP = 'Zoom in'
-
-const CONTROLS_STYLE =
-  'absolute absolute--center-w-third bottom-1 z-1 w-third flex items-center f5'
-const ZOOM_ICON_STYLE = 'flex-none'
-const ZOOM_RESET_STYLE = 'absolute bottom-2 left-50 tf-center-x'
-
-const ZOOM_BAR_CONTAINER_STYLE = 'relative w-100 h2 flex items-center grab'
-const ZOOM_BAR_STYLE = 'dib pt2 bg-white shadow w-100'
-const ZOOM_SLIDER_STYLE =
-  'absolute w1 h1 top-50 tf-center bg-brand o-70 left-animate'
+const ZOOM_RESET_TOOLTIP = "Reset pan and zoom";
+const ZOOM_OUT_TOOLTIP = "Zoom out";
+const ZOOM_IN_TOOTIP = "Zoom in";
 
 export default function Controls(props: DisplayControllerProps): JSX.Element {
-  const [grabbing, setGrabbing] = useState(false)
-  const {step, reset, zoom, zoomIn, zoomOut} = props
-  const sliderLeft = `${stepToScale(step) * 100}%`
+  const [grabbing, setGrabbing] = useState(false);
+  const { step, reset, zoom, zoomIn, zoomOut } = props;
+  const sliderLeft = `${stepToScale(step) * 100}%`;
 
   const handleGrabMove = (event: React.MouseEvent): void => {
-    const {left, width} = event.currentTarget.getBoundingClientRect()
-    const nextStep = scaleToStep((event.clientX - left) / width)
-    zoom(nextStep - step)
-  }
+    const { left, width } = event.currentTarget.getBoundingClientRect();
+    const nextStep = scaleToStep((event.clientX - left) / width);
+    zoom(nextStep - step);
+  };
 
   return (
-    <div className={CONTROLS_STYLE}>
+    <div className="absolute left-[calc(50%-100%/6)] bottom-4 z-10 w-1/3 flex items-center text-base">
       <Button
-        className={ZOOM_RESET_STYLE}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
         onClick={reset}
         title={ZOOM_RESET_TOOLTIP}
       >
         <Icon name="expand" />
       </Button>
-      <Button
-        className={ZOOM_ICON_STYLE}
-        onClick={zoomOut}
-        title={ZOOM_OUT_TOOLTIP}
-      >
+      <Button className="shrink-0" onClick={zoomOut} title={ZOOM_OUT_TOOLTIP}>
         <Icon name="search-minus" />
       </Button>
       <span
-        className={ZOOM_BAR_CONTAINER_STYLE}
+        className="relative w-full h-8 flex items-center cursor-grab active:cursor-grabbing"
         onMouseDown={(event) => {
-          setGrabbing(true)
-          handleGrabMove(event)
+          setGrabbing(true);
+          handleGrabMove(event);
         }}
         onMouseUp={() => setGrabbing(false)}
         onMouseMove={grabbing ? handleGrabMove : undefined}
       >
-        <span className={ZOOM_BAR_STYLE} />
-        <span className={ZOOM_SLIDER_STYLE} style={{left: sliderLeft}} />
+        <span className="inline-block pt-2 bg-white shadow-view w-full" />
+        <span
+          className="absolute w-4 h-4 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand opacity-70 transition-[left]"
+          style={{ left: sliderLeft }}
+        />
       </span>
-      <Button
-        className={ZOOM_ICON_STYLE}
-        onClick={zoomIn}
-        title={ZOOM_IN_TOOTIP}
-      >
+      <Button className="shrink-0" onClick={zoomIn} title={ZOOM_IN_TOOTIP}>
         <Icon name="search-plus" />
       </Button>
     </div>
-  )
+  );
 }

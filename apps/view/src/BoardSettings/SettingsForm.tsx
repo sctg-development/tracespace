@@ -1,55 +1,55 @@
-import React from 'react'
-import {Formik, Form, Field} from 'formik'
+import React from "react";
+import { Formik, Form, Field } from "formik";
 
-import log from '../logger'
-import {getDefaultLayerOptions, orderLayers} from '../layers'
-import {useAppState, updateBoard, deleteBoard} from '../state'
-import {BoardRender} from '../types'
-import {TitledSection, SectionColumnLeft, SectionColumnRight} from '../ui'
-import {Values} from './types'
-import {boardRenderToValues, valuesToBoardUpdate} from './values'
+import log from "../logger";
+import { getDefaultLayerOptions, orderLayers } from "../layers";
+import { useAppState, updateBoard, deleteBoard } from "../state";
+import { BoardRender } from "../types";
+import { TitledSection, SectionColumnLeft, SectionColumnRight } from "../ui";
+import { Values } from "./types";
+import { boardRenderToValues, valuesToBoardUpdate } from "./values";
 
-import BoardUrl from './BoardUrl'
-import SettingsButtons from './SettingsButtons'
-import {BoardNameInput} from './name'
-import {ColorPresetsField, ColorFields} from './color'
+import BoardUrl from "./BoardUrl";
+import SettingsButtons from "./SettingsButtons";
+import { BoardNameInput } from "./name";
+import { ColorPresetsField, ColorFields } from "./color";
 import {
   UseOutlineInput,
   GapFillInput,
   CoordFormatFields,
   ZeroSuppressionFields,
   UnitsFields,
-} from './render'
+} from "./render";
 import {
   LayerList,
   LayerItem,
   LayerTypeSelect,
   LayerSideSelect,
   LayerColorInput,
-} from './layers'
+} from "./layers";
 
 type SettingsFormProps = {
-  className: string
-  board: BoardRender
-  close: () => void
-}
+  className: string;
+  board: BoardRender;
+  close: () => void;
+};
 
 export default function SettingsForm(props: SettingsFormProps): JSX.Element {
-  const {dispatch} = useAppState()
-  const {board, close, className} = props
-  const {id, sourceUrl, layers} = board
-  const defaultGerberOptions = getDefaultLayerOptions(layers, 'gerber')
-  const defaultDrillOptions = getDefaultLayerOptions(layers, 'drill')
+  const { dispatch } = useAppState();
+  const { board, close, className } = props;
+  const { id, sourceUrl, layers } = board;
+  const defaultGerberOptions = getDefaultLayerOptions(layers, "gerber");
+  const defaultDrillOptions = getDefaultLayerOptions(layers, "drill");
 
   const handleSubmit = (values: Values): void => {
-    dispatch(updateBoard(id, valuesToBoardUpdate(values, log)))
-    close()
-  }
+    dispatch(updateBoard(id, valuesToBoardUpdate(values, log)));
+    close();
+  };
 
   const handleDelete = (): void => {
-    dispatch(deleteBoard(id))
-    close()
-  }
+    dispatch(deleteBoard(id));
+    close();
+  };
 
   return (
     <Formik
@@ -141,5 +141,5 @@ export default function SettingsForm(props: SettingsFormProps): JSX.Element {
         </Form>
       )}
     </Formik>
-  )
+  );
 }

@@ -1,36 +1,32 @@
-import React from 'react'
+import React from "react";
 
-import {Slide} from './animation'
-import {Button} from './buttons'
-import {Icon} from './Icon'
-
-const STYLE =
-  'fixed top-1 right-1 z-2 w-25 nt2 nr2 pv2 ph3 br3 near-black bg-white shadow'
-const TITLE_BAR_STYLE = 'flex items-center mb3'
-const TITLE_STYLE = 'mr-auto f3 lh-title mv0 normal'
-const BUTTON_STYLE = 'flex-none nr2 f4'
+import { Slide } from "./animation";
+import { Button } from "./buttons";
+import { Icon } from "./Icon";
 
 export type DrawerProps = {
-  title: string
-  open: boolean
-  children: React.ReactNode
-  close: () => unknown
-}
+  title: string;
+  open: boolean;
+  children: React.ReactNode;
+  close: () => unknown;
+};
 
 export function Drawer(props: DrawerProps): JSX.Element {
-  const {title, open, children, close} = props
+  const { title, open, children, close } = props;
 
   return (
     <Slide in={open} from="right">
-      <section className={STYLE}>
-        <div className={TITLE_BAR_STYLE}>
-          <h2 className={TITLE_STYLE}>{title}</h2>
-          <Button onClick={close} className={BUTTON_STYLE}>
+      <section className="fixed top-4 right-4 z-20 w-1/4 -mt-2 -mr-2 py-2 px-4 rounded-lg text-neutral-950 bg-white shadow-view">
+        <div className="flex items-center mb-4">
+          <h2 className="mr-auto text-2xl leading-tight my-0 font-normal">
+            {title}
+          </h2>
+          <Button onClick={close} className="shrink-0 -mr-2 text-xl">
             <Icon name="times" />
           </Button>
         </div>
         {children}
       </section>
     </Slide>
-  )
+  );
 }

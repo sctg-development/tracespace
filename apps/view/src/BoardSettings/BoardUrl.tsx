@@ -1,51 +1,49 @@
-import React, {useState} from 'react'
-import cx from 'classnames'
+import React, { useState } from "react";
+import cx from "classnames";
 
-import {useTimeout} from '../hooks'
-import {preventDefault, select} from '../events'
-import {Label, Icon} from '../ui'
+import { useTimeout } from "../hooks";
+import { preventDefault, select } from "../events";
+import { Label, Icon } from "../ui";
 
 export type BoardUrlProps = {
-  url: string
-}
+  url: string;
+};
 
-const SUCCESS_TIMEOUT = 1200
+const SUCCESS_TIMEOUT = 1200;
 
-const PARAM = '?boardUrl='
-
-const STYLE = 'justify-center f6 lh-solid mb3'
-const TEXT_STYLE =
-  'flex items-center mv0 lh-copy near-black bg-animate near-black'
-const ICON_STYLE = 'flex-none ml1 nr4 br2 c-animate bg-animate'
+const PARAM = "?boardUrl=";
 
 export default function BoardUrl(props: BoardUrlProps): JSX.Element {
-  const [selected, setSelected] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [selected, setSelected] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  useTimeout(() => setSuccess(false), success ? SUCCESS_TIMEOUT : null)
+  useTimeout(() => setSuccess(false), success ? SUCCESS_TIMEOUT : null);
 
-  const {url} = props
-  const {origin, pathname} = window.location
-  const href = `${origin}${pathname}`
-  const copyValue = url ? `${href}${PARAM}${encodeURIComponent(url)}` : ''
-  const textStyle = cx(TEXT_STYLE, selected ? 'bg-light-blue' : 'bg-white')
+  const { url } = props;
+  const { origin, pathname } = window.location;
+  const href = `${origin}${pathname}`;
+  const copyValue = url ? `${href}${PARAM}${encodeURIComponent(url)}` : "";
+  const textStyle = cx(
+    "flex items-center my-0 leading-relaxed text-neutral-950 transition-colors text-neutral-950",
+    selected ? "bg-sky-200" : "bg-white",
+  );
   const iconStyle = cx(
-    ICON_STYLE,
-    success ? 'white bg-brand' : 'near-black bg-white'
-  )
+    "shrink-0 ml-1 -mr-8 rounded transition-colors transition-colors",
+    success ? "text-white bg-brand" : "text-neutral-950 bg-white",
+  );
 
   return (
     <Label
-      className={STYLE}
+      className="justify-center text-sm leading-none mb-4"
       onCopy={(event) => {
-        setSuccess(true)
-        event.currentTarget.focus()
-        event.clipboardData.setData('text/plain', copyValue)
-        preventDefault(event)
+        setSuccess(true);
+        event.currentTarget.focus();
+        event.clipboardData.setData("text/plain", copyValue);
+        preventDefault(event);
       }}
     >
       <p className={textStyle}>
-        <span className="fw3">
+        <span className="font-light">
           {href}
           {PARAM}
         </span>
@@ -55,21 +53,21 @@ export default function BoardUrl(props: BoardUrlProps): JSX.Element {
       <input
         type="text"
         value={copyValue}
-        className="clip"
+        className="sr-only"
         onClick={(event) => {
-          select(event)
-          document.execCommand('copy')
+          select(event);
+          document.execCommand("copy");
         }}
         onFocus={(event) => {
-          select(event)
-          setSelected(true)
+          select(event);
+          setSelected(true);
         }}
         onBlur={() => {
-          setSelected(false)
-          setSuccess(false)
+          setSelected(false);
+          setSuccess(false);
         }}
         readOnly
       />
     </Label>
-  )
+  );
 }

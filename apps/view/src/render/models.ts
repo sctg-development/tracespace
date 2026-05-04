@@ -189,7 +189,7 @@ async function fileStreamsToStackups(
 ): Promise<[StackupFromFiles, StackupFromFiles]> {
   const id = xid.random(RANDOM_ID_LENGTH)
   const layers = fileStreams.map(fileStreamToInputLayer)
-  const options = {id, attributes: {class: 'w-100 h-100'}}
+  const options = {id, attributes: {class: 'mx-auto w-100 h-100'}}
 
   return getPcbStackup().then((pcbStackup) => {
     const selfContainedStackup = pcbStackup(layers, options)
@@ -241,7 +241,7 @@ function stackupToBoardOptions(stackup: Stackup): Board['options'] {
 function boardToPcbStackupOptions(board: Board): StackupOptions {
   return {
     id: board.id,
-    attributes: {class: 'w-100 h-100'},
+    attributes: {class: 'mx-auto w-100 h-100'},
     outlineGapFill: board.options.outlineGapFill,
     useOutline: board.options.useOutline,
     color: board.options.color,
