@@ -1,6 +1,6 @@
 {
   "name": "@sctg/whats-that-gerber",
-  "version": "5.1.4",
+  "version": "5.1.5",
   "type": "module",
   "description": "Identify Gerber and drill files by filenamee",
   "main": "index.js",

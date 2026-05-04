@@ -1,6 +1,6 @@
 {
   "name": "@sctg/tracespace-config",
-  "version": "5.1.4",
+  "version": "5.1.5",
   "private": true,
   "description": "Development config for tracespace/tracespace",
   "author": {

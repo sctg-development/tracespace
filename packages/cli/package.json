@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "5.1.4",
+  "version": "5.1.5",
   "type": "module",
   "description": "Render a PCB as SVGs from the command line",
   "bin": {
@@ -34,9 +34,9 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@sctg/gerber-to-svg": "^5.1.4",
-    "@sctg/pcb-stackup": "^5.1.4",
-    "@sctg/whats-that-gerber": "^5.1.4",
+    "@sctg/gerber-to-svg": "^5.1.5",
+    "@sctg/pcb-stackup": "^5.1.5",
+    "@sctg/whats-that-gerber": "^5.1.5",
     "common-prefix": "^1.1.0",
     "cosmiconfig": "^9.0.1",
     "debug": "^4.4.3",
