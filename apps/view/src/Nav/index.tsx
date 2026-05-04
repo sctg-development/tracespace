@@ -17,6 +17,7 @@ type Props = {
   pageTitle?: string;
   pageSubtitle?: string;
   showAnalyticsOptin?: boolean;
+  showFoooter?: boolean;
 };
 
 export default function Nav(props: Props): JSX.Element {
@@ -29,6 +30,7 @@ export default function Nav(props: Props): JSX.Element {
     pageTitle = "tracespace",
     pageSubtitle = "view",
     showAnalyticsOptin = false,
+    showFoooter = false,
   } = props;
   const show = !loading && board !== null;
 
@@ -57,7 +59,7 @@ export default function Nav(props: Props): JSX.Element {
         />
         <AppSettings buttonClassName={"ml-1 p-1 text-2xl"} showAnalyticsOptin={showAnalyticsOptin} />
       </div>
-      <Footer />
+      {showFoooter && <Footer />}
     </nav>
   );
 }

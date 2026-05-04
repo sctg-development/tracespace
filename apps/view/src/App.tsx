@@ -21,6 +21,7 @@ export type AppProps = {
   pageTitle?: string;
   pageSubtitle?: string;
   showLoadFiles?: boolean;
+  showFoooter?: boolean;
   file?: FileProp;
 };
 
@@ -32,6 +33,7 @@ function App(props: AppProps): JSX.Element {
     pageTitle = "tracespace",
     pageSubtitle = "view",
     showLoadFiles = true,
+    showFoooter = false,
     file,
   } = props;
   const { dispatch, workerInitialized } = useAppState();
@@ -81,6 +83,7 @@ function App(props: AppProps): JSX.Element {
           showPageTitleLogo={showPageTitleLogo}
           pageTitle={pageTitle}
           pageSubtitle={pageSubtitle}
+          showFoooter={showFoooter}
         />
       )}
       {showLoadFiles && (

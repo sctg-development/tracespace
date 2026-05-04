@@ -169,6 +169,9 @@ export function stackupToBoardRender(
   stackup: Stackup,
   board: Board
 ): BoardRender {
+  const topSvg = stripSvgRootDimensions(stackup.top.svg)
+  const bottomSvg = stripSvgRootDimensions(stackup.bottom.svg)
+
   return {
     id: board.id,
     name: board.name,
@@ -176,12 +179,20 @@ export function stackupToBoardRender(
     gerberOptions: board.gerberOptions,
     drillOptions: board.drillOptions,
     viewBox: vb.add(stackup.top.viewBox, stackup.bottom.viewBox),
-    top: stackup.top.svg,
-    bottom: stackup.bottom.svg,
+    top: topSvg,
+    bottom: bottomSvg,
     layers: stackupToLayerRenders(stackup, board),
     sourceIds: board.layerIds.map((id) => board.layers[id].sourceId),
     sourceUrl: board.sourceUrl || null,
   }
+}
+
+function stripSvgRootDimensions(svg: string): string {
+  return svg.replace(/<svg\b[^>]*>/, (svgTag) =>
+    svgTag
+      .replace(/\swidth\s*=\s*("[^"]*"|'[^']*')/i, '')
+      .replace(/\sheight\s*=\s*("[^"]*"|'[^']*')/i, '')
+  )
 }
 
 async function fileStreamsToStackups(
@@ -189,7 +200,7 @@ async function fileStreamsToStackups(
 ): Promise<[StackupFromFiles, StackupFromFiles]> {
   const id = xid.random(RANDOM_ID_LENGTH)
   const layers = fileStreams.map(fileStreamToInputLayer)
-  const options = {id, attributes: {class: 'mx-auto w-100 h-100'}}
+  const options = {id, attributes: {class: 'mx-auto'}}
 
   return getPcbStackup().then((pcbStackup) => {
     const selfContainedStackup = pcbStackup(layers, options)
@@ -241,7 +252,7 @@ function stackupToBoardOptions(stackup: Stackup): Board['options'] {
 function boardToPcbStackupOptions(board: Board): StackupOptions {
   return {
     id: board.id,
-    attributes: {class: 'mx-auto w-100 h-100'},
+    attributes: {class: 'mx-auto'},
     outlineGapFill: board.options.outlineGapFill,
     useOutline: board.options.useOutline,
     color: board.options.color,

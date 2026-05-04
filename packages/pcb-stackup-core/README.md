@@ -222,7 +222,7 @@ If you want to add more attributes to the SVG nodes than are there by default, t
 ```js
 var stackup = pcbStackupCore(layers, {
   attributes: {
-    class: 'w-100 h-100',
+    class: 'w-full h-full',
   },
 })
 ```

@@ -96,6 +96,12 @@ export type TracespaceViewerProps = {
    * Defaults to `false`.
    */
   showAnalyticsOptin?: boolean;
+
+  /**
+   * Show or hide the footer in the bottom-right corner.
+   * Defaults to `false`.
+   */
+  showFoooter?: boolean;
 };
 
 /**
@@ -129,12 +135,17 @@ export type TracespaceViewerProps = {
 export default function TracespaceViewer(
   props: TracespaceViewerProps,
 ): JSX.Element {
-  const { useStorage, showAnalyticsOptin = false, ...appProps } = props;
+  const {
+    useStorage,
+    showAnalyticsOptin = false,
+    showFoooter = false,
+    ...appProps
+  } = props;
   return (
     <ViewerConfigContext.Provider value={{ showAnalyticsOptin }}>
       <StorageProvider useStorage={useStorage ?? false}>
         <StoreProvider useStorage={useStorage}>
-          <App {...appProps} />
+          <App {...appProps} showFoooter={showFoooter} />
         </StoreProvider>
       </StorageProvider>
     </ViewerConfigContext.Provider>
