@@ -34,7 +34,7 @@ jobs:
         run: npm run build:all
 
       - name: Build Vite app for apps/view
-        run: npx vite build --base=/{{ github.repository }}
+        run: npx vite build --base="/${{ github.event.repository.name }}/"
         working-directory: apps/view
 
       - name: Upload artifact
