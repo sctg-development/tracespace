@@ -18,7 +18,7 @@
     "serve": "lerna run serve --parallel",
     "clean": "lerna run clean --parallel",
     "postclean": "npm run clean:types",
-    "build:all": "npm run build && npm run example && npm run docs",
+    "build:all": "lerna run build && npm run example && npm run docs",
     "lint": "eslint .",
     "format": "prettier --ignore-path .prettierignore --write '.*.@(js|yml)' '**/*.@(js|ts|tsx|json|md|yml)'",
     "types": "tsc --build",
