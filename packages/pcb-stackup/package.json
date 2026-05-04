@@ -1,6 +1,6 @@
 {
   "name": "@sctg/pcb-stackup",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "type": "module",
   "description": "Render PCBs as beautiful, precise SVGs from Gerber / NC drill files",
   "main": "index.js",
@@ -37,10 +37,10 @@
   },
   "homepage": "https://github.com/sctg-development/tracespace",
   "dependencies": {
-    "@sctg/gerber-to-svg": "^5.1.5",
-    "@sctg/pcb-stackup-core": "^5.1.5",
-    "@sctg/tracespace-xml-id": "^5.1.5",
-    "@sctg/whats-that-gerber": "^5.1.5",
+    "@sctg/gerber-to-svg": "^5.1.6",
+    "@sctg/pcb-stackup-core": "^5.1.6",
+    "@sctg/tracespace-xml-id": "^5.1.6",
+    "@sctg/whats-that-gerber": "^5.1.6",
     "@types/node": "^25.6.0",
     "run-parallel": "^1.2.0",
     "run-waterfall": "^1.1.7",
