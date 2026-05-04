@@ -1,6 +1,6 @@
 {
   "name": "@sctg/gerber-to-svg",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "type": "module",
   "description": "Render individual Gerber / NC drill files as SVGs",
   "main": "index.js",
@@ -40,9 +40,9 @@
   },
   "homepage": "https://github.com/sctg-development/tracespace#readme",
   "dependencies": {
-    "@sctg/gerber-parser": "^5.1.1",
-    "@sctg/gerber-plotter": "^5.1.1",
-    "@sctg/tracespace-xml-id": "^5.1.1",
+    "@sctg/gerber-parser": "^5.1.2",
+    "@sctg/gerber-plotter": "^5.1.2",
+    "@sctg/tracespace-xml-id": "^5.1.2",
     "@types/node": "^25.6.0",
     "abort-controller": "^3.0.0",
     "escape-html": "^1.0.3",
