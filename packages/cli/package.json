@@ -34,7 +34,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "@sctg/gerber-to-svg": "^5.1.3",
+    "@sctg/gerber-to-svg": "^5.1.4",
     "@sctg/pcb-stackup": "^5.1.4",
     "@sctg/whats-that-gerber": "^5.1.4",
     "common-prefix": "^1.1.0",

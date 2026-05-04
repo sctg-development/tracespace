@@ -1,6 +1,6 @@
 {
   "name": "@sctg/gerber-plotter",
-  "version": "5.1.3",
+  "version": "5.1.4",
   "type": "module",
   "description": "Streaming Gerber / NC drill layer image plotter",
   "main": "index.js",
