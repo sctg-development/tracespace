@@ -17,18 +17,29 @@
   },
   "scripts": {
     "start": "vite --host 0.0.0.0",
-    "build": "vite build && node scripts/archive-example.js",
+    "build": "npm run build:lib && npm run build:view",
+    "build:view": "vite build && node scripts/archive-example.js",
+    "build:lib": "node -e \"const fs=require('fs'),path=require('path');['lib/index.js','lib/index.js.map','lib/style.css','tsconfig.tsbuildinfo'].forEach(f=>{try{fs.unlinkSync(f)}catch(e){}});try{fs.readdirSync('lib').filter(f=>f.endsWith('.mjs')||f.endsWith('.mjs.map')).forEach(f=>fs.unlinkSync(path.join('lib',f)))}catch(e){};try{fs.rmSync('lib/assets',{recursive:true})}catch(e){}\" && tsc -p tsconfig.json && vite build --config vite.lib.config.mjs",
     "serve": "vite preview --host 0.0.0.0"
   },
   "bugs": {
     "url": "https://github.com/sctg-development/tracespace/issues"
   },
-  "main": "./src/index.tsx",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./style.css": "./lib/style.css"
+  },
   "files": [
     "src",
     "lib",
-    "typings"
+    "typings",
+    "vite.lib.config.mjs"
   ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
@@ -65,13 +76,18 @@
     "mixpanel-browser": "^2.78.0",
     "pump": "^3.0.4",
     "randomcolor": "^0.6.2",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
     "react-transition-group": "^4.4.5",
     "viewbox": "^1.0.0"
   },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
+    "@vitejs/plugin-react": "^4.0.0",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "tailwindcss": "^4.2.4"
   },
   "publishConfig": {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 
 import App from "./App";
 import type { FileProp } from "./App";
@@ -7,6 +7,18 @@ import { StorageProvider } from "./StorageContext";
 import "./styles/index.css";
 
 export type { FileProp };
+
+type ViewerConfig = {
+  showAnalyticsOptin: boolean;
+};
+
+const ViewerConfigContext = createContext<ViewerConfig>({
+  showAnalyticsOptin: false,
+});
+
+export function useViewerConfig(): ViewerConfig {
+  return useContext(ViewerConfigContext);
+}
 
 /**
  * Props for the {@text-inherit no-underline TracespaceViewer} component.
@@ -78,6 +90,12 @@ export type TracespaceViewerProps = {
    * preserved across page reloads. Defaults to `false`.
    */
   useStorage?: boolean;
+
+  /**
+   * Show or hide the analytics opt-in modal on first visit.
+   * Defaults to `false`.
+   */
+  showAnalyticsOptin?: boolean;
 };
 
 /**
@@ -111,12 +129,14 @@ export type TracespaceViewerProps = {
 export default function TracespaceViewer(
   props: TracespaceViewerProps,
 ): JSX.Element {
-  const { useStorage, ...appProps } = props;
+  const { useStorage, showAnalyticsOptin = false, ...appProps } = props;
   return (
-    <StorageProvider useStorage={useStorage ?? false}>
-      <StoreProvider useStorage={useStorage}>
-        <App {...appProps} />
-      </StoreProvider>
-    </StorageProvider>
+    <ViewerConfigContext.Provider value={{ showAnalyticsOptin }}>
+      <StorageProvider useStorage={useStorage ?? false}>
+        <StoreProvider useStorage={useStorage}>
+          <App {...appProps} />
+        </StoreProvider>
+      </StorageProvider>
+    </ViewerConfigContext.Provider>
   );
 }

@@ -8,6 +8,49 @@ Your renders are saved locally, so you can check out your boards without constan
 
 [pcb-stackup]: ../packages/pcb-stackup
 
+## embedding as a React component
+
+The package exports `<TracespaceViewer>`, a self-contained React 19 component. See the [main README](../../README.md#sctgtracespace-view) for full usage instructions.
+
+**Quick start:**
+
+```typescript
+import '@sctg/tracespace-view/style.css'
+import {TracespaceViewer} from '@sctg/tracespace-view'
+
+export default function MyPage() {
+  return (
+    <TracespaceViewer
+      showLoadFiles={false}
+      showAnalyticsOptin={false}
+      file="/boards/my-board.zip"
+    />
+  )
+}
+```
+
+**Props summary:**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `showNav` | `boolean` | `true` | Show/hide the top navigation bar |
+| `showPageTitle` | `boolean` | `true` | Show/hide the page title |
+| `showPageTitleLogo` | `boolean` | `true` | Show/hide the tracespace logo |
+| `pageTitle` | `string` | `"tracespace"` | Main title text |
+| `pageSubtitle` | `string` | `"view"` | Subtitle text |
+| `showLoadFiles` | `boolean` | `true` | Show/hide the file upload interface |
+| `file` | `string \| File \| Blob \| Array<File \| Blob>` | — | File(s) to load programmatically |
+| `useStorage` | `boolean` | `false` | Persist state in IndexedDB |
+| `showAnalyticsOptin` | `boolean` | `false` | Show/hide the analytics opt-in modal on first visit |
+
+**Building the library bundle:**
+
+```shell
+npm run build:lib
+```
+
+This generates `lib/index.js` (pre-compiled ESM) and `lib/style.css` (pre-built Tailwind styles). The worker is inlined as a base64 blob so no separate asset file is needed.
+
 ## architecture
 
 The app is very similar to a typical React + Redux application. A central [state store][store] is available all through-out the app, and much of the UI is derived directly from that state.

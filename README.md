@@ -130,10 +130,55 @@ export default function MyApp() {
 - `showLoadFiles` — Show/hide the file upload interface (default: `true`)
 - `file` — Programmatically load a file (URL, File, Blob, or array of files)
 - `useStorage` — Enable persistent state storage via IndexedDB (default: `false`)
+- `showAnalyticsOptin` — Show/hide the analytics opt-in modal on first visit (default: `false`)
 
-#### Tailwind CSS setup for consumer apps
+#### Using in an external project (recommended)
 
-`<TracespaceViewer>` is styled exclusively with Tailwind CSS v4 utility classes. Because Tailwind v4 generates CSS at build time by scanning source files, a consumer app must perform the scanning itself — it cannot be delegated to the library.
+The package ships a pre-compiled ESM bundle (`lib/index.js`) and a pre-built stylesheet (`lib/style.css`). No Tailwind configuration is required in the consumer app.
+
+**1. Install the package:**
+
+```shell
+npm install @sctg/tracespace-view
+```
+
+**2. Import the stylesheet** once in your app entry point (layout, `_app.tsx`, `main.tsx`, etc.):
+
+```typescript
+import '@sctg/tracespace-view/style.css'
+```
+
+**3. Use the component:**
+
+```typescript
+import {TracespaceViewer} from '@sctg/tracespace-view'
+
+export default function MyPage() {
+  return (
+    <TracespaceViewer
+      showNav={false}
+      showLoadFiles={false}
+      showAnalyticsOptin={false}
+      file="/boards/my-board.zip"
+    />
+  )
+}
+```
+
+**4. Configure Vite** to deduplicate React (required with local `file:` dependencies, recommended otherwise):
+
+```typescript
+// vite.config.ts
+export default defineConfig({
+  resolve: {
+    dedupe: ['react', 'react-dom', 'react/jsx-runtime'],
+  },
+})
+```
+
+#### Using in a Tailwind app (monorepo / source-level integration)
+
+If your app already uses Tailwind CSS v4 and you want to share the same build pass, you can point Tailwind at the tracespace-view source files instead of importing the pre-built stylesheet.
 
 **Requirements:** `@tailwindcss/vite` ≥ 4.2.4 installed and registered as a Vite plugin.
 

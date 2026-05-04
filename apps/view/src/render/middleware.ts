@@ -1,7 +1,7 @@
 import {saveAs} from 'file-saver'
 import * as State from '../state'
 import log from '../logger'
-import RenderWorker from './worker?worker'
+import RenderWorker from './worker?worker&inline'
 // import RenderWorker from './worker-test?worker'
 // import RenderWorker from './worker-test2?worker'
 // import RenderWorker from './worker-test3?worker'

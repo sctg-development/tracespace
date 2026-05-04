@@ -13,11 +13,12 @@ const SETTINGS_TOOLTIP = "App settings";
 
 export type AppSettingsProps = {
   buttonClassName: string;
+  showAnalyticsOptin?: boolean;
 };
 
 export default function AppSettings(props: AppSettingsProps): JSX.Element {
   const [open, setOpen] = useState(false);
-  const { buttonClassName } = props;
+  const { buttonClassName, showAnalyticsOptin = false } = props;
   const toggleOpen = (): void => setOpen(!open);
 
   return (
@@ -42,7 +43,7 @@ export default function AppSettings(props: AppSettingsProps): JSX.Element {
         <Icon name="sliders-h" />
       </Button>
       <SettingsDrawer open={open} close={toggleOpen} />
-      <AnalyticsOptInModal />
+      {showAnalyticsOptin && <AnalyticsOptInModal />}
     </>
   );
 }
