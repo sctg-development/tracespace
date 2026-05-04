@@ -31,10 +31,10 @@ jobs:
         run: npm ci
 
       - name: Build all apps
-        run: npm run build
+        run: npm run build:all
 
       - name: Build Vite app for apps/view
-        run: npx vite build --base=/tracespace
+        run: npx vite build --base=/{{ github.repository }}
         working-directory: apps/view
 
       - name: Upload artifact
