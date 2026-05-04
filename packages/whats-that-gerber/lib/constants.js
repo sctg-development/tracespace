@@ -28,4 +28,5 @@ export default {
   _CAD_GEDA_PCB: 'geda-pcb',
   _CAD_ORCAD: 'orcad',
   _CAD_DIPTRACE: 'diptrace',
+  _CAD_PROTEL_99: 'protel-99',
 }

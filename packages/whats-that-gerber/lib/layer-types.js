@@ -39,6 +39,7 @@ export default [
     side: c.SIDE_TOP,
     matchers: [
       {ext: 'cmp', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'el', cad: c._CAD_PROTEL_99},
       {ext: 'top', cad: [c._CAD_EAGLE_LEGACY, c._CAD_ORCAD]},
       {ext: 'gtl', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'toplayer\\.ger', cad: c._CAD_EAGLE_OSHPARK},
@@ -54,6 +55,7 @@ export default [
     side: c.SIDE_TOP,
     matchers: [
       {ext: 'stc', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 've', cad: c._CAD_PROTEL_99},
       {ext: 'tsm', cad: c._CAD_EAGLE_LEGACY},
       {ext: 'gts', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'smt', cad: c._CAD_ORCAD},
@@ -70,6 +72,8 @@ export default [
     side: c.SIDE_TOP,
     matchers: [
       {ext: 'plc', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'ses', cad: c._CAD_PROTEL_99},
+      {ext: 'se', cad: c._CAD_PROTEL_99},
       {ext: 'tsk', cad: c._CAD_EAGLE_LEGACY},
       {ext: 'gto', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'sst', cad: c._CAD_ORCAD},
@@ -86,6 +90,7 @@ export default [
     side: c.SIDE_TOP,
     matchers: [
       {ext: 'crc', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'be', cad: c._CAD_PROTEL_99},
       {ext: 'tsp', cad: c._CAD_EAGLE_LEGACY},
       {ext: 'gtp', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'spt', cad: c._CAD_ORCAD},
@@ -101,6 +106,7 @@ export default [
     side: c.SIDE_BOTTOM,
     matchers: [
       {ext: 'sol', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'so', cad: c._CAD_PROTEL_99},
       {ext: 'bot', cad: [c._CAD_EAGLE_LEGACY, c._CAD_ORCAD]},
       {ext: 'gbl', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'bottomlayer\\.ger', cad: c._CAD_EAGLE_OSHPARK},
@@ -116,6 +122,7 @@ export default [
     side: c.SIDE_BOTTOM,
     matchers: [
       {ext: 'sts', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'vs', cad: c._CAD_PROTEL_99},
       {ext: 'bsm', cad: c._CAD_EAGLE_LEGACY},
       {ext: 'gbs', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'smb', cad: c._CAD_ORCAD},
@@ -132,6 +139,7 @@ export default [
     side: c.SIDE_BOTTOM,
     matchers: [
       {ext: 'pls', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'ss', cad: c._CAD_PROTEL_99},
       {ext: 'bsk', cad: c._CAD_EAGLE_LEGACY},
       {ext: 'gbo', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'ssb', cad: c._CAD_ORCAD},
@@ -148,6 +156,7 @@ export default [
     side: c.SIDE_BOTTOM,
     matchers: [
       {ext: 'crs', cad: c._CAD_EAGLE_LEGACY},
+      {ext: 'bs', cad: c._CAD_PROTEL_99},
       {ext: 'bsp', cad: c._CAD_EAGLE_LEGACY},
       {ext: 'gbp', cad: [c._CAD_KICAD, c._CAD_ALTIUM]},
       {ext: 'spb', cad: c._CAD_ORCAD},
@@ -193,6 +202,8 @@ export default [
     side: c.SIDE_ALL,
     matchers: [
       {ext: 'txt', cad: [c._CAD_EAGLE_LEGACY, c._CAD_ALTIUM]},
+      {ext: 'tn', cad: c._CAD_PROTEL_99},
+      {ext: 'tnm', cad: c._CAD_PROTEL_99},
       {
         ext: 'xln',
         cad: [c._CAD_EAGLE, c._CAD_EAGLE_LEGACY, c._CAD_EAGLE_OSHPARK],
@@ -213,6 +224,7 @@ export default [
     side: null,
     matchers: [
       {ext: 'pos', cad: c._CAD_KICAD},
+      {ext: 'pe', cad: c._CAD_PROTEL_99},
       {ext: 'art', cad: c._CAD_ALLEGRO},
       {ext: 'gbr', cad: null},
       {ext: 'gbx', cad: null},
