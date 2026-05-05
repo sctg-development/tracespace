@@ -12,7 +12,7 @@ export async function readFiles(files: Array<File>): PromiseArray<FileStream> {
 }
 
 export async function fetchZipFile(url: string): PromiseArray<FileStream> {
-  console.log('[fetchZipFile] Starting fetch from:', url)
+  console.log('[fetchZipFile] Starting fetch from:', url.slice(0, 100))
   return fetch(url)
     .then((response) => {
       console.log(
