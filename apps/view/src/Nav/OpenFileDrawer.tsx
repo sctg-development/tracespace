@@ -7,7 +7,7 @@ const TITLE = "new board";
 
 const UPLOAD_FILES_LABEL = "upload files from your computer";
 const ENTER_URL_LABEL = "enter the URL of a ZIP archive";
-const ENTER_URL_PLACEHOLDER = "https://tracespace.io/view/arduino-uno.zip";
+const ENTER_URL_PLACEHOLDER = "https://sctg-development.github.io/tracespace/arduino-uno.zip";
 const FOOTER = "you can also drag-and-drop files into the app at any time";
 
 export type OpenFileDrawerProps = {
