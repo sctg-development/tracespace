@@ -4,10 +4,9 @@ If you run into a problem that's not in this troubleshooting guide, please feel 
 
 - [file an issue][issues]
 - [chat on Gitter][gitter]
-- email <help@sctg/tracespace-.io>
+- email <technique@spot-analyzer.pp.ua>
 
-[issues]: https://github.com/tracespace/tracespace/issues
-[gitter]: https://gitter.im/tracespace/Lobby
+[issues]: https://github.com/sctg-development/tracespace/issues
 
 ## board not rendering
 
