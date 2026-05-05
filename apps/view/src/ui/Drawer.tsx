@@ -16,7 +16,7 @@ export function Drawer(props: DrawerProps): JSX.Element {
 
   return (
     <Slide in={open} from="right">
-      <section className="fixed top-4 right-4 z-20 w-1/4 -mt-2 -mr-2 py-2 px-4 rounded-lg text-neutral-950 bg-white shadow-view">
+      <section className="fixed top-4 right-4 z-100 w-1/4 -mt-2 -mr-2 py-2 px-4 rounded-lg text-neutral-950 bg-white shadow-view">
         <div className="flex items-center mb-4">
           <h2 className="mr-auto text-2xl leading-tight my-0 font-normal">
             {title}
