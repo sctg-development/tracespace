@@ -15,7 +15,7 @@ export default defineConfig({
     "process.env.NODE_ENV": JSON.stringify(
       process.env.NODE_ENV || "production",
     ),
-    "process.env.MIXPANEL_ID": JSON.stringify(process.env.MIXPANEL_ID || ""),
+    "process.env.MIXPANEL_ID": JSON.stringify(process.env.MIXPANEL_ID || "37cecbd0ac1436554068bc4655a52d31"),
     "process.env.PKG_VERSION": JSON.stringify(pkg.version),
     "process.env.PKG_REPOSITORY_URL": JSON.stringify(pkg.repository.url),
     "process.env.PKG_AUTHOR_NAME": JSON.stringify(pkg.author.name),

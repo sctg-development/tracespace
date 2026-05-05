@@ -16,6 +16,9 @@ export function createAnalyticsMiddleware(): State.Middleware {
   if (MIXPANEL_ID) {
     log.debug('initializing mixpanel')
     mixpanel.init(MIXPANEL_ID, {
+      autocapture: true,
+      record_sessions_percent: 100,
+      api_host: 'https://api-eu.mixpanel.com',
       opt_out_tracking_by_default: true,
       loaded: (mp): void => {
         userId = mp.get_distinct_id()
